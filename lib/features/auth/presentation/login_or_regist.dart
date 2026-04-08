@@ -5,6 +5,7 @@ import 'package:odk_flutter_template/features/auth/data/models/userlogin_request
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
+import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
@@ -36,17 +37,23 @@ class _InnerLoginPageState extends State<InnerLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicAppbar(title: Text(widget.title)),
+      // appBar: BasicAppbar(title: Text(widget.title)),
+      // 👇 【核心】禁止页面随键盘上移，背景永久固定
+      resizeToAvoidBottomInset: false,
       body: Stack(
+        // 👇 【优化】Stack铺满全屏
+        fit: StackFit.expand,
         children: [
-          Center(
-            child: SvgPicture.asset(
-              AppImages.logoBg,
-              width: double.infinity,
-              height: double.infinity,
-            ),
+          // 👇 背景图：固定不动，不受键盘影响
+          Image.asset(
+            AppImages.login,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
           ),
-          Padding(
+
+          // 👇 【优化】滚动视图：防止键盘挡住输入框
+          SingleChildScrollView(
             padding: const EdgeInsets.symmetric(
               horizontal: 30.0,
               vertical: 50.0,
@@ -56,11 +63,12 @@ class _InnerLoginPageState extends State<InnerLoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  // _appLogoField(),
                   const SizedBox(height: 20),
                   _emailField(context),
                   const SizedBox(height: 20),
                   _passwordField(context),
-                  const Spacer(),
+                  const SizedBox(height: 40),
                   _registerButton(context),
                   const SizedBox(height: 20),
                 ],
@@ -92,9 +100,19 @@ class _InnerLoginPageState extends State<InnerLoginPage> {
       );
       if (userEntity != null) {
         await userProvider.refresh();
-        NavigatorUtils.go('/home');
+        NavigatorUtils.goNamed(RouteNames.home);
       }
     }
+  }
+
+  Widget _appLogoField() {
+    return SvgPicture.asset(
+      AppImages.logoBg,
+      width: 80,
+      height: 80,
+      // 👇 填充模式，保证全屏覆盖
+      fit: BoxFit.cover,
+    );
   }
 
   Widget _emailField(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/core/constants/images/app_images.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 
 class SplashPage extends StatefulWidget {
@@ -47,14 +48,14 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _redirect(bool fromOtherPage) async {
     await Future.delayed(const Duration(seconds: 2));
     if (fromOtherPage) {
-      NavigatorUtils.go('/login');
+      NavigatorUtils.goNamed(RouteNames.signin);
       return;
     }
     final isLogged = await AuthService().checkLoggedIn();
     if (isLogged) {
-      NavigatorUtils.go('/home');
+      NavigatorUtils.goNamed(RouteNames.home);
     } else {
-      NavigatorUtils.go('/login');
+      NavigatorUtils.goNamed(RouteNames.signin);
     }
   }
 }

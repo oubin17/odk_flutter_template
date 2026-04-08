@@ -18,25 +18,35 @@ class NavigatorUtils {
   // /// 获取当前的 State
   // static NavigatorState? get currentState => navigatorKey.currentState;
 
-  // /// 跳转到欢迎页并清空路由栈
-  // static void pushReplacementPage(Widget page) {
-  //   _routerState?.pushAndRemoveUntil(
-  //     MaterialPageRoute(builder: (context) => page),
-  //     (route) => false,
-  //   );
-  // }
-
-  /// 🔥 清空路由栈，跳转到 Splash（完全等价你原来的 pushAndRemoveUntil）
-  static void pushReplacementSplash() {
-    // ✅ 最正确、最简单的写法：直接调用路由实例
-    AppRouter.router.go('/');
-  }
-
   // 通用无 Context 跳转
   static void go(String path) {
     AppRouter.router.go(path);
   }
 
+  // 2. 新增：name 跳转 ✅
+  static void goNamed(
+    String name, {
+    Map<String, String> pathParameters = const {},
+    Map<String, dynamic> queryParameters = const {},
+  }) {
+    AppRouter.router.goNamed(
+      name,
+      pathParameters: pathParameters,
+      queryParameters: queryParameters,
+    );
+  }
+
+  // 3. 新增：替换跳转（登录→首页专用）
+  static void pushReplacementNamed(String name) {
+    AppRouter.router.pushReplacementNamed(name);
+  }
+
+  // 4. 新增：普通跳转
+  static void push(String path) {
+    AppRouter.router.push(path);
+  }
+
+  // 5. 新增：返回
   static void pop() {
     AppRouter.router.pop();
   }

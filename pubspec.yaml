@@ -83,6 +83,7 @@ flutter:
   assets:
     - assets/images/auth/
     - assets/images/splash/
+    - assets/images/login/
     - assets/vectors/
     - assets/logo.png
     - lib/core/config/keys/public_key.pem

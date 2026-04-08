@@ -6,6 +6,8 @@ class AppImages {
   /// 认证背景图片
   static const String splash = '${basePath}splash/splash.jpg';
 
+  static const String login = '${basePath}login/login_regist.jpg';
+
   static const String adminBg = '${basePath}auth/admin.jpg';
 
   static const String employeeBg = '${basePath}auth/employee.jpg';
