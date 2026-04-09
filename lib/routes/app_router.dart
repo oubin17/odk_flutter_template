@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:odk_flutter_template/features/auth/presentation/login_or_regist.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
 import 'package:odk_flutter_template/features/home/presentation/home.dart';
@@ -71,11 +70,7 @@ class AppRouter {
         name: RouteNames.signin,
         builder: (context, state) => const SignInPage(),
       ),
-      GoRoute(
-        path: RoutePaths.login,
-        name: RouteNames.login,
-        builder: (context, state) => const LoginOrRegistPage(),
-      ),
+
       GoRoute(
         path: RoutePaths.home,
         name: RouteNames.home,

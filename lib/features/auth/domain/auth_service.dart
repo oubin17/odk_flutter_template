@@ -35,17 +35,23 @@ class AuthService {
     UserLoginResponse? response = await AuthApi().login(request);
 
     //1.存储 token
-    await SecureStorageManager().write(StorageKey.token, response?.token ?? '');
-    UserEntity userEntity = UserEntity.fromJson(
-      jsonDecode(jsonEncode(response?.toJson() ?? {})),
-    );
-    //2.存储用户信息
-    await SecureStorageManager().write(
-      StorageKey.userInfo,
-      jsonEncode(userEntity.toJson()),
-    );
-    // isLoggedIn = true;
-    return userEntity;
+    if (response != null) {
+      await SecureStorageManager().write(
+        StorageKey.token,
+        response.token ?? '',
+      );
+      UserEntity userEntity = UserEntity.fromJson(
+        jsonDecode(jsonEncode(response.toJson())),
+      );
+      //2.存储用户信息
+      await SecureStorageManager().write(
+        StorageKey.userInfo,
+        jsonEncode(userEntity.toJson()),
+      );
+      // isLoggedIn = true;
+      return userEntity;
+    }
+    return null;
   }
 
   /// 登录方法，返回用户 ID

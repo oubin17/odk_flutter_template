@@ -6,7 +6,7 @@ import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
-import 'package:odk_flutter_template/widgets/toast/basic_toast.dart';
+import 'package:odk_flutter_template/widgets/smart_dialog/basic_toast.dart';
 
 //注册页面
 class SignUpPage extends StatelessWidget {
@@ -91,7 +91,7 @@ class SignUpPage extends StatelessWidget {
           ),
         );
         if (userId == null) {
-          BasicToast.show("注册失败");
+          BasicToast.showToast("注册失败");
         } else {
           NavigatorUtils.goNamed(RouteNames.signin);
         }

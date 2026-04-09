@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
@@ -15,6 +16,8 @@ void main() async {
 
   final userProvider = UserProvider();
   await userProvider.refresh();
+
+  // initSmartDialogConfig(); // 初始化样式
 
   runApp(
     MultiProvider(
@@ -44,10 +47,33 @@ class MyApp extends StatelessWidget {
         routerConfig: AppRouter.router,
         // 关闭调试标识
         debugShowCheckedModeBanner: false,
-
+        // 🔥 5.x 保留这个初始化即可
+        builder: FlutterSmartDialog.init(),
         // 其他主题配置保留不变
         // theme: ThemeData(primarySwatch: Colors.blue),
       ),
     );
   }
 }
+
+// // 🔥 flutter_smart_dialog 5.1.0 最新配置
+// void initSmartDialogConfig() {
+//   SmartDialog.init(
+//     // Loading 全局样式
+//     loadingStyle: LoadingStyle(
+//       background: Colors.black54,
+//       radius: 16,
+//       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+//       fontColor: Colors.white,
+//       fontSize: 28,
+//     ),
+//     // Toast 全局样式
+//     toastStyle: ToastStyle(
+//       background: Colors.black87,
+//       radius: 12,
+//       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+//       fontColor: Colors.white,
+//       fontSize: 26,
+//     ),
+//   );
+// }
