@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/constants/images/app_images.dart';
-import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
-import 'package:odk_flutter_template/models/entities/user_entity.dart';
-import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
-import 'package:provider/provider.dart';
+import 'package:odk_flutter_template/widgets/toast/basic_toast.dart';
 
 //
 class SignUpPage extends StatelessWidget {
@@ -15,11 +13,12 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController userNameController = TextEditingController();
+    final TextEditingController accountController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
 
-    Widget _registerText() {
+    Widget registerText() {
       return Text(
         "注册",
         style: TextStyle(
@@ -31,9 +30,25 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
-    Widget _accountField(BuildContext context) {
+    Widget userNameField() {
       return TextFormField(
-        controller: _emailController,
+        controller: userNameController,
+        decoration: const InputDecoration(
+          prefixIcon: Icon(Icons.app_registration),
+          labelText: '用户名',
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '请输入用户名';
+          }
+          return null;
+        },
+      );
+    }
+
+    Widget accountField() {
+      return TextFormField(
+        controller: accountController,
         decoration: const InputDecoration(
           prefixIcon: Icon(Icons.app_registration),
           labelText: '账号',
@@ -47,9 +62,9 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
-    Widget _passwordField(BuildContext context) {
+    Widget passwordField() {
       return TextFormField(
-        controller: _passwordController,
+        controller: passwordController,
         decoration: const InputDecoration(
           hintText: '请输入密码',
           labelText: '密码',
@@ -65,29 +80,28 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
-    // ✅ 修复后的登录方法（无警告、安全）
-    void _login(BuildContext context) async {
-      if (_formKey.currentState!.validate()) {
-        // 👇 核心：【异步前】提前获取 UserProvider 实例（无context风险）
-        final userProvider = context.read<UserProvider>();
-        final UserEntity? userEntity = await AuthService().login(
-          UserLoginRequest(
-            loginId: _emailController.text,
-            identifyValue: _passwordController.text,
+    void register(BuildContext context) async {
+      if (formKey.currentState!.validate()) {
+        final String? userId = await AuthService().register(
+          UserRegistRequest(
+            username: userNameController.text,
+            loginId: accountController.text,
+            identifyValue: passwordController.text,
           ),
         );
-        if (userEntity != null) {
-          await userProvider.refresh();
-          NavigatorUtils.goNamed(RouteNames.home);
+        if (userId == null) {
+          BasicToast.show("注册失败");
+        } else {
+          NavigatorUtils.goNamed(RouteNames.signin);
         }
       }
     }
 
-    Widget _registerButton(BuildContext context) {
-      return BasicAppButton(onPressed: () => _login(context), title: '注册');
+    Widget registerButton(BuildContext context) {
+      return BasicAppButton(onPressed: () => register(context), title: '注册');
     }
 
-    Widget _signupText(BuildContext context) {
+    Widget signupText(BuildContext context) {
       return Padding(
         padding: const EdgeInsets.all(30.0),
         child: Row(
@@ -142,18 +156,20 @@ class SignUpPage extends StatelessWidget {
               vertical: 50.0,
             ),
             child: Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // _appLogoField(),
-                  _registerText(),
+                  registerText(),
                   const SizedBox(height: 20),
-                  _accountField(context),
+                  userNameField(),
                   const SizedBox(height: 20),
-                  _passwordField(context),
+                  accountField(),
+                  const SizedBox(height: 20),
+                  passwordField(),
                   const SizedBox(height: 40),
-                  _registerButton(context),
+                  registerButton(context),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -161,7 +177,7 @@ class SignUpPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: _signupText(context),
+      bottomNavigationBar: signupText(context),
     );
   }
 }

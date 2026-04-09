@@ -129,9 +129,9 @@ class _ProjectInfoTableWidgetState extends State<ProjectInfoTableWidget> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withAlpha(50),
           borderRadius: BorderRadius.circular(45),
-          border: Border.all(color: color.withOpacity(0.5)),
+          border: Border.all(color: color.withAlpha(128)),
         ),
         child: Center(
           child: Text(

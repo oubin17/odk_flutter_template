@@ -7,6 +7,7 @@ import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
+import 'package:odk_flutter_template/widgets/toast/basic_toast.dart';
 import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
@@ -14,11 +15,11 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController accountController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
 
-    Widget _registerText() {
+    Widget signInText() {
       return Text(
         "登录",
         style: TextStyle(
@@ -30,9 +31,9 @@ class SignInPage extends StatelessWidget {
       );
     }
 
-    Widget _emailField(BuildContext context) {
+    Widget accountField() {
       return TextFormField(
-        controller: _emailController,
+        controller: accountController,
         decoration: const InputDecoration(
           prefixIcon: Icon(Icons.app_registration),
           labelText: '账号',
@@ -47,9 +48,9 @@ class SignInPage extends StatelessWidget {
       );
     }
 
-    Widget _passwordField(BuildContext context) {
+    Widget passwordField() {
       return TextFormField(
-        controller: _passwordController,
+        controller: passwordController,
         decoration: const InputDecoration(
           hintText: '请输入密码',
           labelText: '密码',
@@ -65,29 +66,30 @@ class SignInPage extends StatelessWidget {
       );
     }
 
-    // ✅ 修复后的登录方法（无警告、安全）
-    void _login(BuildContext context) async {
-      if (_formKey.currentState!.validate()) {
+    void login(BuildContext context) async {
+      if (formKey.currentState!.validate()) {
         // 👇 核心：【异步前】提前获取 UserProvider 实例（无context风险）
         final userProvider = context.read<UserProvider>();
         final UserEntity? userEntity = await AuthService().login(
           UserLoginRequest(
-            loginId: _emailController.text,
-            identifyValue: _passwordController.text,
+            loginId: accountController.text,
+            identifyValue: passwordController.text,
           ),
         );
-        if (userEntity != null) {
+        if (userEntity == null) {
+          BasicToast.show("登录失败，请检查账号密码");
+        } else {
           await userProvider.refresh();
           NavigatorUtils.goNamed(RouteNames.home);
         }
       }
     }
 
-    Widget _registerButton(BuildContext context) {
-      return BasicAppButton(onPressed: () => _login(context), title: '登录');
+    Widget loginButton(BuildContext context) {
+      return BasicAppButton(onPressed: () => login(context), title: '登录');
     }
 
-    Widget _signupText(BuildContext context) {
+    Widget bottomText(BuildContext context) {
       return Padding(
         padding: const EdgeInsets.all(30.0),
         child: Row(
@@ -142,18 +144,18 @@ class SignInPage extends StatelessWidget {
               vertical: 50.0,
             ),
             child: Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // _appLogoField(),
-                  _registerText(),
+                  signInText(),
                   const SizedBox(height: 20),
-                  _emailField(context),
+                  accountField(),
                   const SizedBox(height: 20),
-                  _passwordField(context),
+                  passwordField(),
                   const SizedBox(height: 40),
-                  _registerButton(context),
+                  loginButton(context),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -161,7 +163,7 @@ class SignInPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: _signupText(context),
+      bottomNavigationBar: bottomText(context),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:odk_flutter_template/core/network/api_service.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
+import 'package:odk_flutter_template/features/auth/data/models/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_response.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
@@ -11,6 +12,20 @@ class AuthApi {
 
   AuthApi._internal();
   factory AuthApi() => _instance;
+
+  /// 注册
+  Future<String> register(UserRegistRequest request) async {
+    try {
+      ServiceResponse response = await ApiService().post(
+        '/user/register',
+        request,
+      );
+      return response.data as String;
+    } catch (e, stackTrace) {
+      Log.e('🚨 [AuthApi] 注册失败: $e, $stackTrace');
+      rethrow;
+    }
+  }
 
   Future<UserLoginResponse?> login(UserLoginRequest request) async {
     try {
