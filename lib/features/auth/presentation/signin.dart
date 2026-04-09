@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/constants/images/app_images.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
@@ -10,8 +11,9 @@ import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
 import 'package:odk_flutter_template/widgets/toast/basic_toast.dart';
 import 'package:provider/provider.dart';
 
+//登录页面
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class SignInPage extends StatelessWidget {
         "登录",
         style: TextStyle(
           // color: Colors.white,
-          fontSize: 25,
+          fontSize: 40.sp,
           fontWeight: FontWeight.bold,
         ),
         textAlign: TextAlign.center,
@@ -91,7 +93,7 @@ class SignInPage extends StatelessWidget {
 
     Widget bottomText(BuildContext context) {
       return Padding(
-        padding: const EdgeInsets.all(30.0),
+        padding: EdgeInsets.all(60.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -99,7 +101,7 @@ class SignInPage extends StatelessWidget {
               "没有账号？",
               style: TextStyle(
                 // color: Colors.white,
-                fontSize: 14,
+                fontSize: 28.sp,
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
@@ -139,10 +141,7 @@ class SignInPage extends StatelessWidget {
 
           // 👇 【优化】滚动视图：防止键盘挡住输入框
           SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30.0,
-              vertical: 50.0,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
             child: Form(
               key: formKey,
               child: Column(
@@ -150,13 +149,13 @@ class SignInPage extends StatelessWidget {
                 children: [
                   // _appLogoField(),
                   signInText(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 40.h),
                   accountField(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 40.h),
                   passwordField(),
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.h),
                   loginButton(context),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                 ],
               ),
             ),

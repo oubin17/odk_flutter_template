@@ -14,13 +14,16 @@ class AuthApi {
   factory AuthApi() => _instance;
 
   /// 注册
-  Future<String> register(UserRegistRequest request) async {
+  Future<String?> register(UserRegistRequest request) async {
     try {
-      ServiceResponse response = await ApiService().post(
-        '/user/register',
-        request,
-      );
-      return response.data as String;
+      ServiceResponse response = await ApiService().post('/user/register', {
+        'loginId': request.loginId,
+        'identifyValue': request.identifyValue,
+        "loginType": request.loginType,
+        "identifyType": request.identifyType,
+        "userName": request.userName,
+      });
+      return response.data as String?;
     } catch (e, stackTrace) {
       Log.e('🚨 [AuthApi] 注册失败: $e, $stackTrace');
       rethrow;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/constants/images/app_images.dart';
 import 'package:odk_flutter_template/features/auth/data/models/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
@@ -7,7 +8,7 @@ import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
 import 'package:odk_flutter_template/widgets/toast/basic_toast.dart';
 
-//
+//注册页面
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
@@ -23,7 +24,7 @@ class SignUpPage extends StatelessWidget {
         "注册",
         style: TextStyle(
           // color: Colors.white,
-          fontSize: 25,
+          fontSize: 40.sp,
           fontWeight: FontWeight.bold,
         ),
         textAlign: TextAlign.center,
@@ -34,7 +35,7 @@ class SignUpPage extends StatelessWidget {
       return TextFormField(
         controller: userNameController,
         decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.app_registration),
+          prefixIcon: Icon(Icons.account_circle),
           labelText: '用户名',
         ),
         validator: (value) {
@@ -84,7 +85,7 @@ class SignUpPage extends StatelessWidget {
       if (formKey.currentState!.validate()) {
         final String? userId = await AuthService().register(
           UserRegistRequest(
-            username: userNameController.text,
+            userName: userNameController.text,
             loginId: accountController.text,
             identifyValue: passwordController.text,
           ),
@@ -103,7 +104,7 @@ class SignUpPage extends StatelessWidget {
 
     Widget signupText(BuildContext context) {
       return Padding(
-        padding: const EdgeInsets.all(30.0),
+        padding: EdgeInsets.all(60.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -111,7 +112,7 @@ class SignUpPage extends StatelessWidget {
               "已经有账号？",
               style: TextStyle(
                 // color: Colors.white,
-                fontSize: 14,
+                fontSize: 28.sp,
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
@@ -151,10 +152,7 @@ class SignUpPage extends StatelessWidget {
 
           // 👇 【优化】滚动视图：防止键盘挡住输入框
           SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30.0,
-              vertical: 50.0,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
             child: Form(
               key: formKey,
               child: Column(
@@ -162,15 +160,15 @@ class SignUpPage extends StatelessWidget {
                 children: [
                   // _appLogoField(),
                   registerText(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 40.h),
                   userNameField(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 40.h),
                   accountField(),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 40.h),
                   passwordField(),
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.h),
                   registerButton(context),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                 ],
               ),
             ),

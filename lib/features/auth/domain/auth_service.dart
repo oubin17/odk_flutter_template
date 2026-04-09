@@ -26,7 +26,6 @@ class AuthService {
     return await AuthApi().register(request);
   }
 
-  // BasicToast.show("登录失败，请检查账号密码");
   /// 登录
   Future<UserEntity?> login(UserLoginRequest request) async {
     // 直接调用 API，让异常自然向上传递
