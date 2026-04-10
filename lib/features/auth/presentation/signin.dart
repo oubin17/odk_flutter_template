@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/core/constants/images/app_images.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
@@ -80,7 +79,7 @@ class SignInPage extends StatelessWidget {
           ),
         );
         if (userEntity == null) {
-          BasicToast.showToast("登录失败，请检查账号密码");
+          AppToast.showToast("登录失败，请检查账号密码");
         } else {
           await userProvider.refresh();
           NavigatorUtils.goNamed(RouteNames.home);

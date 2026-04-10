@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:odk_flutter_template/common/theme/app_theme.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
+import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,12 @@ void main() async {
 
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => userProvider)],
+      providers: [
+        // 注入用户Provider
+        ChangeNotifierProvider(create: (context) => userProvider),
+        // 注入主题Provider
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -42,38 +49,35 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true, // 最小文字适配
       splitScreenMode: true, // 支持分屏模式适配
       // 你的应用主体
-      child: MaterialApp.router(
-        // 绑定路由配置
-        routerConfig: AppRouter.router,
-        // 关闭调试标识
-        debugShowCheckedModeBanner: false,
-        // 🔥 5.x 保留这个初始化即可
-        builder: FlutterSmartDialog.init(),
-        // 其他主题配置保留不变
-        // theme: ThemeData(primarySwatch: Colors.blue),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp.router(
+            // 绑定路由配置
+            routerConfig: AppRouter.router,
+            // 关闭调试标识
+            debugShowCheckedModeBanner: false,
+            // 🔥 5.x 保留这个初始化即可
+            builder: FlutterSmartDialog.init(),
+
+            // 绑定主题
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: _getThemeMode(themeProvider.themeMode),
+          );
+        },
       ),
     );
   }
-}
 
-// // 🔥 flutter_smart_dialog 5.1.0 最新配置
-// void initSmartDialogConfig() {
-//   SmartDialog.init(
-//     // Loading 全局样式
-//     loadingStyle: LoadingStyle(
-//       background: Colors.black54,
-//       radius: 16,
-//       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-//       fontColor: Colors.white,
-//       fontSize: 28,
-//     ),
-//     // Toast 全局样式
-//     toastStyle: ToastStyle(
-//       background: Colors.black87,
-//       radius: 12,
-//       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-//       fontColor: Colors.white,
-//       fontSize: 26,
-//     ),
-//   );
-// }
+  // 转换主题模式
+  ThemeMode _getThemeMode(ThemeModeType type) {
+    switch (type) {
+      case ThemeModeType.light:
+        return ThemeMode.light;
+      case ThemeModeType.dark:
+        return ThemeMode.dark;
+      case ThemeModeType.system:
+        return ThemeMode.system;
+    }
+  }
+}

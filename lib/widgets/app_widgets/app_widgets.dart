@@ -2,21 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
-/// 全局统一颜色（后续只需改这里，全APP换肤）
+/// 全局统一颜色（适配明暗主题）
 class AppColors {
   // 主色
-  static const Color primary = Color(0xFF407BFF);
-  static const Color primaryLight = Color(0xFFE8F3FF);
+  static Color primary(BuildContext context) => Theme.of(context).primaryColor;
+  static Color primaryLight(BuildContext context) =>
+      Theme.of(context).primaryColor.withAlpha(25);
 
-  // 中性色
-  static const Color bgPage = Color(0xFFF7F8FA);
-  static const Color card = Colors.white;
-  static const Color divider = Color(0xFFF2F3F5);
+  // 页面背景
+  static Color bgPage(BuildContext context) =>
+      Theme.of(context).scaffoldBackgroundColor;
+  // 卡片背景
+  static Color card(BuildContext context) => Theme.of(context).cardColor;
+  // 分割线
+  static Color divider(BuildContext context) => Theme.of(context).dividerColor;
 
   // 文字色
-  static const Color textMain = Color(0xFF1D2129);
-  static const Color textSecond = Color(0xFF4E5969);
-  static const Color textGray = Color(0xFF86909C);
+  static Color textMain(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? Colors.white.withAlpha(225)
+      : const Color(0xFF1D2129);
+  static Color textSecond(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? Colors.white.withAlpha(170)
+      : const Color(0xFF4E5969);
+  static Color textGray(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+      ? Colors.white.withAlpha(128)
+      : const Color(0xFF86909C);
   static const Color textWhite = Colors.white;
 
   // 状态色
@@ -25,7 +38,7 @@ class AppColors {
   static const Color warning = Color(0xFFFF7D00);
 }
 
-/// 统一文本组件（告别到处写style）
+/// 统一文本组件（适配主题+暗黑模式）
 class AppText extends StatelessWidget {
   final String text;
   final Color? color;
@@ -34,6 +47,7 @@ class AppText extends StatelessWidget {
   final int? maxLines;
   final TextAlign? align;
 
+  // 基础构造
   const AppText(
     this.text, {
     super.key,
@@ -44,40 +58,45 @@ class AppText extends StatelessWidget {
     this.align,
   });
 
-  // 快速标题（移除const，修复报错）
-  AppText.title(this.text, {super.key, Color? color})
+  // 快速标题
+  AppText.title(this.text, {super.key, this.color})
     : size = 32.sp,
       weight = FontWeight.w500,
-      color = color ?? AppColors.textMain,
       maxLines = null,
       align = null;
 
-  // 正文（最常用，移除const）
-  AppText.body(this.text, {super.key, Color? color})
+  // 正文（最常用）
+  AppText.body(this.text, {super.key, this.color})
     : size = 28.sp,
       weight = FontWeight.normal,
-      color = color ?? AppColors.textMain,
       maxLines = null,
       align = null;
 
-  // 次要文字（移除const）
-  AppText.second(this.text, {super.key, Color? color})
+  // 次要文字
+  AppText.second(this.text, {super.key, this.color})
     : size = 26.sp,
       weight = FontWeight.normal,
-      color = color ?? AppColors.textSecond,
       maxLines = null,
       align = null;
 
-  // 小字提示（移除const）
-  AppText.tip(this.text, {super.key, Color? color})
+  // 小字提示
+  AppText.tip(this.text, {super.key, this.color})
     : size = 24.sp,
       weight = FontWeight.normal,
-      color = color ?? AppColors.textGray,
       maxLines = null,
       align = null;
 
   @override
   Widget build(BuildContext context) {
+    Color getDefaultColor() {
+      if (color != null) return color!;
+      if (size == 32.sp) return AppColors.textMain(context);
+      if (size == 28.sp) return AppColors.textMain(context);
+      if (size == 26.sp) return AppColors.textSecond(context);
+      if (size == 24.sp) return AppColors.textGray(context);
+      return AppColors.textMain(context);
+    }
+
     return Text(
       text,
       textAlign: align,
@@ -85,7 +104,7 @@ class AppText extends StatelessWidget {
       overflow: maxLines != null ? TextOverflow.ellipsis : null,
       style: TextStyle(
         fontSize: size,
-        color: color,
+        color: getDefaultColor(),
         fontWeight: weight,
         height: 1.4,
       ),
@@ -129,7 +148,7 @@ class AppCard extends StatelessWidget {
       width: double.infinity,
       padding: padding ?? EdgeInsets.all(30.w),
       decoration: BoxDecoration(
-        color: bg ?? AppColors.card,
+        color: bg ?? AppColors.card(context),
         borderRadius: BorderRadius.circular(radius ?? 16.w),
         boxShadow: showShadow
             ? [
@@ -172,8 +191,8 @@ class AppButton extends StatelessWidget {
         onPressed: disabled ? null : onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: disabled
-              ? AppColors.textGray
-              : (bgColor ?? AppColors.primary),
+              ? AppColors.textGray(context)
+              : (bgColor ?? AppColors.primary(context)),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.w),
@@ -205,12 +224,12 @@ class AppOutlinedButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onTap,
         style: OutlinedButton.styleFrom(
-          side: BorderSide(color: AppColors.primary, width: 1.w),
+          side: BorderSide(color: AppColors.primary(context), width: 1.w),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.w),
           ),
         ),
-        child: AppText(text, color: AppColors.primary, size: 28.sp),
+        child: AppText(text, color: AppColors.primary(context), size: 28.sp),
       ),
     );
   }
@@ -236,12 +255,16 @@ class AppTextButton extends StatelessWidget {
       style: TextButton.styleFrom(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       ),
-      child: AppText(text, color: color ?? AppColors.primary, size: 26.sp),
+      child: AppText(
+        text,
+        color: color ?? AppColors.primary(context),
+        size: 26.sp,
+      ),
     );
   }
 }
 
-/// 1. 带加载状态的按钮（登录/提交专用）
+/// 加载状态按钮
 class AppLoadingButton extends StatelessWidget {
   final String text;
   final bool isLoading;
@@ -264,9 +287,9 @@ class AppLoadingButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading || disabled ? null : onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: disabled || isLoading
-              ? AppColors.textGray
-              : AppColors.primary,
+          backgroundColor: isLoading || disabled
+              ? AppColors.textGray(context)
+              : AppColors.primary(context),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.w),
@@ -313,10 +336,13 @@ class AppInput extends StatelessWidget {
       obscureText: obscure,
       readOnly: readOnly,
       keyboardType: keyboardType,
-      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain),
+      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(fontSize: 26.sp, color: AppColors.textGray),
+        hintStyle: TextStyle(
+          fontSize: 26.sp,
+          color: AppColors.textGray(context),
+        ),
         prefixIcon: prefix != null
             ? Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -330,7 +356,7 @@ class AppInput extends StatelessWidget {
               )
             : null,
         filled: true,
-        fillColor: AppColors.card,
+        fillColor: AppColors.card(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.w),
           borderSide: BorderSide.none,
@@ -341,7 +367,7 @@ class AppInput extends StatelessWidget {
   }
 }
 
-/// 2. 验证码输入框（带倒计时按钮）
+/// 验证码输入框
 class AppCodeInput extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback onSendCode;
@@ -366,12 +392,15 @@ class _AppCodeInputState extends State<AppCodeInput> {
     return TextField(
       controller: widget.controller,
       keyboardType: TextInputType.number,
-      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain),
+      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
       decoration: InputDecoration(
         hintText: "请输入验证码",
-        hintStyle: TextStyle(fontSize: 26.sp, color: AppColors.textGray),
+        hintStyle: TextStyle(
+          fontSize: 26.sp,
+          color: AppColors.textGray(context),
+        ),
         filled: true,
-        fillColor: AppColors.card,
+        fillColor: AppColors.card(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.w),
           borderSide: BorderSide.none,
@@ -383,7 +412,9 @@ class _AppCodeInputState extends State<AppCodeInput> {
             onPressed: widget.isCounting ? null : widget.onSendCode,
             child: AppText(
               widget.isCounting ? "${widget.countTime}s后重发" : "获取验证码",
-              color: widget.isCounting ? AppColors.textGray : AppColors.primary,
+              color: widget.isCounting
+                  ? AppColors.textGray(context)
+                  : AppColors.primary(context),
               size: 24.sp,
             ),
           ),
@@ -439,7 +470,7 @@ class AppListItem extends StatelessWidget {
               Icon(
                 Icons.arrow_forward_ios,
                 size: 24.w,
-                color: AppColors.textGray,
+                color: AppColors.textGray(context),
               ),
           ],
         ),
@@ -448,7 +479,7 @@ class AppListItem extends StatelessWidget {
   }
 }
 
-/// 3. 通用头像组件
+/// 通用头像组件
 class AppAvatar extends StatelessWidget {
   final String? imgUrl;
   final double size;
@@ -463,16 +494,21 @@ class AppAvatar extends StatelessWidget {
       child: Container(
         width: size.w,
         height: size.w,
-        color: AppColors.primaryLight,
+        color: AppColors.primaryLight(context),
         child: imgUrl != null && imgUrl!.isNotEmpty
             ? Image.network(imgUrl!, fit: BoxFit.cover)
-            : child ?? Icon(Icons.person, size: 40.w, color: AppColors.primary),
+            : child ??
+                  Icon(
+                    Icons.person,
+                    size: 40.w,
+                    color: AppColors.primary(context),
+                  ),
       ),
     );
   }
 }
 
-/// 4. 通用确认弹窗（删除/确认/取消）
+/// 通用确认弹窗
 void showAppConfirmDialog({
   required String title,
   required String msg,

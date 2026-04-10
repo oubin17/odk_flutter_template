@@ -91,7 +91,7 @@ class SignUpPage extends StatelessWidget {
           ),
         );
         if (userId == null) {
-          BasicToast.showToast("注册失败");
+          AppToast.showToast("注册失败");
         } else {
           NavigatorUtils.goNamed(RouteNames.signin);
         }
