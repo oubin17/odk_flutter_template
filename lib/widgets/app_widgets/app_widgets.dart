@@ -1,0 +1,520 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+
+/// 全局统一颜色（后续只需改这里，全APP换肤）
+class AppColors {
+  // 主色
+  static const Color primary = Color(0xFF407BFF);
+  static const Color primaryLight = Color(0xFFE8F3FF);
+
+  // 中性色
+  static const Color bgPage = Color(0xFFF7F8FA);
+  static const Color card = Colors.white;
+  static const Color divider = Color(0xFFF2F3F5);
+
+  // 文字色
+  static const Color textMain = Color(0xFF1D2129);
+  static const Color textSecond = Color(0xFF4E5969);
+  static const Color textGray = Color(0xFF86909C);
+  static const Color textWhite = Colors.white;
+
+  // 状态色
+  static const Color success = Color(0xFF00B42A);
+  static const Color error = Color(0xFFF53F3F);
+  static const Color warning = Color(0xFFFF7D00);
+}
+
+/// 统一文本组件（告别到处写style）
+class AppText extends StatelessWidget {
+  final String text;
+  final Color? color;
+  final double? size;
+  final FontWeight? weight;
+  final int? maxLines;
+  final TextAlign? align;
+
+  const AppText(
+    this.text, {
+    super.key,
+    this.color,
+    this.size,
+    this.weight,
+    this.maxLines,
+    this.align,
+  });
+
+  // 快速标题（移除const，修复报错）
+  AppText.title(this.text, {super.key, Color? color})
+    : size = 32.sp,
+      weight = FontWeight.w500,
+      color = color ?? AppColors.textMain,
+      maxLines = null,
+      align = null;
+
+  // 正文（最常用，移除const）
+  AppText.body(this.text, {super.key, Color? color})
+    : size = 28.sp,
+      weight = FontWeight.normal,
+      color = color ?? AppColors.textMain,
+      maxLines = null,
+      align = null;
+
+  // 次要文字（移除const）
+  AppText.second(this.text, {super.key, Color? color})
+    : size = 26.sp,
+      weight = FontWeight.normal,
+      color = color ?? AppColors.textSecond,
+      maxLines = null,
+      align = null;
+
+  // 小字提示（移除const）
+  AppText.tip(this.text, {super.key, Color? color})
+    : size = 24.sp,
+      weight = FontWeight.normal,
+      color = color ?? AppColors.textGray,
+      maxLines = null,
+      align = null;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: align,
+      maxLines: maxLines,
+      overflow: maxLines != null ? TextOverflow.ellipsis : null,
+      style: TextStyle(
+        fontSize: size,
+        color: color,
+        fontWeight: weight,
+        height: 1.4,
+      ),
+    );
+  }
+}
+
+/// 统一间距组件
+class AppGap {
+  // 垂直间距
+  static Widget hSmall = SizedBox(height: 20.h);
+  static Widget hNormal = SizedBox(height: 30.h);
+  static Widget hLarge = SizedBox(height: 40.h);
+  static Widget hXL = SizedBox(height: 60.h);
+
+  // 水平间距
+  static Widget wSmall = SizedBox(width: 20.w);
+  static Widget wNormal = SizedBox(width: 30.w);
+}
+
+/// 统一卡片
+class AppCard extends StatelessWidget {
+  final Widget child;
+  final EdgeInsetsGeometry? padding;
+  final double? radius;
+  final Color? bg;
+  final bool showShadow;
+
+  const AppCard({
+    super.key,
+    required this.child,
+    this.padding,
+    this.radius,
+    this.bg,
+    this.showShadow = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: padding ?? EdgeInsets.all(30.w),
+      decoration: BoxDecoration(
+        color: bg ?? AppColors.card,
+        borderRadius: BorderRadius.circular(radius ?? 16.w),
+        boxShadow: showShadow
+            ? [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 10.w,
+                  offset: Offset(0, 4.w),
+                ),
+              ]
+            : null,
+      ),
+      child: child,
+    );
+  }
+}
+
+/// 主按钮（填充）
+class AppButton extends StatelessWidget {
+  final String text;
+  final VoidCallback? onTap;
+  final bool disabled;
+  final double? height;
+  final Color? bgColor;
+
+  const AppButton({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.disabled = false,
+    this.height,
+    this.bgColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: height ?? 88.h,
+      child: ElevatedButton(
+        onPressed: disabled ? null : onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: disabled
+              ? AppColors.textGray
+              : (bgColor ?? AppColors.primary),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.w),
+          ),
+        ),
+        child: AppText(
+          text,
+          color: AppColors.textWhite,
+          size: 32.sp,
+          weight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+}
+
+/// 次按钮（线框）
+class AppOutlinedButton extends StatelessWidget {
+  final String text;
+  final VoidCallback? onTap;
+
+  const AppOutlinedButton({super.key, required this.text, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 72.h,
+      child: OutlinedButton(
+        onPressed: onTap,
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: AppColors.primary, width: 1.w),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.w),
+          ),
+        ),
+        child: AppText(text, color: AppColors.primary, size: 28.sp),
+      ),
+    );
+  }
+}
+
+/// 文字按钮
+class AppTextButton extends StatelessWidget {
+  final String text;
+  final VoidCallback? onTap;
+  final Color? color;
+
+  const AppTextButton({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onTap,
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      ),
+      child: AppText(text, color: color ?? AppColors.primary, size: 26.sp),
+    );
+  }
+}
+
+/// 1. 带加载状态的按钮（登录/提交专用）
+class AppLoadingButton extends StatelessWidget {
+  final String text;
+  final bool isLoading;
+  final VoidCallback? onTap;
+  final bool disabled;
+
+  const AppLoadingButton({
+    super.key,
+    required this.text,
+    required this.isLoading,
+    required this.onTap,
+    this.disabled = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 88.h,
+      child: ElevatedButton(
+        onPressed: isLoading || disabled ? null : onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: disabled || isLoading
+              ? AppColors.textGray
+              : AppColors.primary,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.w),
+          ),
+        ),
+        child: isLoading
+            ? CircularProgressIndicator(color: Colors.white, strokeWidth: 2.w)
+            : AppText(
+                text,
+                color: AppColors.textWhite,
+                size: 32.sp,
+                weight: FontWeight.w500,
+              ),
+      ),
+    );
+  }
+}
+
+/// 通用输入框
+class AppInput extends StatelessWidget {
+  final TextEditingController? controller;
+  final String hint;
+  final bool obscure;
+  final Widget? suffix;
+  final Widget? prefix;
+  final TextInputType? keyboardType;
+  final bool readOnly;
+
+  const AppInput({
+    super.key,
+    this.controller,
+    required this.hint,
+    this.obscure = false,
+    this.suffix,
+    this.prefix,
+    this.keyboardType,
+    this.readOnly = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      obscureText: obscure,
+      readOnly: readOnly,
+      keyboardType: keyboardType,
+      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(fontSize: 26.sp, color: AppColors.textGray),
+        prefixIcon: prefix != null
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: prefix,
+              )
+            : null,
+        suffixIcon: suffix != null
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: suffix,
+              )
+            : null,
+        filled: true,
+        fillColor: AppColors.card,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.w),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
+      ),
+    );
+  }
+}
+
+/// 2. 验证码输入框（带倒计时按钮）
+class AppCodeInput extends StatefulWidget {
+  final TextEditingController controller;
+  final VoidCallback onSendCode;
+  final bool isCounting;
+  final int countTime;
+
+  const AppCodeInput({
+    super.key,
+    required this.controller,
+    required this.onSendCode,
+    required this.isCounting,
+    this.countTime = 60,
+  });
+
+  @override
+  State<AppCodeInput> createState() => _AppCodeInputState();
+}
+
+class _AppCodeInputState extends State<AppCodeInput> {
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: widget.controller,
+      keyboardType: TextInputType.number,
+      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain),
+      decoration: InputDecoration(
+        hintText: "请输入验证码",
+        hintStyle: TextStyle(fontSize: 26.sp, color: AppColors.textGray),
+        filled: true,
+        fillColor: AppColors.card,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.w),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
+        suffixIcon: Padding(
+          padding: EdgeInsets.only(right: 20.w),
+          child: TextButton(
+            onPressed: widget.isCounting ? null : widget.onSendCode,
+            child: AppText(
+              widget.isCounting ? "${widget.countTime}s后重发" : "获取验证码",
+              color: widget.isCounting ? AppColors.textGray : AppColors.primary,
+              size: 24.sp,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// 通用列表项
+class AppListItem extends StatelessWidget {
+  final Widget? left;
+  final String title;
+  final String? desc;
+  final Widget? right;
+  final VoidCallback? onTap;
+  final bool showArrow;
+
+  const AppListItem({
+    super.key,
+    this.left,
+    required this.title,
+    this.desc,
+    this.right,
+    this.onTap,
+    this.showArrow = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16.w),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),
+        child: Row(
+          children: [
+            if (left != null) ...[left!, AppGap.wNormal],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText.body(title),
+                  if (desc != null && desc!.isNotEmpty) ...[
+                    AppGap.hSmall,
+                    AppText.tip(desc!),
+                  ],
+                ],
+              ),
+            ),
+            if (right != null) ...[right!],
+            if (showArrow)
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 24.w,
+                color: AppColors.textGray,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// 3. 通用头像组件
+class AppAvatar extends StatelessWidget {
+  final String? imgUrl;
+  final double size;
+  final Widget? child;
+
+  const AppAvatar({super.key, this.imgUrl, this.size = 100, this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(size.w),
+      child: Container(
+        width: size.w,
+        height: size.w,
+        color: AppColors.primaryLight,
+        child: imgUrl != null && imgUrl!.isNotEmpty
+            ? Image.network(imgUrl!, fit: BoxFit.cover)
+            : child ?? Icon(Icons.person, size: 40.w, color: AppColors.primary),
+      ),
+    );
+  }
+}
+
+/// 4. 通用确认弹窗（删除/确认/取消）
+void showAppConfirmDialog({
+  required String title,
+  required String msg,
+  String confirmText = "确认",
+  String cancelText = "取消",
+  VoidCallback? onConfirm,
+}) {
+  SmartDialog.show(
+    clickMaskDismiss: false,
+    builder: (context) => AppCard(
+      radius: 20,
+      showShadow: true,
+      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppText.title(title),
+          AppGap.hNormal,
+          AppText.second(msg),
+          AppGap.hXL,
+          Row(
+            children: [
+              Expanded(
+                child: AppOutlinedButton(
+                  text: cancelText,
+                  onTap: () => SmartDialog.dismiss(),
+                ),
+              ),
+              AppGap.wNormal,
+              Expanded(
+                child: AppButton(
+                  text: confirmText,
+                  onTap: () {
+                    SmartDialog.dismiss();
+                    onConfirm?.call();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
