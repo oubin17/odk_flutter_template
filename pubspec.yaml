@@ -47,6 +47,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_smart_dialog: ^5.1.0
   cached_network_image: ^3.4.1
+  flutter_flavor: ^3.1.4
 
 dev_dependencies:
   flutter_test:
@@ -89,7 +90,7 @@ flutter:
     - assets/images/login/
     - assets/vectors/
     - assets/logo.png
-    - lib/core/config/keys/public_key.pem
+    - lib/config/keys/public_key.pem
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

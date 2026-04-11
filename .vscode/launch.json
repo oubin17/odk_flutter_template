@@ -1,0 +1,33 @@
+{
+  // 使用 IntelliSense 了解相关属性。 
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+
+
+    // {
+    //   "name": "odk_flutter_template",
+    //   "request": "launch",
+    //   "type": "dart"
+    // },
+    {
+      "name": "odk_flutter_template_dev",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_dev.dart"
+    },
+    {
+      "name": "odk_flutter_template_test",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_test.dart"
+    },
+    {
+      "name": "odk_flutter_template_prod",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_prod.dart"
+    }
+  ]
+}

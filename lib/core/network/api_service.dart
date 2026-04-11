@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:odk_flutter_template/core/constants/system/http_constants.dart';
+import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
 import 'package:odk_flutter_template/core/network/interceptors/request_response_interceptor.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
@@ -10,6 +10,16 @@ class ApiService {
   static ApiService? _instance;
 
   final Dio _dio;
+
+  // 公共请求头
+  static Map<String, dynamic> commonHeaders = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-TENANT-ID': Env.tenantId,
+    // 可以在这里添加其他公共请求头，例如：
+    // 'Platform': 'mobile',
+    // 'Version': '1.0.0',
+  };
 
   // 获取单例实例的方法
   static ApiService get instance {
@@ -22,12 +32,12 @@ class ApiService {
     : _dio = Dio(
         BaseOptions(
           // 默认使用 BaseConstants.baseUrl，也可以自定义
-          baseUrl: baseUrl ?? HttpConstants.baseUrl,
+          baseUrl: baseUrl ?? Env.serverUri,
           connectTimeout: const Duration(seconds: 30),
           receiveTimeout: const Duration(seconds: 30),
           // 自动合并公共请求头和自定义请求头
           headers: {
-            ...HttpConstants.commonHeaders,
+            ...commonHeaders,
             if (customHeaders != null) ...customHeaders,
           },
         ),

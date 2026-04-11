@@ -9,9 +9,7 @@ class EncryptUtils {
   /// 初始化，加载公钥
   static Future<void> init() async {
     if (_publicKey != null) return;
-    _publicKey = await rootBundle.loadString(
-      'lib/core/config/keys/public_key.pem',
-    );
+    _publicKey = await rootBundle.loadString('lib/config/keys/public_key.pem');
   }
 
   /// 使用 RSA 公钥对文本进行加密

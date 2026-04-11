@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:odk_flutter_template/core/constants/system/system_constants.dart';
+import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
@@ -31,7 +31,7 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
 
     // 3. 注入请求头（逻辑不变）
     if (token != null && token.isNotEmpty) {
-      options.headers[SystemConstants.tokenHeader] = token;
+      options.headers[Env.tokenHeader] = token;
     }
 
     return handler.next(options);
