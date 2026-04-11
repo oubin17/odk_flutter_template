@@ -2,23 +2,42 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:odk_flutter_template/common/theme/app_theme.dart';
 
 /// 全局统一颜色（适配明暗主题）
 class AppColors {
-  // 主色
-  static Color primary(BuildContext context) => Theme.of(context).primaryColor;
-  static Color primaryLight(BuildContext context) =>
-      Theme.of(context).primaryColor.withAlpha(25);
+  // ===================== 主色系列（梯度成组：自动适配明暗主题） =====================
 
-  // 页面背景
+  /// 主色-超浅（最淡背景、悬浮层背景）
+  static Color primary50(BuildContext context) => AppTheme.primary50(context);
+
+  /// 主色-浅（标签背景、头像背景、弱强调）
+  static Color primaryLight(BuildContext context) =>
+      AppTheme.primaryLight(context);
+
+  /// 主色（按钮、强调、图标）
+  static Color primary(BuildContext context) => AppTheme.primary(context);
+
+  /// 主色-深（按压态、文字高亮、深强调）
+  static Color primaryDark(BuildContext context) =>
+      AppTheme.primaryDark(context);
+
+  /// 主色-深（按压态、文字高亮、深强调）
+  static Color primaryDeepDark(BuildContext context) =>
+      AppTheme.primaryDeepDark(context);
+
+  // ===================== 背景/边框系列 =====================
+  /// 页面背景
   static Color bgPage(BuildContext context) =>
       Theme.of(context).scaffoldBackgroundColor;
-  // 卡片背景
+
+  /// 卡片/输入框背景
   static Color card(BuildContext context) => Theme.of(context).cardColor;
-  // 分割线
+
+  /// 分割线
   static Color divider(BuildContext context) => Theme.of(context).dividerColor;
 
-  // 文字色
+  // ===================== 文字色系列（无改动，保留你的原有配置） =====================
   static Color textMain(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
       ? Colors.white.withAlpha(225)
