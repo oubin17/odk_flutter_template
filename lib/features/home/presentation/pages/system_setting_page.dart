@@ -15,10 +15,12 @@ class SystemSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPage(context),
-      appBar: BasicAppbar(title: const AppText("设置")),
+      appBar: const BasicAppbar(title: AppText("设置")),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         children: [
+          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+
           // 主题切换 + 图标
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
@@ -67,7 +69,11 @@ class SystemSettingPage extends StatelessWidget {
             ),
             title: "版本信息",
             desc: "1.0.0",
-            onTap: () {},
+            onTap: () {
+              // SmartDialog.show(
+              //   builder: (BuildContext context) => const AppInfoPage(),
+              // );
+            },
           ),
           // 退出登录 + 图标
           Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),

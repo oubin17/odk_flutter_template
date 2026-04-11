@@ -1,61 +1,64 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
-import 'package:odk_flutter_template/gen/assets.gen.dart';
-import 'package:odk_flutter_template/routes/app_router.dart';
-import 'package:odk_flutter_template/routes/navigator_utils.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:go_router/go_router.dart';
+// import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+// import 'package:odk_flutter_template/gen/assets.gen.dart';
+// import 'package:odk_flutter_template/routes/app_router.dart';
+// import 'package:odk_flutter_template/routes/navigator_utils.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+// class SplashPage extends StatefulWidget {
+//   const SplashPage({super.key});
 
-  @override
-  State<SplashPage> createState() => _SplashPageState();
-}
+//   @override
+//   State<SplashPage> createState() => _SplashPageState();
+// }
 
-class _SplashPageState extends State<SplashPage> {
-  bool fromOtherPage = false;
-  // 防止重复执行跳转
-  bool _isRedirected = false;
+// class _SplashPageState extends State<SplashPage> {
+//   bool fromOtherPage = false;
+//   bool _isRedirected = false;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // 上下文已就绪，安全获取路由参数
-    final params = GoRouterState.of(context).uri.queryParameters;
-    fromOtherPage = params['fromOtherPage'] == 'true';
+//   @override
+//   void initState() {
+//     super.initState();
+//   }
 
-    // 只执行一次跳转
-    if (!_isRedirected) {
-      _isRedirected = true;
-      _redirect(fromOtherPage);
-    }
-  }
+//   @override
+//   void didChangeDependencies() {
+//     super.didChangeDependencies();
+//     final params = GoRouterState.of(context).uri.queryParameters;
+//     fromOtherPage = params['fromOtherPage'] == 'true';
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Image.asset(
-          Assets.splash.splash.path,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-        ),
-      ),
-    );
-  }
+//     if (!_isRedirected) {
+//       _isRedirected = true;
+//       _redirect(fromOtherPage);
+//     }
+//   }
 
-  Future<void> _redirect(bool fromOtherPage) async {
-    await Future.delayed(const Duration(seconds: 2));
-    if (fromOtherPage) {
-      NavigatorUtils.goNamed(RouteNames.signin);
-      return;
-    }
-    final isLogged = await AuthService().checkLoggedIn();
-    if (isLogged) {
-      NavigatorUtils.goNamed(RouteNames.home);
-    } else {
-      NavigatorUtils.goNamed(RouteNames.signin);
-    }
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       // 🔥 1. 背景色和原生完全一致
+//       // backgroundColor: const Color(0xFFFFFFFF),
+//       body: Image.asset(
+//         Assets.logo.path,
+//         width: 1.sw,
+//         height: 1.sh,
+//         fit: BoxFit.cover,
+//       ),
+//     );
+//   }
+
+//   Future<void> _redirect(bool fromOtherPage) async {
+//     await Future.delayed(const Duration(seconds: 1));
+//     if (fromOtherPage) {
+//       NavigatorUtils.goNamed(RouteNames.signin);
+//       return;
+//     }
+//     final isLogged = await AuthService().checkLoggedIn();
+//     if (isLogged) {
+//       NavigatorUtils.goNamed(RouteNames.home);
+//     } else {
+//       NavigatorUtils.goNamed(RouteNames.signin);
+//     }
+//   }
+// }

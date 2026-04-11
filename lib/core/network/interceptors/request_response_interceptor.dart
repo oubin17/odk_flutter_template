@@ -85,7 +85,7 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
         // ======================================================
 
         // 2. 跳转欢迎页
-        NavigatorUtils.goNamed(RouteNames.splash);
+        NavigatorUtils.goNamed(RouteNames.signin);
       }
     }
   }

@@ -49,6 +49,11 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_flavor: ^3.1.4
   flutter_gen_runner: ^5.13.0+1
+  logger: ^2.7.0
+  permission_handler: ^12.0.1
+  package_info_plus: ^9.0.1
+  device_info_plus: ^12.4.0
+  flutter_native_splash: ^2.4.7
 
 dev_dependencies:
   flutter_test:
@@ -87,10 +92,12 @@ flutter:
   # https://flutter.dev/to/asset-from-package
   assets:
     - assets/profile/
+    - assets/launcher_icon/
+    
     - assets/splash/
     - assets/login/
     - assets/vectors/
-    - assets/logo.png
+    - assets/logo.jpg
     - lib/config/keys/public_key.pem
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
@@ -111,11 +118,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-# 配置 flutter_launcher_icons
+# 配置 flutter_launcher_icons应用图标
 flutter_launcher_icons:
   android: 'launcher_icon'
   ios: true
-  image_path: 'assets/logo.png' # 你的图标路径
+  image_path: 'assets/launcher_icon/launcher.png' # 你的图标路径
   min_sdk_android: 21 # android min sdk warning fix
 
 
@@ -128,3 +135,27 @@ flutter_gen:
   output: lib/gen/
   # 可选配置
   line_length: 120
+
+# ----------------- 原生启动屏配置 -----------------
+#dart run flutter_native_splash:create
+#dart run flutter_native_splash:remove
+flutter_native_splash:
+  # 通用配置
+  color: "#FFFFFF"       # 启动页背景色（纯白，可自定义）
+  image: assets/logo.jpg    # 你的Logo图片路径（必须创建）
+  fullscreen: true                  # 全屏（隐藏状态栏）
+  # 安卓全屏填充
+  android_gravity: fill
+  # iOS全屏填充
+  ios_content_mode: scaleAspectFill
+
+  # Android 12+ 专用适配（必须加，否则安卓12显示异常）
+  android_12:
+    image: assets/logo.jpg
+    color: "#FFFFFF"
+    icon_background_color: "#FFFFFF"
+    android_12_gravity: fill
+
+  # 平台开关
+  android: true
+  ios: true

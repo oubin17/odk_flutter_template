@@ -18,6 +18,16 @@ class $LibGen {
   $LibConfigGen get config => const $LibConfigGen();
 }
 
+class $AssetsLauncherIconGen {
+  const $AssetsLauncherIconGen();
+
+  /// File path: assets/launcher_icon/launcher.png
+  AssetGenImage get launcher => const AssetGenImage('assets/launcher_icon/launcher.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [launcher];
+}
+
 class $AssetsLoginGen {
   const $AssetsLoginGen();
 
@@ -81,8 +91,9 @@ class $LibConfigKeysGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsLauncherIconGen launcherIcon = $AssetsLauncherIconGen();
   static const $AssetsLoginGen login = $AssetsLoginGen();
-  static const AssetGenImage logo = AssetGenImage('assets/logo.png');
+  static const AssetGenImage logo = AssetGenImage('assets/logo.jpg');
   static const $AssetsProfileGen profile = $AssetsProfileGen();
   static const $AssetsSplashGen splash = $AssetsSplashGen();
   static const $AssetsVectorsGen vectors = $AssetsVectorsGen();

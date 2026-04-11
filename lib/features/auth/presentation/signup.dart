@@ -28,7 +28,7 @@ class SignUpPage extends StatelessWidget {
         controller: userNameController,
         label: '用户名',
         hint: '请输入用户名',
-        prefix: Icon(Icons.account_circle),
+        prefix: const Icon(Icons.account_circle),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return "用户名不能为空";
@@ -43,7 +43,7 @@ class SignUpPage extends StatelessWidget {
         controller: accountController,
         label: '账号',
         hint: '请输入账号',
-        prefix: Icon(Icons.app_registration),
+        prefix: const Icon(Icons.app_registration),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return "账号不能为空";
@@ -58,7 +58,7 @@ class SignUpPage extends StatelessWidget {
         controller: passwordController,
         label: '密码',
         hint: '请输入密码',
-        prefix: Icon(Icons.password),
+        prefix: const Icon(Icons.password),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return "密码不能为空";

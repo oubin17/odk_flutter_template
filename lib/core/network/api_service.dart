@@ -45,7 +45,7 @@ class ApiService {
     // 注意：Dio 的 onResponse/onError 是逆序执行的。
     _dio.interceptors.add(RequestResponseInterceptor());
 
-    Log.i('拦截器初始化完毕，当前数量: ${_dio.interceptors.length}', tag: 'ApiService');
+    Log.i('拦截器初始化完毕，当前数量: ${_dio.interceptors.length}');
   }
 
   // 保留公开构造函数用于测试或特殊场景

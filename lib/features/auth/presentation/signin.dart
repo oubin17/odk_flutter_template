@@ -45,7 +45,7 @@ class SignInPage extends StatelessWidget {
         controller: passwordController,
         label: '密码',
         hint: '请输入密码',
-        prefix: Icon(Icons.password),
+        prefix: const Icon(Icons.password),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return "密码不能为空";
@@ -129,7 +129,7 @@ class SignInPage extends StatelessWidget {
                   AppGap.hNormal,
                   AppGap.hNormal,
                   passwordField(),
-                  Spacer(),
+                  const Spacer(),
                   loginButton(context),
                   AppGap.hXL,
                 ],

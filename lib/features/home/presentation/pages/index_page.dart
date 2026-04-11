@@ -4,6 +4,7 @@ import 'package:odk_flutter_template/features/home/data/models/projectinfo_stati
 import 'package:odk_flutter_template/features/home/domain/home_resume_service.dart';
 import 'package:odk_flutter_template/features/home/presentation/widgets/projectinfo_gridview_widget.dart';
 import 'package:odk_flutter_template/features/home/presentation/widgets/projectinfo_table_widget.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/futurebuilder/common_future_builder.dart';
 
@@ -49,7 +50,7 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicAppbar(title: const Text('首页')),
+      appBar: const BasicAppbar(title: AppText('首页')),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         color: Colors.blue,

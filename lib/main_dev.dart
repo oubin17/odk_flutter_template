@@ -1,10 +1,14 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/common/theme/app_theme.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
+import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
@@ -14,7 +18,12 @@ void main() async {
   // 确保 Flutter 引擎绑定初始化
   WidgetsFlutterBinding.ensureInitialized();
 
+  // 配置环境变量
   FlavorConfig(name: Environment.dev.name, variables: devVariables);
+
+  // 🔥 新增：保留原生启动屏，不自动关闭
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // 1. 初始化普通存储
   await StorageManager.init();
@@ -23,7 +32,17 @@ void main() async {
   final userProvider = UserProvider();
   await userProvider.refresh();
 
-  // initSmartDialogConfig(); // 初始化样式
+  // 捕获 UI 崩溃
+  FlutterError.onError = (FlutterErrorDetails details) {
+    Log.e("🔥 UI 全局崩溃", error: details.exception, stackTrace: details.stack);
+    FlutterError.presentError(details);
+  };
+
+  // 捕获 异步/原生 崩溃
+  PlatformDispatcher.instance.onError = (error, stack) {
+    Log.e("🔥 异步全局崩溃", error: error, stackTrace: stack);
+    return true;
+  };
 
   runApp(
     MultiProvider(
@@ -36,6 +55,10 @@ void main() async {
       child: const MyApp(),
     ),
   );
+
+  // 🔥 4. 所有初始化/校验完成 → 关闭原生启动屏
+  // 直接显示目标页面，无任何切换
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
