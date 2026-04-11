@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
+import 'package:odk_flutter_template/features/common/theme_setting.dart';
 import 'package:odk_flutter_template/features/home/presentation/home.dart';
+import 'package:odk_flutter_template/features/home/presentation/pages/system_setting_page.dart';
 import 'package:odk_flutter_template/features/splash/presentation/splash.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/pages/todo_detail.dart';
@@ -15,10 +17,12 @@ class RouteNames {
   static const String splash = 'Splash';
   static const String signup = 'Signup';
   static const String signin = 'Signin';
+  static const String systemSetting = 'SystemSetting';
 
   static const String login = 'Login';
   static const String home = 'Home';
   static const String detail = 'detail';
+  static const String themeSetting = 'ThemeSetting';
 }
 
 // ====================== 路由路径常量（可选，推荐一起抽离） ======================
@@ -27,6 +31,9 @@ class RoutePaths {
   static const String signup = '/signup';
   static const String signin = '/signin';
 
+  static const String systemSetting = '/systemSetting';
+
+  static const String themeSetting = '/themeSetting';
   static const String login = '/login';
   static const String home = '/home';
   static const String detail = '/detail/:id';
@@ -81,6 +88,16 @@ class AppRouter {
         name: RouteNames.detail,
         builder: (context, state) =>
             TodoDetail(id: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: RoutePaths.themeSetting,
+        name: RouteNames.themeSetting,
+        builder: (context, state) => const ThemeSettingPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.systemSetting,
+        name: RouteNames.systemSetting,
+        builder: (context, state) => const SystemSettingPage(),
       ),
     ],
   );

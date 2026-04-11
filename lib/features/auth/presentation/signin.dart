@@ -7,6 +7,7 @@ import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/basic_toast.dart';
 import 'package:provider/provider.dart';
@@ -22,28 +23,18 @@ class SignInPage extends StatelessWidget {
     final TextEditingController passwordController = TextEditingController();
 
     Widget signInText() {
-      return Text(
-        "登录",
-        style: TextStyle(
-          // color: Colors.white,
-          fontSize: 40.sp,
-          fontWeight: FontWeight.bold,
-        ),
-        textAlign: TextAlign.center,
-      );
+      return AppText.customerTitle("登录", 40.sp, FontWeight.bold);
     }
 
     Widget accountField() {
-      return TextFormField(
+      return AppInput(
         controller: accountController,
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.app_registration),
-          labelText: '账号',
-          hintText: '请输入账号',
-        ),
+        label: '账号',
+        hint: '请输入账号',
+        prefix: Icon(Icons.app_registration),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return '请输入账号';
+            return "账号不能为空";
           }
           return null;
         },
@@ -51,17 +42,14 @@ class SignInPage extends StatelessWidget {
     }
 
     Widget passwordField() {
-      return TextFormField(
+      return AppInput(
         controller: passwordController,
-        decoration: const InputDecoration(
-          hintText: '请输入密码',
-          labelText: '密码',
-          prefixIcon: Icon(Icons.password),
-        ),
-        obscureText: true,
+        label: '密码',
+        hint: '请输入密码',
+        prefix: Icon(Icons.password),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return '请输入密码';
+            return "密码不能为空";
           }
           return null;
         },
@@ -88,7 +76,7 @@ class SignInPage extends StatelessWidget {
     }
 
     Widget loginButton(BuildContext context) {
-      return BasicAppButton(onPressed: () => login(context), title: '登录');
+      return AppButton(onTap: () => login(context), text: '登录');
     }
 
     Widget bottomText(BuildContext context) {
@@ -97,22 +85,12 @@ class SignInPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "没有账号？",
-              style: TextStyle(
-                // color: Colors.white,
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            TextButton(
-              onPressed: () {
-                {
-                  NavigatorUtils.goNamed(RouteNames.signup);
-                }
+            AppText.second("没有账号？"),
+            AppTextButton(
+              onTap: () {
+                NavigatorUtils.goNamed(RouteNames.signup);
               },
-              child: Text('注册'),
+              text: '注册',
             ),
           ],
         ),

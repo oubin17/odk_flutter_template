@@ -5,6 +5,7 @@ import 'package:odk_flutter_template/features/auth/data/models/user_regist_reque
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/basic_toast.dart';
 
@@ -20,27 +21,18 @@ class SignUpPage extends StatelessWidget {
     final TextEditingController passwordController = TextEditingController();
 
     Widget registerText() {
-      return Text(
-        "注册",
-        style: TextStyle(
-          // color: Colors.white,
-          fontSize: 40.sp,
-          fontWeight: FontWeight.bold,
-        ),
-        textAlign: TextAlign.center,
-      );
+      return AppText.customerTitle("注册", 40.sp, FontWeight.bold);
     }
 
     Widget userNameField() {
-      return TextFormField(
+      return AppInput(
         controller: userNameController,
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
-          labelText: '用户名',
-        ),
+        label: '用户名',
+        hint: '请输入用户名',
+        prefix: Icon(Icons.account_circle),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return '请输入用户名';
+            return "用户名不能为空";
           }
           return null;
         },
@@ -48,15 +40,14 @@ class SignUpPage extends StatelessWidget {
     }
 
     Widget accountField() {
-      return TextFormField(
+      return AppInput(
         controller: accountController,
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.app_registration),
-          labelText: '账号',
-        ),
+        label: '账号',
+        hint: '请输入账号',
+        prefix: Icon(Icons.app_registration),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return '请输入账号';
+            return "账号不能为空";
           }
           return null;
         },
@@ -64,17 +55,14 @@ class SignUpPage extends StatelessWidget {
     }
 
     Widget passwordField() {
-      return TextFormField(
+      return AppInput(
         controller: passwordController,
-        decoration: const InputDecoration(
-          hintText: '请输入密码',
-          labelText: '密码',
-          prefixIcon: Icon(Icons.password),
-        ),
-        obscureText: true,
+        label: '密码',
+        hint: '请输入密码',
+        prefix: Icon(Icons.password),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return '请输入密码';
+            return "密码不能为空";
           }
           return null;
         },
@@ -99,7 +87,7 @@ class SignUpPage extends StatelessWidget {
     }
 
     Widget registerButton(BuildContext context) {
-      return BasicAppButton(onPressed: () => register(context), title: '注册');
+      return AppButton(onTap: () => register(context), text: '注册');
     }
 
     Widget signupText(BuildContext context) {
@@ -108,22 +96,12 @@ class SignUpPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "已经有账号？",
-              style: TextStyle(
-                // color: Colors.white,
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            TextButton(
-              onPressed: () {
-                {
-                  NavigatorUtils.goNamed(RouteNames.signin);
-                }
+            AppText.second("已经有账号？"),
+            AppTextButton(
+              onTap: () {
+                NavigatorUtils.goNamed(RouteNames.signin);
               },
-              child: Text('登录'),
+              text: '登录',
             ),
           ],
         ),
@@ -166,6 +144,7 @@ class SignUpPage extends StatelessWidget {
                   accountField(),
                   SizedBox(height: 40.h),
                   passwordField(),
+
                   SizedBox(height: 40.h),
                   registerButton(context),
                   SizedBox(height: 20.h),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -57,6 +58,15 @@ class AppText extends StatelessWidget {
     this.maxLines,
     this.align,
   });
+  // 快速标题
+  const AppText.customerTitle(
+    this.text,
+    this.size,
+    this.weight, {
+    super.key,
+    this.color,
+  }) : maxLines = null,
+       align = null;
 
   // 快速标题
   AppText.title(this.text, {super.key, this.color})
@@ -115,6 +125,7 @@ class AppText extends StatelessWidget {
 /// 统一间距组件
 class AppGap {
   // 垂直间距
+  static Widget hSuperSmall = SizedBox(height: 10.h);
   static Widget hSmall = SizedBox(height: 20.h);
   static Widget hNormal = SizedBox(height: 30.h);
   static Widget hLarge = SizedBox(height: 40.h);
@@ -203,6 +214,51 @@ class AppButton extends StatelessWidget {
           color: AppColors.textWhite,
           size: 32.sp,
           weight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+}
+
+/// 图标按钮（通用：返回、刷新、更多、删除等）
+class AppIconButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback? onTap;
+  final bool disabled;
+  final double? size; // 图标大小
+  final double? btnSize; // 按钮整体尺寸
+  final Color? iconColor;
+  final Color? bgColor;
+
+  const AppIconButton({
+    super.key,
+    required this.icon,
+    required this.onTap,
+    this.disabled = false,
+    this.size,
+    this.btnSize,
+    this.iconColor,
+    this.bgColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: disabled ? null : onTap,
+      borderRadius: BorderRadius.circular(16.w),
+      child: Container(
+        width: btnSize ?? 60.w,
+        height: btnSize ?? 60.w,
+        decoration: BoxDecoration(
+          color: bgColor ?? Colors.transparent,
+          borderRadius: BorderRadius.circular(16.w),
+        ),
+        child: Icon(
+          icon,
+          size: size ?? 28.w,
+          color: disabled
+              ? AppColors.textGray(context)
+              : (iconColor ?? AppColors.primary(context)),
         ),
       ),
     );
@@ -308,9 +364,10 @@ class AppLoadingButton extends StatelessWidget {
   }
 }
 
-/// 通用输入框
+/// /// 通用输入框（支持表单校验 + 主题适配）
 class AppInput extends StatelessWidget {
   final TextEditingController? controller;
+  final String? label;
   final String hint;
   final bool obscure;
   final Widget? suffix;
@@ -318,26 +375,51 @@ class AppInput extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool readOnly;
 
+  // 👇 新增：表单校验核心参数（和你之前用的 TextFormField 完全一致）
+  final String? Function(String?)? validator;
+  final void Function(String?)? onSaved;
+  final void Function(String)? onChanged;
+  final AutovalidateMode? autovalidateMode;
+
   const AppInput({
     super.key,
     this.controller,
+    this.label,
     required this.hint,
     this.obscure = false,
     this.suffix,
     this.prefix,
     this.keyboardType,
     this.readOnly = false,
+    // 👇 新增校验参数
+    this.validator,
+    this.onSaved,
+    this.onChanged,
+    this.autovalidateMode,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    // 🔥 核心：替换为 TextFormField，支持校验
+    return TextFormField(
       controller: controller,
       obscureText: obscure,
       readOnly: readOnly,
       keyboardType: keyboardType,
       style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
+      // 👇 绑定校验相关属性
+      validator: validator,
+      onSaved: onSaved,
+      onChanged: onChanged,
+      autovalidateMode: autovalidateMode,
+      // 👇 原有装饰样式 100% 保留
       decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(
+          fontSize: 26.sp,
+          color: AppColors.textGray(context),
+        ),
+
         hintText: hint,
         hintStyle: TextStyle(
           fontSize: 26.sp,
@@ -355,24 +437,32 @@ class AppInput extends StatelessWidget {
                 child: suffix,
               )
             : null,
-        filled: true,
-        fillColor: AppColors.card(context),
+        // filled: true,
+        // fillColor: AppColors.card(context),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.w),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
+        // 错误提示样式（适配主题）
+        errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
       ),
     );
   }
 }
 
-/// 验证码输入框
+/// /// 验证码输入框（支持表单校验 + 主题适配 + 倒计时）
 class AppCodeInput extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback onSendCode;
   final bool isCounting;
   final int countTime;
+
+  // 新增：表单校验核心参数（与AppInput完全一致）
+  final String? Function(String?)? validator;
+  final void Function(String?)? onSaved;
+  final void Function(String)? onChanged;
+  final AutovalidateMode? autovalidateMode;
 
   const AppCodeInput({
     super.key,
@@ -380,6 +470,11 @@ class AppCodeInput extends StatefulWidget {
     required this.onSendCode,
     required this.isCounting,
     this.countTime = 60,
+    // 新增校验参数
+    this.validator,
+    this.onSaved,
+    this.onChanged,
+    this.autovalidateMode,
   });
 
   @override
@@ -389,23 +484,35 @@ class AppCodeInput extends StatefulWidget {
 class _AppCodeInputState extends State<AppCodeInput> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    // 核心：替换为 TextFormField，支持校验
+    return TextFormField(
       controller: widget.controller,
       keyboardType: TextInputType.number,
       style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
+      // 绑定校验相关属性
+      validator: widget.validator,
+      onSaved: widget.onSaved,
+      onChanged: widget.onChanged,
+      autovalidateMode: widget.autovalidateMode,
       decoration: InputDecoration(
         hintText: "请输入验证码",
         hintStyle: TextStyle(
           fontSize: 26.sp,
           color: AppColors.textGray(context),
         ),
-        filled: true,
-        fillColor: AppColors.card(context),
+        // filled: true,
+        // fillColor: AppColors.card(context),
+        // border: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(16.w),
+        //   borderSide: BorderSide.none,
+        // ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16.w),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
+        // 错误提示样式（统一主题）
+        errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
         suffixIcon: Padding(
           padding: EdgeInsets.only(right: 20.w),
           child: TextButton(
@@ -432,6 +539,8 @@ class AppListItem extends StatelessWidget {
   final Widget? right;
   final VoidCallback? onTap;
   final bool showArrow;
+  final double verticalPadding;
+  final double horizontalPadding;
 
   const AppListItem({
     super.key,
@@ -441,6 +550,8 @@ class AppListItem extends StatelessWidget {
     this.right,
     this.onTap,
     this.showArrow = true,
+    this.verticalPadding = 20,
+    this.horizontalPadding = 20,
   });
 
   @override
@@ -449,7 +560,10 @@ class AppListItem extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(16.w),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),
+        padding: EdgeInsets.symmetric(
+          vertical: verticalPadding.h,
+          horizontal: horizontalPadding.w,
+        ),
         child: Row(
           children: [
             if (left != null) ...[left!, AppGap.wNormal],
@@ -479,32 +593,93 @@ class AppListItem extends StatelessWidget {
   }
 }
 
-/// 通用头像组件
-class AppAvatar extends StatelessWidget {
-  final String? imgUrl;
-  final double size;
-  final Widget? child;
+// 头像形状枚举
+enum AppAvatarShape {
+  circle, // 圆形（默认）
+  square, // 正方形
+  rounded, // 圆角矩形
+}
 
-  const AppAvatar({super.key, this.imgUrl, this.size = 100, this.child});
+/// 通用头像组件（支持网络/本地图片 + 自定义形状 + 主题适配）
+class AppAvatar extends StatelessWidget {
+  final String? imgUrl; // 网络图片地址
+  final String? assetPath; // 本地资源图片路径（新增）
+  final double size; // 尺寸
+  final Widget? child; // 自定义子组件
+  final AppAvatarShape shape; // 头像形状（新增）
+  final double borderRadius; // 圆角大小（仅shape=rounded生效）
+
+  const AppAvatar({
+    super.key,
+    this.imgUrl,
+    this.assetPath,
+    this.size = 100,
+    this.child,
+    this.shape = AppAvatarShape.circle, // 默认圆形
+    this.borderRadius = 16, // 默认圆角16.w
+  });
 
   @override
   Widget build(BuildContext context) {
+    // 根据形状获取圆角/裁剪样式
+    BorderRadiusGeometry getBorderRadius() {
+      switch (shape) {
+        case AppAvatarShape.circle:
+          return BorderRadius.circular(size.w);
+        case AppAvatarShape.square:
+          return BorderRadius.zero;
+        case AppAvatarShape.rounded:
+          return BorderRadius.circular(borderRadius.w);
+      }
+    }
+
     return ClipRRect(
-      borderRadius: BorderRadius.circular(size.w),
+      borderRadius: getBorderRadius(),
       child: Container(
         width: size.w,
         height: size.w,
         color: AppColors.primaryLight(context),
-        child: imgUrl != null && imgUrl!.isNotEmpty
-            ? Image.network(imgUrl!, fit: BoxFit.cover)
-            : child ??
-                  Icon(
-                    Icons.person,
-                    size: 40.w,
-                    color: AppColors.primary(context),
-                  ),
+        child: _buildImageContent(context),
       ),
     );
+  }
+
+  // 构建图片内容：本地图片 → 网络图片 → 默认图标
+  Widget _buildImageContent(BuildContext context) {
+    // 1. 优先显示本地资源图片
+    if (assetPath != null && assetPath!.isNotEmpty) {
+      return Image.asset(
+        assetPath!,
+        fit: BoxFit.cover,
+        width: size.w,
+        height: size.w,
+      );
+    }
+
+    // 2. 其次显示网络图片（带缓存+占位+错误）
+    if (imgUrl != null && imgUrl!.isNotEmpty) {
+      return CachedNetworkImage(
+        imageUrl: imgUrl!,
+        fit: BoxFit.cover,
+        width: size.w,
+        height: size.w,
+        placeholder: (context, url) => Center(
+          child: CircularProgressIndicator(
+            color: AppColors.primary(context),
+            strokeWidth: 2.w,
+          ),
+        ),
+        errorWidget: (context, url, error) => _defaultIcon(context),
+      );
+    }
+
+    // 3. 无图片时显示默认图标/自定义组件
+    return child ?? _defaultIcon(context);
+  }
+
+  // 默认头像图标
+  Widget _defaultIcon(BuildContext context) {
+    return Icon(Icons.person, size: 40.w, color: AppColors.primary(context));
   }
 }
 

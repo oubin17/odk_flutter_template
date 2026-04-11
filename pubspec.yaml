@@ -46,6 +46,7 @@ dependencies:
   go_router: ^14.1.0
   flutter_screenutil: ^5.9.3
   flutter_smart_dialog: ^5.1.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
