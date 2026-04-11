@@ -134,6 +134,8 @@ class AppGap {
   // 水平间距
   static Widget wSmall = SizedBox(width: 20.w);
   static Widget wNormal = SizedBox(width: 30.w);
+  static Widget wLarge = SizedBox(width: 40.w);
+  static Widget wXL = SizedBox(width: 60.w);
 }
 
 /// 统一卡片
@@ -684,47 +686,61 @@ class AppAvatar extends StatelessWidget {
 }
 
 /// 通用确认弹窗
+
 void showAppConfirmDialog({
   required String title,
-  required String msg,
+  String? msg,
   String confirmText = "确认",
   String cancelText = "取消",
   VoidCallback? onConfirm,
 }) {
   SmartDialog.show(
     clickMaskDismiss: false,
-    builder: (context) => AppCard(
-      radius: 20,
-      showShadow: true,
-      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AppText.title(title),
-          AppGap.hNormal,
-          AppText.second(msg),
-          AppGap.hXL,
-          Row(
-            children: [
-              Expanded(
-                child: AppOutlinedButton(
-                  text: cancelText,
-                  onTap: () => SmartDialog.dismiss(),
-                ),
-              ),
-              AppGap.wNormal,
-              Expanded(
-                child: AppButton(
-                  text: confirmText,
-                  onTap: () {
-                    SmartDialog.dismiss();
-                    onConfirm?.call();
-                  },
-                ),
-              ),
+    // 原生圆角弹窗容器
+    builder: (context) => Dialog(
+      // 主题适配：弹窗背景色
+      backgroundColor: AppColors.bgPage(context),
+      // 圆角
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
+      // 阴影
+      elevation: 4,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // 标题
+            AppText.title(title, color: AppColors.textMain(context)),
+            AppGap.hNormal,
+            if (msg != null && msg.isNotEmpty) ...[
+              AppText.second(msg, color: AppColors.textSecond(context)),
+              AppGap.hSmall,
             ],
-          ),
-        ],
+
+            // 按钮行
+            Row(
+              children: [
+                // 取消按钮（原生）
+                Expanded(
+                  child: AppTextButton(
+                    text: cancelText,
+                    onTap: () => SmartDialog.dismiss(),
+                  ),
+                ),
+                AppGap.wXL,
+                Expanded(
+                  child: AppTextButton(
+                    text: confirmText,
+                    onTap: () {
+                      SmartDialog.dismiss();
+                      onConfirm?.call();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     ),
   );

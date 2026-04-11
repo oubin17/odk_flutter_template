@@ -8,7 +8,6 @@ import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/basic_toast.dart';
 import 'package:provider/provider.dart';
 

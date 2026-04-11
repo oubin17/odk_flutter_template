@@ -5,6 +5,7 @@ import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
+import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class SystemSettingPage extends StatelessWidget {
@@ -14,15 +15,7 @@ class SystemSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPage(context),
-      appBar: AppBar(
-        backgroundColor: AppColors.primary(context),
-        leading: AppIconButton(
-          icon: Icons.arrow_back,
-          onTap: () => context.pop(),
-          iconColor: Colors.white,
-        ),
-        title: const AppText("系统设置", color: Colors.white),
-      ),
+      appBar: BasicAppbar(title: const AppText("设置")),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         children: [
@@ -84,10 +77,16 @@ class SystemSettingPage extends StatelessWidget {
             title: "退出登录",
             showArrow: false,
             onTap: () {
-              AuthService().logout();
-              // 直接清空，比refresh更快
-              context.read<UserProvider>().clearUser();
-              context.go('/?fromOtherPage=true');
+              showAppConfirmDialog(
+                title: "退出登录",
+                // msg: "是否退出登录？",
+                onConfirm: () {
+                  AuthService().logout();
+                  // 直接清空，比refresh更快
+                  context.read<UserProvider>().clearUser();
+                  context.go('/?fromOtherPage=true');
+                },
+              );
             },
           ),
         ],
