@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:odk_flutter_template/core/constants/images/app_images.dart';
+import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
@@ -56,8 +56,8 @@ class ProfilePage extends StatelessWidget {
               // 本地图片
               AppAvatar(
                 assetPath: user?.isAdmin == true
-                    ? AppImages.adminBg
-                    : AppImages.employeeBg,
+                    ? Assets.profile.admin.path
+                    : Assets.profile.employee.path,
                 size: 300.w,
               ),
               AppGap.hSuperSmall,

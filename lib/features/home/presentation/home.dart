@@ -3,6 +3,7 @@ import 'package:odk_flutter_template/features/home/presentation/pages/index_page
 import 'package:odk_flutter_template/features/home/presentation/pages/private_resume_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/profile_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/resume_library.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _currentIndex,
 
         // 1. 核心：设置选中时的颜色
-        selectedItemColor: Colors.deepPurpleAccent,
+        selectedItemColor: AppColors.primary(context),
 
         // 2. 核心：设置未选中时的颜色
         unselectedItemColor: Colors.grey,

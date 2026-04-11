@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:odk_flutter_template/core/constants/images/app_images.dart';
 import 'package:odk_flutter_template/core/storage/secure_storage_manager.dart';
 import 'package:odk_flutter_template/core/storage/storage_key.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/features/home/data/models/private_resume.dart';
 import 'package:odk_flutter_template/features/home/data/models/private_resume_status.dart';
 import 'package:odk_flutter_template/features/home/domain/home_resume_service.dart';
+import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/widgets/futurebuilder/common_future_builder.dart';
 
@@ -127,8 +127,8 @@ class PrivateResumeTableRowWidget extends StatelessWidget {
         radius: 28,
         backgroundImage: AssetImage(
           privateResumeInfo.resumeLibraryDTO?.gender == "1"
-              ? AppImages.man
-              : AppImages.woman,
+              ? Assets.profile.admin.path
+              : Assets.profile.employee.path,
         ),
       ),
       shape: RoundedRectangleBorder(

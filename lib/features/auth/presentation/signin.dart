@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:odk_flutter_template/core/constants/images/app_images.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
@@ -110,14 +110,12 @@ class SignInPage extends StatelessWidget {
         children: [
           // 👇 背景图：固定不动，不受键盘影响
           Image.asset(
-            AppImages.login,
+            Assets.login.loginRegist.path,
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
-
-          // 👇 【优化】滚动视图：防止键盘挡住输入框
-          SingleChildScrollView(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
             child: Form(
               key: formKey,
@@ -126,13 +124,14 @@ class SignInPage extends StatelessWidget {
                 children: [
                   // _appLogoField(),
                   signInText(),
-                  SizedBox(height: 40.h),
+                  AppGap.hNormal,
                   accountField(),
-                  SizedBox(height: 40.h),
+                  AppGap.hNormal,
+                  AppGap.hNormal,
                   passwordField(),
-                  SizedBox(height: 40.h),
+                  Spacer(),
                   loginButton(context),
-                  SizedBox(height: 20.h),
+                  AppGap.hXL,
                 ],
               ),
             ),

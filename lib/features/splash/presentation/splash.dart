@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:odk_flutter_template/core/constants/images/app_images.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 
@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          AppImages.splash,
+          Assets.splash.splash.path,
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,

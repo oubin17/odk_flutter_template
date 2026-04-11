@@ -48,6 +48,7 @@ dependencies:
   flutter_smart_dialog: ^5.1.0
   cached_network_image: ^3.4.1
   flutter_flavor: ^3.1.4
+  flutter_gen_runner: ^5.13.0+1
 
 dev_dependencies:
   flutter_test:
@@ -85,9 +86,9 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
   assets:
-    - assets/images/auth/
-    - assets/images/splash/
-    - assets/images/login/
+    - assets/profile/
+    - assets/splash/
+    - assets/login/
     - assets/vectors/
     - assets/logo.png
     - lib/config/keys/public_key.pem
@@ -121,3 +122,9 @@ flutter_launcher_icons:
   # 如果需要 Android 的自适应图标（Adaptive Icon），可以添加以下两行：
   #adaptive_icon_background: "#ffffff" # 背景颜色或背景图
   #adaptive_icon_foreground: "assets/logo_foreground.png" # 前景图
+# flutter_gen 配置
+flutter_gen:
+  # 自动生成的代码存放目录（推荐固定这个）
+  output: lib/gen/
+  # 可选配置
+  line_length: 120
