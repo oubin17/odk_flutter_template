@@ -6,7 +6,7 @@ import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/smart_dialog/basic_toast.dart';
+import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 //注册页面
 class SignUpPage extends StatelessWidget {

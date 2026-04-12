@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 
@@ -66,12 +68,27 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     Log.e('成功捕获到上层抛出的异常！', tag: 'ErrorInterceptor', error: err.message);
-    final data = err.response?.data;
 
-    if (data is Map<String, dynamic> && data['success'] == false) {
-      Log.w('业务逻辑失败: $data', tag: 'Network-ERR');
+    // 🔥 修复1：空安全判断 + 安全强转（防止崩溃）
+    final dynamic responseData = err.response?.data;
+    if (responseData == null || responseData is! Map<String, dynamic>) {
+      handler.next(err);
+      return;
+    }
+    final Map<String, dynamic> dataMap = responseData;
+
+    // 支持：status=404 / statusCode=404 两种格式
+    final int? status = dataMap['status'] ?? err.response?.statusCode;
+    if (status == 404) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        AppToast.showToast('请求异常');
+      });
+    }
+
+    if (dataMap['success'] == false) {
+      Log.w('业务逻辑失败: $dataMap', tag: 'Network-ERR');
       List<String> tokenExpiredCodes = ['020', '021', '022'];
-      final errorCode = data['errorCode'];
+      final errorCode = dataMap['errorCode'];
 
       if (tokenExpiredCodes.contains(errorCode)) {
         // 1. 清除本地存储

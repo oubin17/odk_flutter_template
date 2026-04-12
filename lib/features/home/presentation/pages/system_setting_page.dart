@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
+import 'package:odk_flutter_template/common/app_info/app_info.dart';
+import 'package:odk_flutter_template/common/app_info/device_info.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
+import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:provider/provider.dart';
 
 class SystemSettingPage extends StatelessWidget {
@@ -57,7 +62,13 @@ class SystemSettingPage extends StatelessWidget {
               color: AppColors.textSecond(context),
             ),
             title: "关于我们",
-            onTap: () {},
+            onTap: () {
+              // Fluttertoast.showToast(msg: "操作成功！");
+              AppToast.showLoading(
+                loading: "待实现...",
+                displayTime: const Duration(seconds: 2),
+              );
+            },
           ),
           Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
 
@@ -68,14 +79,26 @@ class SystemSettingPage extends StatelessWidget {
               color: AppColors.textSecond(context),
             ),
             title: "版本信息",
-            desc: "1.0.0",
+            // desc: "1.0.0",
             onTap: () {
-              // SmartDialog.show(
-              //   builder: (BuildContext context) => const AppInfoPage(),
-              // );
+              // SmartDialog.show(builder: (context) => const AppInfoPage());
+              AppToast.show(const AppInfoPage());
             },
           ),
-          // 退出登录 + 图标
+          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+          // 设备信息 + 图标
+          AppListItem(
+            left: Icon(
+              Icons.device_hub_outlined,
+              color: AppColors.textSecond(context),
+            ),
+            title: "设备信息",
+            // desc: "1.0.0",
+            onTap: () {
+              AppToast.show(const DeviceInfoPage());
+            },
+          ),
+
           Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
           // Spacer(),
           AppListItem(
@@ -83,7 +106,7 @@ class SystemSettingPage extends StatelessWidget {
             title: "退出登录",
             showArrow: false,
             onTap: () {
-              showAppConfirmDialog(
+              AppToast.showAppConfirmDialog(
                 title: "退出登录",
                 // msg: "是否退出登录？",
                 onConfirm: () {

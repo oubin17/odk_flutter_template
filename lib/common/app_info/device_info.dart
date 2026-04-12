@@ -1,6 +1,8 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 class DeviceInfoPage extends StatefulWidget {
   const DeviceInfoPage({super.key});
@@ -44,15 +46,23 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("设备信息")),
-      body: _deviceData.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
-              children: _deviceData.entries.map((e) {
-                return ListTile(title: Text("${e.key}：${e.value}"));
-              }).toList(),
-            ),
+    return Dialog(
+      // 主题适配：弹窗背景色
+      backgroundColor: AppColors.bgPage(context),
+      // 圆角
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ..._deviceData.entries.map((e) {
+              return AppText("${e.key}：${e.value}");
+            }),
+          ],
+        ),
+      ),
     );
   }
 }

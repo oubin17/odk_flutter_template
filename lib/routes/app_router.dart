@@ -18,7 +18,7 @@ class RouteNames {
   static const String systemSetting = 'SystemSetting';
   static const String home = 'Home';
   static const String detail = 'detail';
-  static const String themeSetting = 'ThemeSetting';
+  static const String notFound = 'NotFound';
 }
 
 // ====================== 路由路径常量（已删除Splash） ======================
@@ -29,6 +29,7 @@ class RoutePaths {
   static const String themeSetting = '/themeSetting';
   static const String home = '/home';
   static const String detail = '/detail/:id';
+  static const String notFound = '/notFound';
 }
 
 class AppRouter {
@@ -92,6 +93,11 @@ class AppRouter {
         path: RoutePaths.systemSetting,
         name: RouteNames.systemSetting,
         builder: (context, state) => const SystemSettingPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.notFound,
+        name: RouteNames.notFound,
+        builder: (context, state) => const NotFoundPage(),
       ),
     ],
   );
