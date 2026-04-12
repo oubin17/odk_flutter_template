@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
 import 'package:odk_flutter_template/core/network/interceptors/request_response_interceptor.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
+import 'package:odk_flutter_template/core/utils/network_utils.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
+import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 class ApiService {
   // 单例实例
@@ -59,6 +62,11 @@ class ApiService {
     String path, {
     Map<String, dynamic>? queryParameters,
   }) async {
+    // final hasNetwork = await NetworkUtil.instance.checkNetwork();
+    // if (!hasNetwork) {
+    //   AppToast.showNotify('无网络连接', NotifyType.warning);
+    //   throw AppException(type: AppExceptionType.network, message: '无网络连接');
+    // }
     try {
       final response = await _dio.get(path, queryParameters: queryParameters);
       return ServiceResponse.fromJson(response.data);
@@ -71,6 +79,11 @@ class ApiService {
   /// 支持添加请求体数据
   Future<ServiceResponse> post(String path, dynamic data) async {
     try {
+      // final hasNetwork = await NetworkUtil.instance.checkNetwork();
+      // if (!hasNetwork) {
+      //   AppToast.showNotify('无网络连接', NotifyType.warning);
+      //   throw AppException(type: AppExceptionType.network, message: '无网络连接');
+      // }
       final response = await _dio.post(path, data: data);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {

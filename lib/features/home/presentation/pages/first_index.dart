@@ -23,6 +23,9 @@ class FirstIndexPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const AppText("你好世界 Flutter 阿里巴巴普惠体", size: 30),
+            const AppText("正文文字：横竖撇捺 123 abc", size: 28),
+            const AppText("按钮文字也会统一", size: 24),
             AppText('Hello World $f1'),
             AppText('Hello World $f2'),
             AppText('Hello World $enDate'),

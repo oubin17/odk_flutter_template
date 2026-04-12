@@ -9,6 +9,7 @@ import 'package:odk_flutter_template/common/theme/app_theme.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
+import 'package:odk_flutter_template/core/utils/network_utils.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
@@ -17,6 +18,9 @@ import 'package:provider/provider.dart';
 void main() async {
   // 确保 Flutter 引擎绑定初始化
   WidgetsFlutterBinding.ensureInitialized();
+
+  // ========== 新增：初始化网络监听 ==========
+  await NetworkUtil.instance.initNetworkListen();
 
   // 配置环境变量
   FlavorConfig(name: Environment.dev.name, variables: devVariables);

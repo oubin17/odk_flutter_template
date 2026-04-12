@@ -19,7 +19,7 @@ class AppToast {
   }
 
   /// Show notify
-  static void showNotify(String message, {NotifyType? notifyType}) {
+  static void showNotify(String message, warning, {NotifyType? notifyType}) {
     SmartDialog.showNotify(
       msg: message,
       alignment: Alignment.center,
