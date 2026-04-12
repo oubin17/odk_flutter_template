@@ -1,12 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
 import 'package:odk_flutter_template/core/network/interceptors/request_response_interceptor.dart';
-import 'package:odk_flutter_template/core/utils/log_utils.dart';
-import 'package:odk_flutter_template/core/utils/network_utils.dart';
+import 'package:odk_flutter_template/core/network/check/network_utils.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
-import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 class ApiService {
   // 单例实例
@@ -47,8 +44,6 @@ class ApiService {
       ) {
     // 注意：Dio 的 onResponse/onError 是逆序执行的。
     _dio.interceptors.add(RequestResponseInterceptor());
-
-    Log.i('拦截器初始化完毕，当前数量: ${_dio.interceptors.length}');
   }
 
   // 保留公开构造函数用于测试或特殊场景
@@ -62,11 +57,11 @@ class ApiService {
     String path, {
     Map<String, dynamic>? queryParameters,
   }) async {
-    // final hasNetwork = await NetworkUtil.instance.checkNetwork();
-    // if (!hasNetwork) {
-    //   AppToast.showNotify('无网络连接', NotifyType.warning);
-    //   throw AppException(type: AppExceptionType.network, message: '无网络连接');
-    // }
+    final hasNetwork = await NetworkCheck.instance.checkNetwork();
+    if (!hasNetwork) {
+      // AppToast.showNotify('无网络连接', NotifyType.warning);
+      return ServiceResponse.networkError();
+    }
     try {
       final response = await _dio.get(path, queryParameters: queryParameters);
       return ServiceResponse.fromJson(response.data);
@@ -79,11 +74,11 @@ class ApiService {
   /// 支持添加请求体数据
   Future<ServiceResponse> post(String path, dynamic data) async {
     try {
-      // final hasNetwork = await NetworkUtil.instance.checkNetwork();
-      // if (!hasNetwork) {
-      //   AppToast.showNotify('无网络连接', NotifyType.warning);
-      //   throw AppException(type: AppExceptionType.network, message: '无网络连接');
-      // }
+      final hasNetwork = await NetworkCheck.instance.checkNetwork();
+      if (!hasNetwork) {
+        // AppToast.showNotify('无网络连接', NotifyType.warning);
+        return ServiceResponse.networkError();
+      }
       final response = await _dio.post(path, data: data);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {
@@ -95,6 +90,11 @@ class ApiService {
   /// 支持添加请求体数据
   Future<ServiceResponse> put(String path, dynamic data) async {
     try {
+      final hasNetwork = await NetworkCheck.instance.checkNetwork();
+      if (!hasNetwork) {
+        // AppToast.showNotify('无网络连接', NotifyType.warning);
+        return ServiceResponse.networkError();
+      }
       final response = await _dio.put(path, data: data);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {
@@ -106,6 +106,11 @@ class ApiService {
   /// 支持添加路径
   Future<ServiceResponse> delete(String path) async {
     try {
+      final hasNetwork = await NetworkCheck.instance.checkNetwork();
+      if (!hasNetwork) {
+        // AppToast.showNotify('无网络连接', NotifyType.warning);
+        return ServiceResponse.networkError();
+      }
       final response = await _dio.delete(path);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {

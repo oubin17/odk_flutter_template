@@ -68,7 +68,7 @@ class SignInPage extends StatelessWidget {
         );
         if (userEntity == null) {
           // 全局修改默认配置
-          SmartDialog.config.toast = SmartConfigToast(isExist: true);
+          // SmartDialog.config.toast = SmartConfigToast(isExist: true);
           AppToast.showToast("登录失败，请检查账号密码");
         } else {
           await userProvider.refresh();

@@ -15,6 +15,11 @@ class ServiceResponse extends BaseResponse {
     super.errorContext,
   });
 
+  // ✅ 新增：快捷创建网络错误响应
+  factory ServiceResponse.networkError() {
+    return ServiceResponse(success: false, errorContext: '无网络连接');
+  }
+
   factory ServiceResponse.fromJson(Map<String, dynamic> json) =>
       _$ServiceResponseFromJson(json);
 

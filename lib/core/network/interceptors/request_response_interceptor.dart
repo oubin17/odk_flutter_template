@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
@@ -15,11 +16,6 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    Log.i(
-      '${options.method} ${options.uri} ${options.data} ${options.headers}',
-      tag: 'Network-REQ',
-    );
-
     // ====================== 核心修改 ======================
     // 1. 通过全局路由Key获取上下文
     final globalContext = AppRouter.routerKey.currentContext;
@@ -36,6 +32,18 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
       options.headers[Env.tokenHeader] = token;
     }
 
+    // ======================
+    // 🔥 新增：最优设备+App请求头（直接用全局缓存）
+    // ======================
+    options.headers['X-App-Version'] = GlobalInfo.instance.appVersion;
+    options.headers['X-App-Build'] = GlobalInfo.instance.appBuild;
+    options.headers['X-Device-ID'] = GlobalInfo.instance.deviceId;
+    options.headers['X-OS-Type'] = GlobalInfo.instance.osType;
+    options.headers['X-OS-Version'] = GlobalInfo.instance.osVersion;
+    Log.i(
+      '${options.method} ${options.uri} ${options.data} ${options.headers}',
+      tag: 'Network-REQ',
+    );
     return handler.next(options);
   }
 
