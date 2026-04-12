@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 class AppToast {
@@ -15,7 +16,12 @@ class AppToast {
 
   /// Show toast
   static void showToast(String message) {
-    SmartDialog.showToast(message, alignment: Alignment.center);
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+    );
+    // SmartDialog.showToast(message, alignment: Alignment.center);
   }
 
   /// Show notify

@@ -11,6 +11,7 @@ class FirstIndexPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // return const AppInfoPage();
     // return const DeviceInfoPage();
+
     var num1 = 123456;
     String f1 = NumberFormat('#,###').format(num1);
     DateTime now = DateTime.now();

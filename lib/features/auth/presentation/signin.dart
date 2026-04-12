@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
@@ -30,7 +31,7 @@ class SignInPage extends StatelessWidget {
         controller: accountController,
         label: '账号',
         hint: '请输入账号',
-        prefix: Icon(Icons.app_registration),
+        prefix: const Icon(Icons.app_registration),
         validator: (value) {
           if (value == null || value.isEmpty) {
             return "账号不能为空";
@@ -66,6 +67,8 @@ class SignInPage extends StatelessWidget {
           ),
         );
         if (userEntity == null) {
+          // 全局修改默认配置
+          SmartDialog.config.toast = SmartConfigToast(isExist: true);
           AppToast.showToast("登录失败，请检查账号密码");
         } else {
           await userProvider.refresh();

@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
+import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 /// 网络状态工具类
 class NetworkUtil {
@@ -45,11 +45,11 @@ class NetworkUtil {
     if (results.contains(ConnectivityResult.none)) {
       _isConnected = false;
       // 无网络：弹出提示（用你项目已有的SmartDialog）
-      SmartDialog.showToast('当前无网络连接，请检查网络设置');
+      AppToast.showToast('当前无网络连接，请检查网络设置');
       Log.w('网络状态：断开连接');
     } else {
       _isConnected = true;
-      SmartDialog.showToast('网络连接恢复');
+      AppToast.showToast('网络连接恢复');
       Log.i('网络状态：已连接 (${results.first})');
     }
   }
