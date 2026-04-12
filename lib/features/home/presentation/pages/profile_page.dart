@@ -56,8 +56,8 @@ class ProfilePage extends StatelessWidget {
               // 本地图片
               AppAvatar(
                 assetPath: user?.isAdmin == true
-                    ? Assets.profile.admin.path
-                    : Assets.profile.employee.path,
+                    ? Assets.images.profile.admin.path
+                    : Assets.images.profile.employee.path,
                 size: 300.w,
               ),
               AppGap.hSuperSmall,

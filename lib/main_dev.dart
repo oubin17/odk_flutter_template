@@ -85,7 +85,6 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             // 🔥 5.x 保留这个初始化即可
             builder: FlutterSmartDialog.init(),
-
             // 绑定主题
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,

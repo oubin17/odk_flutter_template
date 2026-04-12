@@ -11,54 +11,24 @@
 
 import 'package:flutter/widgets.dart';
 
-class $LibGen {
-  const $LibGen();
+class $AssetsConfigGen {
+  const $AssetsConfigGen();
 
-  /// Directory path: lib/config
-  $LibConfigGen get config => const $LibConfigGen();
+  /// Directory path: assets/config/keys
+  $AssetsConfigKeysGen get keys => const $AssetsConfigKeysGen();
 }
 
-class $AssetsLauncherIconGen {
-  const $AssetsLauncherIconGen();
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
 
-  /// File path: assets/launcher_icon/launcher.png
-  AssetGenImage get launcher => const AssetGenImage('assets/launcher_icon/launcher.png');
+  /// Directory path: assets/images/launcher_icon
+  $AssetsImagesLauncherIconGen get launcherIcon => const $AssetsImagesLauncherIconGen();
 
-  /// List of all assets
-  List<AssetGenImage> get values => [launcher];
-}
+  /// Directory path: assets/images/login
+  $AssetsImagesLoginGen get login => const $AssetsImagesLoginGen();
 
-class $AssetsLoginGen {
-  const $AssetsLoginGen();
-
-  /// File path: assets/login/login_regist.jpg
-  AssetGenImage get loginRegist => const AssetGenImage('assets/login/login_regist.jpg');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [loginRegist];
-}
-
-class $AssetsProfileGen {
-  const $AssetsProfileGen();
-
-  /// File path: assets/profile/admin.jpg
-  AssetGenImage get admin => const AssetGenImage('assets/profile/admin.jpg');
-
-  /// File path: assets/profile/employee.jpg
-  AssetGenImage get employee => const AssetGenImage('assets/profile/employee.jpg');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [admin, employee];
-}
-
-class $AssetsSplashGen {
-  const $AssetsSplashGen();
-
-  /// File path: assets/splash/splash.jpg
-  AssetGenImage get splash => const AssetGenImage('assets/splash/splash.jpg');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [splash];
+  /// Directory path: assets/images/profile
+  $AssetsImagesProfileGen get profile => const $AssetsImagesProfileGen();
 }
 
 class $AssetsVectorsGen {
@@ -71,33 +41,56 @@ class $AssetsVectorsGen {
   List<String> get values => [logo];
 }
 
-class $LibConfigGen {
-  const $LibConfigGen();
+class $AssetsConfigKeysGen {
+  const $AssetsConfigKeysGen();
 
-  /// Directory path: lib/config/keys
-  $LibConfigKeysGen get keys => const $LibConfigKeysGen();
-}
-
-class $LibConfigKeysGen {
-  const $LibConfigKeysGen();
-
-  /// File path: lib/config/keys/public_key.pem
-  String get publicKey => 'lib/config/keys/public_key.pem';
+  /// File path: assets/config/keys/public_key.pem
+  String get publicKey => 'assets/config/keys/public_key.pem';
 
   /// List of all assets
   List<String> get values => [publicKey];
 }
 
+class $AssetsImagesLauncherIconGen {
+  const $AssetsImagesLauncherIconGen();
+
+  /// File path: assets/images/launcher_icon/launcher.png
+  AssetGenImage get launcher => const AssetGenImage('assets/images/launcher_icon/launcher.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [launcher];
+}
+
+class $AssetsImagesLoginGen {
+  const $AssetsImagesLoginGen();
+
+  /// File path: assets/images/login/login_regist.jpg
+  AssetGenImage get loginRegist => const AssetGenImage('assets/images/login/login_regist.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [loginRegist];
+}
+
+class $AssetsImagesProfileGen {
+  const $AssetsImagesProfileGen();
+
+  /// File path: assets/images/profile/admin.jpg
+  AssetGenImage get admin => const AssetGenImage('assets/images/profile/admin.jpg');
+
+  /// File path: assets/images/profile/employee.jpg
+  AssetGenImage get employee => const AssetGenImage('assets/images/profile/employee.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [admin, employee];
+}
+
 class Assets {
   const Assets._();
 
-  static const $AssetsLauncherIconGen launcherIcon = $AssetsLauncherIconGen();
-  static const $AssetsLoginGen login = $AssetsLoginGen();
+  static const $AssetsConfigGen config = $AssetsConfigGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const AssetGenImage logo = AssetGenImage('assets/logo.jpg');
-  static const $AssetsProfileGen profile = $AssetsProfileGen();
-  static const $AssetsSplashGen splash = $AssetsSplashGen();
   static const $AssetsVectorsGen vectors = $AssetsVectorsGen();
-  static const $LibGen lib = $LibGen();
 
   /// List of all assets
   static List<AssetGenImage> get values => [logo];

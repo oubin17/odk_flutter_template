@@ -127,8 +127,8 @@ class PrivateResumeTableRowWidget extends StatelessWidget {
         radius: 28,
         backgroundImage: AssetImage(
           privateResumeInfo.resumeLibraryDTO?.gender == "1"
-              ? Assets.profile.admin.path
-              : Assets.profile.employee.path,
+              ? Assets.images.profile.admin.path
+              : Assets.images.profile.employee.path,
         ),
       ),
       shape: RoundedRectangleBorder(

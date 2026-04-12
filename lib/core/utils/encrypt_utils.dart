@@ -1,5 +1,6 @@
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/services.dart';
+import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:pointycastle/asymmetric/api.dart';
 
 /// 加密工具类
@@ -9,7 +10,7 @@ class EncryptUtils {
   /// 初始化，加载公钥
   static Future<void> init() async {
     if (_publicKey != null) return;
-    _publicKey = await rootBundle.loadString('lib/config/keys/public_key.pem');
+    _publicKey = await rootBundle.loadString(Assets.config.keys.publicKey);
   }
 
   /// 使用 RSA 公钥对文本进行加密

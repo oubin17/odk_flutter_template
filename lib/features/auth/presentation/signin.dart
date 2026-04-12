@@ -110,7 +110,7 @@ class SignInPage extends StatelessWidget {
         children: [
           // 👇 背景图：固定不动，不受键盘影响
           Image.asset(
-            Assets.login.loginRegist.path,
+            Assets.images.login.loginRegist.path,
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,

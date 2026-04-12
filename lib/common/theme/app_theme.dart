@@ -92,6 +92,7 @@ class AppTheme {
       bodyLarge: TextStyle(fontSize: 28.sp, color: _lightTextMain),
       bodyMedium: TextStyle(fontSize: 26.sp, color: _lightTextSecond),
     ),
+    fontFamily: 'AlibabaPuHuiTi',
   );
 
   // ===================== 暗色主题 =====================
@@ -116,5 +117,6 @@ class AppTheme {
       bodyLarge: TextStyle(fontSize: 28.sp, color: _darkTextMain),
       bodyMedium: TextStyle(fontSize: 26.sp, color: _darkTextSecond),
     ),
+    fontFamily: 'AlibabaPuHuiTi',
   );
 }
