@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/first_index.dart';
-import 'package:odk_flutter_template/features/home/presentation/pages/index_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/private_resume_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/profile_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/resume_library.dart';

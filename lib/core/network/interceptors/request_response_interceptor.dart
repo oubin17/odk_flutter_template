@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
@@ -100,7 +99,7 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
 
     // 统一吐司提示（必加，避免页面无感知）
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AppToast.showToast(errorMsg, gravity: ToastGravity.TOP);
+      AppToast.showToast(errorMsg, alignment: Alignment.topCenter);
     });
 
     // ====================== 原有逻辑：token 过期处理 ======================

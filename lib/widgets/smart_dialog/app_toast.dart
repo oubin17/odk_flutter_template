@@ -17,17 +17,16 @@ class AppToast {
   }
 
   /// Show toast
-  static void showToast(String message, {gravity = ToastGravity.CENTER}) {
+  static void showToast(String message, {alignment = Alignment.center}) {
+    SmartDialog.showToast(message, alignment: Alignment.center);
+  }
+
+  static void showToast2(String message, {gravity = ToastGravity.CENTER}) {
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: gravity,
     );
-    // SmartDialog.showToast(message, alignment: Alignment.center);
-  }
-
-  static void showToast2(String message, {alignment = Alignment.center}) {
-    SmartDialog.showToast(message, alignment: Alignment.center);
   }
 
   /// Show notify

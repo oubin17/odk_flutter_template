@@ -70,6 +70,7 @@ class SignUpPage extends StatelessWidget {
 
     void register(BuildContext context) async {
       if (formKey.currentState!.validate()) {
+        AppToast.showLoading();
         final String? userId = await AuthService().register(
           UserRegistRequest(
             userName: userNameController.text,
@@ -77,6 +78,7 @@ class SignUpPage extends StatelessWidget {
             identifyValue: passwordController.text,
           ),
         );
+        AppToast.dismiss();
         if (userId == null) {
           AppToast.showToast("注册失败");
         } else {

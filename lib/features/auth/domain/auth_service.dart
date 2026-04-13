@@ -7,7 +7,7 @@ import 'package:odk_flutter_template/core/storage/storage_manager.dart';
 import 'package:odk_flutter_template/core/utils/encrypt_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/api/auth_api.dart';
 import 'package:odk_flutter_template/features/auth/data/models/user_regist_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_response.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
 

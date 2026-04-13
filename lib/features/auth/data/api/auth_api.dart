@@ -1,6 +1,6 @@
 import 'package:odk_flutter_template/core/network/api_service.dart';
 import 'package:odk_flutter_template/features/auth/data/models/user_regist_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/userlogin_response.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
@@ -14,23 +14,18 @@ class AuthApi {
 
   /// 注册
   Future<String?> register(UserRegistRequest request) async {
-    ServiceResponse response = await ApiService().post('/user/register', {
-      'loginId': request.loginId,
-      'identifyValue': request.identifyValue,
-      "loginType": request.loginType,
-      "identifyType": request.identifyType,
-      "userName": request.userName,
-    });
+    ServiceResponse response = await ApiService().post(
+      '/user/register',
+      request.toJson(),
+    );
     return response.data as String?;
   }
 
   Future<UserLoginResponse?> login(UserLoginRequest request) async {
-    ServiceResponse response = await ApiService().post('/user/login', {
-      'loginId': request.loginId,
-      'identifyValue': request.identifyValue,
-      "loginType": request.loginType,
-      "identifyType": request.identifyType,
-    });
+    ServiceResponse response = await ApiService().post(
+      '/user/login',
+      request.toJson(),
+    );
 
     if (response.data == null) {
       return null;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:odk_flutter_template/features/auth/data/models/userlogin_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
@@ -72,7 +72,7 @@ class SignInPage extends StatelessWidget {
           // 全局修改默认配置
           // SmartDialog.config.toast = SmartConfigToast(isExist: true);
           // AppToast.showToast("登录失败，请检查账号密码");
-          AppToast.showToast2("登录失败，请检查账号密码");
+          AppToast.showToast("登录失败，请检查账号密码");
         } else {
           await userProvider.refresh();
           NavigatorUtils.goNamed(RouteNames.home);
