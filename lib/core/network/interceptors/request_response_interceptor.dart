@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
+import 'package:odk_flutter_template/models/response/service_response.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
@@ -75,43 +77,56 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    Log.e('成功捕获到上层抛出的异常！', tag: 'ErrorInterceptor', error: err.message);
+    Log.e('捕获异常', tag: 'Network-ERR', error: err.message);
 
-    // 🔥 修复1：空安全判断 + 安全强转（防止崩溃）
-    final dynamic responseData = err.response?.data;
-    if (responseData == null || responseData is! Map<String, dynamic>) {
-      handler.next(err);
-      return;
+    // ====================== 核心修复：统一处理所有异常，不往外抛 ======================
+    String errorMsg = '请求失败';
+    // 1. 分类处理 Dio 异常类型（超时/无网/服务器错误）
+    switch (err.type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+        errorMsg = '网络请求超时，请重试';
+        break;
+      case DioExceptionType.connectionError:
+        errorMsg = '网络连接异常，请检查网络';
+        break;
+      case DioExceptionType.badResponse:
+        errorMsg = '服务器异常(${err.response?.statusCode})';
+        break;
+      default:
+        errorMsg = '网络请求失败，请重试';
     }
-    final Map<String, dynamic> dataMap = responseData;
 
-    // 支持：status=404 / statusCode=404 两种格式
-    final int? status = dataMap['status'] ?? err.response?.statusCode;
-    if (status == 404) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        AppToast.showToast('请求异常');
-      });
-    }
+    // 统一吐司提示（必加，避免页面无感知）
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppToast.showToast(errorMsg, gravity: ToastGravity.TOP);
+    });
 
-    if (dataMap['success'] == false) {
-      Log.w('业务逻辑失败: $dataMap', tag: 'Network-ERR');
+    // ====================== 原有逻辑：token 过期处理 ======================
+    final responseData = err.response?.data;
+    if (responseData is Map<String, dynamic>) {
+      final dataMap = responseData;
       List<String> tokenExpiredCodes = ['020', '021', '022'];
       final errorCode = dataMap['errorCode'];
-
       if (tokenExpiredCodes.contains(errorCode)) {
-        // 1. 清除本地存储
         AuthService().afterLogout();
-        // ====================== 优化：联动清空Provider ======================
-        // 清空用户状态，保证所有UI页面自动刷新（如个人卡片、导航栏等）
         final globalContext = AppRouter.routerKey.currentContext;
         if (globalContext != null) {
           globalContext.read<UserProvider>().clearUser();
         }
-        // ======================================================
-
-        // 2. 跳转欢迎页
         NavigatorUtils.goNamed(RouteNames.signin);
       }
     }
+
+    // ====================== 关键：不执行 handler.next(err)！异常到此为止 ======================
+    // 直接把异常标记为处理完成，Dio 不会再把异常抛给 post 方法
+    handler.resolve(
+      Response(
+        requestOptions: err.requestOptions,
+        statusCode: 999, // 自定义异常码
+        data: ServiceResponse.commonError().toJson(),
+      ),
+    );
   }
 }

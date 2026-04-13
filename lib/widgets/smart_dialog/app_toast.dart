@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 class AppToast {
+  static void dismiss() => SmartDialog.dismiss();
+
   /// Show loading toast
   static void showLoading({String? loading, Duration? displayTime}) {
     SmartDialog.showLoading(
@@ -15,13 +17,17 @@ class AppToast {
   }
 
   /// Show toast
-  static void showToast(String message) {
+  static void showToast(String message, {gravity = ToastGravity.CENTER}) {
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
+      gravity: gravity,
     );
     // SmartDialog.showToast(message, alignment: Alignment.center);
+  }
+
+  static void showToast2(String message, {alignment = Alignment.center}) {
+    SmartDialog.showToast(message, alignment: Alignment.center);
   }
 
   /// Show notify

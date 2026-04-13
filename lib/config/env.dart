@@ -10,6 +10,7 @@ class ConfigKey {
   static const String tokenHeader = 'ODK-TOKEN';
   static const String tenantId = 'tenantId';
   static const String serverUri = 'serverUri';
+  static const String httpTimeout = 'httpTimeout';
 }
 
 // 3. 公共配置（使用常量 Key，无硬编码）
@@ -17,6 +18,7 @@ const Map<String, String> commonVariables = {
   ConfigKey.serverName: 'odk-base-template',
   ConfigKey.tokenHeader: 'ODK-TOKEN',
   ConfigKey.tenantId: 'DEFAULT',
+  ConfigKey.httpTimeout: '3',
 };
 
 // 4. 各环境独立配置（继承公共配置，常量 Key）
@@ -47,4 +49,5 @@ class Env {
   static String get tokenHeader => get(ConfigKey.tokenHeader);
   static String get tenantId => get(ConfigKey.tenantId);
   static String get serverUri => get(ConfigKey.serverUri);
+  static int get httpTimeout => int.parse(get(ConfigKey.httpTimeout));
 }

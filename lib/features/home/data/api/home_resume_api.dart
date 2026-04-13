@@ -41,77 +41,61 @@ class HomeResumeApi {
 
   /// 项目列表
   Future<List<ProjectInfo>> getProjectInfo() async {
-    try {
-      PageRequest pageRequest = PageRequest.withValues(
-        page: 0,
-        size: 10,
-        sortField: 'updateTime',
-        sortDirection: 'DESC',
-      );
-      ServiceResponse response = await ApiService().post(
-        '/project/info/list',
-        pageRequest,
-      );
-      if (response.data == null) {
-        return [];
-      }
-      PageResponse<ProjectInfo> pageResponse =
-          PageResponse<ProjectInfo>.fromJson(
-            response.data as Map<String, dynamic>,
-            (json) => ProjectInfo.fromJson(json as Map<String, dynamic>),
-          );
-
-      return pageResponse.pageList.toList();
-    } catch (e, stackTrace) {
-      Log.e('🚨 [HomeResumeApi] 获取项目信息失败: $e, $stackTrace');
-      rethrow;
+    PageRequest pageRequest = PageRequest.withValues(
+      page: 0,
+      size: 10,
+      sortField: 'updateTime',
+      sortDirection: 'DESC',
+    );
+    ServiceResponse response = await ApiService().post(
+      '/project/info/list',
+      pageRequest,
+    );
+    if (response.data == null) {
+      return [];
     }
+    PageResponse<ProjectInfo> pageResponse = PageResponse<ProjectInfo>.fromJson(
+      response.data as Map<String, dynamic>,
+      (json) => ProjectInfo.fromJson(json as Map<String, dynamic>),
+    );
+
+    return pageResponse.pageList.toList();
   }
 
   /// 隐私简历列表
   Future<List<PrivateResumeInfo>> getPrivateResumeInfo() async {
-    try {
-      PageRequest pageRequest = PageRequest.withValues(
-        page: 0,
-        size: 500,
-        sortField: 'in_time',
-        sortDirection: 'DESC',
-      );
-      ServiceResponse response = await ApiService().post(
-        '/resume/private/list',
-        pageRequest,
-      );
-      if (response.data == null) {
-        return [];
-      }
-      PageResponse<PrivateResumeInfo> pageResponse =
-          PageResponse<PrivateResumeInfo>.fromJson(
-            response.data as Map<String, dynamic>,
-            (json) => PrivateResumeInfo.fromJson(json as Map<String, dynamic>),
-          );
-
-      return pageResponse.pageList.toList();
-    } catch (e, stackTrace) {
-      Log.e('🚨 [HomeResumeApi] 获取隐私简历信息失败: $e, $stackTrace');
-      rethrow;
+    PageRequest pageRequest = PageRequest.withValues(
+      page: 0,
+      size: 500,
+      sortField: 'in_time',
+      sortDirection: 'DESC',
+    );
+    ServiceResponse response = await ApiService().post(
+      '/resume/private/list',
+      pageRequest,
+    );
+    if (response.data == null) {
+      return [];
     }
+    PageResponse<PrivateResumeInfo> pageResponse =
+        PageResponse<PrivateResumeInfo>.fromJson(
+          response.data as Map<String, dynamic>,
+          (json) => PrivateResumeInfo.fromJson(json as Map<String, dynamic>),
+        );
+
+    return pageResponse.pageList.toList();
   }
 
   /// 添加隐私简历
   Future<dynamic> privateResumeAdd(ResumeLibraryInfo resumeLibraryInfo) async {
-    try {
-      ServiceResponse response = await ApiService().post(
-        '/resume/private/add',
-        resumeLibraryInfo.toJson(),
-      );
-      if (response.success) {
-        return true;
-      } else {
-        return response.errorContext;
-      }
-    } catch (e, stackTrace) {
-      Log.e('🚨 [HomeResumeApi] 添加隐私简历失败: $e, $stackTrace');
-      rethrow;
+    ServiceResponse response = await ApiService().post(
+      '/resume/private/add',
+      resumeLibraryInfo.toJson(),
+    );
+    if (response.success) {
+      return true;
+    } else {
+      return response.errorContext;
     }
   }
 }

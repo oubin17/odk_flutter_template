@@ -58,6 +58,7 @@ class SignInPage extends StatelessWidget {
 
     void login(BuildContext context) async {
       if (formKey.currentState!.validate()) {
+        AppToast.showLoading();
         // 👇 核心：【异步前】提前获取 UserProvider 实例（无context风险）
         final userProvider = context.read<UserProvider>();
         final UserEntity? userEntity = await AuthService().login(
@@ -66,10 +67,12 @@ class SignInPage extends StatelessWidget {
             identifyValue: passwordController.text,
           ),
         );
+        AppToast.dismiss();
         if (userEntity == null) {
           // 全局修改默认配置
           // SmartDialog.config.toast = SmartConfigToast(isExist: true);
-          AppToast.showToast("登录失败，请检查账号密码");
+          // AppToast.showToast("登录失败，请检查账号密码");
+          AppToast.showToast2("登录失败，请检查账号密码");
         } else {
           await userProvider.refresh();
           NavigatorUtils.goNamed(RouteNames.home);

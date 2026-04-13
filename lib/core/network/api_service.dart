@@ -3,6 +3,7 @@ import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
 import 'package:odk_flutter_template/core/network/interceptors/request_response_interceptor.dart';
 import 'package:odk_flutter_template/core/network/check/network_utils.dart';
+import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class ApiService {
@@ -33,8 +34,8 @@ class ApiService {
         BaseOptions(
           // 默认使用 BaseConstants.baseUrl，也可以自定义
           baseUrl: baseUrl ?? Env.serverUri,
-          connectTimeout: const Duration(seconds: 30),
-          receiveTimeout: const Duration(seconds: 30),
+          connectTimeout: Duration(seconds: Env.httpTimeout),
+          receiveTimeout: Duration(seconds: Env.httpTimeout),
           // 自动合并公共请求头和自定义请求头
           headers: {
             ...commonHeaders,
@@ -66,7 +67,8 @@ class ApiService {
       final response = await _dio.get(path, queryParameters: queryParameters);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {
-      throw _unwrapException(e);
+      Log.e('get请求异常', tag: 'Network', error: e);
+      return ServiceResponse.commonError();
     }
   }
 
@@ -76,13 +78,13 @@ class ApiService {
     try {
       final hasNetwork = await NetworkCheck.instance.checkNetwork();
       if (!hasNetwork) {
-        // AppToast.showNotify('无网络连接', NotifyType.warning);
         return ServiceResponse.networkError();
       }
       final response = await _dio.post(path, data: data);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {
-      throw _unwrapException(e);
+      Log.e('post请求异常', tag: 'Network', error: e);
+      return ServiceResponse.commonError();
     }
   }
 
@@ -98,7 +100,8 @@ class ApiService {
       final response = await _dio.put(path, data: data);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {
-      throw _unwrapException(e);
+      Log.e('put请求异常', tag: 'Network', error: e);
+      return ServiceResponse.commonError();
     }
   }
 
@@ -114,7 +117,8 @@ class ApiService {
       final response = await _dio.delete(path);
       return ServiceResponse.fromJson(response.data);
     } on DioException catch (e) {
-      throw _unwrapException(e);
+      Log.e('delete请求异常', tag: 'Network', error: e);
+      return ServiceResponse.commonError();
     }
   }
 

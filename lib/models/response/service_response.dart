@@ -20,6 +20,10 @@ class ServiceResponse extends BaseResponse {
     return ServiceResponse(success: false, errorContext: '无网络连接');
   }
 
+  factory ServiceResponse.commonError() {
+    return ServiceResponse(success: false, errorContext: '请求失败');
+  }
+
   factory ServiceResponse.fromJson(Map<String, dynamic> json) =>
       _$ServiceResponseFromJson(json);
 
