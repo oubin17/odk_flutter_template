@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/features/auth/data/models/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';

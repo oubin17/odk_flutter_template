@@ -3,6 +3,7 @@ import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
 import 'package:odk_flutter_template/core/network/interceptors/request_response_interceptor.dart';
 import 'package:odk_flutter_template/core/network/check/network_utils.dart';
+import 'package:odk_flutter_template/core/network/interceptors/sign_interceptor.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
@@ -17,9 +18,6 @@ class ApiService {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'X-TENANT-ID': Env.tenantId,
-    // 可以在这里添加其他公共请求头，例如：
-    // 'Platform': 'mobile',
-    // 'Version': '1.0.0',
   };
 
   // 获取单例实例的方法
@@ -45,6 +43,7 @@ class ApiService {
       ) {
     // 注意：Dio 的 onResponse/onError 是逆序执行的。
     _dio.interceptors.add(RequestResponseInterceptor());
+    _dio.interceptors.add(SignInterceptor());
   }
 
   // 保留公开构造函数用于测试或特殊场景

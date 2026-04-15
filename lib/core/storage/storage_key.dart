@@ -3,4 +3,6 @@ class StorageKey {
   static const String userInfo = 'userInfo';
 
   static const String themeMode = 'themeMode';
+
+  static const String deviceId = 'deviceId';
 }
