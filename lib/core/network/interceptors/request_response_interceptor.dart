@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
@@ -87,7 +86,8 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
 
     // 统一吐司提示（必加，避免页面无感知）
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AppToast.showToast(errorMsg, alignment: Alignment.topCenter);
+      // AppToast.showToast(errorMsg, alignment: Alignment.topCenter);
+      AppToast.showToast2(errorMsg);
     });
 
     // ====================== 原有逻辑：token 过期处理 ======================
@@ -98,6 +98,7 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
       final errorCode = dataMap['errorCode'];
       if (tokenExpiredCodes.contains(errorCode)) {
         AuthService().afterLogout();
+        // AppToast.showToast('登录已过期，请重新登录');
         final globalContext = AppRouter.routerKey.currentContext;
         if (globalContext != null) {
           globalContext.read<UserProvider>().clearUser();

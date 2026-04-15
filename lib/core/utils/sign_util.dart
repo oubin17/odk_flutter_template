@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
+import 'package:odk_flutter_template/common/app_info/global_info.dart';
 
 import 'package:odk_flutter_template/config/env.dart';
 
@@ -23,12 +24,23 @@ class SignUtils {
   }
 
   // 生成随机字符串
-  static String generateNonce([int length = 16]) {
+  // ====================== 🔥 替换这里：绝对唯一 nonce ======================
+  static String generateNonce([int length = 8]) {
+    // 1. 时间戳（精确到毫秒）
+    String timePart = DateTime.now().millisecondsSinceEpoch.toString();
+    // 2. 设备唯一ID（截取后8位）
+    String devicePart = GlobalInfo.instance.deviceId.substring(
+      GlobalInfo.instance.deviceId.length - 8,
+    );
+    // 3. 短随机数（8位）
     const chars =
         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    return List.generate(
+    String randomPart = List.generate(
       length,
       (index) => chars[Random().nextInt(chars.length)],
     ).join();
+
+    // 组合 = 时间戳 + 设备ID + 随机数 → 绝对唯一
+    return '${timePart}_${devicePart}_$randomPart';
   }
 }

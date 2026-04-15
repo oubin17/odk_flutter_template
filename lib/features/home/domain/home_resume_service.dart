@@ -22,7 +22,8 @@ class HomeResumeService {
 
   /// 获取隐私简历列表
   Future<List<PrivateResumeInfo>> getPrivateResumeInfo() async {
-    return await HomeResumeApi().getPrivateResumeInfo();
+    return [];
+    // return await HomeResumeApi().getPrivateResumeInfo();
   }
 
   /// 添加隐私简历

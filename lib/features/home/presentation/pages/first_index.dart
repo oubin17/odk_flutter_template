@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:odk_flutter_template/common/app_info/app_info.dart';
 import 'package:odk_flutter_template/common/app_info/device_info.dart';
+import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 
@@ -30,6 +31,12 @@ class FirstIndexPage extends StatelessWidget {
             AppText('Hello World $f1'),
             AppText('Hello World $f2'),
             AppText('Hello World $enDate'),
+            AppIconButton(
+              icon: Icons.search,
+              onTap: () {
+                AuthService().getUserInfo();
+              },
+            ),
           ],
         ),
       ),

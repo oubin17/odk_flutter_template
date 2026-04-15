@@ -61,7 +61,7 @@ class AuthService {
   Future<void> logout() async {
     // 拦截器已经统一处理了所有异常
     await AuthApi().logout();
-    await afterLogout();
+    afterLogout();
   }
 
   /// 登出后需要执行的操作，清除 storage 中的所有数据

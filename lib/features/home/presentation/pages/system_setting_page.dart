@@ -107,10 +107,12 @@ class SystemSettingPage extends StatelessWidget {
               AppToast.showAppConfirmDialog(
                 title: "退出登录",
                 // msg: "是否退出登录？",
-                onConfirm: () {
-                  AuthService().logout();
+                onConfirm: () async {
+                  await AuthService().logout();
                   // 直接清空，比refresh更快
+                  // ignore: use_build_context_synchronously
                   context.read<UserProvider>().clearUser();
+                  // ignore: use_build_context_synchronously
                   context.go('/?fromOtherPage=true');
                 },
               );
