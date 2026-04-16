@@ -3,15 +3,6 @@ import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/core/utils/sign_util.dart';
-// 替换为你项目的实际导入路径
-
-/// 【配置】公开接口名单（无需登录的接口：登录/注册/验证码）
-/// 这些接口使用 设备ID 进行签名，不使用用户Token
-const List<String> publicApiPaths = [
-  '/api/login',
-  '/api/register',
-  '/api/sendSmsCode',
-];
 
 class SignInterceptor extends InterceptorsWrapper {
   SignInterceptor();
