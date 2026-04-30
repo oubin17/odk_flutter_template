@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:odk_flutter_template/features/auth/data/models/user_regist_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
+import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
+import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_response.dart';
+import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
-import 'package:odk_flutter_template/gen/assets.gen.dart';
+import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
@@ -17,7 +23,18 @@ class SignUpPage extends StatelessWidget {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final TextEditingController userNameController = TextEditingController();
     final TextEditingController accountController = TextEditingController();
+    final TextEditingController verifyCodeController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+
+    final VerificationCode verificationCode = VerificationCode("", "");
+
+    Widget appLogo() {
+      return AppAvatar(
+        assetPath: Assets.images.login.loginRegist.path,
+        size: 300.w,
+        shape: AppAvatarShape.square,
+      );
+    }
 
     Widget registerText() {
       return AppText.customerTitle("注册", 40.sp, FontWeight.bold);
@@ -53,6 +70,24 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
+    Widget verifyCodeField() {
+      return AppCodeInput(
+        controller: verifyCodeController,
+        onSendCode: () async {
+          VerificationCodeResponse response = await AuthService()
+              .sendVerifyCode(
+                VerificationCodeRequest(
+                  verifyType: "1",
+                  verifyKey: accountController.text,
+                  verifyScene: "REGISTER",
+                ),
+              );
+          verificationCode.uniqueId = response.uniqueId;
+        },
+        isCounting: false,
+      );
+    }
+
     Widget passwordField() {
       return AppInput(
         controller: passwordController,
@@ -71,15 +106,18 @@ class SignUpPage extends StatelessWidget {
     void register(BuildContext context) async {
       if (formKey.currentState!.validate()) {
         AppToast.showLoading();
-        final String? userId = await AuthService().register(
+        verificationCode.verifyCode = verifyCodeController.text;
+        final UserEntity? userEntity = await AuthService().register(
           UserRegistRequest(
             userName: userNameController.text,
             loginId: accountController.text,
             identifyValue: passwordController.text,
+            verificationCode: verificationCode,
+            extendInfoDto: ExtendInfoDto(privacyVersion: "v1.0"),
           ),
         );
         AppToast.dismiss();
-        if (userId == null) {
+        if (userEntity == null) {
           AppToast.showToast("注册失败");
         } else {
           NavigatorUtils.goNamed(RouteNames.signin);
@@ -122,12 +160,12 @@ class SignUpPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           // 👇 背景图：固定不动，不受键盘影响
-          Image.asset(
-            Assets.images.login.loginRegist.path,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
+          // Image.asset(
+          //   Assets.images.login.loginRegist.path,
+          //   fit: BoxFit.cover,
+          //   width: double.infinity,
+          //   height: double.infinity,
+          // ),
 
           // 👇 【优化】滚动视图：防止键盘挡住输入框
           Padding(
@@ -138,14 +176,18 @@ class SignUpPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // _appLogoField(),
+                  appLogo(),
+                  AppGap.hLarge,
                   registerText(),
-                  SizedBox(height: 40.h),
+                  AppGap.hLarge,
                   userNameField(),
-                  SizedBox(height: 40.h),
+                  AppGap.hLarge,
                   accountField(),
-                  SizedBox(height: 40.h),
+                  AppGap.hLarge,
+                  verifyCodeField(),
+                  AppGap.hLarge,
                   passwordField(),
-                  Spacer(),
+                  const Spacer(),
                   registerButton(context),
                   AppGap.hXL,
                 ],

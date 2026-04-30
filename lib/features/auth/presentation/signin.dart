@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:odk_flutter_template/features/auth/data/models/user_login_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
+import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
+import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_response.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
@@ -11,109 +14,150 @@ import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:provider/provider.dart';
 
-//登录页面
-class SignInPage extends StatelessWidget {
+// 登录页面 → 改为 StatefulWidget
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    final TextEditingController accountController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
+  State<SignInPage> createState() => _SignInPageState();
+}
 
-    Widget signInText() {
-      return AppText.customerTitle("登录", 40.sp, FontWeight.bold);
-    }
+class _SignInPageState extends State<SignInPage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController accountController = TextEditingController();
+  final TextEditingController verifyCodeController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-    Widget accountField() {
-      return AppInput(
-        controller: accountController,
-        label: '账号',
-        hint: '请输入账号',
-        prefix: const Icon(Icons.app_registration),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "账号不能为空";
-          }
-          return null;
-        },
-      );
-    }
+  final VerificationCode verificationCode = VerificationCode("", "");
+  bool passwordLogin = true; // 状态变量，放在State里
 
-    Widget passwordField() {
-      return AppInput(
-        controller: passwordController,
-        label: '密码',
-        hint: '请输入密码',
-        prefix: const Icon(Icons.password),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "密码不能为空";
-          }
-          return null;
-        },
-      );
-    }
+  @override
+  void dispose() {
+    // 释放控制器，防止内存泄漏
+    accountController.dispose();
+    verifyCodeController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
-    void login(BuildContext context) async {
-      if (formKey.currentState!.validate()) {
-        AppToast.showLoading();
-        // 👇 核心：【异步前】提前获取 UserProvider 实例（无context风险）
-        final userProvider = context.read<UserProvider>();
-        final UserEntity? userEntity = await AuthService().login(
-          UserLoginRequest(
-            loginId: accountController.text,
-            identifyValue: passwordController.text,
+  Widget signInText() {
+    return AppText.customerTitle("登录", 40.sp, FontWeight.bold);
+  }
+
+  Widget accountField() {
+    return AppInput(
+      controller: accountController,
+      label: '账号',
+      hint: '请输入账号',
+      prefix: const Icon(Icons.app_registration),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "账号不能为空";
+        }
+        return null;
+      },
+    );
+  }
+
+  Widget verifyCodeField() {
+    return AppCodeInput(
+      controller: verifyCodeController,
+      onSendCode: () async {
+        VerificationCodeResponse response = await AuthService().sendVerifyCode(
+          VerificationCodeRequest(
+            verifyType: "1",
+            verifyKey: accountController.text,
+            verifyScene: "LOGIN",
           ),
         );
-        AppToast.dismiss();
-        if (userEntity == null) {
-          // 全局修改默认配置
-          // SmartDialog.config.toast = SmartConfigToast(isExist: true);
-          // AppToast.showToast("登录失败，请检查账号密码");
-          AppToast.showToast("登录失败，请检查账号密码");
-        } else {
-          await userProvider.refresh();
-          NavigatorUtils.goNamed(RouteNames.home);
+        verificationCode.uniqueId = response.uniqueId;
+      },
+      isCounting: false,
+    );
+  }
+
+  Widget switchLoginTypeField() {
+    return AppTextButton(
+      text: '切换登录方式',
+      onTap: () {
+        // ✅ 必须用 setState 更新状态，刷新UI
+        setState(() {
+          passwordLogin = !passwordLogin;
+        });
+      },
+    );
+  }
+
+  Widget passwordField() {
+    return AppInput(
+      controller: passwordController,
+      label: '密码',
+      hint: '请输入密码',
+      prefix: const Icon(Icons.password),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "密码不能为空";
         }
-      }
-    }
+        return null;
+      },
+    );
+  }
 
-    Widget loginButton(BuildContext context) {
-      return AppButton(onTap: () => login(context), text: '登录');
-    }
-
-    Widget bottomText(BuildContext context) {
-      return Padding(
-        padding: EdgeInsets.all(60.h),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AppText.second("没有账号？"),
-            AppTextButton(
-              onTap: () {
-                NavigatorUtils.goNamed(RouteNames.signup);
-              },
-              text: '注册',
-            ),
-          ],
+  void login() async {
+    if (formKey.currentState!.validate()) {
+      verificationCode.verifyCode = verifyCodeController.text;
+      AppToast.showLoading();
+      final userProvider = context.read<UserProvider>();
+      final UserEntity? userEntity = await AuthService().login(
+        UserLoginRequest(
+          loginId: accountController.text,
+          identifyType: passwordLogin ? "1" : "2",
+          // 密码登录 → 传密码；验证码登录 → 传null
+          identifyValue: passwordLogin ? passwordController.text : null,
+          // 验证码登录 → 传验证码对象；密码登录 → 传null
+          verificationCode: passwordLogin ? null : verificationCode,
         ),
       );
+      AppToast.dismiss();
+      if (userEntity == null) {
+        AppToast.showToast("登录失败，请检查账号密码");
+      } else {
+        await userProvider.refresh();
+        NavigatorUtils.goNamed(RouteNames.home);
+      }
     }
+  }
 
+  Widget loginButton() {
+    return AppButton(onTap: login, text: '登录');
+  }
+
+  Widget bottomText() {
+    return Padding(
+      padding: EdgeInsets.all(60.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AppText.second("没有账号？"),
+          AppTextButton(
+            onTap: () {
+              NavigatorUtils.goNamed(RouteNames.signup);
+            },
+            text: '注册',
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: BasicAppbar(title: Text(widget.title)),
-      // 👇 【核心】禁止页面随键盘上移，背景永久固定
       resizeToAvoidBottomInset: false,
-      // 👇 核心2：让body延伸【覆盖底部导航栏】+ 全屏显示
       extendBody: true,
-      // 可选：让body延伸覆盖状态栏（顶部也全屏）
-      // extendBodyBehindAppBar: true,
       body: Stack(
-        // 👇 【优化】Stack铺满全屏
         fit: StackFit.expand,
         children: [
-          // 👇 背景图：固定不动，不受键盘影响
           Image.asset(
             Assets.images.login.loginRegist.path,
             fit: BoxFit.cover,
@@ -127,15 +171,15 @@ class SignInPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // _appLogoField(),
                   signInText(),
                   AppGap.hNormal,
                   accountField(),
                   AppGap.hNormal,
-                  AppGap.hNormal,
-                  passwordField(),
+                  if (passwordLogin) passwordField() else verifyCodeField(),
+                  AppGap.hSuperSmall,
+                  switchLoginTypeField(),
                   const Spacer(),
-                  loginButton(context),
+                  loginButton(),
                   AppGap.hXL,
                 ],
               ),
@@ -143,7 +187,7 @@ class SignInPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: bottomText(context),
+      bottomNavigationBar: bottomText(),
     );
   }
 }
