@@ -388,7 +388,7 @@ class AppLoadingButton extends StatelessWidget {
 class AppInput extends StatelessWidget {
   final TextEditingController? controller;
   final String? label;
-  final String hint;
+  final String? hint;
   final bool obscure;
   final Widget? suffix;
   final Widget? prefix;
@@ -405,7 +405,7 @@ class AppInput extends StatelessWidget {
     super.key,
     this.controller,
     this.label,
-    required this.hint,
+    this.hint,
     this.obscure = false,
     this.suffix,
     this.prefix,
@@ -442,7 +442,7 @@ class AppInput extends StatelessWidget {
 
         hintText: hint,
         hintStyle: TextStyle(
-          fontSize: 26.sp,
+          fontSize: 20.sp,
           color: AppColors.textGray(context),
         ),
         prefixIcon: prefix != null
@@ -457,20 +457,41 @@ class AppInput extends StatelessWidget {
                 child: suffix,
               )
             : null,
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.w),
+
+        // focusedBorder: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(16.w),
+        //   borderSide: BorderSide(
+        //     color: AppColors.primaryLight(context),
+        //     width: 1.w,
+        //   ),
+        // ),
+        // filled: true,
+        // fillColor: AppColors.card(context),
+        // border: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(16.w),
+        //   borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
+        // ),
+        border: UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryLight(context),
             width: 1.w,
           ),
         ),
-        // filled: true,
-        // fillColor: AppColors.card(context),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.w),
-          borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
+        // 正常状态边框
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryLight(context),
+            width: 1.w,
+          ),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
+        // 聚焦状态边框（和正常状态完全一样，不变色）
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryLight(context),
+            width: 1.w,
+          ),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
         // 错误提示样式（适配主题）
         errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
       ),
@@ -533,9 +554,29 @@ class _AppCodeInputState extends State<AppCodeInput> {
         //   borderRadius: BorderRadius.circular(16.w),
         //   borderSide: BorderSide.none,
         // ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.w),
-          borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
+        // border: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(16.w),
+        //   borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
+        // ),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryLight(context),
+            width: 1.w,
+          ),
+        ),
+        // 正常状态边框
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryLight(context),
+            width: 1.w,
+          ),
+        ),
+        // 聚焦状态边框（和正常状态完全一样，不变色）
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryLight(context),
+            width: 1.w,
+          ),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
         // 错误提示样式（统一主题）

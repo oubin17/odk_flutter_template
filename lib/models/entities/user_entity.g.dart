@@ -26,7 +26,7 @@ Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
       'userId': instance.userId,
       'userType': instance.userType,
       'userStatus': instance.userStatus,
-      'accessToken': instance.accessToken,
-      'roles': instance.roles,
-      'userProfile': instance.userProfile,
+      'accessToken': instance.accessToken.toJson(),
+      'roles': instance.roles?.map((e) => e.toJson()).toList(),
+      'userProfile': instance.userProfile?.toJson(),
     };

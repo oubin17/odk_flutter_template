@@ -23,15 +23,8 @@ class AuthApi {
   //   return response.data as String?;
   // }
 
-  Future<UserLoginResponse?> loginAfterRegister(
-    UserRegistRequest request,
-  ) async {
-    ServiceResponse response = await ApiService().post(
-      '/user/register/login',
-      request.toJson(),
-    );
-    return UserLoginResponse.fromJson(response.data as Map<String, dynamic>)
-        as UserLoginResponse?;
+  Future<ServiceResponse> loginAfterRegister(UserRegistRequest request) async {
+    return await ApiService().post('/user/register/login', request.toJson());
   }
 
   Future<UserLoginResponse?> login(UserLoginRequest request) async {

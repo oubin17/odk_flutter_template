@@ -23,5 +23,5 @@ Map<String, dynamic> _$UserLoginRequestToJson(UserLoginRequest instance) =>
       'loginId': instance.loginId,
       'identifyType': instance.identifyType,
       'identifyValue': instance.identifyValue,
-      'verificationCode': instance.verificationCode,
+      'verificationCode': instance.verificationCode?.toJson(),
     };

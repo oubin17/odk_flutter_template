@@ -30,8 +30,8 @@ Map<String, dynamic> _$UserLoginResponseToJson(UserLoginResponse instance) =>
       'userId': instance.userId,
       'userType': instance.userType,
       'userStatus': instance.userStatus,
-      'accessToken': instance.accessToken,
-      'roles': instance.roles,
-      'userProfile': instance.userProfile,
+      'accessToken': instance.accessToken.toJson(),
+      'roles': instance.roles?.map((e) => e.toJson()).toList(),
+      'userProfile': instance.userProfile?.toJson(),
       'token': instance.token,
     };

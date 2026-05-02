@@ -77,9 +77,9 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
       case DioExceptionType.connectionError:
         errorMsg = '网络连接异常，请检查网络';
         break;
-      case DioExceptionType.badResponse:
-        errorMsg = '服务器异常(${err.response?.statusCode})';
-        break;
+      // case DioExceptionType.badResponse:
+      //   errorMsg = '服务器异常(${err.response?.statusCode})';
+      //   break;
       default:
         errorMsg = '网络请求失败，请重试';
     }
@@ -113,7 +113,11 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
       Response(
         requestOptions: err.requestOptions,
         statusCode: 999, // 自定义异常码
-        data: ServiceResponse.commonError().toJson(),
+        data: ServiceResponse.bizError(
+          responseData['errorType'],
+          responseData['errorCode'],
+          responseData['errorContext'],
+        ).toJson(),
       ),
     );
   }

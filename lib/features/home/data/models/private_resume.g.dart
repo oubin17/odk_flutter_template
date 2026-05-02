@@ -25,5 +25,5 @@ Map<String, dynamic> _$PrivateResumeInfoToJson(PrivateResumeInfo instance) =>
       'status': instance.status,
       'company': instance.company,
       'userName': instance.userName,
-      'resumeLibraryDTO': instance.resumeLibraryDTO,
+      'resumeLibraryDTO': instance.resumeLibraryDTO?.toJson(),
     };

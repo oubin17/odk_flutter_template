@@ -13,7 +13,7 @@ UserRegistRequest _$UserRegistRequestFromJson(Map<String, dynamic> json) =>
       verificationCode: VerificationCode.fromJson(
         json['verificationCode'] as Map<String, dynamic>,
       ),
-      extendInfoDto: ExtendInfoDto.fromJson(
+      extendInfoDTO: ExtendInfoDto.fromJson(
         json['extendInfoDto'] as Map<String, dynamic>,
       ),
       identifyValue: json['identifyValue'] as String?,
@@ -25,6 +25,6 @@ Map<String, dynamic> _$UserRegistRequestToJson(UserRegistRequest instance) =>
       'loginId': instance.loginId,
       'identifyType': instance.identifyType,
       'identifyValue': instance.identifyValue,
-      'verificationCode': instance.verificationCode,
-      'extendInfoDto': instance.extendInfoDto,
+      'verificationCode': instance.verificationCode.toJson(),
+      'extendInfoDTO': instance.extendInfoDTO.toJson(),
     };

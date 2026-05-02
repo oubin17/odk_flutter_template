@@ -24,6 +24,19 @@ class ServiceResponse extends BaseResponse {
     return ServiceResponse(success: false, errorContext: '请求失败');
   }
 
+  factory ServiceResponse.bizError(
+    String errorType,
+    String errorCode,
+    String errorContext,
+  ) {
+    return ServiceResponse(
+      success: false,
+      errorType: errorType,
+      errorCode: errorCode,
+      errorContext: errorContext,
+    );
+  }
+
   factory ServiceResponse.fromJson(Map<String, dynamic> json) =>
       _$ServiceResponseFromJson(json);
 

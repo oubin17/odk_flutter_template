@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
 import 'package:odk_flutter_template/core/storage/secure_storage_manager.dart';
 import 'package:odk_flutter_template/core/storage/storage_key.dart';
@@ -12,6 +13,9 @@ import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_re
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_response.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
+import 'package:odk_flutter_template/models/response/service_response.dart';
+import 'package:odk_flutter_template/providers/user/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class AuthService {
   static final AuthService _instance = AuthService._internal();
@@ -22,20 +26,32 @@ class AuthService {
   // bool isLoggedIn = false;
 
   /// 注册
-  Future<UserEntity?> register(UserRegistRequest request) async {
+  Future<ServiceResponse> register(
+    UserRegistRequest request,
+    BuildContext context,
+  ) async {
     if (request.identifyValue != null) {
       request.identifyValue = await EncryptUtils.encrypt(
         request.identifyValue!,
       );
     }
 
-    UserLoginResponse response =
-        await AuthApi().loginAfterRegister(request) as UserLoginResponse;
-    return _doAfterLogin(response);
+    ServiceResponse response = await AuthApi().loginAfterRegister(request);
+    if (response.success) {
+      UserLoginResponse userLoginResponse = UserLoginResponse.fromJson(
+        response.data as Map<String, dynamic>,
+      );
+      //1.存储 token
+      await _doAfterLogin(userLoginResponse, context);
+    }
+    return response;
   }
 
   /// 登录
-  Future<UserEntity?> login(UserLoginRequest request) async {
+  Future<UserEntity?> login(
+    UserLoginRequest request,
+    BuildContext context,
+  ) async {
     //
     if (request.identifyValue != null) {
       request.identifyValue = await EncryptUtils.encrypt(
@@ -48,12 +64,16 @@ class AuthService {
 
     //1.存储 token
     if (response != null) {
-      return _doAfterLogin(response);
+      await _doAfterLogin(response, context);
     }
     return null;
   }
 
-  Future<UserEntity> _doAfterLogin(UserLoginResponse response) async {
+  Future<UserEntity> _doAfterLogin(
+    UserLoginResponse response,
+    BuildContext context,
+  ) async {
+    final userProvider = context.read<UserProvider>();
     await SecureStorageManager().write(StorageKey.token, response.token ?? '');
     UserEntity userEntity = UserEntity.fromJson(
       jsonDecode(jsonEncode(response.toJson())),
@@ -63,6 +83,7 @@ class AuthService {
       StorageKey.userInfo,
       jsonEncode(userEntity.toJson()),
     );
+    await userProvider.refresh();
     // isLoggedIn = true;
     return userEntity;
   }

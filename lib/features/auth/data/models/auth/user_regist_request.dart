@@ -14,16 +14,17 @@ class UserRegistRequest {
 
   VerificationCode verificationCode;
 
-  ExtendInfoDto extendInfoDto;
+  ExtendInfoDto extendInfoDTO;
 
   UserRegistRequest({
     this.userName,
     required this.loginId,
     required this.verificationCode,
-    required this.extendInfoDto,
+    required this.extendInfoDTO,
     this.identifyValue,
   });
   factory UserRegistRequest.fromJson(Map<String, dynamic> json) =>
       _$UserRegistRequestFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$UserRegistRequestToJson(this);
 }

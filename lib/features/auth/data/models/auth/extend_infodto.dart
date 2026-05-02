@@ -6,7 +6,6 @@ part 'extend_infodto.g.dart';
 class ExtendInfoDto {
   String privacyVersion;
   ExtendInfoDto({required this.privacyVersion});
-
   factory ExtendInfoDto.fromJson(Map<String, dynamic> json) =>
       _$ExtendInfoDtoFromJson(json);
 
