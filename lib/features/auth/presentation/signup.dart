@@ -40,9 +40,25 @@ class _SignUpPageState extends State<SignUpPage> {
   int countDown = 60;
   Timer? codeTimer; // 定时器
 
+  // 仅保留这一个状态
+  bool isAgree = false;
+
+  // 跳转到协议页面（复用你的路由）
+  void _toAgreementPage(String title, String url) {
+    NavigatorUtils.pushNamed(
+      RouteNames.agreement,
+      queryParameters: {'title': title, 'url': url},
+    );
+  }
+
   @override
   void dispose() {
     codeTimer?.cancel(); // 销毁定时器
+    // 释放控制器
+    userNameController.dispose();
+    accountController.dispose();
+    verifyCodeController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -84,21 +100,6 @@ class _SignUpPageState extends State<SignUpPage> {
       return AppText.customerTitle("欢迎回来", 50.sp, FontWeight.bold);
     }
 
-    // Widget userNameField() {
-    //   return AppInput(
-    //     controller: userNameController,
-    //     label: '用户名',
-    //     // hint: '请输入用户名',
-    //     prefix: const Icon(Icons.account_circle),
-    //     validator: (value) {
-    //       if (value == null || value.isEmpty) {
-    //         return "用户名不能为空";
-    //       }
-    //       return null;
-    //     },
-    //   );
-    // }
-
     Widget accountField() {
       return AppInput(
         controller: accountController,
@@ -134,37 +135,41 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 );
 
-            // ✅ 3. 发送成功：启动倒计时！
             verifyCode.uniqueId = response.uniqueId;
             startCountDown();
             AppToast.showToast("验证码发送成功");
           } catch (e) {
-            // 发送失败，不启动倒计时
             AppToast.showToast("验证码发送失败：$e");
           }
         },
-        // ✅ 核心：传入动态的倒计时状态，不是固定false！
         isCounting: isCounting,
         countTime: countDown,
       );
     }
 
-    // Widget passwordField() {
-    //   return AppInput(
-    //     controller: passwordController,
-    //     label: '密码',
-    //     // hint: '请输入密码',
-    //     prefix: const Icon(Icons.password),
-    //     validator: (value) {
-    //       if (value == null || value.isEmpty) {
-    //         return "密码不能为空";
-    //       }
-    //       return null;
-    //     },
-    //   );
-    // }
+    // 直接使用封装好的组件！
+    Widget agreementWidget() {
+      return AppAgreementCheckbox(
+        isAgree: isAgree,
+        onChanged: (value) {
+          setState(() {
+            isAgree = value;
+          });
+        },
+        onUserAgreement: () =>
+            _toAgreementPage("用户协议", "https://www.xxx.com/user_agreement.html"),
+        onPrivacyPolicy: () =>
+            _toAgreementPage("隐私政策", "https://www.xxx.com/privacy_policy.html"),
+      );
+    }
 
     void register(BuildContext context) async {
+      // ====================== 新增：注册前必选校验协议 ======================
+      if (!isAgree) {
+        AppToast.showToast("请勾选用户协议和隐私政策");
+        return;
+      }
+
       if (formKey.currentState!.validate()) {
         AppToast.showLoading();
         verifyCode.verifyCode = verifyCodeController.text;
@@ -210,26 +215,11 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     return Scaffold(
-      // appBar: BasicAppbar(title: Text(widget.title)),
-      // 👇 【核心】禁止页面随键盘上移，背景永久固定
       resizeToAvoidBottomInset: false,
-      // 👇 核心2：让body延伸【覆盖底部导航栏】+ 全屏显示
       extendBody: true,
-      // 可选：让body延伸覆盖状态栏（顶部也全屏）
-      // extendBodyBehindAppBar: true,
       body: Stack(
-        // 👇 【优化】Stack铺满全屏
         fit: StackFit.expand,
         children: [
-          // 👇 背景图：固定不动，不受键盘影响
-          // Image.asset(
-          //   Assets.images.login.loginRegist.path,
-          //   fit: BoxFit.cover,
-          //   width: double.infinity,
-          //   height: double.infinity,
-          // ),
-
-          // 👇 【优化】滚动视图：防止键盘挡住输入框
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
             child: Form(
@@ -243,13 +233,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   AppGap.hLarge,
                   registerText(),
                   AppGap.hLarge,
-                  // userNameField(),
-                  // AppGap.hLarge,
                   accountField(),
                   AppGap.hSmall,
                   verifyCodeField(),
-                  // AppGap.hLarge,
-                  // passwordField(),
+                  AppGap.hSuperSmall,
+                  agreementWidget(), // ✅ 一行调用
                   const Spacer(),
                   registerButton(context),
                   AppGap.hXL,

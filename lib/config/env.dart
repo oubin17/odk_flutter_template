@@ -27,7 +27,7 @@ const Map<String, String> commonVariables = {
 // 4. 各环境独立配置（继承公共配置，常量 Key）
 const Map<String, String> devVariables = {
   ...commonVariables,
-  ConfigKey.serverUri: 'http://192.168.0.103:8080/odk-base-template/api',
+  ConfigKey.serverUri: 'http://172.27.3.80:8080/odk-base-template/api',
   // ConfigKey.serverUri: 'http://192.168.31.228:8080/odk-base-template/api',
 
   // 开发环境专属密钥

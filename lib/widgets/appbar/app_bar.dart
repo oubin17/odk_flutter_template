@@ -17,8 +17,8 @@ class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
-      title: title ?? AppText(''),
-      leading: context.canPop()
+      title: title ?? const AppText(''),
+      leading: GoRouter.of(context).canPop()
           ? IconButton(
               onPressed: () => NavigatorUtils.pop(),
               icon: Container(

@@ -36,6 +36,19 @@ class NavigatorUtils {
     );
   }
 
+  // ====================== 新增：压栈跳转（详情页/协议页专用！） ======================
+  static void pushNamed(
+    String name, {
+    Map<String, String> pathParameters = const {},
+    Map<String, dynamic> queryParameters = const {},
+  }) {
+    AppRouter.router.pushNamed(
+      name,
+      pathParameters: pathParameters,
+      queryParameters: queryParameters,
+    );
+  }
+
   // 3. 新增：替换跳转（登录→首页专用）
   static void pushReplacementNamed(String name) {
     AppRouter.router.pushReplacementNamed(name);

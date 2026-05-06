@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
-import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
+import 'package:odk_flutter_template/features/auth/presentation/signup.dart'
+    hide SignInPage;
 import 'package:odk_flutter_template/features/home/presentation/home.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/system_setting_page.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
+import 'package:odk_flutter_template/routes/pages/agreement_page.dart';
 import 'package:odk_flutter_template/routes/pages/todo_detail.dart';
 import 'package:odk_flutter_template/routes/pages/not_found.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +19,9 @@ class RouteNames {
   static const String signin = 'Signin';
   static const String systemSetting = 'SystemSetting';
   static const String home = 'Home';
-  static const String detail = 'detail';
+  static const String detail = 'Detail';
   static const String notFound = 'NotFound';
+  static const String agreement = 'Agreement';
 }
 
 // ====================== 路由路径常量（已删除Splash） ======================
@@ -30,6 +33,7 @@ class RoutePaths {
   static const String home = '/home';
   static const String detail = '/detail/:id';
   static const String notFound = '/notFound';
+  static const String agreement = '/agreement';
 }
 
 class AppRouter {
@@ -95,6 +99,16 @@ class AppRouter {
         builder: (context, state) => const SystemSettingPage(),
       ),
       GoRoute(
+        path: RoutePaths.agreement,
+        name: RouteNames.agreement,
+        builder: (context, state) {
+          // 接收路由传递的标题和链接
+          final title = state.uri.queryParameters['title'] ?? '协议';
+          final url = state.uri.queryParameters['url'] ?? '';
+          return AgreementPage(title: title, url: url);
+        },
+      ),
+      GoRoute(
         path: RoutePaths.notFound,
         name: RouteNames.notFound,
         builder: (context, state) => const NotFoundPage(),
@@ -103,5 +117,9 @@ class AppRouter {
   );
 
   /// 路由白名单（已删除Splash，仅保留登录/注册）
-  static const List<String> whiteList = [RoutePaths.signup, RoutePaths.signin];
+  static const List<String> whiteList = [
+    RoutePaths.signup,
+    RoutePaths.signin,
+    RoutePaths.agreement,
+  ];
 }

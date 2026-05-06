@@ -316,12 +316,14 @@ class AppTextButton extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
   final Color? color;
+  final double? size;
 
   const AppTextButton({
     super.key,
     required this.text,
     required this.onTap,
     this.color,
+    this.size,
   });
 
   @override
@@ -334,7 +336,7 @@ class AppTextButton extends StatelessWidget {
       child: AppText(
         text,
         color: color ?? AppColors.primary(context),
-        size: 26.sp,
+        size: size ?? 26.sp,
       ),
     );
   }
@@ -748,5 +750,98 @@ class AppAvatar extends StatelessWidget {
   // 默认头像图标
   Widget _defaultIcon(BuildContext context) {
     return Icon(Icons.person, size: 40.w, color: AppColors.primary(context));
+  }
+}
+
+// ===================== 统一勾选框组件 =====================
+
+/// 基础勾选框（纯Checkbox，可独立复用）
+class AppCheckbox extends StatelessWidget {
+  final bool value; // 选中状态
+  final ValueChanged<bool>? onChanged; // 状态回调
+  final bool disabled; // 是否禁用
+  final double size; // 勾选框尺寸
+
+  const AppCheckbox({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.disabled = false,
+    this.size = 26, // 默认尺寸，适配项目
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: disabled
+          ? null
+          : () {
+              onChanged?.call(!value);
+            },
+      borderRadius: BorderRadius.circular(8.w),
+      child: Container(
+        width: size.w,
+        height: size.w,
+        decoration: BoxDecoration(
+          color: disabled
+              ? AppColors.textGray(context).withOpacity(0.3)
+              : (value ? AppColors.primary(context) : Colors.transparent),
+          borderRadius: BorderRadius.circular(8.w),
+          border: Border.all(
+            width: 1.5.w,
+            color: disabled
+                ? AppColors.textGray(context)
+                : (value
+                      ? AppColors.primary(context)
+                      : AppColors.primaryDark(context)),
+          ),
+        ),
+        child: value
+            ? Icon(Icons.check, size: 20.w, color: Colors.white)
+            : const SizedBox(),
+      ),
+    );
+  }
+}
+
+/// 协议专用勾选框（勾选框 + 可点击文字，适配注册/登录页）
+class AppAgreementCheckbox extends StatelessWidget {
+  final bool isAgree; // 勾选状态
+  final ValueChanged<bool> onChanged; // 勾选回调
+  final VoidCallback onUserAgreement; // 用户协议点击
+  final VoidCallback onPrivacyPolicy; // 隐私政策点击
+
+  const AppAgreementCheckbox({
+    super.key,
+    required this.isAgree,
+    required this.onChanged,
+    required this.onUserAgreement,
+    required this.onPrivacyPolicy,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        // 统一勾选框
+        AppCheckbox(value: isAgree, onChanged: onChanged),
+        AppGap.wSmall,
+        // 协议文字组
+        Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            AppText.tip("我已阅读并同意"),
+            // 用户协议
+            AppTextButton(text: "《用户协议》", size: 24.sp, onTap: onUserAgreement),
+            AppText.tip("和"),
+            // 隐私政策
+            AppTextButton(text: "《隐私政策》", size: 24.sp, onTap: onPrivacyPolicy),
+          ],
+        ),
+      ],
+    );
   }
 }
