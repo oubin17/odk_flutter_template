@@ -14,6 +14,9 @@ class ConfigKey {
 
   // 👇 新增：签名密钥 Key（统一管理，杜绝硬编码）
   static const String signSecret = 'signSecret';
+
+  static const String userAgreementUrl = 'https://www.example.com/agreement';
+  static const String privacyPolicyUrl = 'https://www.example.com/privacy';
 }
 
 // 3. 公共配置（使用常量 Key，无硬编码）
@@ -27,11 +30,13 @@ const Map<String, String> commonVariables = {
 // 4. 各环境独立配置（继承公共配置，常量 Key）
 const Map<String, String> devVariables = {
   ...commonVariables,
-  ConfigKey.serverUri: 'http://172.27.3.80:8080/odk-base-template/api',
-  // ConfigKey.serverUri: 'http://192.168.31.228:8080/odk-base-template/api',
+  // ConfigKey.serverUri: 'http://172.27.3.80:8080/odk-base-template/api',
+  ConfigKey.serverUri: 'http://192.168.31.228:8080/odk-base-template/api',
 
   // 开发环境专属密钥
   ConfigKey.signSecret: 'flutter_app_dev_sign_secret_2025',
+  ConfigKey.userAgreementUrl: 'https://www.example.com/agreement',
+  ConfigKey.privacyPolicyUrl: 'https://www.example.com/privacy',
 };
 
 const Map<String, String> testVariables = {
@@ -65,4 +70,6 @@ class Env {
   static int get httpTimeout => int.parse(get(ConfigKey.httpTimeout));
   // 👇 新增：快捷获取签名密钥
   static String get signSecret => get(ConfigKey.signSecret);
+  static String get userAgreementUrl => get(ConfigKey.userAgreementUrl);
+  static String get privacyPolicyUrl => get(ConfigKey.privacyPolicyUrl);
 }

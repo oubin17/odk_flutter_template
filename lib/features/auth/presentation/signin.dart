@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
@@ -187,10 +188,8 @@ class _SignInPageState extends State<SignInPage> {
     return AppAgreementCheckbox(
       isAgree: _isAgree,
       onChanged: (value) => setState(() => _isAgree = value),
-      onUserAgreement: () =>
-          _toAgreementPage("用户协议", "https://www.xxx.com/user_agreement.html"),
-      onPrivacyPolicy: () =>
-          _toAgreementPage("隐私政策", "https://www.xxx.com/privacy_policy.html"),
+      onUserAgreement: () => _toAgreementPage("用户协议", Env.userAgreementUrl),
+      onPrivacyPolicy: () => _toAgreementPage("隐私政策", Env.privacyPolicyUrl),
     );
   }
 
@@ -238,7 +237,7 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // AppGap.hLarge,
+                  AppGap.hLarge,
                   AppGap.hLarge,
                   _signInTitle(),
                   AppGap.hNormal,

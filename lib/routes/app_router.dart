@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
-import 'package:odk_flutter_template/features/auth/presentation/signup.dart'
-    hide SignInPage;
+import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
 import 'package:odk_flutter_template/features/home/presentation/home.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/system_setting_page.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
@@ -42,6 +42,8 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     navigatorKey: routerKey,
+    // 注册 SmartDialog 观察者，除了在 builder 中初始化 FlutterSmartDialog.init() 外， 必须 在路由配置中注册 FlutterSmartDialog.observer 。如果没有这个观察者，插件无法正确感知页面层级和生命周期，导致 Overlay 弹窗无法正常渲染。
+    observers: [FlutterSmartDialog.observer],
     // 🔥 核心1：初始路由设为根路径 /，由重定向自动决定跳首页/登录页
     initialLocation: '/',
     // 🔥 核心2：路由重定向（登录校验，完全替代Splash功能）

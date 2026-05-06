@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
 import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
@@ -101,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     final ServiceResponse response = await AuthService().register(
       UserRegistRequest(
-        userName: _accountController.text,
+        // userName: _accountController.text,
         loginId: _accountController.text,
         identifyValue: "",
         verificationCode: _verifyCode,
@@ -166,10 +167,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return AppAgreementCheckbox(
       isAgree: _isAgree,
       onChanged: (value) => setState(() => _isAgree = value),
-      onUserAgreement: () =>
-          _toAgreementPage("用户协议", "https://www.xxx.com/user_agreement.html"),
-      onPrivacyPolicy: () =>
-          _toAgreementPage("隐私政策", "https://www.xxx.com/privacy_policy.html"),
+      onUserAgreement: () => _toAgreementPage("用户协议", Env.userAgreementUrl),
+      onPrivacyPolicy: () => _toAgreementPage("隐私政策", Env.privacyPolicyUrl),
     );
   }
 

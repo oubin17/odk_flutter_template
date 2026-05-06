@@ -18,7 +18,7 @@ class AppToast {
 
   /// Show toast
   static void showToast(String message, {alignment = Alignment.center}) {
-    SmartDialog.showToast(message, alignment: Alignment.center);
+    SmartDialog.showToast(message, alignment: alignment);
   }
 
   static void showToast2(String message, {gravity = ToastGravity.CENTER}) {
