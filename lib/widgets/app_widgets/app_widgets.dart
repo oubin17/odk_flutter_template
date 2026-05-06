@@ -836,7 +836,7 @@ class AppAgreementCheckbox extends StatelessWidget {
             AppText.tip("我已阅读并同意"),
             // 用户协议
             AppTextButton(text: "《用户协议》", size: 24.sp, onTap: onUserAgreement),
-            AppText.tip("和"),
+            // AppText.tip("和"),
             // 隐私政策
             AppTextButton(text: "《隐私政策》", size: 24.sp, onTap: onPrivacyPolicy),
           ],
