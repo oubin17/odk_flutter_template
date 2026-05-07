@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -27,7 +28,7 @@ class _AgreementPageState extends State<AgreementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // 直接用，自动显示返回按钮！
-      appBar: BasicAppbar(title: Text(widget.title)),
+      appBar: BasicAppBar(title: AppText(widget.title)),
       body: WebViewWidget(controller: _controller),
     );
   }

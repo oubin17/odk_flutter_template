@@ -23,10 +23,12 @@ class AuthApi {
   //   return response.data as String?;
   // }
 
+  /// 注册后登录
   Future<ServiceResponse> loginAfterRegister(UserRegistRequest request) async {
     return await ApiService().post('/user/register/login', request.toJson());
   }
 
+  /// 登录：验证码登录，密码登录
   Future<UserLoginResponse?> login(UserLoginRequest request) async {
     ServiceResponse response = await ApiService().post(
       '/user/login',
@@ -40,6 +42,7 @@ class AuthApi {
     return UserLoginResponse.fromJson(response.data as Map<String, dynamic>);
   }
 
+  /// 退出登录
   Future<void> logout() async {
     await ApiService().post('/user/logout', {});
   }

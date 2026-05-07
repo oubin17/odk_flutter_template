@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/features/home/data/models/resume_library.dart';
 import 'package:odk_flutter_template/features/home/domain/home_resume_service.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
 
@@ -26,7 +27,7 @@ class _ResumeLibraryPageState extends State<ResumeLibraryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BasicAppbar(title: Text('添加客户')),
+      appBar: const BasicAppBar(title: AppText('添加客户')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

@@ -20,7 +20,7 @@ class FirstIndexPage extends StatelessWidget {
     String enDate = DateFormat('EEEE, MMMM dd, yyyy', 'en_US').format(now);
 
     return Scaffold(
-      appBar: const BasicAppbar(title: Text('First Index Page')),
+      appBar: const BasicAppBar(title: Text('First Index Page')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

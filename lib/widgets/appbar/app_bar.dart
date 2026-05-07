@@ -4,16 +4,20 @@ import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
-/// 通用导航栏（适配主题+明暗模式）
-class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
+/// 通用导航栏（适配主题+明暗模式）+ 右上角统一保存按钮
+class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
-  const BasicAppbar({this.title, super.key});
+  // 保存按钮回调
+  final VoidCallback? onSave;
+  // 保存按钮文案
+  final String saveText;
+
+  const BasicAppBar({super.key, this.title, this.onSave, this.saveText = '保存'});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       // 透明背景保留（通用样式）
-      // backgroundColor: Colors.transparent,
       backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
@@ -38,6 +42,21 @@ class BasicAppbar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
           : null,
+      // 右上角：使用项目统一的 AppTextButton
+      actions: [
+        if (onSave != null)
+          Padding(
+            // 右侧内边距，避免按钮贴边
+            padding: EdgeInsets.only(right: 16.w),
+            child: AppTextButton(
+              text: saveText,
+              onTap: onSave!,
+              // 适配主题主色，和项目所有按钮保持一致
+              color: AppColors.primary(context),
+              size: 26.sp, // 统一字体大小
+            ),
+          ),
+      ],
     );
   }
 

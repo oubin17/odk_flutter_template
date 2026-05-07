@@ -18,7 +18,7 @@ class SystemSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPage(context),
-      appBar: const BasicAppbar(title: AppText("设置")),
+      appBar: const BasicAppBar(title: AppText("设置")),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         children: [

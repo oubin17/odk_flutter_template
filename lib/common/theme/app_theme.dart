@@ -25,7 +25,7 @@ class AppTheme {
   static const Color _darkBgCard = Color(0xFF1E1E1E);
 
   /// 三、分割线组
-  static const Color _lightDivider = Color(0xFFF2F3F5);
+  static const Color _lightDivider = Color(0xEDEDEDED);
   static const Color _darkDivider = Color(0xFF2C2C2C);
 
   /// 四、文字色组（主/次/提示/禁用）

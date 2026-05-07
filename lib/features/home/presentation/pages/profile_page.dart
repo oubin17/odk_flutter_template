@@ -26,15 +26,15 @@ class ProfilePage extends StatelessWidget {
             AppGap.hSmall,
             _buildInfoCard(),
             AppGap.hSmall,
-            _buildSystemSettingCard(
-              context,
-              icon: Icons.settings,
-              title: "系统设置",
-              onTap: () => context.pushNamed(RouteNames.systemSetting),
-            ),
-            AppGap.hSmall,
+            // _buildSystemSettingCard(
+            //   context,
+            //   icon: Icons.settings,
+            //   title: "系统设置",
+            //   onTap: () => context.pushNamed(RouteNames.systemSetting),
+            // ),
+            // AppGap.hSmall,
 
-            AppGap.hSmall,
+            // AppGap.hSmall,
           ],
         ),
       ),
@@ -53,48 +53,75 @@ class ProfilePage extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              // 本地图片
-              AppAvatar(
-                assetPath: user?.isAdmin == true
-                    ? Assets.images.profile.admin.path
-                    : Assets.images.profile.employee.path,
-                size: 300.w,
+              Row(
+                // 关键：让Row内所有子组件垂直居中对齐（头像、文本、按钮组对齐）
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AppGap.wSmall,
+                  AppAvatar(
+                    assetPath: user?.isAdmin == true
+                        ? Assets.images.profile.admin.path
+                        : Assets.images.profile.employee.path,
+                    size: 300.w,
+                  ),
+                  AppGap.wNormal,
+                  AppText(
+                    user?.userProfile?.userName ?? "",
+                    size: 35.sp,
+                    weight: FontWeight.w500,
+                  ),
+                  // ✅ 核心：添加Spacer，自动填充水平剩余空间，将后面的按钮组挤到最右侧
+                  const Spacer(),
+                  Column(
+                    // 关键：让Column宽度自适应（不占满剩余空间）
+                    mainAxisSize: MainAxisSize.min,
+                    // 关键：按钮组自身右对齐
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      AppIconButton(
+                        icon: Icons.settings,
+                        size: 38.w,
+                        onTap: () =>
+                            context.pushNamed(RouteNames.systemSetting),
+                      ),
+                      AppIconButton(
+                        icon: Icons.edit,
+                        size: 32.w,
+                        onTap: () => context.pushNamed(RouteNames.userInfo),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               AppGap.hSuperSmall,
-              AppText(
-                user?.userProfile?.userName ?? "未设置姓名",
-                size: 40.sp,
-                weight: FontWeight.bold,
-              ),
-              AppGap.hSuperSmall,
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  borderRadius: BorderRadius.circular(12.w),
-                  border: Border.all(color: Colors.blue[200]!),
-                ),
-                child: AppText(
-                  user?.isAdmin == true ? "管理员" : "员工",
-                  size: 28.sp,
-                  weight: FontWeight.w200,
-                  color: Colors.blue[700],
-                ),
-              ),
+              // Container(
+              //   padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+              //   decoration: BoxDecoration(
+              //     color: Colors.blue[50],
+              //     borderRadius: BorderRadius.circular(12.w),
+              //     border: Border.all(color: Colors.blue[200]!),
+              //   ),
+              //   child: AppText(
+              //     user?.isAdmin == true ? "管理员" : "员工",
+              //     size: 28.sp,
+              //     weight: FontWeight.w200,
+              //     color: Colors.blue[700],
+              //   ),
+              // ),
               const Divider(),
-              _buildInfoRow(
-                context,
-                Icons.badge,
-                "工号",
-                user?.accessToken.tokenValue ?? "",
-              ),
-              AppGap.hSuperSmall,
-              _buildInfoRow(
-                context,
-                Icons.check_circle_outline,
-                "状态",
-                user?.userStatus == "0" ? "正常" : "异常",
-              ),
+              // _buildInfoRow(
+              //   context,
+              //   Icons.badge,
+              //   "工号",
+              //   user?.accessToken.tokenValue ?? "",
+              // ),
+              // AppGap.hSuperSmall,
+              // _buildInfoRow(
+              //   context,
+              //   Icons.check_circle_outline,
+              //   "状态",
+              //   user?.userStatus == "0" ? "正常" : "异常",
+              // ),
             ],
           ),
         );

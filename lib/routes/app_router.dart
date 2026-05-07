@@ -5,6 +5,8 @@ import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
 import 'package:odk_flutter_template/features/home/presentation/home.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/system_setting_page.dart';
+import 'package:odk_flutter_template/features/home/presentation/pages/user_info_page.dart';
+import 'package:odk_flutter_template/features/home/presentation/pages/user_info_update_page.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/pages/agreement_page.dart';
 import 'package:odk_flutter_template/routes/pages/todo_detail.dart';
@@ -17,6 +19,8 @@ class RouteNames {
 
   static const String signup = 'Signup';
   static const String signin = 'Signin';
+  static const String userInfo = 'UserInfo';
+  static const String userInfoUpdate = 'UserInfoUpdate';
   static const String systemSetting = 'SystemSetting';
   static const String home = 'Home';
   static const String detail = 'Detail';
@@ -28,6 +32,8 @@ class RouteNames {
 class RoutePaths {
   static const String signup = '/signup';
   static const String signin = '/signin';
+  static const String userInfo = '/userInfo';
+  static const String userInfoUpdate = '/userInfoUpdate';
   static const String systemSetting = '/systemSetting';
   static const String themeSetting = '/themeSetting';
   static const String home = '/home';
@@ -94,6 +100,30 @@ class AppRouter {
         name: RouteNames.detail,
         builder: (context, state) =>
             TodoDetail(id: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: RoutePaths.userInfo,
+        name: RouteNames.userInfo,
+        builder: (context, state) => const UserInfoPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.userInfoUpdate,
+        name: RouteNames.userInfoUpdate,
+        builder: (context, state) {
+          // 从 queryParameters 取参数（不是 pathParameters）
+          final title = state.uri.queryParameters['title'] ?? '用户信息更新';
+          final typeIndex = state.uri.queryParameters['type'];
+
+          // 安全解析枚举，防止报错
+          late UserInfoUpdateType type;
+          if (typeIndex != null && int.tryParse(typeIndex) != null) {
+            type = UserInfoUpdateType.values[int.parse(typeIndex)];
+          } else {
+            type = UserInfoUpdateType.nickname; // 默认值
+          }
+
+          return UserInfoUpdatePage(title: title, type: type);
+        },
       ),
       GoRoute(
         path: RoutePaths.systemSetting,

@@ -50,7 +50,7 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BasicAppbar(title: AppText('首页')),
+      appBar: const BasicAppBar(title: AppText('首页')),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
         color: Colors.blue,

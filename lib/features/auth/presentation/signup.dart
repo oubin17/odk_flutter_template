@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/config/env.dart';
-import 'package:odk_flutter_template/core/utils/tool_utils.dart';
+// ignore: library_prefixes
 import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
 import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_response.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';

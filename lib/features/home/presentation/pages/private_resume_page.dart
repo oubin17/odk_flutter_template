@@ -8,7 +8,7 @@ class PrivateResumePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicAppbar(title: const Text('私有库')),
+      appBar: BasicAppBar(title: const Text('私有库')),
       body: const PrivateResumeTableWidget(),
     );
   }
