@@ -114,31 +114,4 @@ class AuthService {
     await AuthApi().validateToken();
     return true;
   }
-
-  /// 获取本地用户信息
-  Future<UserEntity?> getLocalUserInfo() async {
-    final String? userInfo = await SecureStorageManager().read(
-      StorageKey.userInfo,
-    );
-    if (userInfo == null) {
-      return getUserInfo();
-    } else {
-      return UserEntity.fromJson(jsonDecode(userInfo));
-    }
-  }
-
-  /// 获取用户信息
-  Future<UserEntity> getUserInfo() async {
-    // 拦截器已经统一处理了所有异常
-    UserEntity user = await AuthApi().getUserInfo();
-    return user;
-  }
-
-  /// 发送验证码
-  Future<VerificationCodeResponse> sendVerifyCode(
-    VerificationCodeRequest request,
-  ) async {
-    // 拦截器已经统一处理了所有异常
-    return await AuthApi().sendVerifyCode(request) as VerificationCodeResponse;
-  }
 }

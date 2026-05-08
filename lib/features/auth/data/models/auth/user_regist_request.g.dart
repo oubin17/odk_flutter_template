@@ -14,7 +14,7 @@ UserRegistRequest _$UserRegistRequestFromJson(Map<String, dynamic> json) =>
         json['verificationCode'] as Map<String, dynamic>,
       ),
       extendInfoDTO: ExtendInfoDto.fromJson(
-        json['extendInfoDto'] as Map<String, dynamic>,
+        json['extendInfoDTO'] as Map<String, dynamic>,
       ),
       identifyValue: json['identifyValue'] as String?,
     )..identifyType = json['identifyType'] as String?;

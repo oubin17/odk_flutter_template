@@ -8,6 +8,7 @@ import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/features/auth/domain/verify_code.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
@@ -72,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     try {
-      final response = await AuthService().sendVerifyCode(
+      final response = await VerifyCodeService().sendVerifyCode(
         VerificationCodeRequest(
           verifyType: "1",
           verifyKey: _accountController.text,

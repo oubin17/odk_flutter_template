@@ -6,6 +6,7 @@ import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_r
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/features/auth/domain/verify_code.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
@@ -76,7 +77,7 @@ class _SignInPageState extends State<SignInPage> {
 
     try {
       // 2. 请求接口
-      final response = await AuthService().sendVerifyCode(
+      final response = await VerifyCodeService().sendVerifyCode(
         VerificationCodeRequest(
           verifyType: "1",
           verifyKey: _accountController.text,
