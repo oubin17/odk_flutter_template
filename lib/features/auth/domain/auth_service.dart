@@ -1,21 +1,13 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
+import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/storage/secure_storage_manager.dart';
 import 'package:odk_flutter_template/core/storage/storage_key.dart';
-import 'package:odk_flutter_template/core/storage/storage_manager.dart';
 import 'package:odk_flutter_template/core/utils/encrypt_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/api/auth_api.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_response.dart';
-import 'package:odk_flutter_template/models/entities/user_entity.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
-import 'package:odk_flutter_template/providers/user/user_provider.dart';
-import 'package:provider/provider.dart';
 
 class AuthService {
   static final AuthService _instance = AuthService._internal();
@@ -26,10 +18,7 @@ class AuthService {
   // bool isLoggedIn = false;
 
   /// 注册
-  Future<ServiceResponse> register(
-    UserRegistRequest request,
-    BuildContext context,
-  ) async {
+  Future<ServiceResponse> register(UserRegistRequest request) async {
     if (request.identifyValue != null) {
       request.identifyValue = await EncryptUtils.encrypt(
         request.identifyValue!,
@@ -41,51 +30,34 @@ class AuthService {
       UserLoginResponse userLoginResponse = UserLoginResponse.fromJson(
         response.data as Map<String, dynamic>,
       );
-      //1.存储 token
-      await _doAfterLogin(userLoginResponse, context);
+      await _doAfterLogin(userLoginResponse);
     }
     return response;
   }
 
   /// 登录
-  Future<UserEntity?> login(
-    UserLoginRequest request,
-    BuildContext context,
-  ) async {
+  Future<UserLoginResponse?> login(UserLoginRequest request) async {
     //
     if (request.identifyValue != null) {
       request.identifyValue = await EncryptUtils.encrypt(
         request.identifyValue!,
       );
     }
-
     // 拦截器已经统一处理了所有异常
     UserLoginResponse? response = await AuthApi().login(request);
 
-    //1.存储 token
     if (response != null) {
-      await _doAfterLogin(response, context);
+      await _doAfterLogin(response);
     }
-    return null;
+    return response;
   }
 
-  Future<UserEntity> _doAfterLogin(
-    UserLoginResponse response,
-    BuildContext context,
-  ) async {
-    final userProvider = context.read<UserProvider>();
-    await SecureStorageManager().write(StorageKey.token, response.token ?? '');
-    UserEntity userEntity = UserEntity.fromJson(
-      jsonDecode(jsonEncode(response.toJson())),
+  Future<void> _doAfterLogin(UserLoginResponse response) async {
+    await UserSessionService().syncUserSession(
+      response,
+      token: response.token,
+      updateToken: true,
     );
-    //2.存储用户信息
-    await SecureStorageManager().write(
-      StorageKey.userInfo,
-      jsonEncode(userEntity.toJson()),
-    );
-    await userProvider.refresh();
-    // isLoggedIn = true;
-    return userEntity;
   }
 
   /// 登录方法，返回用户 ID
@@ -95,14 +67,12 @@ class AuthService {
   Future<void> logout() async {
     // 拦截器已经统一处理了所有异常
     await AuthApi().logout();
-    afterLogout();
+    await afterLogout();
   }
 
   /// 登出后需要执行的操作，清除 storage 中的所有数据
   Future<void> afterLogout() async {
-    // isLoggedIn = false;
-    await SecureStorageManager().deleteAll();
-    await StorageManager().clear();
+    await UserSessionService().clearSession(clearAllStorage: true);
   }
 
   /// 检查用户是否已登录

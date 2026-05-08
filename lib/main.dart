@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/common/theme/app_theme.dart';
+import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
@@ -18,6 +19,7 @@ void main() async {
 
   final userProvider = UserProvider();
   await userProvider.refresh();
+  UserSessionService().bindUserProvider(userProvider);
 
   // initSmartDialogConfig(); // 初始化样式
 

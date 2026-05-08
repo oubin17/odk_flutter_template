@@ -47,33 +47,8 @@ class AuthApi {
     await ApiService().post('/user/logout', {});
   }
 
-  /// 获取用户信息
-  Future<UserEntity> getUserInfo() async {
-    ServiceResponse response = await ApiService().get('/user/query');
-
-    return UserEntity.fromJson(response.data as Map<String, dynamic>);
-  }
-
   /// 验证 token 是否有效
   Future<void> validateToken() async {
     await ApiService().get('/system/validateToken');
-  }
-
-  /// 生成验证码
-  Future<VerificationCodeResponse?> sendVerifyCode(
-    VerificationCodeRequest request,
-  ) async {
-    ServiceResponse response = await ApiService().post(
-      '/verifycode/generate',
-      request.toJson(),
-    );
-
-    if (response.data == null) {
-      return null;
-    }
-
-    return VerificationCodeResponse.fromJson(
-      response.data as Map<String, dynamic>,
-    );
   }
 }

@@ -98,11 +98,6 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
       final errorCode = dataMap['errorCode'];
       if (tokenExpiredCodes.contains(errorCode)) {
         AuthService().afterLogout();
-        // AppToast.showToast('登录已过期，请重新登录');
-        final globalContext = AppRouter.routerKey.currentContext;
-        if (globalContext != null) {
-          globalContext.read<UserProvider>().clearUser();
-        }
         NavigatorUtils.goNamed(RouteNames.signin);
       }
     }

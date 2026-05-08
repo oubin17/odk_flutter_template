@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/core/utils/date_time_utils.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_profile/user_profile_request.dart';
+import 'package:odk_flutter_template/features/basic_user/domain/user_profile_service.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
+import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 // 1. 定义修改类型枚举（规范：昵称/性别/生日）
 enum UserInfoUpdateType {
@@ -60,33 +63,39 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       case UserInfoUpdateType.nickname:
         final newNickname = _nicknameController.text.trim();
         if (newNickname.isEmpty) {
-          _showToast("昵称不能为空");
+          AppToast.showToast("昵称不能为空");
           return;
         }
-        // TODO: 调用接口保存昵称
+        // 调用更新昵称接口
+        UserProfileService().updateProfile(
+          UserProfileRequest(userName: newNickname),
+        );
         break;
       case UserInfoUpdateType.gender:
         if (_selectedGender == null) {
-          _showToast("请选择性别");
+          AppToast.showToast("请选择性别");
           return;
         }
-        // TODO: 调用接口保存性别
+        // 调用更新性别接口
+        UserProfileService().updateProfile(
+          UserProfileRequest(gender: _selectedGender),
+        );
         break;
       case UserInfoUpdateType.birthday:
         if (_selectedBirthday == null) {
-          _showToast("请选择生日");
+          AppToast.showToast("请选择生日");
           return;
         }
-        // TODO: 调用接口保存生日
+        // 调用更新生日接口
+        UserProfileService().updateProfile(
+          UserProfileRequest(
+            birthDay: DateTimeUtils.dateToDateStr(_selectedBirthday),
+          ),
+        );
         break;
     }
     // 保存成功，返回上一页
     Navigator.pop(context);
-  }
-
-  // 提示框
-  void _showToast(String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: AppText(msg)));
   }
 
   Widget _buildNicknameInputWidget() {
@@ -104,13 +113,13 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         // 性别单选：仅允许男/女
         RadioListTile<String>(
           title: const AppText("男"),
-          value: "男",
+          value: "1",
           groupValue: _selectedGender,
           onChanged: (val) => setState(() => _selectedGender = val),
         ),
         RadioListTile<String>(
           title: const AppText("女"),
-          value: "女",
+          value: "2",
           groupValue: _selectedGender,
           onChanged: (val) => setState(() => _selectedGender = val),
         ),

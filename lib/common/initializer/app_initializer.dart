@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/core/network/check/network_utils.dart';
+import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
@@ -34,6 +35,7 @@ class AppInitializer {
     // 7.  启动时恢复用户登录状态
     userProvider = UserProvider();
     await userProvider.refresh();
+    UserSessionService().bindUserProvider(userProvider);
 
     // 捕获 UI 崩溃
     FlutterError.onError = (FlutterErrorDetails details) {

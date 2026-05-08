@@ -5,7 +5,6 @@ import 'package:odk_flutter_template/common/app_info/app_info.dart';
 import 'package:odk_flutter_template/common/app_info/device_info.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
-import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
@@ -109,9 +108,6 @@ class SystemSettingPage extends StatelessWidget {
                 // msg: "是否退出登录？",
                 onConfirm: () async {
                   await AuthService().logout();
-                  // 直接清空，比refresh更快
-                  // ignore: use_build_context_synchronously
-                  context.read<UserProvider>().clearUser();
                   // ignore: use_build_context_synchronously
                   context.go('/?fromOtherPage=true');
                 },

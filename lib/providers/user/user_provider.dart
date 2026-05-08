@@ -12,6 +12,19 @@ class UserProvider extends ChangeNotifier {
   String? _token;
   UserEntity? get userEntity => _userEntity;
   String? get token => _token;
+
+  void setUser(
+    UserEntity userEntity, {
+    String? token,
+    bool updateToken = true,
+  }) {
+    _userEntity = userEntity;
+    if (updateToken) {
+      _token = token ?? userEntity.accessToken.tokenValue;
+    }
+    notifyListeners();
+  }
+
   // 刷新：从存储读取数据（启动、登录、登出后调用）
   Future<void> refresh() async {
     _token = await SecureStorageManager().read(StorageKey.token);

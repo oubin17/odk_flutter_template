@@ -108,13 +108,13 @@ class _SignUpPageState extends State<SignUpPage> {
         verificationCode: _verifyCode,
         extendInfoDTO: ExtendInfoDto(privacyVersion: "v1.0"),
       ),
-      context,
     );
 
     AppToast.dismiss();
     if (!response.success) {
       AppToast.showToast(response.errorContext ?? "注册失败");
     } else {
+      if (!mounted) return;
       NavigatorUtils.goNamed(RouteNames.home);
     }
   }
