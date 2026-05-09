@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 class AppToast {
@@ -52,8 +53,8 @@ class AppToast {
   static void showAppConfirmDialog({
     required String title,
     String? msg,
-    String confirmText = "确认",
-    String cancelText = "取消",
+    String? confirmText,
+    String? cancelText,
     VoidCallback? onConfirm,
   }) {
     SmartDialog.show(
@@ -87,14 +88,14 @@ class AppToast {
                   // 取消按钮（原生）
                   Expanded(
                     child: AppTextButton(
-                      text: cancelText,
+                      text: cancelText ?? L10nUtils.cancel,
                       onTap: () => SmartDialog.dismiss(),
                     ),
                   ),
                   AppGap.wXL,
                   Expanded(
                     child: AppTextButton(
-                      text: confirmText,
+                      text: confirmText ?? L10nUtils.confirm,
                       onTap: () {
                         SmartDialog.dismiss();
                         onConfirm?.call();

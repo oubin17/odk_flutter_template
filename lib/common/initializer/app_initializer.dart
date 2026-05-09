@@ -36,7 +36,6 @@ class AppInitializer {
     userProvider = UserProvider();
     await userProvider.refresh();
     UserSessionService().bindUserProvider(userProvider);
-
     // 捕获 UI 崩溃
     FlutterError.onError = (FlutterErrorDetails details) {
       Log.e("🔥 UI 全局崩溃", error: details.exception, stackTrace: details.stack);

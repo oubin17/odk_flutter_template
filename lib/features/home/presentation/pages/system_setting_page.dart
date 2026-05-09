@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/common/app_info/app_info.dart';
 import 'package:odk_flutter_template/common/app_info/device_info.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/l10n/app_localizations.dart';
+import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
+import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
@@ -17,7 +21,7 @@ class SystemSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPage(context),
-      appBar: const BasicAppBar(title: AppText("设置")),
+      appBar: BasicAppBar(title: AppText(L10nUtils.systemSetting)),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         children: [
@@ -26,7 +30,9 @@ class SystemSettingPage extends StatelessWidget {
           // 主题切换 + 图标
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
-              final currentMode = themeProvider.isDarkMode ? "夜间模式" : "日间模式";
+              final currentMode = themeProvider.isDarkMode
+                  ? L10nUtils.darkMode
+                  : L10nUtils.lightMode;
               return AppListItem(
                 left: themeProvider.isDarkMode
                     ? Icon(
@@ -37,7 +43,7 @@ class SystemSettingPage extends StatelessWidget {
                         Icons.light_mode_outlined,
                         color: AppColors.textSecond(context),
                       ),
-                title: "主题模式",
+                title: L10nUtils.themeMode,
                 desc: currentMode,
                 showArrow: false,
                 onTap: () {
@@ -52,18 +58,48 @@ class SystemSettingPage extends StatelessWidget {
           ),
           Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
 
+          Consumer<LocaleProvider>(
+            builder: (context, localProvider, child) {
+              final l10n = AppLocalizations.of(context)!;
+              return AppListItem(
+                left: localProvider.isEnglish
+                    ? Icon(
+                        Icons.language_outlined,
+                        color: AppColors.textSecond(context),
+                      )
+                    : Icon(
+                        Icons.language_outlined,
+                        color: AppColors.textSecond(context),
+                      ),
+                title: l10n.switchLanguage,
+                desc: L10nUtils.language,
+                showArrow: false,
+                onTap: () {
+                  localProvider.changeLanguage(
+                    Locale(
+                      localProvider.isEnglish
+                          ? LocaleType.zh.name
+                          : LocaleType.en.name,
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+
           // 关于我们 + 图标
           AppListItem(
             left: Icon(
               Icons.info_outline,
               color: AppColors.textSecond(context),
             ),
-            title: "关于我们",
+            title: L10nUtils.aboutUs,
             onTap: () {
               // Fluttertoast.showToast(msg: "操作成功！");
               AppToast.showLoading(
-                loading: "待实现...",
-                displayTime: const Duration(seconds: 2),
+                loading: L10nUtils.todo,
+                displayTime: const Duration(seconds: 1),
               );
             },
           ),
@@ -75,7 +111,7 @@ class SystemSettingPage extends StatelessWidget {
               Icons.system_update_outlined,
               color: AppColors.textSecond(context),
             ),
-            title: "版本信息",
+            title: L10nUtils.versionInfo,
             // desc: "1.0.0",
             onTap: () {
               // SmartDialog.show(builder: (context) => const AppInfoPage());
@@ -89,7 +125,7 @@ class SystemSettingPage extends StatelessWidget {
               Icons.device_hub_outlined,
               color: AppColors.textSecond(context),
             ),
-            title: "设备信息",
+            title: L10nUtils.deviceInfo,
             // desc: "1.0.0",
             onTap: () {
               AppToast.show(const DeviceInfoPage());
@@ -100,16 +136,15 @@ class SystemSettingPage extends StatelessWidget {
           // Spacer(),
           AppListItem(
             left: Icon(Icons.logout, color: AppColors.textSecond(context)),
-            title: "退出登录",
+            title: L10nUtils.logout,
             showArrow: false,
             onTap: () {
               AppToast.showAppConfirmDialog(
-                title: "退出登录",
-                // msg: "是否退出登录？",
+                title: L10nUtils.logout,
                 onConfirm: () async {
                   await AuthService().logout();
                   // ignore: use_build_context_synchronously
-                  context.go('/?fromOtherPage=true');
+                  NavigatorUtils.goNamed(RouteNames.signin);
                 },
               );
             },

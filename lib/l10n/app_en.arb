@@ -1,0 +1,85 @@
+{
+  "confirm" : "Confirm",
+  "cancel" : "Cancel",
+  "save" : "Save",
+  "success" : "Success",
+  "fail" : "Failed",
+  "error" : "Error",
+
+  "systemSetting": "Setting",
+  "themeMode": "ThemeMode",
+  "lightMode": "Light Mode",
+  "darkMode" : "Dark Mode",
+  "switchLanguage": "Language",
+  "language": "English",
+  "aboutUs" : "About Us",
+  "deviceInfo" :"Device Info",
+  "versionInfo" :"Version Info",
+  "logout" : "Log Out",
+  "home" : "Home",
+  "mine" : "Mine",
+  "profile" : "Profile",
+  "avatar" : "Avatar",
+  "nickname" : "Nickname",
+  "gender" : "Gender",
+  "male" : "Male",
+  "female" : "Female",
+  "birthday" : "Birthday",
+  "phoneNumber" : "Phone Number",
+
+  "todo" : "To do...",
+  
+
+  "appTitle": "Flutter Internationalization Demo",
+  "@appTitle": {
+    "description": "Application title displayed in app bar"
+  },
+  "welcomeMessage": "Welcome, {userName}!",
+  "@welcomeMessage": {
+    "description": "Welcome message with user name",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "description": "Name of the user"
+      }
+    }
+  },
+  "switchLanguage": "Language",
+  "@switchLanguage": {
+    "description": "Switch language between Chinese and English"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English"
+  },
+  "unreadMessages": "{count, plural, zero{No unread messages} one{1 unread message} other{{count} unread messages}}",
+  "@unreadMessages": {
+    "description": "Message count indicator",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+
+"fieldNotEmptyTip": "{field} cannot be empty",
+"@fieldNotEmptyTip": {
+  "description": "xx不能为空 表单校验提示",
+  "placeholders": {
+    "field": {
+      "type": "String"
+    }
+  }
+},
+"fieldFormatErrorTip": "{field} format is incorrect",
+"@fieldFormatErrorTip": {
+  "description": "xx格式不正确 表单校验提示",
+  "placeholders": {
+    "field": {
+      "type": "String"
+    }
+  }
+}
+
+}

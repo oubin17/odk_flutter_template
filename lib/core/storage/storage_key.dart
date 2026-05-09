@@ -5,4 +5,6 @@ class StorageKey {
   static const String themeMode = 'themeMode';
 
   static const String deviceId = 'deviceId';
+
+  static const String languageCode = 'languageCode';
 }

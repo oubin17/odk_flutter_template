@@ -4,6 +4,7 @@ import 'package:odk_flutter_template/common/app_info/app_info.dart';
 import 'package:odk_flutter_template/common/app_info/device_info.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/features/basic_user/domain/user_query_service.dart';
+import 'package:odk_flutter_template/l10n/app_localizations.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 
@@ -13,6 +14,8 @@ class FirstIndexPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // return const AppInfoPage();
     // return const DeviceInfoPage();
+    // 获取本地化实例
+    final loc = AppLocalizations.of(context)!;
 
     var num1 = 123456;
     String f1 = NumberFormat('#,###').format(num1);
@@ -26,6 +29,7 @@ class FirstIndexPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            AppText(loc.unreadMessages(5), size: 30),
             const AppText("你好世界 Flutter 阿里巴巴普惠体", size: 30),
             const AppText("正文文字：横竖撇捺 123 abc", size: 28),
             const AppText("按钮文字也会统一", size: 24),

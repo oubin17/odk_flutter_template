@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
@@ -10,9 +11,9 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   // 保存按钮回调
   final VoidCallback? onSave;
   // 保存按钮文案
-  final String saveText;
+  final String? saveText;
 
-  const BasicAppBar({super.key, this.title, this.onSave, this.saveText = '保存'});
+  const BasicAppBar({super.key, this.title, this.onSave, this.saveText});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
             // 右侧内边距，避免按钮贴边
             padding: EdgeInsets.only(right: 16.w),
             child: AppTextButton(
-              text: saveText,
+              text: saveText ?? L10nUtils.save,
               onTap: onSave!,
               // 适配主题主色，和项目所有按钮保持一致
               color: AppColors.primary(context),

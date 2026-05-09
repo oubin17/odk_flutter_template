@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart'; // 必须导入，使用iOS风格选择器
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/date_time_utils.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/basic_user/data/models/user_profile/user_profile_request.dart';
 import 'package:odk_flutter_template/features/basic_user/domain/user_profile_service.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
@@ -37,7 +37,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   void initState() {
     super.initState();
     _nicknameController = TextEditingController(text: widget.value ?? '');
-    // 🔥 修复性别类型匹配问题（核心：支持int/string传入）
     _selectedGender = widget.value?.toString();
     // 初始化生日
     _selectedBirthday = DateTime.tryParse(widget.value ?? '');
@@ -74,7 +73,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       case UserInfoUpdateType.nickname:
         final newNickname = _nicknameController.text.trim();
         if (newNickname.isEmpty) {
-          AppToast.showToast("昵称不能为空");
+          AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.nickname));
           return;
         }
         UserProfileService().updateProfile(
@@ -83,7 +82,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         break;
       case UserInfoUpdateType.gender:
         if (_selectedGender == null) {
-          AppToast.showToast("请选择性别");
+          AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.gender));
           return;
         }
         UserProfileService().updateProfile(
@@ -92,7 +91,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         break;
       case UserInfoUpdateType.birthday:
         if (_selectedBirthday == null) {
-          AppToast.showToast("请选择生日");
+          AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.birthday));
           return;
         }
         UserProfileService().updateProfile(
@@ -102,16 +101,19 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         );
         break;
     }
-    AppToast.showToast("保存成功");
+    AppToast.showToast(L10nUtils.success);
     NavigatorUtils.pop();
   }
 
+  /// 新增：构建昵称输入框
   Widget _buildNicknameInputWidget() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: AppInput(
         controller: _nicknameController,
-        validator: (value) => value?.trim().isEmpty ?? true ? "昵称不能为空" : null,
+        validator: (value) => value?.trim().isEmpty ?? true
+            ? L10nUtils.fieldNotEmptyTip(L10nUtils.nickname)
+            : null,
         suffix: ClearButton(controller: _nicknameController),
       ),
     );
@@ -123,9 +125,9 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       color: Colors.white,
       child: Column(
         children: [
-          _buildGenderItem("男", "1"),
+          _buildGenderItem(L10nUtils.male, "1"),
           Divider(height: 1.h, color: AppColors.divider(context), indent: 40.w),
-          _buildGenderItem("女", "2"),
+          _buildGenderItem(L10nUtils.female, "2"),
         ],
       ),
     );
@@ -164,7 +166,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         controller: _birthdayController,
         readOnly: true, // 禁止手动输入
         onTap: _showBottomDatePicker, // 点击弹出底部选择器
-        hint: '请选择生日',
+        hint: L10nUtils.birthday,
         suffix: const Icon(Icons.calendar_today),
       ),
     );
@@ -184,18 +186,11 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicAppBar(
-        title: AppText(widget.title),
-        onSave: _handleSave,
-        saveText: '保存',
-      ),
+      appBar: BasicAppBar(title: AppText(widget.title), onSave: _handleSave),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildInputWidget(),
-            // SizedBox(height: 40.h),
-          ],
+          children: [_buildInputWidget()],
         ),
       ),
     );

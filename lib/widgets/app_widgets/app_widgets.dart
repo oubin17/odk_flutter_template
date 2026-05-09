@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/common/theme/app_theme.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 
 /// 全局统一颜色（适配明暗主题）
@@ -823,7 +824,7 @@ class AppBottomDatePicker {
                       TextButton(
                         onPressed: () => NavigatorUtils.pop(),
                         child: AppText.tip(
-                          "取消",
+                          L10nUtils.cancel,
                           color: AppColors.textGray(context),
                         ),
                       ),
@@ -836,7 +837,7 @@ class AppBottomDatePicker {
                           NavigatorUtils.pop();
                         },
                         child: AppText.body(
-                          "确定",
+                          L10nUtils.confirm,
                           color: AppColors.primary(context),
                         ),
                       ),

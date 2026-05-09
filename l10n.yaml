@@ -1,0 +1,6 @@
+arb-dir: lib/l10n  # arb文件存放目录
+template-arb-file: app_en.arb  # 模板文件(主语言)
+output-localization-file: app_localizations.dart  # 生成的Dart文件名
+output-class: AppLocalizations  # 生成的类名
+preferred-supported-locales: [en, zh]  # 优先支持的语言
+use-deferred-loading: false  # 禁用延迟加载

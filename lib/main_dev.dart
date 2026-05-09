@@ -3,6 +3,7 @@ import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:odk_flutter_template/common/initializer/app_initializer.dart';
 import 'package:odk_flutter_template/config/env.dart';
+import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/widgets/app_root/app_root.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,8 @@ void main() async {
         ),
         // 注入主题Provider
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        // 注入语言Provider
+        ChangeNotifierProvider(create: (context) => LocaleProvider()),
       ],
       child: const AppRoot(),
     ),
