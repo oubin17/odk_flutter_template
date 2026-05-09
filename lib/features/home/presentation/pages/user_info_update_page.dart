@@ -57,32 +57,14 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
 
   // 🔥 底部弹出 原生年月日滚轮选择器（替代丑陋的顶部弹窗）
   Future<void> _showBottomDatePicker() async {
-    // 聚焦取消，防止键盘弹出
-    FocusScope.of(context).unfocus();
-
-    await showModalBottomSheet(
+    AppBottomDatePicker.show(
       context: context,
-      // 背景圆角
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (context) {
-        return SizedBox(
-          height: 300.h,
-          // 系统原生日期选择器
-          child: CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.date, // 仅年月日
-            initialDateTime: _selectedBirthday ?? DateTime.now(),
-            minimumDate: DateTime(1900),
-            maximumDate: DateTime.now(),
-            onDateTimeChanged: (date) {
-              setState(() {
-                _selectedBirthday = date;
-                _birthdayController.text = DateTimeUtils.dateToDateStr(date);
-              });
-            },
-          ),
-        );
+      initialDate: _selectedBirthday,
+      onConfirm: (date) {
+        setState(() {
+          _selectedBirthday = date;
+          _birthdayController.text = DateTimeUtils.dateToDateStr(date);
+        });
       },
     );
   }

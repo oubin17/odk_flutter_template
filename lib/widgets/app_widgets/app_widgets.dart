@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/common/theme/app_theme.dart';
+import 'package:odk_flutter_template/routes/navigator_utils.dart';
 
 /// 全局统一颜色（适配明暗主题）
 class AppColors {
@@ -766,6 +768,102 @@ class AppAvatar extends StatelessWidget {
   // 默认头像图标
   Widget _defaultIcon(BuildContext context) {
     return Icon(Icons.person, size: 40.w, color: AppColors.primary(context));
+  }
+}
+
+// ===================== 通用底部日期选择器 =====================
+class AppBottomDatePicker {
+  /// 弹出底部日期选择器
+  /// [context] 上下文
+  /// [initialDate] 初始日期
+  /// [minimumDate] 最小可选日期
+  /// [maximumDate] 最大可选日期
+  /// [mode] 选择模式：date(年月日) / time(时间) / dateTime(日期+时间)
+  /// [onConfirm] 确认选择回调
+  static Future<void> show({
+    required BuildContext context,
+    DateTime? initialDate,
+    DateTime? minimumDate,
+    DateTime? maximumDate,
+    CupertinoDatePickerMode mode = CupertinoDatePickerMode.date,
+    required Function(DateTime date) onConfirm,
+  }) async {
+    // 关闭键盘
+    FocusScope.of(context).unfocus();
+
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (ctx) {
+        DateTime? selectedDate = initialDate;
+        return StatefulBuilder(
+          builder: (ctx, setBottomState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // 顶部操作栏：取消 + 确定
+                Container(
+                  height: 60.h,
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: AppColors.divider(context),
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // 取消
+                      TextButton(
+                        onPressed: () => NavigatorUtils.pop(),
+                        child: AppText.tip(
+                          "取消",
+                          color: AppColors.textGray(context),
+                        ),
+                      ),
+                      // 确定
+                      TextButton(
+                        onPressed: () {
+                          if (selectedDate != null) {
+                            onConfirm(selectedDate!);
+                          }
+                          NavigatorUtils.pop();
+                        },
+                        child: AppText.body(
+                          "确定",
+                          color: AppColors.primary(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // 日期滚轮
+                SizedBox(
+                  height: 300.h,
+                  child: CupertinoDatePicker(
+                    mode: mode,
+                    initialDateTime: initialDate ?? DateTime.now(),
+                    minimumDate: minimumDate ?? DateTime(1900),
+                    maximumDate: maximumDate ?? DateTime.now(),
+                    onDateTimeChanged: (date) {
+                      setBottomState(() {
+                        selectedDate = date;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }
 
