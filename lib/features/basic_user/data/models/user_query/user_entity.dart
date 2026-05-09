@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:odk_flutter_template/models/entities/access_token_entity.dart';
-import 'package:odk_flutter_template/models/entities/role_entity.dart';
-import 'package:odk_flutter_template/models/entities/user_profile_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_query/access_token_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_query/role_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_query/user_profile_entity.dart';
 
 part 'user_entity.g.dart';
 

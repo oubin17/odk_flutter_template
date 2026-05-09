@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/utils/date_time_utils.dart';
 import 'package:odk_flutter_template/features/basic_user/data/models/user_profile/user_profile_request.dart';
 import 'package:odk_flutter_template/features/basic_user/domain/user_profile_service.dart';
+import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
@@ -19,10 +20,12 @@ class UserInfoUpdatePage extends StatefulWidget {
   const UserInfoUpdatePage({
     super.key,
     required this.title, // 页面标题（如：修改昵称）
+    required this.value, // 初始值（如：当前昵称）
     required this.type, // 修改类型
   });
 
   final String title;
+  final String? value;
   final UserInfoUpdateType type;
 
   @override
@@ -31,7 +34,8 @@ class UserInfoUpdatePage extends StatefulWidget {
 
 class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   // 昵称输入控制器
-  final TextEditingController _nicknameController = TextEditingController();
+  TextEditingController get _nicknameController =>
+      TextEditingController(text: widget.value ?? '');
   // 选中的性别
   String? _selectedGender;
   // 选中的生日
@@ -95,7 +99,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         break;
     }
     // 保存成功，返回上一页
-    Navigator.pop(context);
+    NavigatorUtils.pop();
   }
 
   Widget _buildNicknameInputWidget() {
@@ -104,6 +108,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       // label: '昵称',
       // prefix: const AppText("昵称"),
       validator: (value) => value?.trim() ?? "昵称不能为空",
+      suffix: ClearButton(controller: _nicknameController),
     );
   }
 

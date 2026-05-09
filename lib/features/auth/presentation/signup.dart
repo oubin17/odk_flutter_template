@@ -144,6 +144,7 @@ class _SignUpPageState extends State<SignUpPage> {
         size: 32.w,
         color: AppColors.textGray(context),
       ),
+      suffix: ClearButton(controller: _accountController),
       validator: ToolUtils.checkPhoneValidator,
     );
   }

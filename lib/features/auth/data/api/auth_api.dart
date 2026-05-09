@@ -4,7 +4,7 @@ import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_r
 import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_response.dart';
-import 'package:odk_flutter_template/models/entities/user_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_query/user_entity.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class AuthApi {

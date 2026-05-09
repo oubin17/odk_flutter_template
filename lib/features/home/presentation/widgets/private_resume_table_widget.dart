@@ -8,7 +8,7 @@ import 'package:odk_flutter_template/features/home/data/models/private_resume.da
 import 'package:odk_flutter_template/features/home/data/models/private_resume_status.dart';
 import 'package:odk_flutter_template/features/home/domain/home_resume_service.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
-import 'package:odk_flutter_template/models/entities/user_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_query/user_entity.dart';
 import 'package:odk_flutter_template/widgets/futurebuilder/common_future_builder.dart';
 
 class PrivateResumeData {

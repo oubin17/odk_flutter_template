@@ -428,6 +428,8 @@ class AppInput extends StatelessWidget {
       obscureText: obscure,
       readOnly: readOnly,
       keyboardType: keyboardType,
+      // 🔥 强制文字垂直居中（核心！解决文字上浮）
+      textAlignVertical: TextAlignVertical.center,
       style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
       // 👇 绑定校验相关属性
       validator: validator,
@@ -436,6 +438,7 @@ class AppInput extends StatelessWidget {
       autovalidateMode: autovalidateMode,
       // 👇 原有装饰样式 100% 保留
       decoration: InputDecoration(
+        isDense: true, // 🔥 新增：开启紧凑模式，大幅减少默认间距
         labelText: label,
         labelStyle: TextStyle(
           fontSize: 26.sp,
@@ -449,14 +452,15 @@ class AppInput extends StatelessWidget {
         ),
         prefixIcon: prefix != null
             ? Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: prefix,
+                padding: EdgeInsets.only(right: 20.w),
+                // 🔥 移除图标默认最小高度约束（不撑开输入框）
+                child: UnconstrainedBox(child: prefix),
               )
             : null,
         suffixIcon: suffix != null
             ? Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: suffix,
+                padding: EdgeInsets.only(left: 20.w),
+                child: UnconstrainedBox(child: suffix),
               )
             : null,
 
@@ -493,10 +497,38 @@ class AppInput extends StatelessWidget {
             width: 1.w,
           ),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 1.h),
         // 错误提示样式（适配主题）
         errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
       ),
+    );
+  }
+}
+
+// 🔥 封装通用的清除按钮组件（复用性极强）
+class ClearButton extends StatelessWidget {
+  final TextEditingController controller;
+
+  const ClearButton({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    // 监听输入框内容变化，动态显示/隐藏按钮
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        // 输入框为空时，不显示按钮
+        if (controller.text.isEmpty) return const SizedBox();
+
+        // 有内容时，显示删除图标
+        return AppIconButton(
+          icon: Icons.clear,
+          onTap: () {
+            // 一键清空文本
+            controller.clear();
+          },
+        );
+      },
     );
   }
 }

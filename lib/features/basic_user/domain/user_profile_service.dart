@@ -2,7 +2,7 @@ import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/features/basic_user/data/api/user_profile_api.dart';
 import 'package:odk_flutter_template/features/basic_user/data/models/user_profile/user_profile_request.dart';
 import 'package:odk_flutter_template/features/basic_user/domain/user_query_service.dart';
-import 'package:odk_flutter_template/models/entities/user_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_query/user_entity.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class UserProfileService {

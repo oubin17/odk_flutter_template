@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/core/utils/enum_utils.dart';
+import 'package:odk_flutter_template/features/basic_user/data/models/user_query/gender_enum.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/user_info_update_page.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
@@ -61,6 +63,7 @@ class UserInfoPage extends StatelessWidget {
                       RouteNames.userInfoUpdate,
                       queryParameters: {
                         'title': "修改昵称",
+                        'value': user?.userProfile?.userName ?? "",
                         'type': UserInfoUpdateType.nickname.index.toString(),
                       },
                     );
@@ -74,7 +77,12 @@ class UserInfoPage extends StatelessWidget {
                   right: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: AppText(
-                      user?.userProfile?.gender ?? "",
+                      EnumUtils.fromCode(
+                            GenderEnum.values,
+                            (e) => e.code,
+                            user?.userProfile!.gender,
+                          )?.name ??
+                          "",
                       size: 26.sp,
                     ),
                   ),
@@ -84,6 +92,7 @@ class UserInfoPage extends StatelessWidget {
                       RouteNames.userInfoUpdate,
                       queryParameters: {
                         'title': "修改性别",
+                        'value': user?.userProfile?.gender.toString() ?? "",
                         'type': UserInfoUpdateType.gender.index.toString(),
                       },
                     );
@@ -105,6 +114,7 @@ class UserInfoPage extends StatelessWidget {
                       RouteNames.userInfoUpdate,
                       queryParameters: {
                         'title': "修改生日",
+                        'value': user?.userProfile?.birthDay ?? "",
                         'type': UserInfoUpdateType.birthday.index.toString(),
                       },
                     );
@@ -120,13 +130,14 @@ class UserInfoPage extends StatelessWidget {
                       size: 26.sp,
                     ),
                   ),
+                  showArrow: false,
                   // desc: "1.0.0",
                   onTap: () {
                     // Fluttertoast.showToast(msg: "操作成功！");
-                    AppToast.showLoading(
-                      loading: "待实现...",
-                      displayTime: const Duration(seconds: 2),
-                    );
+                    // AppToast.showLoading(
+                    //   loading: "待实现...",
+                    //   displayTime: const Duration(seconds: 2),
+                    // );
                   },
                 ),
                 Divider(height: 1.h, color: AppColors.divider(context)),

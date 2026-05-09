@@ -112,6 +112,7 @@ class AppRouter {
         builder: (context, state) {
           // 从 queryParameters 取参数（不是 pathParameters）
           final title = state.uri.queryParameters['title'] ?? '用户信息更新';
+          final value = state.uri.queryParameters['value'] ?? '';
           final typeIndex = state.uri.queryParameters['type'];
 
           // 安全解析枚举，防止报错
@@ -122,7 +123,7 @@ class AppRouter {
             type = UserInfoUpdateType.nickname; // 默认值
           }
 
-          return UserInfoUpdatePage(title: title, type: type);
+          return UserInfoUpdatePage(title: title, value: value, type: type);
         },
       ),
       GoRoute(
