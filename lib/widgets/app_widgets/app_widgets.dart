@@ -403,6 +403,9 @@ class AppInput extends StatelessWidget {
   final void Function(String)? onChanged;
   final AutovalidateMode? autovalidateMode;
 
+  // 🔥 新增：点击回调方法
+  final VoidCallback? onTap;
+
   const AppInput({
     super.key,
     this.controller,
@@ -418,33 +421,32 @@ class AppInput extends StatelessWidget {
     this.onSaved,
     this.onChanged,
     this.autovalidateMode,
+    this.onTap, // 新增
   });
 
   @override
   Widget build(BuildContext context) {
-    // 🔥 核心：替换为 TextFormField，支持校验
+    // 🔥 删掉错误的 GestureDetector！直接用 TextFormField 原生 onTap
     return TextFormField(
       controller: controller,
       obscureText: obscure,
       readOnly: readOnly,
       keyboardType: keyboardType,
-      // 🔥 强制文字垂直居中（核心！解决文字上浮）
       textAlignVertical: TextAlignVertical.center,
       style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
-      // 👇 绑定校验相关属性
+      // 👇 原生 onTap，100% 触发（核心修复！）
+      onTap: onTap,
       validator: validator,
       onSaved: onSaved,
       onChanged: onChanged,
       autovalidateMode: autovalidateMode,
-      // 👇 原有装饰样式 100% 保留
       decoration: InputDecoration(
-        isDense: true, // 🔥 新增：开启紧凑模式，大幅减少默认间距
+        isDense: true,
         labelText: label,
         labelStyle: TextStyle(
           fontSize: 26.sp,
           color: AppColors.textGray(context),
         ),
-
         hintText: hint,
         hintStyle: TextStyle(
           fontSize: 20.sp,
@@ -453,7 +455,6 @@ class AppInput extends StatelessWidget {
         prefixIcon: prefix != null
             ? Padding(
                 padding: EdgeInsets.only(right: 20.w),
-                // 🔥 移除图标默认最小高度约束（不撑开输入框）
                 child: UnconstrainedBox(child: prefix),
               )
             : null,
@@ -463,34 +464,18 @@ class AppInput extends StatelessWidget {
                 child: UnconstrainedBox(child: suffix),
               )
             : null,
-
-        // focusedBorder: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(16.w),
-        //   borderSide: BorderSide(
-        //     color: AppColors.primaryLight(context),
-        //     width: 1.w,
-        //   ),
-        // ),
-        // filled: true,
-        // fillColor: AppColors.card(context),
-        // border: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(16.w),
-        //   borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
-        // ),
         border: UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryLight(context),
             width: 1.w,
           ),
         ),
-        // 正常状态边框
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryLight(context),
             width: 1.w,
           ),
         ),
-        // 聚焦状态边框（和正常状态完全一样，不变色）
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryLight(context),
@@ -498,7 +483,6 @@ class AppInput extends StatelessWidget {
           ),
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 1.h),
-        // 错误提示样式（适配主题）
         errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
       ),
     );
