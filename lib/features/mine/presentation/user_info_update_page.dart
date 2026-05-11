@@ -114,7 +114,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         validator: (value) => value?.trim().isEmpty ?? true
             ? L10nUtils.fieldNotEmptyTip(L10nUtils.nickname)
             : null,
-        suffix: ClearButton(controller: _nicknameController),
+        suffixIcon: ClearButton(controller: _nicknameController),
       ),
     );
   }
@@ -167,7 +167,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         readOnly: true, // 禁止手动输入
         onTap: _showBottomDatePicker, // 点击弹出底部选择器
         hint: L10nUtils.birthday,
-        suffix: const Icon(Icons.calendar_today),
+        suffixIcon: const Icon(Icons.calendar_today),
       ),
     );
   }

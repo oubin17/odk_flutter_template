@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:odk_flutter_template/core/utils/enum_utils.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/basic_user/data/models/user_query/gender_enum.dart';
-import 'package:odk_flutter_template/features/basic_user/presentation/user_info_update_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/user_info_update_page.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
@@ -32,7 +31,6 @@ class UserInfoPage extends StatelessWidget {
                 Divider(height: 1.h, color: AppColors.divider(context)),
 
                 AppListItem(
-                  // left: AppText.second("头像"),
                   title: L10nUtils.avatar,
                   right: Padding(
                     padding: const EdgeInsets.only(right: 20.0),

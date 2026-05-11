@@ -21,22 +21,7 @@ class ProfilePage extends StatelessWidget {
           top: 64.h,
           bottom: 16.h,
         ),
-        child: Column(
-          children: [
-            AppGap.hSmall,
-            _buildInfoCard(),
-            AppGap.hSmall,
-            // _buildSystemSettingCard(
-            //   context,
-            //   icon: Icons.settings,
-            //   title: "系统设置",
-            //   onTap: () => context.pushNamed(RouteNames.systemSetting),
-            // ),
-            // AppGap.hSmall,
-
-            // AppGap.hSmall,
-          ],
-        ),
+        child: Column(children: [AppGap.hSmall, _buildInfoCard()]),
       ),
     );
   }
@@ -77,16 +62,18 @@ class ProfilePage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     // 关键：按钮组自身右对齐
                     crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppIconButton(
-                        icon: Icons.settings,
+                        icon: Icons.settings_sharp,
+                        iconColor: AppColors.iconColor,
                         size: 38.w,
                         onTap: () =>
                             context.pushNamed(RouteNames.systemSetting),
                       ),
                       AppIconButton(
                         icon: Icons.edit,
-                        size: 32.w,
+                        size: 30.w,
                         onTap: () => context.pushNamed(RouteNames.userInfo),
                       ),
                     ],

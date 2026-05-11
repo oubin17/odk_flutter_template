@@ -28,6 +28,9 @@ class AppTheme {
   static const Color _lightDivider = Color(0xEDEDEDED);
   static const Color _darkDivider = Color(0xFF2C2C2C);
 
+  static const Color _lightSecondDivider = Color.fromARGB(255, 223, 222, 222);
+  static const Color _darkSecondDivider = Color.fromARGB(255, 67, 67, 67);
+
   /// 四、文字色组（主/次/提示/禁用）
   static const Color _lightTextMain = Color(0xFF1D2129);
   static const Color _lightTextSecond = Color(0xFF4E5969);
@@ -70,6 +73,11 @@ class AppTheme {
       Theme.of(context).brightness == Brightness.light
       ? _lightPrimary900
       : _darkPrimary900;
+
+  static Color secondBgColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.light
+      ? _lightSecondDivider
+      : _darkSecondDivider;
   // ===================== 亮色主题 =====================
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,

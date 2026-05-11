@@ -4,9 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
 import 'package:odk_flutter_template/features/home/presentation/home.dart';
-import 'package:odk_flutter_template/features/home/presentation/pages/system_setting_page.dart';
-import 'package:odk_flutter_template/features/basic_user/presentation/user_info_page.dart';
-import 'package:odk_flutter_template/features/basic_user/presentation/user_info_update_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/common_setting_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/password_manager_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/security_setting_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/system_setting_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/user_info_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/user_info_update_page.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/pages/agreement_page.dart';
 import 'package:odk_flutter_template/routes/pages/todo_detail.dart';
@@ -22,6 +25,9 @@ class RouteNames {
   static const String userInfo = 'UserInfo';
   static const String userInfoUpdate = 'UserInfoUpdate';
   static const String systemSetting = 'SystemSetting';
+  static const String commonSetting = 'CommonSetting';
+  static const String securitySetting = 'SecuritySetting';
+  static const String passwordManager = 'PasswordManager';
   static const String home = 'Home';
   static const String detail = 'Detail';
   static const String notFound = 'NotFound';
@@ -35,7 +41,9 @@ class RoutePaths {
   static const String userInfo = '/userInfo';
   static const String userInfoUpdate = '/userInfoUpdate';
   static const String systemSetting = '/systemSetting';
-  static const String themeSetting = '/themeSetting';
+  static const String commonSetting = '/commonSetting';
+  static const String securitySetting = '/securitySetting';
+  static const String passwordManager = '/passwordManager';
   static const String home = '/home';
   static const String detail = '/detail/:id';
   static const String notFound = '/notFound';
@@ -130,6 +138,34 @@ class AppRouter {
         path: RoutePaths.systemSetting,
         name: RouteNames.systemSetting,
         builder: (context, state) => const SystemSettingPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.commonSetting,
+        name: RouteNames.commonSetting,
+        builder: (context, state) => const CommonSettingPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.securitySetting,
+        name: RouteNames.securitySetting,
+        builder: (context, state) => const SecuritySettingPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.passwordManager,
+        name: RouteNames.passwordManager,
+        builder: (context, state) {
+          // 从 queryParameters 取参数（不是 pathParameters）
+          final title = state.uri.queryParameters['title'] ?? '密码管理';
+          final typeIndex = state.uri.queryParameters['type'];
+
+          // 安全解析枚举，防止报错
+          late PasswordManagerType type;
+          if (typeIndex != null && int.tryParse(typeIndex) != null) {
+            type = PasswordManagerType.values[int.parse(typeIndex)];
+          } else {
+            type = PasswordManagerType.set; // 默认值
+          }
+          return PasswordManagerPage(title: title, type: type);
+        },
       ),
       GoRoute(
         path: RoutePaths.agreement,

@@ -1,32 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:odk_flutter_template/common/app_info/app_info.dart';
-import 'package:odk_flutter_template/common/app_info/device_info.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
-import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
 import 'package:odk_flutter_template/l10n/app_localizations.dart';
 import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
-import 'package:odk_flutter_template/routes/app_router.dart';
-import 'package:odk_flutter_template/routes/navigator_utils.dart';
-import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
-import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
+import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:provider/provider.dart';
 
-class SystemSettingPage extends StatelessWidget {
-  const SystemSettingPage({super.key});
+class CommonSettingPage extends StatelessWidget {
+  const CommonSettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgPage(context),
-      appBar: BasicAppBar(title: AppText(L10nUtils.systemSetting)),
+      appBar: BasicAppBar(title: AppText("通用设置")),
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
         children: [
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-
           // 主题切换 + 图标
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
@@ -89,66 +79,66 @@ class SystemSettingPage extends StatelessWidget {
           Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
 
           // 关于我们 + 图标
-          AppListItem(
-            left: Icon(
-              Icons.info_outline,
-              color: AppColors.textSecond(context),
-            ),
-            title: L10nUtils.aboutUs,
-            onTap: () {
-              // Fluttertoast.showToast(msg: "操作成功！");
-              AppToast.showLoading(
-                loading: L10nUtils.todo,
-                displayTime: const Duration(seconds: 1),
-              );
-            },
-          ),
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+          // AppListItem(
+          //   left: Icon(
+          //     Icons.info_outline,
+          //     color: AppColors.textSecond(context),
+          //   ),
+          //   title: L10nUtils.aboutUs,
+          //   onTap: () {
+          //     // Fluttertoast.showToast(msg: "操作成功！");
+          //     AppToast.showLoading(
+          //       loading: L10nUtils.todo,
+          //       displayTime: const Duration(seconds: 1),
+          //     );
+          //   },
+          // ),
+          // Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
 
-          // 版本信息 + 图标
-          AppListItem(
-            left: Icon(
-              Icons.system_update_outlined,
-              color: AppColors.textSecond(context),
-            ),
-            title: L10nUtils.versionInfo,
-            // desc: "1.0.0",
-            onTap: () {
-              // SmartDialog.show(builder: (context) => const AppInfoPage());
-              AppToast.show(const AppInfoPage());
-            },
-          ),
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-          // 设备信息 + 图标
-          AppListItem(
-            left: Icon(
-              Icons.device_hub_outlined,
-              color: AppColors.textSecond(context),
-            ),
-            title: L10nUtils.deviceInfo,
-            // desc: "1.0.0",
-            onTap: () {
-              AppToast.show(const DeviceInfoPage());
-            },
-          ),
+          // // 版本信息 + 图标
+          // AppListItem(
+          //   left: Icon(
+          //     Icons.system_update_outlined,
+          //     color: AppColors.textSecond(context),
+          //   ),
+          //   title: L10nUtils.versionInfo,
+          //   // desc: "1.0.0",
+          //   onTap: () {
+          //     // SmartDialog.show(builder: (context) => const AppInfoPage());
+          //     AppToast.show(const AppInfoPage());
+          //   },
+          // ),
+          // Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+          // // 设备信息 + 图标
+          // AppListItem(
+          //   left: Icon(
+          //     Icons.device_hub_outlined,
+          //     color: AppColors.textSecond(context),
+          //   ),
+          //   title: L10nUtils.deviceInfo,
+          //   // desc: "1.0.0",
+          //   onTap: () {
+          //     AppToast.show(const DeviceInfoPage());
+          //   },
+          // ),
 
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-          // Spacer(),
-          AppListItem(
-            left: Icon(Icons.logout, color: AppColors.textSecond(context)),
-            title: L10nUtils.logout,
-            showArrow: false,
-            onTap: () {
-              AppToast.showAppConfirmDialog(
-                title: L10nUtils.logout,
-                onConfirm: () async {
-                  await AuthService().logout();
-                  // ignore: use_build_context_synchronously
-                  NavigatorUtils.goNamed(RouteNames.signin);
-                },
-              );
-            },
-          ),
+          // Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+          // // Spacer(),
+          // AppListItem(
+          //   left: Icon(Icons.logout, color: AppColors.textSecond(context)),
+          //   title: L10nUtils.logout,
+          //   showArrow: false,
+          //   onTap: () {
+          //     AppToast.showAppConfirmDialog(
+          //       title: L10nUtils.logout,
+          //       onConfirm: () async {
+          //         await AuthService().logout();
+          //         // ignore: use_build_context_synchronously
+          //         NavigatorUtils.goNamed(RouteNames.signin);
+          //       },
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

@@ -33,6 +33,10 @@ class AppColors {
   static Color bgPage(BuildContext context) =>
       Theme.of(context).scaffoldBackgroundColor;
 
+  /// 次要背景
+  static Color bgSecond(BuildContext context) =>
+      AppTheme.secondBgColor(context);
+
   /// 卡片/输入框背景
   static Color card(BuildContext context) => Theme.of(context).cardColor;
 
@@ -58,6 +62,9 @@ class AppColors {
   static const Color success = Color(0xFF00B42A);
   static const Color error = Color(0xFFF53F3F);
   static const Color warning = Color(0xFFFF7D00);
+
+  //其他特殊颜色，不跟随系统
+  static const Color iconColor = Color(0xFF4E5969);
 }
 
 /// 统一文本组件（适配主题+暗黑模式）
@@ -139,6 +146,23 @@ class AppText extends StatelessWidget {
         fontWeight: weight,
         height: 1.4,
       ),
+    );
+  }
+}
+
+/// 小子提醒
+class AppTip extends StatelessWidget {
+  final String tip;
+
+  const AppTip({super.key, required this.tip});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // 保持你原来的内边距
+      padding: EdgeInsets.only(left: 20.w, top: 16.h, bottom: 16.h),
+      color: AppColors.bgSecond(context),
+      child: AppText.second(tip),
     );
   }
 }
@@ -395,18 +419,15 @@ class AppInput extends StatelessWidget {
   final String? label;
   final String? hint;
   final bool obscure;
-  final Widget? suffix;
-  final Widget? prefix;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon; // 统一保留，兼容图标/文字
   final TextInputType? keyboardType;
   final bool readOnly;
 
-  // 👇 新增：表单校验核心参数（和你之前用的 TextFormField 完全一致）
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
   final void Function(String)? onChanged;
   final AutovalidateMode? autovalidateMode;
-
-  // 🔥 新增：点击回调方法
   final VoidCallback? onTap;
 
   const AppInput({
@@ -415,21 +436,19 @@ class AppInput extends StatelessWidget {
     this.label,
     this.hint,
     this.obscure = false,
-    this.suffix,
-    this.prefix,
+    this.suffixIcon,
+    this.prefixIcon,
     this.keyboardType,
     this.readOnly = false,
-    // 👇 新增校验参数
     this.validator,
     this.onSaved,
     this.onChanged,
     this.autovalidateMode,
-    this.onTap, // 新增
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    // 🔥 删掉错误的 GestureDetector！直接用 TextFormField 原生 onTap
     return TextFormField(
       controller: controller,
       obscureText: obscure,
@@ -437,7 +456,6 @@ class AppInput extends StatelessWidget {
       keyboardType: keyboardType,
       textAlignVertical: TextAlignVertical.center,
       style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
-      // 👇 原生 onTap，100% 触发（核心修复！）
       onTap: onTap,
       validator: validator,
       onSaved: onSaved,
@@ -455,16 +473,23 @@ class AppInput extends StatelessWidget {
           fontSize: 20.sp,
           color: AppColors.textGray(context),
         ),
-        prefixIcon: prefix != null
+        // ====================== 安全版前缀（无遮挡+可输入） ======================
+        prefixIcon: prefixIcon != null
             ? Padding(
                 padding: EdgeInsets.only(right: 20.w),
-                child: UnconstrainedBox(child: prefix),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  widthFactor: 1, // 🔥 防遮挡核心：不撑满宽度
+                  child: prefixIcon,
+                ),
               )
             : null,
-        suffixIcon: suffix != null
+        prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+        // ====================================================================
+        suffixIcon: suffixIcon != null
             ? Padding(
                 padding: EdgeInsets.only(left: 20.w),
-                child: UnconstrainedBox(child: suffix),
+                child: suffixIcon,
               )
             : null,
         border: UnderlineInputBorder(
@@ -516,106 +541,6 @@ class ClearButton extends StatelessWidget {
           },
         );
       },
-    );
-  }
-}
-
-/// /// 验证码输入框（支持表单校验 + 主题适配 + 倒计时）
-class AppCodeInput extends StatefulWidget {
-  final TextEditingController controller;
-  final VoidCallback onSendCode;
-  final bool isCounting;
-  final int countTime;
-
-  // 新增：表单校验核心参数（与AppInput完全一致）
-  final String? Function(String?)? validator;
-  final void Function(String?)? onSaved;
-  final void Function(String)? onChanged;
-  final AutovalidateMode? autovalidateMode;
-
-  const AppCodeInput({
-    super.key,
-    required this.controller,
-    required this.onSendCode,
-    required this.isCounting,
-    this.countTime = 60,
-    // 新增校验参数
-    this.validator,
-    this.onSaved,
-    this.onChanged,
-    this.autovalidateMode,
-  });
-
-  @override
-  State<AppCodeInput> createState() => _AppCodeInputState();
-}
-
-class _AppCodeInputState extends State<AppCodeInput> {
-  @override
-  Widget build(BuildContext context) {
-    // 核心：替换为 TextFormField，支持校验
-    return TextFormField(
-      controller: widget.controller,
-      keyboardType: TextInputType.number,
-      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
-      // 绑定校验相关属性
-      validator: widget.validator,
-      onSaved: widget.onSaved,
-      onChanged: widget.onChanged,
-      autovalidateMode: widget.autovalidateMode,
-      decoration: InputDecoration(
-        hintText: "请输入验证码",
-        hintStyle: TextStyle(
-          fontSize: 26.sp,
-          color: AppColors.textGray(context),
-        ),
-        // filled: true,
-        // fillColor: AppColors.card(context),
-        // border: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(16.w),
-        //   borderSide: BorderSide.none,
-        // ),
-        // border: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(16.w),
-        //   borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
-        // ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
-        // 正常状态边框
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
-        // 聚焦状态边框（和正常状态完全一样，不变色）
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
-        // 错误提示样式（统一主题）
-        errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
-        suffixIcon: Padding(
-          padding: EdgeInsets.only(right: 20.w),
-          child: TextButton(
-            onPressed: widget.isCounting ? null : widget.onSendCode,
-            child: AppText(
-              widget.isCounting ? "${widget.countTime}s后重发" : "获取验证码",
-              color: widget.isCounting
-                  ? AppColors.textGray(context)
-                  : AppColors.primary(context),
-              size: 24.sp,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
@@ -958,5 +883,30 @@ class AppAgreementCheckbox extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+/// 固定宽度空白占位符（强制对齐神器，替代不稳定的空格）
+/// [width] 占位宽度，默认 20.w，适配屏幕
+class AppWidthPlaceholder extends StatelessWidget {
+  final double width;
+
+  const AppWidthPlaceholder({super.key, this.width = 20});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(width: width.w);
+  }
+}
+
+/// 垂直占位符（备用）
+class AppHeightPlaceholder extends StatelessWidget {
+  final double height;
+
+  const AppHeightPlaceholder({super.key, this.height = 20});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(height: height.h);
   }
 }

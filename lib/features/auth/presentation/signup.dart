@@ -5,15 +5,13 @@ import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
 import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
-import 'package:odk_flutter_template/features/auth/domain/verify_code.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
-import 'package:odk_flutter_template/widgets/app_countdown/countdown_controller.dart';
+import 'package:odk_flutter_template/widgets/app_countdown/verify_code_input.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
@@ -34,25 +32,14 @@ class _SignUpPageState extends State<SignUpPage> {
   // 验证码实体
   final VerificationCode _verifyCode = VerificationCode("", "");
 
-  // 🔥 公共倒计时控制器（自动管理定时器）
-  late final CountdownController _countdownController;
-
   // 协议勾选状态
   bool _isAgree = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // 初始化倒计时（60秒）
-    _countdownController = CountdownController();
-  }
 
   @override
   void dispose() {
     // 统一释放资源
     _accountController.dispose();
     _verifyCodeController.dispose();
-    _countdownController.dispose();
     super.dispose();
   }
 
@@ -62,30 +49,6 @@ class _SignUpPageState extends State<SignUpPage> {
       RouteNames.agreement,
       queryParameters: {'title': title, 'url': url},
     );
-  }
-
-  /// 发送验证码
-  Future<void> _sendVerifyCode() async {
-    final errorMsg = ToolUtils.checkPhoneValidator(_accountController.text);
-    if (errorMsg != null) {
-      AppToast.showToast(errorMsg);
-      return;
-    }
-
-    try {
-      final response = await VerifyCodeService().sendVerifyCode(
-        VerificationCodeRequest(
-          verifyType: "1",
-          verifyKey: _accountController.text,
-          verifyScene: "REGISTER",
-        ),
-      );
-      _verifyCode.uniqueId = response.uniqueId;
-      _countdownController.start(); // 启动公共倒计时
-      AppToast.showToast("验证码发送成功");
-    } catch (e) {
-      AppToast.showToast("验证码发送失败：$e");
-    }
   }
 
   /// 注册提交
@@ -139,26 +102,24 @@ class _SignUpPageState extends State<SignUpPage> {
     return AppInput(
       controller: _accountController,
       label: '账号',
-      prefix: Icon(
+      prefixIcon: Icon(
         Icons.phone_outlined,
         size: 32.w,
         color: AppColors.textGray(context),
       ),
-      suffix: ClearButton(controller: _accountController),
+      suffixIcon: ClearButton(controller: _accountController),
       validator: ToolUtils.checkPhoneValidator,
     );
   }
 
   Widget _verifyCodeInput() {
-    return ListenableBuilder(
-      listenable: _countdownController,
-      builder: (context, child) {
-        return AppCodeInput(
-          controller: _verifyCodeController,
-          onSendCode: _sendVerifyCode,
-          isCounting: _countdownController.isCounting,
-          countTime: _countdownController.countDown,
-        );
+    return VerifyCodeInput(
+      accountController: _accountController,
+      verifyScene: VerifyScene.register,
+      verifyType: VerifyType.mobile,
+      verifyCodeController: _verifyCodeController,
+      onUniqueIdChanged: (uniqueId) {
+        _verifyCode.uniqueId = uniqueId;
       },
     );
   }

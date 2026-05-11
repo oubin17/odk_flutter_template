@@ -5,13 +5,11 @@ import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
-import 'package:odk_flutter_template/features/auth/domain/verify_code.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
-import 'package:odk_flutter_template/widgets/app_countdown/countdown_controller.dart';
+import 'package:odk_flutter_template/widgets/app_countdown/verify_code_input.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
@@ -33,20 +31,10 @@ class _SignInPageState extends State<SignInPage> {
   // 验证码实体
   final VerificationCode _verificationCode = VerificationCode("", "");
 
-  // 🔥 公共倒计时控制器（全项目复用）
-  late final CountdownController _countdownController;
-
   // 登录状态
   bool _isPasswordLogin = true;
   // 🔥 协议勾选状态（合规必选）
   bool _isAgree = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // 初始化倒计时60秒
-    _countdownController = CountdownController();
-  }
 
   @override
   void dispose() {
@@ -54,7 +42,6 @@ class _SignInPageState extends State<SignInPage> {
     _accountController.dispose();
     _verifyCodeController.dispose();
     _passwordController.dispose();
-    _countdownController.dispose();
     super.dispose();
   }
 
@@ -64,33 +51,6 @@ class _SignInPageState extends State<SignInPage> {
       RouteNames.agreement,
       queryParameters: {'title': title, 'url': url},
     );
-  }
-
-  /// 发送登录验证码
-  Future<void> _sendVerifyCode() async {
-    // 1. 校验账号
-    final errorMsg = ToolUtils.checkPhoneValidator(_accountController.text);
-    if (errorMsg != null) {
-      AppToast.showToast(errorMsg);
-      return;
-    }
-
-    try {
-      // 2. 请求接口
-      final response = await VerifyCodeService().sendVerifyCode(
-        VerificationCodeRequest(
-          verifyType: "1",
-          verifyKey: _accountController.text,
-          verifyScene: "LOGIN",
-        ),
-      );
-      // 3. 保存唯一标识 + 启动倒计时
-      _verificationCode.uniqueId = response.uniqueId;
-      _countdownController.start();
-      AppToast.showToast("验证码发送成功");
-    } catch (e) {
-      AppToast.showToast("验证码发送失败：$e");
-    }
   }
 
   /// 登录提交
@@ -133,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
     return AppInput(
       controller: _accountController,
       label: '账号',
-      prefix: Icon(
+      prefixIcon: Icon(
         Icons.phone_outlined,
         size: 32.w,
         color: AppColors.textGray(context),
@@ -146,7 +106,7 @@ class _SignInPageState extends State<SignInPage> {
     return AppInput(
       controller: _passwordController,
       label: '密码',
-      prefix: Icon(
+      prefixIcon: Icon(
         Icons.password,
         size: 32.w,
         color: AppColors.textGray(context),
@@ -160,15 +120,13 @@ class _SignInPageState extends State<SignInPage> {
 
   /// 验证码输入框（响应式倒计时）
   Widget _verifyCodeInput() {
-    return ListenableBuilder(
-      listenable: _countdownController,
-      builder: (context, child) {
-        return AppCodeInput(
-          controller: _verifyCodeController,
-          onSendCode: _sendVerifyCode,
-          isCounting: _countdownController.isCounting,
-          countTime: _countdownController.countDown,
-        );
+    return VerifyCodeInput(
+      accountController: _accountController,
+      verifyScene: VerifyScene.login,
+      verifyType: VerifyType.mobile,
+      verifyCodeController: _verifyCodeController,
+      onUniqueIdChanged: (uniqueId) {
+        _verificationCode.uniqueId = uniqueId;
       },
     );
   }
