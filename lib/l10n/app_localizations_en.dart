@@ -27,6 +27,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error => 'Error';
 
   @override
+  String get appTitle => 'ODK Flutter Template';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get general => 'General';
+
+  @override
   String get systemSetting => 'Setting';
 
   @override
@@ -90,27 +99,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get todo => 'To do...';
 
   @override
-  String get appTitle => 'Flutter Internationalization Demo';
+  String get commonSetting => 'General Settings';
 
   @override
-  String welcomeMessage(String userName) {
-    return 'Welcome, $userName!';
-  }
+  String get accountSecurity => 'Account Security';
 
   @override
-  String get english => 'English';
+  String get setPassword => 'Set Password';
 
   @override
-  String unreadMessages(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count unread messages',
-      one: '1 unread message',
-      zero: 'No unread messages',
-    );
-    return '$_temp0';
-  }
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get operationFailed => 'Operation Failed';
+
+  @override
+  String get pleaseEnterPassword => 'Please enter password';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get pleaseEnterNewPassword => 'Please enter new password';
+
+  @override
+  String get oldPassword => 'Old Password';
+
+  @override
+  String get pleaseEnterOldPassword => 'Please enter old password';
+
+  @override
+  String get newPasswordCannotBeSameAsOld =>
+      'New password cannot be the same as old password';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get pleaseEnterConfirmPassword => 'Please enter confirm password';
+
+  @override
+  String get passwordsNotMatch => 'Passwords do not match';
 
   @override
   String fieldNotEmptyTip(String field) {

@@ -134,6 +134,24 @@ abstract class AppLocalizations {
   /// **'Error'**
   String get error;
 
+  /// No description provided for @appTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'ODK Flutter Template'**
+  String get appTitle;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// No description provided for @general.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get general;
+
   /// No description provided for @systemSetting.
   ///
   /// In en, this message translates to:
@@ -260,29 +278,89 @@ abstract class AppLocalizations {
   /// **'To do...'**
   String get todo;
 
-  /// Application title displayed in app bar
+  /// No description provided for @commonSetting.
   ///
   /// In en, this message translates to:
-  /// **'Flutter Internationalization Demo'**
-  String get appTitle;
+  /// **'General Settings'**
+  String get commonSetting;
 
-  /// Welcome message with user name
+  /// No description provided for @accountSecurity.
   ///
   /// In en, this message translates to:
-  /// **'Welcome, {userName}!'**
-  String welcomeMessage(String userName);
+  /// **'Account Security'**
+  String get accountSecurity;
 
-  /// English
+  /// No description provided for @setPassword.
   ///
   /// In en, this message translates to:
-  /// **'English'**
-  String get english;
+  /// **'Set Password'**
+  String get setPassword;
 
-  /// Message count indicator
+  /// No description provided for @resetPassword.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, zero{No unread messages} one{1 unread message} other{{count} unread messages}}'**
-  String unreadMessages(int count);
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// No description provided for @operationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Operation Failed'**
+  String get operationFailed;
+
+  /// No description provided for @pleaseEnterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter password'**
+  String get pleaseEnterPassword;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPassword;
+
+  /// No description provided for @pleaseEnterNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter new password'**
+  String get pleaseEnterNewPassword;
+
+  /// No description provided for @oldPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Old Password'**
+  String get oldPassword;
+
+  /// No description provided for @pleaseEnterOldPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter old password'**
+  String get pleaseEnterOldPassword;
+
+  /// No description provided for @newPasswordCannotBeSameAsOld.
+  ///
+  /// In en, this message translates to:
+  /// **'New password cannot be the same as old password'**
+  String get newPasswordCannotBeSameAsOld;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @pleaseEnterConfirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter confirm password'**
+  String get pleaseEnterConfirmPassword;
+
+  /// No description provided for @passwordsNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsNotMatch;
 
   /// xx不能为空 表单校验提示
   ///

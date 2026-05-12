@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "confirm" : "Confirm",
   "cancel" : "Cancel",
   "save" : "Save",
@@ -6,11 +7,17 @@
   "fail" : "Failed",
   "error" : "Error",
 
+  "appTitle": "ODK Flutter Template",
+  "account" : "Account",
+  "general" : "General",
   "systemSetting": "Setting",
   "themeMode": "ThemeMode",
   "lightMode": "Light Mode",
   "darkMode" : "Dark Mode",
   "switchLanguage": "Language",
+  "@switchLanguage": {
+    "description": "Switch language between Chinese and English"
+  },
   "language": "English",
   "aboutUs" : "About Us",
   "deviceInfo" :"Device Info",
@@ -28,48 +35,29 @@
   "phoneNumber" : "Phone Number",
 
   "todo" : "To do...",
-  
 
-  "appTitle": "Flutter Internationalization Demo",
-  "@appTitle": {
-    "description": "Application title displayed in app bar"
-  },
-  "welcomeMessage": "Welcome, {userName}!",
-  "@welcomeMessage": {
-    "description": "Welcome message with user name",
+  "commonSetting": "General Settings",
+  "accountSecurity": "Account Security",
+  "setPassword": "Set Password",
+  "resetPassword": "Reset Password",
+  "operationFailed": "Operation Failed",
+  "pleaseEnterPassword": "Please enter password",
+  "newPassword": "New Password",
+  "pleaseEnterNewPassword": "Please enter new password",
+  "oldPassword": "Old Password",
+  "pleaseEnterOldPassword": "Please enter old password",
+  "newPasswordCannotBeSameAsOld": "New password cannot be the same as old password",
+  "confirmPassword": "Confirm Password",
+  "pleaseEnterConfirmPassword": "Please enter confirm password",
+  "passwordsNotMatch": "Passwords do not match",
+
+  "fieldNotEmptyTip": "{field} cannot be empty",
+  "@fieldNotEmptyTip": {
+    "description": "xx不能为空 表单校验提示",
     "placeholders": {
-      "userName": {
-        "type": "String",
-        "description": "Name of the user"
+      "field": {
+       "type": "String"
       }
-    }
-  },
-  "switchLanguage": "Language",
-  "@switchLanguage": {
-    "description": "Switch language between Chinese and English"
-  },
-  "english": "English",
-  "@english": {
-    "description": "English"
-  },
-  "unreadMessages": "{count, plural, zero{No unread messages} one{1 unread message} other{{count} unread messages}}",
-  "@unreadMessages": {
-    "description": "Message count indicator",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-
-
-"fieldNotEmptyTip": "{field} cannot be empty",
-"@fieldNotEmptyTip": {
-  "description": "xx不能为空 表单校验提示",
-  "placeholders": {
-    "field": {
-      "type": "String"
-    }
   }
 },
 "fieldFormatErrorTip": "{field} format is incorrect",

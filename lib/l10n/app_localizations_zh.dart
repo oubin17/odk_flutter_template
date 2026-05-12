@@ -27,6 +27,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get error => '错误';
 
   @override
+  String get appTitle => 'ODK Flutter 模板';
+
+  @override
+  String get account => '账户';
+
+  @override
+  String get general => '通用';
+
+  @override
   String get systemSetting => '设置';
 
   @override
@@ -90,27 +99,46 @@ class AppLocalizationsZh extends AppLocalizations {
   String get todo => '待实现...';
 
   @override
-  String get appTitle => 'Flutter Internationalization Demo';
+  String get commonSetting => '通用设置';
 
   @override
-  String welcomeMessage(String userName) {
-    return 'Welcome, $userName!';
-  }
+  String get accountSecurity => '账号安全';
 
   @override
-  String get english => 'English';
+  String get setPassword => '设置密码';
 
   @override
-  String unreadMessages(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count unread messages',
-      one: '1 unread message',
-      zero: 'No unread messages',
-    );
-    return '$_temp0';
-  }
+  String get resetPassword => '重置密码';
+
+  @override
+  String get operationFailed => '操作失败';
+
+  @override
+  String get pleaseEnterPassword => '请输入密码';
+
+  @override
+  String get newPassword => '新密码';
+
+  @override
+  String get pleaseEnterNewPassword => '请输入新密码';
+
+  @override
+  String get oldPassword => '旧密码';
+
+  @override
+  String get pleaseEnterOldPassword => '请输入旧密码';
+
+  @override
+  String get newPasswordCannotBeSameAsOld => '新密码不能与旧密码相同';
+
+  @override
+  String get confirmPassword => '确认密码';
+
+  @override
+  String get pleaseEnterConfirmPassword => '请输入确认密码';
+
+  @override
+  String get passwordsNotMatch => '两次输入密码不一致';
 
   @override
   String fieldNotEmptyTip(String field) {

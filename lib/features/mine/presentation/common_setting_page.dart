@@ -14,7 +14,7 @@ class CommonSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BasicAppBar(title: AppText("通用设置")),
+      appBar: BasicAppBar(title: AppText(L10nUtils.commonSetting)),
       body: ListView(
         children: [
           // 主题切换 + 图标
@@ -50,7 +50,6 @@ class CommonSettingPage extends StatelessWidget {
 
           Consumer<LocaleProvider>(
             builder: (context, localProvider, child) {
-              final l10n = AppLocalizations.of(context)!;
               return AppListItem(
                 left: localProvider.isEnglish
                     ? Icon(
@@ -61,7 +60,7 @@ class CommonSettingPage extends StatelessWidget {
                         Icons.language_outlined,
                         color: AppColors.textSecond(context),
                       ),
-                title: l10n.switchLanguage,
+                title: L10nUtils.switchLanguage,
                 desc: L10nUtils.language,
                 showArrow: false,
                 onTap: () {

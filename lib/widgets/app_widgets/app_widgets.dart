@@ -517,6 +517,35 @@ class AppInput extends StatelessWidget {
   }
 }
 
+/// 🔥 国际化输入框统一前缀组件（自动对齐，适配所有语言）
+/// 固定宽度 + 左对齐，无论文字长短，输入框永远对齐
+class AppInputPrefix extends StatelessWidget {
+  final String text; // 国际化文字（中文/英文自动适配）
+  final double width; // 前缀固定宽度（统一所有输入框）
+
+  const AppInputPrefix(
+    this.text, {
+    super.key,
+    this.width = 120, // 🔥 统一固定宽度，全局修改这个值即可
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // 核心：固定宽度，所有语言前缀区域一样宽
+      width: width.w,
+      // 左对齐，文字超长自动换行（可选）
+      alignment: Alignment.centerLeft,
+      child: AppText(
+        text,
+        size: 28.sp,
+        color: AppColors.textMain(context),
+        maxLines: 1,
+      ),
+    );
+  }
+}
+
 // 🔥 封装通用的清除按钮组件（复用性极强）
 class ClearButton extends StatelessWidget {
   final TextEditingController controller;

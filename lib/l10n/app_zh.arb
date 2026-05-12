@@ -1,4 +1,5 @@
 {
+  "@@locale": "zh",
   "confirm" : "确认",
   "cancel" : "取消",
   "save" : "保存",
@@ -6,7 +7,10 @@
   "fail" : "失败",
   "error" : "错误",
 
+  "appTitle": "ODK Flutter 模板",
   "systemSetting": "设置",
+  "account" : "账户",
+  "general" : "通用",
   "themeMode": "主题模式",
   "lightMode": "日间模式",
   "darkMode" : "夜间模式",
@@ -28,6 +32,21 @@
   "phoneNumber" : "手机号",
 
   "todo" : "待实现...",
+
+  "commonSetting": "通用设置",
+  "accountSecurity": "账号安全",
+  "setPassword": "设置密码",
+  "resetPassword": "重置密码",
+  "operationFailed": "操作失败",
+  "pleaseEnterPassword": "请输入密码",
+  "newPassword": "新密码",
+  "pleaseEnterNewPassword": "请输入新密码",
+  "oldPassword": "旧密码",
+  "pleaseEnterOldPassword": "请输入旧密码",
+  "newPasswordCannotBeSameAsOld": "新密码不能与旧密码相同",
+  "confirmPassword": "确认密码",
+  "pleaseEnterConfirmPassword": "请输入确认密码",
+  "passwordsNotMatch": "两次输入密码不一致",
 
   "fieldNotEmptyTip": "{field}不能为空",
   "fieldFormatErrorTip": "{field}格式不正确"

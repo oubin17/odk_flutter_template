@@ -29,6 +29,10 @@ class L10nUtils {
 
   // 👇 把你所有翻译文本都按这个格式加进来（你之前的主题/个人中心文本）
   static String get systemSetting => _localizations!.systemSetting;
+  static String get account => _localizations!.account;
+  static String get general => _localizations!.general;
+
+
 
   static String get themeMode => _localizations!.themeMode;
   static String get lightMode => _localizations!.lightMode;
@@ -49,6 +53,22 @@ class L10nUtils {
   static String get birthday => _localizations!.birthday;
   static String get phoneNumber => _localizations!.phoneNumber;
   static String get todo => _localizations!.todo;
+
+  // 通用设置
+  static String get commonSetting => _localizations!.commonSetting;
+  static String get accountSecurity => _localizations!.accountSecurity;
+  static String get setPassword => _localizations!.setPassword;
+  static String get resetPassword => _localizations!.resetPassword;
+  static String get operationFailed => _localizations!.operationFailed;
+  static String get pleaseEnterPassword => _localizations!.pleaseEnterPassword;
+  static String get newPassword => _localizations!.newPassword;
+  static String get pleaseEnterNewPassword => _localizations!.pleaseEnterNewPassword;
+  static String get oldPassword => _localizations!.oldPassword;
+  static String get pleaseEnterOldPassword => _localizations!.pleaseEnterOldPassword;
+  static String get newPasswordCannotBeSameAsOld => _localizations!.newPasswordCannotBeSameAsOld;
+  static String get confirmPassword => _localizations!.confirmPassword;
+  static String get pleaseEnterConfirmPassword => _localizations!.pleaseEnterConfirmPassword;
+  static String get passwordsNotMatch => _localizations!.passwordsNotMatch;
 
   // 错误提示
   /// 新增：表单校验（不能为空，带字段名参数）

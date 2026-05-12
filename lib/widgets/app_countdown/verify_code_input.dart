@@ -204,7 +204,14 @@ class _VerifyCodeInputState extends State<VerifyCodeInput> {
           onSendCode: sendVerifyCode,
           isCounting: _countdownController.isCounting,
           countTime: _countdownController.countDown,
-          validator: widget.validator,
+          validator:
+              widget.validator ??
+              (value) {
+                if (value == null || value.isEmpty) {
+                  return "请输入验证码";
+                }
+                return null;
+              },
           onSaved: widget.onSaved,
           onChanged: widget.onChanged,
           autovalidateMode: widget.autovalidateMode,
