@@ -264,4 +264,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknownError => 'Unknown error, please try again';
+
+  @override
+  String get networkRestored => 'Network connection restored';
+
+  @override
+  String get noNetworkConnection =>
+      'No network connection, please check network settings';
 }

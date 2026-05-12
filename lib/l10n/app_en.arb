@@ -354,5 +354,14 @@
   "unknownError": "Unknown error, please try again",
   "@unknownError": {
     "description": "未知错误提示"
+  },
+
+  "networkRestored": "Network connection restored",
+  "@networkRestored": {
+    "description": "网络连接恢复提示"
+  },
+  "noNetworkConnection": "No network connection, please check network settings",
+  "@noNetworkConnection": {
+    "description": "无网络连接提示"
   }
 }

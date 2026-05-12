@@ -130,4 +130,8 @@ class L10nUtils {
 
   // ======================== 其他异常 ========================
   static String get unknownError => _localizations!.unknownError;
+
+  // ======================== 网络状态 ========================
+  static String get networkRestored => _localizations!.networkRestored;
+  static String get noNetworkConnection => _localizations!.noNetworkConnection;
 }

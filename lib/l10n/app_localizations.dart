@@ -583,6 +583,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown error, please try again'**
   String get unknownError;
+
+  /// 网络连接恢复提示
+  ///
+  /// In en, this message translates to:
+  /// **'Network connection restored'**
+  String get networkRestored;
+
+  /// 无网络连接提示
+  ///
+  /// In en, this message translates to:
+  /// **'No network connection, please check network settings'**
+  String get noNetworkConnection;
 }
 
 class _AppLocalizationsDelegate

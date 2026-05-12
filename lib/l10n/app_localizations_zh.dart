@@ -256,4 +256,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get unknownError => '未知错误，请重试';
+
+  @override
+  String get networkRestored => '网络连接恢复';
+
+  @override
+  String get noNetworkConnection => '当前无网络连接，请检查网络设置';
 }

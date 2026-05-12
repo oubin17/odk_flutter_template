@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
@@ -65,10 +66,16 @@ class NetworkCheck {
 
     // 正常状态变化：弹出提示
     if (_isConnected) {
-      AppToast.showToast('网络连接恢复', alignment: Alignment.topCenter);
+      AppToast.showToast(
+        L10nUtils.networkRestored,
+        alignment: Alignment.topCenter,
+      );
       Log.i('网络状态：已连接 (${results.first})');
     } else {
-      AppToast.showToast('当前无网络连接，请检查网络设置', alignment: Alignment.topCenter);
+      AppToast.showToast(
+        L10nUtils.noNetworkConnection,
+        alignment: Alignment.topCenter,
+      );
       Log.w('网络状态：断开连接');
     }
   }

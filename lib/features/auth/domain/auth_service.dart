@@ -1,4 +1,3 @@
-import 'package:odk_flutter_template/core/exceptions/app_exception.dart';
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/storage/secure_storage_manager.dart';
 import 'package:odk_flutter_template/core/storage/storage_key.dart';
@@ -61,9 +60,6 @@ class AuthService {
   }
 
   /// 登录方法，返回用户 ID
-  ///
-  /// 异常处理说明:
-  /// - [AppException] - 网络错误或服务器业务错误，包含明确的错误类型和消息
   Future<void> logout() async {
     // 拦截器已经统一处理了所有异常
     await AuthApi().logout();

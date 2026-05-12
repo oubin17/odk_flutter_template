@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/models/response/base_response.dart';
 
 part 'service_response.g.dart';
@@ -17,11 +18,17 @@ class ServiceResponse extends BaseResponse {
 
   // ✅ 新增：快捷创建网络错误响应
   factory ServiceResponse.networkError() {
-    return ServiceResponse(success: false, errorContext: '无网络连接');
+    return ServiceResponse(
+      success: false,
+      errorContext: L10nUtils.noNetworkConnection,
+    );
   }
 
   factory ServiceResponse.commonError() {
-    return ServiceResponse(success: false, errorContext: '请求失败');
+    return ServiceResponse(
+      success: false,
+      errorContext: L10nUtils.requestError,
+    );
   }
 
   factory ServiceResponse.bizError(

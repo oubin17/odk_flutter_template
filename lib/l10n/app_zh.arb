@@ -95,5 +95,8 @@
   "downloadFailed": "下载失败，请重试",
   "uploadFailed": "上传失败，请重试",
 
-  "unknownError": "未知错误，请重试"
+  "unknownError": "未知错误，请重试",
+
+  "networkRestored": "网络连接恢复",
+  "noNetworkConnection": "当前无网络连接，请检查网络设置"
 }

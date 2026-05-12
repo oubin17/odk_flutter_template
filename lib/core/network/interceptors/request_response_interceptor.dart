@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/config/env.dart';
+import 'package:odk_flutter_template/core/network/check/network_utils.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
@@ -16,18 +17,29 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    // ====================== 核心修改 ======================
-    // 1. 通过全局路由Key获取上下文
+    // ====================== 在 async gap 之前获取 Token ======================
+    // 避免在 await 之后使用 BuildContext（lint: don't use BuildContext across async gaps）
     final globalContext = AppRouter.routerKey.currentContext;
     String? token;
-
-    // 2. 从 UserProvider 中读取 Token（内存读取，无需异步await）
     if (globalContext != null) {
       token = globalContext.read<UserProvider>().token;
     }
-    // ======================================================
 
-    // 3. 注入请求头（逻辑不变）
+    // ====================== 网络检查：无网络时直接拦截，不发出请求 ======================
+    final hasNetwork = await NetworkCheck.instance.checkNetwork();
+    if (!hasNetwork) {
+      AppToast.showToast(L10nUtils.noNetworkConnection);
+      handler.resolve(
+        Response(
+          requestOptions: options,
+          statusCode: 999,
+          data: ServiceResponse.networkError().toJson(),
+        ),
+      );
+      return;
+    }
+
+    // ====================== 注入请求头 ======================
     if (token != null && token.isNotEmpty) {
       options.headers[Env.tokenHeader] = token;
     }
@@ -49,7 +61,7 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
           response: response,
           type: DioExceptionType.badResponse,
           error: response.data,
-          message: response.data['errorContext'] ?? '业务请求失败',
+          message: response.data['errorContext'] ?? L10nUtils.operationFailed,
         ),
       );
     }
@@ -66,29 +78,20 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
     Log.e('捕获异常', tag: 'Network-ERR', error: err.message);
 
     // ====================== 核心修复：统一处理所有异常，不往外抛 ======================
-    String errorMsg = '请求失败';
-    // 1. 分类处理 Dio 异常类型（超时/无网/服务器错误）
+    // 注意：无网络的情况已在 onRequest 中通过 NetworkCheck 拦截，这里不会收到 connectionError
+    String errorMsg = L10nUtils.requestError;
     switch (err.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        errorMsg = '网络请求超时，请重试';
+        errorMsg = L10nUtils.networkTimeout;
         break;
-      case DioExceptionType.connectionError:
-        errorMsg = '网络连接异常，请检查网络';
-        break;
-      // case DioExceptionType.badResponse:
-      //   errorMsg = '服务器异常(${err.response?.statusCode})';
-      //   break;
       default:
-        errorMsg = '网络请求失败，请重试';
+        errorMsg = L10nUtils.requestError;
     }
 
     // 统一吐司提示（必加，避免页面无感知）
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // AppToast.showToast(errorMsg, alignment: Alignment.topCenter);
-      AppToast.showToast2(errorMsg);
-    });
+    AppToast.showToast(errorMsg);
 
     // ====================== 原有逻辑：token 过期处理 ======================
     final responseData = err.response?.data;
@@ -104,14 +107,18 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
 
     // ====================== 关键：不执行 handler.next(err)！异常到此为止 ======================
     // 直接把异常标记为处理完成，Dio 不会再把异常抛给 post 方法
+    final safeData = responseData is Map<String, dynamic>
+        ? responseData
+        : <String, dynamic>{};
+
     handler.resolve(
       Response(
         requestOptions: err.requestOptions,
         statusCode: 999, // 自定义异常码
         data: ServiceResponse.bizError(
-          responseData['errorType'],
-          responseData['errorCode'],
-          responseData['errorContext'],
+          safeData['errorType'],
+          safeData['errorCode'],
+          safeData['errorContext'],
         ).toJson(),
       ),
     );
