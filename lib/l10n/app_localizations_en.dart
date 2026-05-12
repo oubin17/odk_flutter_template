@@ -27,16 +27,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error => 'Error';
 
   @override
+  String get todo => 'To do...';
+
+  @override
+  String get common => 'Common';
+
+  @override
+  String get login => 'Login';
+
+  @override
+  String get register => 'Register';
+
+  @override
+  String get operationFailed => 'Operation Failed';
+
+  @override
   String get appTitle => 'ODK Flutter Template';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get mine => 'Mine';
+
+  @override
+  String get systemSetting => 'Setting';
+
+  @override
+  String get commonSetting => 'General Settings';
 
   @override
   String get account => 'Account';
 
   @override
   String get general => 'General';
-
-  @override
-  String get systemSetting => 'Setting';
 
   @override
   String get themeMode => 'ThemeMode';
@@ -66,12 +90,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Log Out';
 
   @override
-  String get home => 'Home';
-
-  @override
-  String get mine => 'Mine';
-
-  @override
   String get profile => 'Profile';
 
   @override
@@ -96,12 +114,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get phoneNumber => 'Phone Number';
 
   @override
-  String get todo => 'To do...';
-
-  @override
-  String get commonSetting => 'General Settings';
-
-  @override
   String get accountSecurity => 'Account Security';
 
   @override
@@ -111,7 +123,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetPassword => 'Reset Password';
 
   @override
-  String get operationFailed => 'Operation Failed';
+  String get resetPasswordShort => 'Reset Password';
 
   @override
   String get pleaseEnterPassword => 'Please enter password';
@@ -142,6 +154,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordsNotMatch => 'Passwords do not match';
 
   @override
+  String get pleaseEnterVerifyCode => 'Please enter verification code';
+
+  @override
+  String resendAfterSeconds(int seconds) {
+    return '${seconds}s to resend';
+  }
+
+  @override
+  String get getVerifyCode => 'Get Code';
+
+  @override
   String fieldNotEmptyTip(String field) {
     return '$field cannot be empty';
   }
@@ -150,4 +173,95 @@ class AppLocalizationsEn extends AppLocalizations {
   String fieldFormatErrorTip(String field) {
     return '$field format is incorrect';
   }
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get userAgreement => 'User Agreement';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get agreeTermsFirst =>
+      'Please agree to the User Agreement and Privacy Policy';
+
+  @override
+  String get loginFailed =>
+      'Login failed, please check your account and password';
+
+  @override
+  String get switchLoginType => 'Switch login method';
+
+  @override
+  String get noAccount => 'No account?';
+
+  @override
+  String get hasAccount => 'Already have an account?';
+
+  @override
+  String get welcomeBack => 'Welcome Back';
+
+  @override
+  String get registerFailed => 'Registration failed';
+
+  @override
+  String get paramValidationError =>
+      'Parameter validation failed, please check your input';
+
+  @override
+  String get networkError =>
+      'Network error, please check your network connection';
+
+  @override
+  String get networkTimeout => 'Network request timed out, please try again';
+
+  @override
+  String get networkConnectionFailed =>
+      'Unable to connect to server, please try again later';
+
+  @override
+  String get sslError =>
+      'Secure connection failed, please check your network settings';
+
+  @override
+  String get requestError => 'Request error, please try again';
+
+  @override
+  String get requestCancelled => 'Request has been cancelled';
+
+  @override
+  String get responseError => 'Response error, please try again later';
+
+  @override
+  String get tooManyRequests => 'Too many requests, please try again later';
+
+  @override
+  String get serverError => 'Server error, please try again later';
+
+  @override
+  String get serverMaintenance =>
+      'Server is under maintenance, please try again later';
+
+  @override
+  String get unauthorized => 'Authentication expired, please log in again';
+
+  @override
+  String get forbidden => 'Access denied, insufficient permissions';
+
+  @override
+  String get notFound => 'Requested resource not found';
+
+  @override
+  String get dataParseError => 'Data parsing error';
+
+  @override
+  String get downloadFailed => 'Download failed, please try again';
+
+  @override
+  String get uploadFailed => 'Upload failed, please try again';
+
+  @override
+  String get unknownError => 'Unknown error, please try again';
 }

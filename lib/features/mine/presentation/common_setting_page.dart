@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
-import 'package:odk_flutter_template/l10n/app_localizations.dart';
 import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';

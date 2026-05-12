@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
+import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/verify_code.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';

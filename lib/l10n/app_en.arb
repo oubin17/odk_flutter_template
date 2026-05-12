@@ -1,73 +1,358 @@
 {
   "@@locale": "en",
-  "confirm" : "Confirm",
-  "cancel" : "Cancel",
-  "save" : "Save",
-  "success" : "Success",
-  "fail" : "Failed",
-  "error" : "Error",
+
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "确认"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "取消"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "保存"
+  },
+  "success": "Success",
+  "@success": {
+    "description": "成功"
+  },
+  "fail": "Failed",
+  "@fail": {
+    "description": "失败"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "错误"
+  },
+  "todo": "To do...",
+  "@todo": {
+    "description": "待实现占位文本"
+  },
+  "common": "Common",
+  "@common": {
+    "description": "通用"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "登录"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "注册"
+  },
+  "operationFailed": "Operation Failed",
+  "@operationFailed": {
+    "description": "操作失败"
+  },
 
   "appTitle": "ODK Flutter Template",
-  "account" : "Account",
-  "general" : "General",
+  "@appTitle": {
+    "description": "应用标题"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "首页"
+  },
+  "mine": "Mine",
+  "@mine": {
+    "description": "我的"
+  },
+
   "systemSetting": "Setting",
+  "@systemSetting": {
+    "description": "系统设置"
+  },
+  "commonSetting": "General Settings",
+  "@commonSetting": {
+    "description": "通用设置"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "账户"
+  },
+  "general": "General",
+  "@general": {
+    "description": "通用"
+  },
   "themeMode": "ThemeMode",
+  "@themeMode": {
+    "description": "主题模式"
+  },
   "lightMode": "Light Mode",
-  "darkMode" : "Dark Mode",
+  "@lightMode": {
+    "description": "日间模式"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "夜间模式"
+  },
   "switchLanguage": "Language",
   "@switchLanguage": {
-    "description": "Switch language between Chinese and English"
+    "description": "切换语言"
   },
   "language": "English",
-  "aboutUs" : "About Us",
-  "deviceInfo" :"Device Info",
-  "versionInfo" :"Version Info",
-  "logout" : "Log Out",
-  "home" : "Home",
-  "mine" : "Mine",
-  "profile" : "Profile",
-  "avatar" : "Avatar",
-  "nickname" : "Nickname",
-  "gender" : "Gender",
-  "male" : "Male",
-  "female" : "Female",
-  "birthday" : "Birthday",
-  "phoneNumber" : "Phone Number",
+  "@language": {
+    "description": "当前语言名称"
+  },
+  "aboutUs": "About Us",
+  "@aboutUs": {
+    "description": "关于我们"
+  },
+  "deviceInfo": "Device Info",
+  "@deviceInfo": {
+    "description": "设备信息"
+  },
+  "versionInfo": "Version Info",
+  "@versionInfo": {
+    "description": "版本信息"
+  },
+  "logout": "Log Out",
+  "@logout": {
+    "description": "登出"
+  },
 
-  "todo" : "To do...",
+  "profile": "Profile",
+  "@profile": {
+    "description": "用户画像"
+  },
+  "avatar": "Avatar",
+  "@avatar": {
+    "description": "头像"
+  },
+  "nickname": "Nickname",
+  "@nickname": {
+    "description": "昵称"
+  },
+  "gender": "Gender",
+  "@gender": {
+    "description": "性别"
+  },
+  "male": "Male",
+  "@male": {
+    "description": "男"
+  },
+  "female": "Female",
+  "@female": {
+    "description": "女"
+  },
+  "birthday": "Birthday",
+  "@birthday": {
+    "description": "生日"
+  },
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "手机号"
+  },
 
-  "commonSetting": "General Settings",
   "accountSecurity": "Account Security",
+  "@accountSecurity": {
+    "description": "账号安全"
+  },
   "setPassword": "Set Password",
+  "@setPassword": {
+    "description": "设置密码"
+  },
   "resetPassword": "Reset Password",
-  "operationFailed": "Operation Failed",
+  "@resetPassword": {
+    "description": "重置密码"
+  },
+  "resetPasswordShort": "Reset Password",
+  "@resetPasswordShort": {
+    "description": "重置密码（场景名称）"
+  },
   "pleaseEnterPassword": "Please enter password",
+  "@pleaseEnterPassword": {
+    "description": "请输入密码"
+  },
   "newPassword": "New Password",
+  "@newPassword": {
+    "description": "新密码"
+  },
   "pleaseEnterNewPassword": "Please enter new password",
+  "@pleaseEnterNewPassword": {
+    "description": "请输入新密码"
+  },
   "oldPassword": "Old Password",
+  "@oldPassword": {
+    "description": "旧密码"
+  },
   "pleaseEnterOldPassword": "Please enter old password",
+  "@pleaseEnterOldPassword": {
+    "description": "请输入旧密码"
+  },
   "newPasswordCannotBeSameAsOld": "New password cannot be the same as old password",
+  "@newPasswordCannotBeSameAsOld": {
+    "description": "新密码不能与旧密码相同"
+  },
   "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "确认密码"
+  },
   "pleaseEnterConfirmPassword": "Please enter confirm password",
+  "@pleaseEnterConfirmPassword": {
+    "description": "请输入确认密码"
+  },
   "passwordsNotMatch": "Passwords do not match",
+  "@passwordsNotMatch": {
+    "description": "两次输入密码不一致"
+  },
+
+  "pleaseEnterVerifyCode": "Please enter verification code",
+  "@pleaseEnterVerifyCode": {
+    "description": "请输入验证码"
+  },
+  "resendAfterSeconds": "{seconds}s to resend",
+  "@resendAfterSeconds": {
+    "description": "xx秒后重发",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "getVerifyCode": "Get Code",
+  "@getVerifyCode": {
+    "description": "获取验证码"
+  },
 
   "fieldNotEmptyTip": "{field} cannot be empty",
   "@fieldNotEmptyTip": {
-    "description": "xx不能为空 表单校验提示",
+    "description": "字段不能为空，表单校验提示",
     "placeholders": {
       "field": {
-       "type": "String"
+        "type": "String"
       }
-  }
-},
-"fieldFormatErrorTip": "{field} format is incorrect",
-"@fieldFormatErrorTip": {
-  "description": "xx格式不正确 表单校验提示",
-  "placeholders": {
-    "field": {
-      "type": "String"
     }
-  }
-}
+  },
+  "fieldFormatErrorTip": "{field} format is incorrect",
+  "@fieldFormatErrorTip": {
+    "description": "字段格式不正确，表单校验提示",
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
 
+  "password": "Password",
+  "@password": {
+    "description": "密码"
+  },
+  "userAgreement": "User Agreement",
+  "@userAgreement": {
+    "description": "用户协议"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "隐私政策"
+  },
+  "agreeTermsFirst": "Please agree to the User Agreement and Privacy Policy",
+  "@agreeTermsFirst": {
+    "description": "请勾选用户协议和隐私政策"
+  },
+  "loginFailed": "Login failed, please check your account and password",
+  "@loginFailed": {
+    "description": "登录失败，请检查账号密码"
+  },
+  "switchLoginType": "Switch login method",
+  "@switchLoginType": {
+    "description": "切换登录方式"
+  },
+  "noAccount": "No account?",
+  "@noAccount": {
+    "description": "没有账号？"
+  },
+  "hasAccount": "Already have an account?",
+  "@hasAccount": {
+    "description": "已经有账号？"
+  },
+  "welcomeBack": "Welcome Back",
+  "@welcomeBack": {
+    "description": "欢迎回来"
+  },
+  "registerFailed": "Registration failed",
+  "@registerFailed": {
+    "description": "注册失败"
+  },
+
+  "paramValidationError": "Parameter validation failed, please check your input",
+  "@paramValidationError": {
+    "description": "参数校验失败提示"
+  },
+
+  "networkError": "Network error, please check your network connection",
+  "@networkError": {
+    "description": "网络异常提示"
+  },
+  "networkTimeout": "Network request timed out, please try again",
+  "@networkTimeout": {
+    "description": "网络请求超时提示"
+  },
+  "networkConnectionFailed": "Unable to connect to server, please try again later",
+  "@networkConnectionFailed": {
+    "description": "网络连接失败提示"
+  },
+  "sslError": "Secure connection failed, please check your network settings",
+  "@sslError": {
+    "description": "SSL证书错误提示"
+  },
+
+  "requestError": "Request error, please try again",
+  "@requestError": {
+    "description": "请求异常提示"
+  },
+  "requestCancelled": "Request has been cancelled",
+  "@requestCancelled": {
+    "description": "请求被取消提示"
+  },
+  "responseError": "Response error, please try again later",
+  "@responseError": {
+    "description": "响应异常提示"
+  },
+  "tooManyRequests": "Too many requests, please try again later",
+  "@tooManyRequests": {
+    "description": "请求过于频繁提示"
+  },
+
+  "serverError": "Server error, please try again later",
+  "@serverError": {
+    "description": "服务器错误提示"
+  },
+  "serverMaintenance": "Server is under maintenance, please try again later",
+  "@serverMaintenance": {
+    "description": "服务器维护提示"
+  },
+
+  "unauthorized": "Authentication expired, please log in again",
+  "@unauthorized": {
+    "description": "未授权/登录过期提示"
+  },
+  "forbidden": "Access denied, insufficient permissions",
+  "@forbidden": {
+    "description": "无权限访问提示"
+  },
+
+  "notFound": "Requested resource not found",
+  "@notFound": {
+    "description": "资源未找到提示"
+  },
+  "dataParseError": "Data parsing error",
+  "@dataParseError": {
+    "description": "数据解析异常提示"
+  },
+
+  "downloadFailed": "Download failed, please try again",
+  "@downloadFailed": {
+    "description": "下载失败提示"
+  },
+  "uploadFailed": "Upload failed, please try again",
+  "@uploadFailed": {
+    "description": "上传失败提示"
+  },
+
+  "unknownError": "Unknown error, please try again",
+  "@unknownError": {
+    "description": "未知错误提示"
+  }
 }

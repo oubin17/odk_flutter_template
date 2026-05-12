@@ -98,281 +98,491 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
-  /// No description provided for @confirm.
+  /// 确认
   ///
   /// In en, this message translates to:
   /// **'Confirm'**
   String get confirm;
 
-  /// No description provided for @cancel.
+  /// 取消
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
 
-  /// No description provided for @save.
+  /// 保存
   ///
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
 
-  /// No description provided for @success.
+  /// 成功
   ///
   /// In en, this message translates to:
   /// **'Success'**
   String get success;
 
-  /// No description provided for @fail.
+  /// 失败
   ///
   /// In en, this message translates to:
   /// **'Failed'**
   String get fail;
 
-  /// No description provided for @error.
+  /// 错误
   ///
   /// In en, this message translates to:
   /// **'Error'**
   String get error;
 
-  /// No description provided for @appTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'ODK Flutter Template'**
-  String get appTitle;
-
-  /// No description provided for @account.
-  ///
-  /// In en, this message translates to:
-  /// **'Account'**
-  String get account;
-
-  /// No description provided for @general.
-  ///
-  /// In en, this message translates to:
-  /// **'General'**
-  String get general;
-
-  /// No description provided for @systemSetting.
-  ///
-  /// In en, this message translates to:
-  /// **'Setting'**
-  String get systemSetting;
-
-  /// No description provided for @themeMode.
-  ///
-  /// In en, this message translates to:
-  /// **'ThemeMode'**
-  String get themeMode;
-
-  /// No description provided for @lightMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Light Mode'**
-  String get lightMode;
-
-  /// No description provided for @darkMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Dark Mode'**
-  String get darkMode;
-
-  /// Switch language between Chinese and English
-  ///
-  /// In en, this message translates to:
-  /// **'Language'**
-  String get switchLanguage;
-
-  /// No description provided for @language.
-  ///
-  /// In en, this message translates to:
-  /// **'English'**
-  String get language;
-
-  /// No description provided for @aboutUs.
-  ///
-  /// In en, this message translates to:
-  /// **'About Us'**
-  String get aboutUs;
-
-  /// No description provided for @deviceInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Device Info'**
-  String get deviceInfo;
-
-  /// No description provided for @versionInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Version Info'**
-  String get versionInfo;
-
-  /// No description provided for @logout.
-  ///
-  /// In en, this message translates to:
-  /// **'Log Out'**
-  String get logout;
-
-  /// No description provided for @home.
-  ///
-  /// In en, this message translates to:
-  /// **'Home'**
-  String get home;
-
-  /// No description provided for @mine.
-  ///
-  /// In en, this message translates to:
-  /// **'Mine'**
-  String get mine;
-
-  /// No description provided for @profile.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get profile;
-
-  /// No description provided for @avatar.
-  ///
-  /// In en, this message translates to:
-  /// **'Avatar'**
-  String get avatar;
-
-  /// No description provided for @nickname.
-  ///
-  /// In en, this message translates to:
-  /// **'Nickname'**
-  String get nickname;
-
-  /// No description provided for @gender.
-  ///
-  /// In en, this message translates to:
-  /// **'Gender'**
-  String get gender;
-
-  /// No description provided for @male.
-  ///
-  /// In en, this message translates to:
-  /// **'Male'**
-  String get male;
-
-  /// No description provided for @female.
-  ///
-  /// In en, this message translates to:
-  /// **'Female'**
-  String get female;
-
-  /// No description provided for @birthday.
-  ///
-  /// In en, this message translates to:
-  /// **'Birthday'**
-  String get birthday;
-
-  /// No description provided for @phoneNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'Phone Number'**
-  String get phoneNumber;
-
-  /// No description provided for @todo.
+  /// 待实现占位文本
   ///
   /// In en, this message translates to:
   /// **'To do...'**
   String get todo;
 
-  /// No description provided for @commonSetting.
+  /// 通用
   ///
   /// In en, this message translates to:
-  /// **'General Settings'**
-  String get commonSetting;
+  /// **'Common'**
+  String get common;
 
-  /// No description provided for @accountSecurity.
+  /// 登录
   ///
   /// In en, this message translates to:
-  /// **'Account Security'**
-  String get accountSecurity;
+  /// **'Login'**
+  String get login;
 
-  /// No description provided for @setPassword.
+  /// 注册
   ///
   /// In en, this message translates to:
-  /// **'Set Password'**
-  String get setPassword;
+  /// **'Register'**
+  String get register;
 
-  /// No description provided for @resetPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset Password'**
-  String get resetPassword;
-
-  /// No description provided for @operationFailed.
+  /// 操作失败
   ///
   /// In en, this message translates to:
   /// **'Operation Failed'**
   String get operationFailed;
 
-  /// No description provided for @pleaseEnterPassword.
+  /// 应用标题
+  ///
+  /// In en, this message translates to:
+  /// **'ODK Flutter Template'**
+  String get appTitle;
+
+  /// 首页
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// 我的
+  ///
+  /// In en, this message translates to:
+  /// **'Mine'**
+  String get mine;
+
+  /// 系统设置
+  ///
+  /// In en, this message translates to:
+  /// **'Setting'**
+  String get systemSetting;
+
+  /// 通用设置
+  ///
+  /// In en, this message translates to:
+  /// **'General Settings'**
+  String get commonSetting;
+
+  /// 账户
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// 通用
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get general;
+
+  /// 主题模式
+  ///
+  /// In en, this message translates to:
+  /// **'ThemeMode'**
+  String get themeMode;
+
+  /// 日间模式
+  ///
+  /// In en, this message translates to:
+  /// **'Light Mode'**
+  String get lightMode;
+
+  /// 夜间模式
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// 切换语言
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get switchLanguage;
+
+  /// 当前语言名称
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get language;
+
+  /// 关于我们
+  ///
+  /// In en, this message translates to:
+  /// **'About Us'**
+  String get aboutUs;
+
+  /// 设备信息
+  ///
+  /// In en, this message translates to:
+  /// **'Device Info'**
+  String get deviceInfo;
+
+  /// 版本信息
+  ///
+  /// In en, this message translates to:
+  /// **'Version Info'**
+  String get versionInfo;
+
+  /// 登出
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get logout;
+
+  /// 用户画像
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// 头像
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar'**
+  String get avatar;
+
+  /// 昵称
+  ///
+  /// In en, this message translates to:
+  /// **'Nickname'**
+  String get nickname;
+
+  /// 性别
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// 男
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get male;
+
+  /// 女
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get female;
+
+  /// 生日
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get birthday;
+
+  /// 手机号
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// 账号安全
+  ///
+  /// In en, this message translates to:
+  /// **'Account Security'**
+  String get accountSecurity;
+
+  /// 设置密码
+  ///
+  /// In en, this message translates to:
+  /// **'Set Password'**
+  String get setPassword;
+
+  /// 重置密码
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// 重置密码（场景名称）
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPasswordShort;
+
+  /// 请输入密码
   ///
   /// In en, this message translates to:
   /// **'Please enter password'**
   String get pleaseEnterPassword;
 
-  /// No description provided for @newPassword.
+  /// 新密码
   ///
   /// In en, this message translates to:
   /// **'New Password'**
   String get newPassword;
 
-  /// No description provided for @pleaseEnterNewPassword.
+  /// 请输入新密码
   ///
   /// In en, this message translates to:
   /// **'Please enter new password'**
   String get pleaseEnterNewPassword;
 
-  /// No description provided for @oldPassword.
+  /// 旧密码
   ///
   /// In en, this message translates to:
   /// **'Old Password'**
   String get oldPassword;
 
-  /// No description provided for @pleaseEnterOldPassword.
+  /// 请输入旧密码
   ///
   /// In en, this message translates to:
   /// **'Please enter old password'**
   String get pleaseEnterOldPassword;
 
-  /// No description provided for @newPasswordCannotBeSameAsOld.
+  /// 新密码不能与旧密码相同
   ///
   /// In en, this message translates to:
   /// **'New password cannot be the same as old password'**
   String get newPasswordCannotBeSameAsOld;
 
-  /// No description provided for @confirmPassword.
+  /// 确认密码
   ///
   /// In en, this message translates to:
   /// **'Confirm Password'**
   String get confirmPassword;
 
-  /// No description provided for @pleaseEnterConfirmPassword.
+  /// 请输入确认密码
   ///
   /// In en, this message translates to:
   /// **'Please enter confirm password'**
   String get pleaseEnterConfirmPassword;
 
-  /// No description provided for @passwordsNotMatch.
+  /// 两次输入密码不一致
   ///
   /// In en, this message translates to:
   /// **'Passwords do not match'**
   String get passwordsNotMatch;
 
-  /// xx不能为空 表单校验提示
+  /// 请输入验证码
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter verification code'**
+  String get pleaseEnterVerifyCode;
+
+  /// xx秒后重发
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds}s to resend'**
+  String resendAfterSeconds(int seconds);
+
+  /// 获取验证码
+  ///
+  /// In en, this message translates to:
+  /// **'Get Code'**
+  String get getVerifyCode;
+
+  /// 字段不能为空，表单校验提示
   ///
   /// In en, this message translates to:
   /// **'{field} cannot be empty'**
   String fieldNotEmptyTip(String field);
 
-  /// xx格式不正确 表单校验提示
+  /// 字段格式不正确，表单校验提示
   ///
   /// In en, this message translates to:
   /// **'{field} format is incorrect'**
   String fieldFormatErrorTip(String field);
+
+  /// 密码
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// 用户协议
+  ///
+  /// In en, this message translates to:
+  /// **'User Agreement'**
+  String get userAgreement;
+
+  /// 隐私政策
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// 请勾选用户协议和隐私政策
+  ///
+  /// In en, this message translates to:
+  /// **'Please agree to the User Agreement and Privacy Policy'**
+  String get agreeTermsFirst;
+
+  /// 登录失败，请检查账号密码
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed, please check your account and password'**
+  String get loginFailed;
+
+  /// 切换登录方式
+  ///
+  /// In en, this message translates to:
+  /// **'Switch login method'**
+  String get switchLoginType;
+
+  /// 没有账号？
+  ///
+  /// In en, this message translates to:
+  /// **'No account?'**
+  String get noAccount;
+
+  /// 已经有账号？
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get hasAccount;
+
+  /// 欢迎回来
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get welcomeBack;
+
+  /// 注册失败
+  ///
+  /// In en, this message translates to:
+  /// **'Registration failed'**
+  String get registerFailed;
+
+  /// 参数校验失败提示
+  ///
+  /// In en, this message translates to:
+  /// **'Parameter validation failed, please check your input'**
+  String get paramValidationError;
+
+  /// 网络异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Network error, please check your network connection'**
+  String get networkError;
+
+  /// 网络请求超时提示
+  ///
+  /// In en, this message translates to:
+  /// **'Network request timed out, please try again'**
+  String get networkTimeout;
+
+  /// 网络连接失败提示
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to connect to server, please try again later'**
+  String get networkConnectionFailed;
+
+  /// SSL证书错误提示
+  ///
+  /// In en, this message translates to:
+  /// **'Secure connection failed, please check your network settings'**
+  String get sslError;
+
+  /// 请求异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Request error, please try again'**
+  String get requestError;
+
+  /// 请求被取消提示
+  ///
+  /// In en, this message translates to:
+  /// **'Request has been cancelled'**
+  String get requestCancelled;
+
+  /// 响应异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Response error, please try again later'**
+  String get responseError;
+
+  /// 请求过于频繁提示
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests, please try again later'**
+  String get tooManyRequests;
+
+  /// 服务器错误提示
+  ///
+  /// In en, this message translates to:
+  /// **'Server error, please try again later'**
+  String get serverError;
+
+  /// 服务器维护提示
+  ///
+  /// In en, this message translates to:
+  /// **'Server is under maintenance, please try again later'**
+  String get serverMaintenance;
+
+  /// 未授权/登录过期提示
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication expired, please log in again'**
+  String get unauthorized;
+
+  /// 无权限访问提示
+  ///
+  /// In en, this message translates to:
+  /// **'Access denied, insufficient permissions'**
+  String get forbidden;
+
+  /// 资源未找到提示
+  ///
+  /// In en, this message translates to:
+  /// **'Requested resource not found'**
+  String get notFound;
+
+  /// 数据解析异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Data parsing error'**
+  String get dataParseError;
+
+  /// 下载失败提示
+  ///
+  /// In en, this message translates to:
+  /// **'Download failed, please try again'**
+  String get downloadFailed;
+
+  /// 上传失败提示
+  ///
+  /// In en, this message translates to:
+  /// **'Upload failed, please try again'**
+  String get uploadFailed;
+
+  /// 未知错误提示
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error, please try again'**
+  String get unknownError;
 }
 
 class _AppLocalizationsDelegate

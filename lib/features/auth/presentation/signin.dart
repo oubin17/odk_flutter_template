@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/config/env.dart';
-import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
+import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
@@ -57,7 +58,7 @@ class _SignInPageState extends State<SignInPage> {
   Future<void> _login() async {
     // 🔥 协议必选校验
     if (!_isAgree) {
-      AppToast.showToast("请勾选用户协议和隐私政策");
+      AppToast.showToast(L10nUtils.agreeTermsFirst);
       return;
     }
 
@@ -77,7 +78,7 @@ class _SignInPageState extends State<SignInPage> {
 
     AppToast.dismiss();
     if (userEntity == null) {
-      AppToast.showToast("登录失败，请检查账号密码");
+      AppToast.showToast(L10nUtils.loginFailed);
     } else {
       if (!mounted) return;
       NavigatorUtils.goNamed(RouteNames.home);
@@ -86,13 +87,13 @@ class _SignInPageState extends State<SignInPage> {
 
   // ====================== UI 组件拆分（对齐注册页） ======================
   Widget _signInTitle() {
-    return AppText.customerTitle("登录", 50.sp, FontWeight.bold);
+    return AppText.customerTitle(L10nUtils.login, 50.sp, FontWeight.bold);
   }
 
   Widget _accountInput() {
     return AppInput(
       controller: _accountController,
-      label: '账号',
+      label: L10nUtils.account,
       prefixIcon: Icon(
         Icons.phone_outlined,
         size: 32.w,
@@ -105,14 +106,16 @@ class _SignInPageState extends State<SignInPage> {
   Widget _passwordInput() {
     return AppInput(
       controller: _passwordController,
-      label: '密码',
+      label: L10nUtils.password,
       prefixIcon: Icon(
         Icons.password,
         size: 32.w,
         color: AppColors.textGray(context),
       ),
       validator: (value) {
-        if (value == null || value.isEmpty) return "密码不能为空";
+        if (value == null || value.isEmpty) {
+          return L10nUtils.fieldNotEmptyTip(L10nUtils.password);
+        }
         return null;
       },
     );
@@ -136,7 +139,7 @@ class _SignInPageState extends State<SignInPage> {
     return Align(
       alignment: Alignment.centerRight,
       child: AppTextButton(
-        text: '切换登录方式',
+        text: L10nUtils.switchLoginType,
         onTap: () => setState(() => _isPasswordLogin = !_isPasswordLogin),
       ),
     );
@@ -147,13 +150,15 @@ class _SignInPageState extends State<SignInPage> {
     return AppAgreementCheckbox(
       isAgree: _isAgree,
       onChanged: (value) => setState(() => _isAgree = value),
-      onUserAgreement: () => _toAgreementPage("用户协议", Env.userAgreementUrl),
-      onPrivacyPolicy: () => _toAgreementPage("隐私政策", Env.privacyPolicyUrl),
+      onUserAgreement: () =>
+          _toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
+      onPrivacyPolicy: () =>
+          _toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
     );
   }
 
   Widget _loginButton() {
-    return AppButton(onTap: _login, text: '登录');
+    return AppButton(onTap: _login, text: L10nUtils.login);
   }
 
   Widget _bottomRegisterText() {
@@ -162,10 +167,10 @@ class _SignInPageState extends State<SignInPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AppText.second("没有账号？"),
+          AppText.second(L10nUtils.noAccount),
           AppTextButton(
             onTap: () => NavigatorUtils.goNamed(RouteNames.signup),
-            text: '注册',
+            text: L10nUtils.register,
           ),
         ],
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/config/env.dart';
-// ignore: library_prefixes
-import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
+import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
@@ -15,7 +15,6 @@ import 'package:odk_flutter_template/widgets/app_countdown/verify_code_input.dar
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
-// 注册页面（优化版）
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -54,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
   /// 注册提交
   Future<void> _register() async {
     if (!_isAgree) {
-      AppToast.showToast("请勾选用户协议和隐私政策");
+      AppToast.showToast(L10nUtils.agreeTermsFirst);
       return;
     }
 
@@ -75,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     AppToast.dismiss();
     if (!response.success) {
-      AppToast.showToast(response.errorContext ?? "注册失败");
+      AppToast.showToast(response.errorContext ?? L10nUtils.registerFailed);
     } else {
       if (!mounted) return;
       NavigatorUtils.goNamed(RouteNames.home);
@@ -95,13 +94,13 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _registerTitle() {
-    return AppText.customerTitle("欢迎回来", 50.sp, FontWeight.bold);
+    return AppText.customerTitle(L10nUtils.welcomeBack, 50.sp, FontWeight.bold);
   }
 
   Widget _accountInput() {
     return AppInput(
       controller: _accountController,
-      label: '账号',
+      label: L10nUtils.account,
       prefixIcon: Icon(
         Icons.phone_outlined,
         size: 32.w,
@@ -129,13 +128,15 @@ class _SignUpPageState extends State<SignUpPage> {
     return AppAgreementCheckbox(
       isAgree: _isAgree,
       onChanged: (value) => setState(() => _isAgree = value),
-      onUserAgreement: () => _toAgreementPage("用户协议", Env.userAgreementUrl),
-      onPrivacyPolicy: () => _toAgreementPage("隐私政策", Env.privacyPolicyUrl),
+      onUserAgreement: () =>
+          _toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
+      onPrivacyPolicy: () =>
+          _toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
     );
   }
 
   Widget _registerButton() {
-    return AppButton(onTap: _register, text: '注册');
+    return AppButton(onTap: _register, text: L10nUtils.register);
   }
 
   Widget _bottomLoginText() {
@@ -144,10 +145,10 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          AppText.second("已经有账号？"),
+          AppText.second(L10nUtils.hasAccount),
           AppTextButton(
             onTap: () => NavigatorUtils.goNamed(RouteNames.signin),
-            text: '登录',
+            text: L10nUtils.login,
           ),
         ],
       ),

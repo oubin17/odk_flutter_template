@@ -4,7 +4,6 @@ import 'package:odk_flutter_template/features/home/domain/home_resume_service.da
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
-import 'package:odk_flutter_template/widgets/button/basic_app_button.dart';
 
 class ResumeLibraryPage extends StatefulWidget {
   const ResumeLibraryPage({super.key});
@@ -51,11 +50,11 @@ class _ResumeLibraryPageState extends State<ResumeLibraryPage> {
               _buildExtendInfoField(),
               const SizedBox(height: 16),
 
-              BasicAppButton(
-                onPressed: () {
+              AppButton(
+                onTap: () {
                   _submitResume();
                 },
-                title: '提交',
+                text: 'Submit',
               ),
             ],
           ),

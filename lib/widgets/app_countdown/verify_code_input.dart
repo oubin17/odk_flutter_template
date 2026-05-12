@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:odk_flutter_template/core/utils/tool_utils.dart' as ToolUtils;
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
+import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/domain/verify_code.dart';
 import 'package:odk_flutter_template/widgets/app_countdown/countdown_controller.dart';
@@ -31,14 +32,13 @@ import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 /// ),
 /// ```
 enum VerifyScene {
-  login("LOGIN", "登录"),
-  register("REGISTER", "注册"),
-  resetPassword("RESET_PASSWORD", "重置密码"),
-  common("COMMON", "通用");
+  login("LOGIN"),
+  register("REGISTER"),
+  resetPassword("RESET_PASSWORD"),
+  common("COMMON");
 
   final String code;
-  final String name;
-  const VerifyScene(this.code, this.name);
+  const VerifyScene(this.code);
 }
 
 enum VerifyType {
@@ -101,7 +101,7 @@ class VerifyCodeInput extends StatefulWidget {
     this.autovalidateMode,
   }) : assert(
          accountController != null || account != null,
-         'accountController 和 account 必须至少传入一个',
+         "Either accountController or account must be provided.",
        );
 
   @override
@@ -186,10 +186,10 @@ class _VerifyCodeInputState extends State<VerifyCodeInput> {
         ),
       );
       // 3. 返回唯一标识
-      AppToast.showToast("验证码发送成功");
+      AppToast.showToast(L10nUtils.success);
       return response.uniqueId;
     } catch (e) {
-      AppToast.showToast("验证码发送失败：$e");
+      AppToast.showToast(L10nUtils.responseError);
       return null;
     }
   }
@@ -208,7 +208,7 @@ class _VerifyCodeInputState extends State<VerifyCodeInput> {
               widget.validator ??
               (value) {
                 if (value == null || value.isEmpty) {
-                  return "请输入验证码";
+                  return L10nUtils.pleaseEnterVerifyCode;
                 }
                 return null;
               },
@@ -265,7 +265,7 @@ class _AppCodeInputState extends State<AppCodeInput> {
       onChanged: widget.onChanged,
       autovalidateMode: widget.autovalidateMode,
       decoration: InputDecoration(
-        hintText: "请输入验证码",
+        hintText: L10nUtils.pleaseEnterVerifyCode,
         hintStyle: TextStyle(
           fontSize: 26.sp,
           color: AppColors.textGray(context),
@@ -308,7 +308,9 @@ class _AppCodeInputState extends State<AppCodeInput> {
           child: TextButton(
             onPressed: widget.isCounting ? null : widget.onSendCode,
             child: AppText(
-              widget.isCounting ? "${widget.countTime}s后重发" : "获取验证码",
+              widget.isCounting
+                  ? L10nUtils.resendAfterSeconds(widget.countTime)
+                  : L10nUtils.getVerifyCode,
               color: widget.isCounting
                   ? AppColors.textGray(context)
                   : AppColors.primary(context),

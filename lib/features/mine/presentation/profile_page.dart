@@ -81,74 +81,12 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
               AppGap.hSuperSmall,
-              // Container(
-              //   padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-              //   decoration: BoxDecoration(
-              //     color: Colors.blue[50],
-              //     borderRadius: BorderRadius.circular(12.w),
-              //     border: Border.all(color: Colors.blue[200]!),
-              //   ),
-              //   child: AppText(
-              //     user?.isAdmin == true ? "管理员" : "员工",
-              //     size: 28.sp,
-              //     weight: FontWeight.w200,
-              //     color: Colors.blue[700],
-              //   ),
-              // ),
+
               const Divider(),
-              // _buildInfoRow(
-              //   context,
-              //   Icons.badge,
-              //   "工号",
-              //   user?.accessToken.tokenValue ?? "",
-              // ),
-              // AppGap.hSuperSmall,
-              // _buildInfoRow(
-              //   context,
-              //   Icons.check_circle_outline,
-              //   "状态",
-              //   user?.userStatus == "0" ? "正常" : "异常",
-              // ),
             ],
           ),
         );
       },
-    );
-  }
-
-  /// 信息行组件
-  Widget _buildInfoRow(
-    BuildContext context,
-    IconData icon,
-    String label,
-    String value,
-  ) {
-    return Row(
-      children: [
-        Icon(icon, size: 32.w, color: AppColors.textSecond(context)),
-        AppGap.wSmall,
-        AppText.second(label),
-        const Spacer(),
-        AppText.second(value),
-      ],
-    );
-  }
-
-  /// 占位卡片
-  Widget _buildSystemSettingCard(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return AppCard(
-      padding: EdgeInsets.zero,
-      child: ListTile(
-        leading: Icon(icon, color: AppColors.textSecond(context)),
-        title: Text(title),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: onTap,
-      ),
     );
   }
 }

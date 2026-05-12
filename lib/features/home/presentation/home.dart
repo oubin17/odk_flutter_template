@@ -46,11 +46,11 @@ class _HomePageState extends State<HomePage> {
           const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
           const BottomNavigationBarItem(
             icon: Icon(Icons.private_connectivity),
-            label: '私有库',
+            label: 'Private Library',
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.library_books),
-            label: '简历库',
+            label: 'Resume Library',
           ),
           const BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的'),
         ],
