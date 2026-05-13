@@ -6,7 +6,7 @@ import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
-import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';

@@ -10,6 +10,7 @@ import 'package:odk_flutter_template/features/mine/presentation/security_setting
 import 'package:odk_flutter_template/features/mine/presentation/system_setting_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/user_info_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/user_info_update_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/version_info_page.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/pages/agreement_page.dart';
 import 'package:odk_flutter_template/routes/pages/todo_detail.dart';
@@ -28,6 +29,7 @@ class RouteNames {
   static const String commonSetting = 'CommonSetting';
   static const String securitySetting = 'SecuritySetting';
   static const String passwordManager = 'PasswordManager';
+  static const String versionInfo = 'VersionInfo';
   static const String home = 'Home';
   static const String detail = 'Detail';
   static const String notFound = 'NotFound';
@@ -44,6 +46,7 @@ class RoutePaths {
   static const String commonSetting = '/commonSetting';
   static const String securitySetting = '/securitySetting';
   static const String passwordManager = '/passwordManager';
+  static const String versionInfo = '/version';
   static const String home = '/home';
   static const String detail = '/detail/:id';
   static const String notFound = '/notFound';
@@ -113,6 +116,11 @@ class AppRouter {
         path: RoutePaths.userInfo,
         name: RouteNames.userInfo,
         builder: (context, state) => const UserInfoPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.versionInfo,
+        name: RouteNames.versionInfo,
+        builder: (context, state) => const VersionInfoPage(),
       ),
       GoRoute(
         path: RoutePaths.userInfoUpdate,

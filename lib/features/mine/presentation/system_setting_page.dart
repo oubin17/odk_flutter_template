@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
-import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
@@ -46,6 +46,20 @@ class SystemSettingPage extends StatelessWidget {
     );
   }
 
+  Widget _buildVersionInfoContext(BuildContext context) {
+    return Column(
+      children: [
+        AppListItem(
+          title: L10nUtils.versionInfo,
+          onTap: () {
+            NavigatorUtils.pushNamed(RouteNames.versionInfo);
+          },
+        ),
+        Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +72,8 @@ class SystemSettingPage extends StatelessWidget {
           _buildAccountContext(context),
           AppTip(tip: L10nUtils.general),
           _buildSystemContext(context),
+          AppTip(tip: "帮助&关于"),
+          _buildVersionInfoContext(context),
           AppListItem(
             left: Icon(Icons.logout, color: AppColors.textSecond(context)),
             title: L10nUtils.logout,

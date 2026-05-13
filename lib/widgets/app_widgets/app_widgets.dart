@@ -939,3 +939,37 @@ class AppHeightPlaceholder extends StatelessWidget {
     return SizedBox(height: height.h);
   }
 }
+
+/// 红点标记组件（用于新版本提示、未读消息、新功能标记等场景）
+///
+/// 示例：
+/// ```dart
+/// Row(
+///   children: [
+///     AppDot(),         // 默认红色小圆点
+///     AppGap.wSmall,
+///     AppText('发现新版本'),
+///   ],
+/// )
+/// ```
+class AppDot extends StatelessWidget {
+  /// 圆点大小（直径）
+  final double size;
+
+  /// 圆点颜色，默认为错误红 [AppColors.error]
+  final Color? color;
+
+  const AppDot({super.key, this.size = 16, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size.w,
+      height: size.w,
+      decoration: BoxDecoration(
+        color: color ?? AppColors.error,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}

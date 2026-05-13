@@ -1,4 +1,4 @@
-import 'package:odk_flutter_template/features/auth/data/api/verify_code.dart';
+import 'package:odk_flutter_template/features/auth/data/api/verify_code_api.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_response.dart';
 

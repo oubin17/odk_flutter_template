@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
-import 'package:odk_flutter_template/features/auth/domain/verify_code.dart';
+import 'package:odk_flutter_template/features/auth/service/verify_code_service.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 /// 验证码工具类（提供全项目复用的发送验证码能力）

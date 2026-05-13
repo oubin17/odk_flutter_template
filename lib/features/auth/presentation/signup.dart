@@ -6,7 +6,7 @@ import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
-import 'package:odk_flutter_template/features/auth/domain/auth_service.dart';
+import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';

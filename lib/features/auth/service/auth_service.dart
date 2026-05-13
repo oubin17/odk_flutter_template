@@ -1,6 +1,4 @@
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
-import 'package:odk_flutter_template/core/storage/secure_storage_manager.dart';
-import 'package:odk_flutter_template/core/storage/storage_key.dart';
 import 'package:odk_flutter_template/core/utils/encrypt_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/api/auth_api.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
@@ -69,15 +67,5 @@ class AuthService {
   /// 登出后需要执行的操作，清除 storage 中的所有数据
   Future<void> afterLogout() async {
     await UserSessionService().clearSession(clearAllStorage: true);
-  }
-
-  /// 检查用户是否已登录
-  Future<bool> checkLoggedIn() async {
-    // 读取加密存储中的 token
-    final token = await SecureStorageManager().read(StorageKey.token);
-    // 不为空且不为空字符串，说明已登录
-    if (token == null || token.isEmpty) return false;
-    await AuthApi().validateToken();
-    return true;
   }
 }
