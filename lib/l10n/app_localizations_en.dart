@@ -271,4 +271,34 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get noNetworkConnection =>
       'No network connection, please check network settings';
+
+  @override
+  String get appName => 'App Name';
+
+  @override
+  String get packageName => 'Package Name';
+
+  @override
+  String get versionNumber => 'Version';
+
+  @override
+  String get buildNumber => 'Build Number';
+
+  @override
+  String get checkingUpdate => 'Checking for updates...';
+
+  @override
+  String newVersionFound(String version) {
+    return 'New version available v$version';
+  }
+
+  @override
+  String get updateNow => 'Update Now';
+
+  @override
+  String get alreadyLatestVersion => 'Already up to date';
+
+  @override
+  String get cannotOpenAppStore =>
+      'Unable to open app store, please search for updates manually';
 }

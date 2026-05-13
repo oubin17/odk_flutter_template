@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
+import 'package:odk_flutter_template/widgets/mixins/mounted_safe_mixin.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
 import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
@@ -22,7 +23,7 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage> with MountedSafeMixin {
   // 表单控制器
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _accountController = TextEditingController();
@@ -76,8 +77,9 @@ class _SignUpPageState extends State<SignUpPage> {
     if (!response.success) {
       AppToast.showToast(response.errorContext ?? L10nUtils.registerFailed);
     } else {
-      if (!mounted) return;
-      NavigatorUtils.goNamed(RouteNames.home);
+      mountedSafeCallback(() {
+        NavigatorUtils.goNamed(RouteNames.home);
+      });
     }
   }
 

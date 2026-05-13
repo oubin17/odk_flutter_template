@@ -262,4 +262,33 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noNetworkConnection => '当前无网络连接，请检查网络设置';
+
+  @override
+  String get appName => '应用名称';
+
+  @override
+  String get packageName => '包名';
+
+  @override
+  String get versionNumber => '版本号';
+
+  @override
+  String get buildNumber => '构建号';
+
+  @override
+  String get checkingUpdate => '正在检查更新...';
+
+  @override
+  String newVersionFound(String version) {
+    return '发现新版本 v$version';
+  }
+
+  @override
+  String get updateNow => '立即更新';
+
+  @override
+  String get alreadyLatestVersion => '已是最新版本';
+
+  @override
+  String get cannotOpenAppStore => '无法打开应用市场，请手动搜索更新';
 }

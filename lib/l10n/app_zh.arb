@@ -98,5 +98,22 @@
   "unknownError": "未知错误，请重试",
 
   "networkRestored": "网络连接恢复",
-  "noNetworkConnection": "当前无网络连接，请检查网络设置"
+  "noNetworkConnection": "当前无网络连接，请检查网络设置",
+
+  "appName": "应用名称",
+  "packageName": "包名",
+  "versionNumber": "版本号",
+  "buildNumber": "构建号",
+  "checkingUpdate": "正在检查更新...",
+  "newVersionFound": "发现新版本 v{version}",
+  "@newVersionFound": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateNow": "立即更新",
+  "alreadyLatestVersion": "已是最新版本",
+  "cannotOpenAppStore": "无法打开应用市场，请手动搜索更新"
 }

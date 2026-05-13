@@ -595,6 +595,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No network connection, please check network settings'**
   String get noNetworkConnection;
+
+  /// 应用名称
+  ///
+  /// In en, this message translates to:
+  /// **'App Name'**
+  String get appName;
+
+  /// 包名
+  ///
+  /// In en, this message translates to:
+  /// **'Package Name'**
+  String get packageName;
+
+  /// 版本号
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get versionNumber;
+
+  /// 构建号
+  ///
+  /// In en, this message translates to:
+  /// **'Build Number'**
+  String get buildNumber;
+
+  /// 正在检查更新
+  ///
+  /// In en, this message translates to:
+  /// **'Checking for updates...'**
+  String get checkingUpdate;
+
+  /// 发现新版本
+  ///
+  /// In en, this message translates to:
+  /// **'New version available v{version}'**
+  String newVersionFound(String version);
+
+  /// 立即更新
+  ///
+  /// In en, this message translates to:
+  /// **'Update Now'**
+  String get updateNow;
+
+  /// 已是最新版本
+  ///
+  /// In en, this message translates to:
+  /// **'Already up to date'**
+  String get alreadyLatestVersion;
+
+  /// 无法打开应用市场
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to open app store, please search for updates manually'**
+  String get cannotOpenAppStore;
 }
 
 class _AppLocalizationsDelegate

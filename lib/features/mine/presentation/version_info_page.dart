@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/core/utils/version_utils.dart';
 import 'package:odk_flutter_template/features/mine/service/version_check_service.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/features/mine/data/models/app_version_info.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
+import 'package:odk_flutter_template/widgets/mixins/mounted_safe_mixin.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class VersionInfoPage extends StatefulWidget {
   const VersionInfoPage({super.key});
@@ -17,8 +19,9 @@ class VersionInfoPage extends StatefulWidget {
   State<VersionInfoPage> createState() => _VersionInfoPageState();
 }
 
-class _VersionInfoPageState extends State<VersionInfoPage> {
-  PackageInfo? _packageInfo;
+class _VersionInfoPageState extends State<VersionInfoPage>
+    with MountedSafeMixin {
+  final _globalInfo = GlobalInfo.instance;
 
   // 版本更新相关状态
   bool _isChecking = true; // 是否正在检查更新
@@ -28,68 +31,55 @@ class _VersionInfoPageState extends State<VersionInfoPage> {
   @override
   void initState() {
     super.initState();
-    _initPackageInfo();
-  }
-
-  Future<void> _initPackageInfo() async {
-    final info = await PackageInfo.fromPlatform();
-    if (mounted) {
-      setState(() {
-        _packageInfo = info;
-      });
-      // 获取到包信息后，自动检查更新
-      _checkUpdate();
-    }
+    _checkUpdate();
   }
 
   /// 检查版本更新
   Future<void> _checkUpdate() async {
-    if (!mounted) return;
-
+    // 同步操作，此时 Widget 一定还是 mounted 的，直接 setState 即可
     setState(() {
       _isChecking = true;
     });
 
     try {
       final result = await VersionCheckService().checkUpdate();
-      if (mounted) {
-        setState(() {
-          _isChecking = false;
-          _hasUpdate = result.hasUpdate;
-          _latestVersion = result.latestVersion;
-        });
-      }
+      // await 之后 Widget 可能已销毁，需要安全检查
+      mountedSafeSetState(() {
+        _isChecking = false;
+        _hasUpdate = result.hasUpdate;
+        _latestVersion = result.latestVersion;
+      });
     } catch (e) {
-      if (mounted) {
-        setState(() {
-          _isChecking = false;
-          _hasUpdate = false;
-        });
-      }
+      mountedSafeSetState(() {
+        _isChecking = false;
+        _hasUpdate = false;
+      });
     }
   }
 
   /// 点击更新按钮，跳转到应用市场
   Future<void> _onUpdateTap() async {
-    if (_latestVersion == null || _packageInfo == null) return;
+    if (_latestVersion == null) return;
 
     final success = await VersionCheckService().goToUpdate(
       _latestVersion!,
-      packageName: _packageInfo!.packageName,
+      packageName: _globalInfo.packageName,
     );
 
-    if (!success && mounted) {
+    if (!success) {
       // 如果跳转失败，尝试使用工具类直接跳转
       final fallbackSuccess = await VersionUtils.launchAppStore(
         androidUrl: _latestVersion!.androidUrl,
         iosUrl: _latestVersion!.iosUrl,
       );
-      if (!fallbackSuccess && mounted) {
-        AppToast.showNotify(
-          '无法打开应用市场，请手动搜索更新',
-          null,
-          notifyType: NotifyType.warning,
-        );
+      if (!fallbackSuccess) {
+        mountedSafeCallback(() {
+          AppToast.showNotify(
+            L10nUtils.cannotOpenAppStore,
+            null,
+            notifyType: NotifyType.warning,
+          );
+        });
       }
     }
   }
@@ -115,98 +105,80 @@ class _VersionInfoPageState extends State<VersionInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgPage(context),
-      appBar: BasicAppBar(title: AppText('版本信息')),
-      body: _packageInfo == null
-          ? Center(
-              child: CircularProgressIndicator(
-                color: AppColors.primary(context),
-                strokeWidth: 2.w,
+      appBar: BasicAppBar(title: AppText(L10nUtils.versionInfo)),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              AppGap.hXL,
+              // 应用图标
+              AppAvatar(
+                assetPath: Assets.images.launcherIcon.launcher.path,
+                size: 160,
+                shape: AppAvatarShape.rounded,
+                borderRadius: 24,
               ),
-            )
-          : SingleChildScrollView(
-              child: SizedBox(
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    AppGap.hXL,
-                    // 应用图标
-                    AppAvatar(
-                      assetPath: Assets.images.launcherIcon.launcher.path,
-                      size: 160,
-                      shape: AppAvatarShape.rounded,
-                      borderRadius: 24,
-                    ),
-                    AppGap.hNormal,
-                    // 应用名称
-                    AppText(
-                      _packageInfo!.appName,
-                      size: 36.sp,
-                      weight: FontWeight.w600,
-                    ),
-                    AppGap.hSuperSmall,
-                    // 版本号
-                    AppText.second(
-                      'v${_packageInfo!.version} (${_packageInfo!.buildNumber})',
-                    ),
-                    AppGap.hNormal,
+              AppGap.hNormal,
+              // 应用名称
+              AppText(
+                _globalInfo.appName,
+                size: 36.sp,
+                weight: FontWeight.w600,
+              ),
+              AppGap.hSuperSmall,
+              // 版本号
+              AppText.second(
+                'v${_globalInfo.appVersion} (${_globalInfo.appBuild})',
+              ),
+              AppGap.hNormal,
 
-                    // ====== 版本更新提示区域 ======
-                    _buildUpdateHint(context),
+              // ====== 版本更新提示区域 ======
+              _buildUpdateHint(context),
 
-                    AppGap.hXL,
-                    // 版本详情卡片
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.w),
-                      child: AppCard(
-                        showShadow: false,
-                        bg: AppColors.card(context),
-                        child: Column(
-                          children: [
-                            _buildInfoRow(
-                              context,
-                              label: '应用名称',
-                              value: _packageInfo!.appName,
-                            ),
-                            Divider(
-                              height: 1.h,
-                              color: AppColors.divider(context),
-                            ),
-                            _buildInfoRow(
-                              context,
-                              label: '包名',
-                              value: _packageInfo!.packageName,
-                            ),
-                            Divider(
-                              height: 1.h,
-                              color: AppColors.divider(context),
-                            ),
-                            _buildInfoRow(
-                              context,
-                              label: '版本号',
-                              value: _packageInfo!.version,
-                            ),
-                            Divider(
-                              height: 1.h,
-                              color: AppColors.divider(context),
-                            ),
-                            _buildInfoRow(
-                              context,
-                              label: '构建号',
-                              value: _packageInfo!.buildNumber,
-                            ),
-                          ],
-                        ),
+              AppGap.hXL,
+              // 版本详情卡片
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: AppCard(
+                  showShadow: false,
+                  bg: AppColors.card(context),
+                  child: Column(
+                    children: [
+                      _buildInfoRow(
+                        context,
+                        label: L10nUtils.appName,
+                        value: _globalInfo.appName,
                       ),
-                    ),
-                    AppGap.hXL,
-                    // 版权信息
-                    AppText.tip(
-                      '© ${DateTime.now().year} ${_packageInfo!.appName}',
-                    ),
-                  ],
+                      Divider(height: 1.h, color: AppColors.divider(context)),
+                      _buildInfoRow(
+                        context,
+                        label: L10nUtils.packageName,
+                        value: _globalInfo.packageName,
+                      ),
+                      Divider(height: 1.h, color: AppColors.divider(context)),
+                      _buildInfoRow(
+                        context,
+                        label: L10nUtils.versionNumber,
+                        value: _globalInfo.appVersion,
+                      ),
+                      Divider(height: 1.h, color: AppColors.divider(context)),
+                      _buildInfoRow(
+                        context,
+                        label: L10nUtils.buildNumber,
+                        value: _globalInfo.appBuild,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+              AppGap.hXL,
+              // 版权信息
+              AppText.tip('© ${DateTime.now().year} ${_globalInfo.appName}'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -228,7 +200,10 @@ class _VersionInfoPageState extends State<VersionInfoPage> {
               ),
             ),
             AppGap.wSmall,
-            AppText.tip('正在检查更新...', color: AppColors.textGray(context)),
+            AppText.tip(
+              L10nUtils.checkingUpdate,
+              color: AppColors.textGray(context),
+            ),
           ],
         ),
       );
@@ -251,7 +226,7 @@ class _VersionInfoPageState extends State<VersionInfoPage> {
                   const AppDot(),
                   AppGap.wSmall,
                   AppText(
-                    '发现新版本 v${_latestVersion!.version}',
+                    L10nUtils.newVersionFound(_latestVersion!.version),
                     size: 28.sp,
                     weight: FontWeight.w500,
                     color: AppColors.primaryDark(context),
@@ -270,7 +245,11 @@ class _VersionInfoPageState extends State<VersionInfoPage> {
               ],
               AppGap.hNormal,
               // 更新按钮
-              AppButton(text: '立即更新', height: 72.h, onTap: _onUpdateTap),
+              AppButton(
+                text: L10nUtils.updateNow,
+                height: 72.h,
+                onTap: _onUpdateTap,
+              ),
             ],
           ),
         ),
@@ -285,7 +264,7 @@ class _VersionInfoPageState extends State<VersionInfoPage> {
         children: [
           Icon(Icons.check_circle, size: 28.w, color: AppColors.success),
           AppGap.wSmall,
-          AppText.tip('已是最新版本', color: AppColors.success),
+          AppText.tip(L10nUtils.alreadyLatestVersion, color: AppColors.success),
         ],
       ),
     );

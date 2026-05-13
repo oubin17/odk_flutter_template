@@ -134,4 +134,17 @@ class L10nUtils {
   // ======================== 网络状态 ========================
   static String get networkRestored => _localizations!.networkRestored;
   static String get noNetworkConnection => _localizations!.noNetworkConnection;
+
+  // ======================== 版本信息页 ========================
+  static String get appName => _localizations!.appName;
+  static String get packageName => _localizations!.packageName;
+  static String get versionNumber => _localizations!.versionNumber;
+  static String get buildNumber => _localizations!.buildNumber;
+  static String get checkingUpdate => _localizations!.checkingUpdate;
+  static String newVersionFound(String version) =>
+      _localizations!.newVersionFound(version);
+  static String get updateNow => _localizations!.updateNow;
+  static String get alreadyLatestVersion =>
+      _localizations!.alreadyLatestVersion;
+  static String get cannotOpenAppStore => _localizations!.cannotOpenAppStore;
 }
