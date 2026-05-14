@@ -141,9 +141,10 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
               width: double.infinity,
               height: double.infinity,
             ),
-            // 内容区域
+            // 主内容区域
             Column(
               children: [
+                // 可滚动内容
                 Expanded(
                   child: SingleChildScrollView(
                     padding: EdgeInsets.symmetric(
@@ -189,26 +190,29 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
                     ),
                   ),
                 ),
+                // 底部固定区域
                 _bottomFixedArea(context),
               ],
             ),
           ],
         ),
       ),
+      bottomNavigationBar: _bottomNavWidget(),
     );
   }
 
   Widget _bottomFixedArea(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
-      child: Column(
-        children: [
-          _loginButton(context),
-          _agreementWidget(context),
-          AppGap.hSuperSmall,
-          _bottomNavWidget(),
-          AppGap.hSuperSmall,
-        ],
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _loginButton(context),
+            _agreementWidget(context),
+            // _bottomNavWidget(),
+          ],
+        ),
       ),
     );
   }

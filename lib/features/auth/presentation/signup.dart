@@ -101,59 +101,82 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
       extendBody: true,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AppGap.hLarge,
-                      AppGap.hLarge,
-                      _appLogo(),
-                      AppGap.hLarge,
-                      _registerTitle(),
-                      AppGap.hLarge,
-                      accountInput(
-                        suffixIcon: ClearButton(controller: accountController),
+            // 背景图
+            Image.asset(
+              Assets.images.login.loginRegist.path,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+            Column(
+              children: [
+                // 可滚动内容区域
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.w,
+                      vertical: 88.h,
+                    ),
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // AppGap.hLarge,
+                          // AppGap.hLarge,
+                          // _appLogo(),
+                          AppGap.hLarge,
+                          _registerTitle(),
+                          AppGap.hLarge,
+                          accountInput(
+                            suffixIcon: ClearButton(
+                              controller: accountController,
+                            ),
+                          ),
+                          AppGap.hSmall,
+                          VerifyCodeInput(
+                            accountController: accountController,
+                            verifyScene: VerifyScene.register,
+                            verifyType: VerifyType.mobile,
+                            verifyCodeController: verifyCodeController,
+                            onUniqueIdChanged: (uniqueId) {
+                              context
+                                      .read<SignUpViewModel>()
+                                      .verifyCodeUniqueId =
+                                  uniqueId;
+                            },
+                          ),
+                        ],
                       ),
-                      AppGap.hSmall,
-                      VerifyCodeInput(
-                        accountController: accountController,
-                        verifyScene: VerifyScene.register,
-                        verifyType: VerifyType.mobile,
-                        verifyCodeController: verifyCodeController,
-                        onUniqueIdChanged: (uniqueId) {
-                          context.read<SignUpViewModel>().verifyCodeUniqueId =
-                              uniqueId;
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+                // 底部固定区域
+                _bottomFixedArea(context),
+              ],
             ),
-            _bottomFixedArea(context),
           ],
         ),
       ),
+      bottomNavigationBar: _bottomNavWidget(),
     );
   }
 
   Widget _bottomFixedArea(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
-      child: Column(
-        children: [
-          _registerButton(context),
-          _agreementWidget(context),
-          AppGap.hSuperSmall,
-          _bottomNavWidget(),
-          AppGap.hSuperSmall,
-        ],
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _registerButton(context),
+            _agreementWidget(context),
+            // _bottomNavWidget(),
+          ],
+        ),
       ),
     );
   }
