@@ -7,8 +7,14 @@ class UserProfileEntity {
   String? userName;
   String? gender;
   String? birthDay;
+  String? avatarUrl;
 
-  UserProfileEntity({this.userName, this.gender, this.birthDay});
+  UserProfileEntity({
+    this.userName,
+    this.gender,
+    this.birthDay,
+    this.avatarUrl,
+  });
 
   factory UserProfileEntity.fromJson(Map<String, dynamic> json) =>
       _$UserProfileEntityFromJson(json);

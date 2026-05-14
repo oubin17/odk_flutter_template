@@ -35,13 +35,29 @@ class UserInfoPage extends StatelessWidget {
                   right: Padding(
                     padding: const EdgeInsets.only(right: 20.0),
                     child: AppAvatar(
-                      assetPath: user?.isAdmin == true
-                          ? Assets.images.profile.admin.path
-                          : Assets.images.profile.employee.path,
+                      imgUrl:
+                          (user?.userProfile?.avatarUrl != null &&
+                              user!.userProfile!.avatarUrl!.isNotEmpty)
+                          ? user.userProfile!.avatarUrl
+                          : null,
+                      assetPath:
+                          (user?.userProfile?.avatarUrl == null ||
+                              user!.userProfile!.avatarUrl!.isEmpty)
+                          ? (user?.isAdmin == true
+                                ? Assets.images.profile.admin.path
+                                : Assets.images.profile.employee.path)
+                          : null,
                       size: 80.w,
                     ),
                   ),
-                  showArrow: false,
+                  onTap: () => NavigatorUtils.pushNamed(
+                    RouteNames.userInfoUpdate,
+                    queryParameters: {
+                      'title': L10nUtils.avatar,
+                      'value': user?.userProfile?.avatarUrl ?? "",
+                      'type': UserInfoUpdateType.avatar.index.toString(),
+                    },
+                  ),
                   // desc: "1.0.0",
                 ),
                 Divider(height: 1.h, color: AppColors.divider(context)),

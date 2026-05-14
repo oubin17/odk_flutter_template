@@ -99,6 +99,20 @@
   "@aboutUs": {
     "description": "关于我们"
   },
+  "helpAbout": "Help & About",
+  "@helpAbout": {
+    "description": "帮助&关于"
+  },
+
+  "iHaveReadAndAgree": "I have read and agree to the",
+  "@iHaveReadAndAgree": {
+    "description": "我已阅读并同意"
+  },
+  "andText": "and",
+  "@andText": {
+    "description": "和"
+  },
+
   "deviceInfo": "Device Info",
   "@deviceInfo": {
     "description": "设备信息"
@@ -405,5 +419,38 @@
   "cannotOpenAppStore": "Unable to open app store, please search for updates manually",
   "@cannotOpenAppStore": {
     "description": "无法打开应用市场"
+  },
+
+  "takePhoto": "Take Photo",
+  "@takePhoto": {
+    "description": "拍照"
+  },
+  "chooseFromAlbum": "Choose from Album",
+  "@chooseFromAlbum": {
+    "description": "从相册选择"
+  },
+  "cameraPermissionDenied": "Camera permission is required to take photos",
+  "@cameraPermissionDenied": {
+    "description": "需要相机权限才能拍照"
+  },
+  "photoPermissionDenied": "Photo library permission is required to select photos",
+  "@photoPermissionDenied": {
+    "description": "需要相册权限才能选择照片"
+  },
+  "permissionDeniedTip": "Permission denied, please enable in Settings",
+  "@permissionDeniedTip": {
+    "description": "权限被拒绝，请在设置中开启"
+  },
+  "avatarUpdateSuccess": "Avatar updated successfully",
+  "@avatarUpdateSuccess": {
+    "description": "头像更新成功"
+  },
+  "selectAvatar": "Select Avatar",
+  "@selectAvatar": {
+    "description": "选择头像"
+  },
+  "saving": "Saving...",
+  "@saving": {
+    "description": "保存中"
   }
 }

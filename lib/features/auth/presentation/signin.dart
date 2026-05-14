@@ -33,7 +33,7 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
   // ====================== 业务逻辑 ======================
 
   /// 登录提交
-  Future<void> _login() async {
+  Future<void> _login(BuildContext context) async {
     final vm = context.read<SignInViewModel>();
 
     // 协议校验
@@ -93,7 +93,7 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
   }
 
   /// 切换登录方式
-  Widget _switchLoginType() {
+  Widget _switchLoginType(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: AppTextButton(
@@ -104,12 +104,12 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
   }
 
   /// 登录按钮 — 监听 isLoading 控制禁用状态
-  Widget _loginButton() {
+  Widget _loginButton(BuildContext context) {
     return Selector<SignInViewModel, bool>(
       selector: (_, vm) => vm.isLoading,
       builder: (_, isLoading, _) {
         return AppButton(
-          onTap: isLoading ? null : _login,
+          onTap: isLoading ? null : () => _login(context),
           text: L10nUtils.login,
         );
       },
@@ -121,11 +121,11 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => SignInViewModel(),
-      child: _buildScaffold(),
+      builder: (context, child) => _buildScaffold(context),
     );
   }
 
-  Widget _buildScaffold() {
+  Widget _buildScaffold(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBody: true,
@@ -142,69 +142,114 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
               height: double.infinity,
             ),
             // 内容区域
-            SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AppGap.hLarge,
-                    AppGap.hLarge,
-                    _signInTitle(),
-                    AppGap.hNormal,
-                    accountInput(),
-                    AppGap.hNormal,
-                    // 动态切换登录方式
-                    Selector<SignInViewModel, bool>(
-                      selector: (_, vm) => vm.isPasswordLogin,
-                      builder: (_, isPasswordLogin, _) {
-                        if (isPasswordLogin) {
-                          return _passwordInput();
-                        }
-                        return VerifyCodeInput(
-                          accountController: accountController,
-                          verifyScene: VerifyScene.login,
-                          verifyType: VerifyType.mobile,
-                          verifyCodeController: verifyCodeController,
-                          onUniqueIdChanged: (uniqueId) {
-                            context.read<SignInViewModel>().verifyCodeUniqueId =
-                                uniqueId;
-                          },
-                        );
-                      },
+            Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.w,
+                      vertical: 88.h,
                     ),
-                    AppGap.hSuperSmall,
-                    _switchLoginType(),
-                    SizedBox(height: 200.h),
-                    _loginButton(),
-                    _agreementWidget(),
-                    AppGap.hNormal,
-                  ],
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AppGap.hLarge,
+                          AppGap.hLarge,
+                          _signInTitle(),
+                          AppGap.hNormal,
+                          accountInput(),
+                          AppGap.hNormal,
+                          // 动态切换登录方式
+                          Selector<SignInViewModel, bool>(
+                            selector: (_, vm) => vm.isPasswordLogin,
+                            builder: (_, isPasswordLogin, _) {
+                              if (isPasswordLogin) {
+                                return _passwordInput();
+                              }
+                              return VerifyCodeInput(
+                                accountController: accountController,
+                                verifyScene: VerifyScene.login,
+                                verifyType: VerifyType.mobile,
+                                verifyCodeController: verifyCodeController,
+                                onUniqueIdChanged: (uniqueId) {
+                                  context
+                                          .read<SignInViewModel>()
+                                          .verifyCodeUniqueId =
+                                      uniqueId;
+                                },
+                              );
+                            },
+                          ),
+                          AppGap.hSuperSmall,
+                          _switchLoginType(context),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                _bottomFixedArea(context),
+              ],
             ),
           ],
         ),
       ),
-      bottomNavigationBar: authBottomNav(
-        hint: L10nUtils.noAccount,
-        actionText: L10nUtils.register,
-        onTap: () => NavigatorUtils.goNamed(RouteNames.signup),
+    );
+  }
+
+  Widget _bottomFixedArea(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+      child: Column(
+        children: [
+          _loginButton(context),
+          _agreementWidget(context),
+          AppGap.hSuperSmall,
+          _bottomNavWidget(),
+          AppGap.hSuperSmall,
+        ],
       ),
     );
   }
 
-  /// 协议勾选组件
-  Widget _agreementWidget() {
-    final vm = context.read<SignInViewModel>();
-    return AppAgreementCheckbox(
-      isAgree: vm.isAgree,
-      onChanged: (value) => vm.isAgree = value,
-      onUserAgreement: () =>
-          toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
-      onPrivacyPolicy: () =>
-          toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
+  Widget _bottomNavWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AppText.second(L10nUtils.noAccount),
+        AppTextButton(
+          onTap: () => NavigatorUtils.goNamed(RouteNames.signup),
+          text: L10nUtils.register,
+        ),
+      ],
     );
+  }
+
+  /// 协议勾选组件
+  Widget _agreementWidget(BuildContext context) {
+    return Selector<SignInViewModel, bool>(
+      selector: (_, vm) => vm.isAgree,
+      builder: (_, isAgree, _) {
+        return AppAgreementCheckbox(
+          isAgree: isAgree,
+          onChanged: (value) => context.read<SignInViewModel>().isAgree = value,
+          onUserAgreement: () =>
+              toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
+          onPrivacyPolicy: () =>
+              toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
+        );
+      },
+    );
+
+    // final vm = context.read<SignInViewModel>();
+    // return AppAgreementCheckbox(
+    //   isAgree: vm.isAgree,
+    //   onChanged: (value) => vm.isAgree = value,
+    //   onUserAgreement: () =>
+    //       toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
+    //   onPrivacyPolicy: () =>
+    //       toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
+    // );
   }
 }

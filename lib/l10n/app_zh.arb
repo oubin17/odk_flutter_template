@@ -11,6 +11,9 @@
   "common": "通用",
   "login": "登录",
   "register": "注册",
+  "iHaveReadAndAgree": "我已阅读并同意",
+  "andText": "和",
+  
   "operationFailed": "操作失败",
 
   "appTitle": "ODK Flutter 模板",
@@ -19,6 +22,7 @@
 
   "systemSetting": "设置",
   "commonSetting": "通用设置",
+  "helpAbout": "帮助&关于",
   "account": "账户",
   "general": "通用",
   "themeMode": "主题模式",
@@ -115,5 +119,14 @@
   },
   "updateNow": "立即更新",
   "alreadyLatestVersion": "已是最新版本",
-  "cannotOpenAppStore": "无法打开应用市场，请手动搜索更新"
+  "cannotOpenAppStore": "无法打开应用市场，请手动搜索更新",
+
+  "takePhoto": "拍照",
+  "chooseFromAlbum": "从相册选择",
+  "cameraPermissionDenied": "需要相机权限才能拍照",
+  "photoPermissionDenied": "需要相册权限才能选择照片",
+  "permissionDeniedTip": "权限被拒绝，请在设置中开启",
+  "avatarUpdateSuccess": "头像更新成功",
+  "selectAvatar": "选择头像",
+  "saving": "保存中..."
 }

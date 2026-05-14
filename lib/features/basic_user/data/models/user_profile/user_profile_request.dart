@@ -7,8 +7,14 @@ class UserProfileRequest {
   final String? userName;
   final String? gender;
   final String? birthDay;
+  final String? avatarUrl;
 
-  UserProfileRequest({this.userName, this.gender, this.birthDay});
+  UserProfileRequest({
+    this.userName,
+    this.gender,
+    this.birthDay,
+    this.avatarUrl,
+  });
 
   factory UserProfileRequest.fromJson(Map<String, dynamic> json) =>
       _$UserProfileRequestFromJson(json);

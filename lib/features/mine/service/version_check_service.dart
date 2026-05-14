@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/core/constants/sys_constants.dart';
+import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/core/utils/version_utils.dart';
 import 'package:odk_flutter_template/features/mine/data/models/app_version_info.dart';
 import 'package:odk_flutter_template/features/system/models/sys_global_config_dto.dart';
@@ -46,6 +47,7 @@ class VersionCheckService {
       );
     } catch (e) {
       // 网络异常等情况下，返回无更新
+      Log.e('checkUpdate error: $e');
       return VersionCheckResult(
         hasUpdate: false,
         currentVersion: GlobalInfo.instance.appVersion,

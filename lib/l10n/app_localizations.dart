@@ -242,6 +242,24 @@ abstract class AppLocalizations {
   /// **'About Us'**
   String get aboutUs;
 
+  /// 帮助&关于
+  ///
+  /// In en, this message translates to:
+  /// **'Help & About'**
+  String get helpAbout;
+
+  /// 我已阅读并同意
+  ///
+  /// In en, this message translates to:
+  /// **'I have read and agree to the'**
+  String get iHaveReadAndAgree;
+
+  /// 和
+  ///
+  /// In en, this message translates to:
+  /// **'and'**
+  String get andText;
+
   /// 设备信息
   ///
   /// In en, this message translates to:
@@ -649,6 +667,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unable to open app store, please search for updates manually'**
   String get cannotOpenAppStore;
+
+  /// 拍照
+  ///
+  /// In en, this message translates to:
+  /// **'Take Photo'**
+  String get takePhoto;
+
+  /// 从相册选择
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from Album'**
+  String get chooseFromAlbum;
+
+  /// 需要相机权限才能拍照
+  ///
+  /// In en, this message translates to:
+  /// **'Camera permission is required to take photos'**
+  String get cameraPermissionDenied;
+
+  /// 需要相册权限才能选择照片
+  ///
+  /// In en, this message translates to:
+  /// **'Photo library permission is required to select photos'**
+  String get photoPermissionDenied;
+
+  /// 权限被拒绝，请在设置中开启
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied, please enable in Settings'**
+  String get permissionDeniedTip;
+
+  /// 头像更新成功
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar updated successfully'**
+  String get avatarUpdateSuccess;
+
+  /// 选择头像
+  ///
+  /// In en, this message translates to:
+  /// **'Select Avatar'**
+  String get selectAvatar;
+
+  /// 保存中
+  ///
+  /// In en, this message translates to:
+  /// **'Saving...'**
+  String get saving;
 }
 
 class _AppLocalizationsDelegate

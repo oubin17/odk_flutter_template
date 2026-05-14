@@ -11,6 +11,7 @@ UserProfileEntity _$UserProfileEntityFromJson(Map<String, dynamic> json) =>
       userName: json['userName'] as String?,
       gender: json['gender'] as String?,
       birthDay: json['birthDay'] as String?,
+      avatarUrl: json['avatarUrl'] as String?,
     );
 
 Map<String, dynamic> _$UserProfileEntityToJson(UserProfileEntity instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$UserProfileEntityToJson(UserProfileEntity instance) =>
       'userName': instance.userName,
       'gender': instance.gender,
       'birthDay': instance.birthDay,
+      'avatarUrl': instance.avatarUrl,
     };

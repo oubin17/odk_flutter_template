@@ -27,6 +27,9 @@ class L10nUtils {
   static String get appTitle => _localizations!.appTitle;
   static String get home => _localizations!.home;
   static String get mine => _localizations!.mine;
+  static String get helpAbout => _localizations!.helpAbout;
+  static String get iHaveReadAndAgree => _localizations!.iHaveReadAndAgree;
+  static String get andText => _localizations!.andText;
 
   // ======================== 设置页 ========================
   static String get systemSetting => _localizations!.systemSetting;
@@ -147,4 +150,16 @@ class L10nUtils {
   static String get alreadyLatestVersion =>
       _localizations!.alreadyLatestVersion;
   static String get cannotOpenAppStore => _localizations!.cannotOpenAppStore;
+
+  // ======================== 头像更新 ========================
+  static String get takePhoto => _localizations!.takePhoto;
+  static String get chooseFromAlbum => _localizations!.chooseFromAlbum;
+  static String get cameraPermissionDenied =>
+      _localizations!.cameraPermissionDenied;
+  static String get photoPermissionDenied =>
+      _localizations!.photoPermissionDenied;
+  static String get permissionDeniedTip => _localizations!.permissionDeniedTip;
+  static String get avatarUpdateSuccess => _localizations!.avatarUpdateSuccess;
+  static String get selectAvatar => _localizations!.selectAvatar;
+  static String get saving => _localizations!.saving;
 }

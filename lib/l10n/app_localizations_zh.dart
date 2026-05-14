@@ -81,6 +81,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aboutUs => '关于我们';
 
   @override
+  String get helpAbout => '帮助&关于';
+
+  @override
+  String get iHaveReadAndAgree => '我已阅读并同意';
+
+  @override
+  String get andText => '和';
+
+  @override
   String get deviceInfo => '设备信息';
 
   @override
@@ -291,4 +300,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get cannotOpenAppStore => '无法打开应用市场，请手动搜索更新';
+
+  @override
+  String get takePhoto => '拍照';
+
+  @override
+  String get chooseFromAlbum => '从相册选择';
+
+  @override
+  String get cameraPermissionDenied => '需要相机权限才能拍照';
+
+  @override
+  String get photoPermissionDenied => '需要相册权限才能选择照片';
+
+  @override
+  String get permissionDeniedTip => '权限被拒绝，请在设置中开启';
+
+  @override
+  String get avatarUpdateSuccess => '头像更新成功';
+
+  @override
+  String get selectAvatar => '选择头像';
+
+  @override
+  String get saving => '保存中...';
 }

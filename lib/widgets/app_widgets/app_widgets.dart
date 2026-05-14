@@ -150,19 +150,27 @@ class AppText extends StatelessWidget {
   }
 }
 
-/// 小子提醒
+/// 小字提醒（整行背景 + 自定义高度 + 保留适配内边距）
 class AppTip extends StatelessWidget {
   final String tip;
 
-  const AppTip({super.key, required this.tip});
+  /// 自定义高度（传值则固定高度，不传自适应）
+  final double? height;
+
+  const AppTip({super.key, this.tip = '', this.height});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // 保持你原来的内边距
+      // 👇 关键1：默认占满父容器宽度 → 背景铺满整行
+      width: double.infinity,
+      // 👇 关键2：强制约束高度，传入的高度100%生效
+      height: height,
+      // ✅ 你的原有内边距 完全保留（适配单位，不修改）
       padding: EdgeInsets.only(left: 20.w, top: 16.h, bottom: 16.h),
       color: AppColors.bgSecond(context),
-      child: AppText.second(tip),
+      // 空内容时渲染空组件，不影响布局
+      child: tip.isEmpty ? const SizedBox() : AppText.second(tip),
     );
   }
 }
@@ -575,6 +583,7 @@ class ClearButton extends StatelessWidget {
 }
 
 /// 通用列表项
+/// 通用列表项
 class AppListItem extends StatelessWidget {
   final Widget? left;
   final String title;
@@ -584,6 +593,8 @@ class AppListItem extends StatelessWidget {
   final bool showArrow;
   final double verticalPadding;
   final double horizontalPadding;
+  // 👇 新增：控制标题是否居中（默认false，保持原有样式）
+  final bool isTitleCenter;
 
   const AppListItem({
     super.key,
@@ -595,6 +606,7 @@ class AppListItem extends StatelessWidget {
     this.showArrow = true,
     this.verticalPadding = 20,
     this.horizontalPadding = 20,
+    this.isTitleCenter = false, // 新增默认值
   });
 
   @override
@@ -607,12 +619,22 @@ class AppListItem extends StatelessWidget {
           vertical: verticalPadding.h,
           horizontal: horizontalPadding.w,
         ),
+        // 👇 核心：根据参数控制整体对齐方式
         child: Row(
+          mainAxisAlignment: isTitleCenter
+              ? MainAxisAlignment
+                    .center // 居中模式
+              : MainAxisAlignment.start, // 原有默认模式
           children: [
-            if (left != null) ...[left!, AppGap.wNormal],
+            // 居中时不显示左侧图标
+            if (left != null && !isTitleCenter) ...[left!, AppGap.wNormal],
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // 👇 核心：根据参数控制文字对齐方式
+                crossAxisAlignment: isTitleCenter
+                    ? CrossAxisAlignment
+                          .center // 文字居中
+                    : CrossAxisAlignment.start, // 文字左对齐（原有）
                 children: [
                   AppText.body(title),
                   if (desc != null && desc!.isNotEmpty) ...[
@@ -622,8 +644,9 @@ class AppListItem extends StatelessWidget {
                 ],
               ),
             ),
-            if (right != null) ...[right!],
-            if (showArrow)
+            // 居中时不显示右侧图标/箭头
+            if (right != null && !isTitleCenter) ...[right!],
+            if (showArrow && !isTitleCenter)
               Icon(
                 Icons.arrow_forward_ios,
                 size: 24.w,
@@ -875,10 +898,10 @@ class AppCheckbox extends StatelessWidget {
 
 /// 协议专用勾选框（勾选框 + 可点击文字，适配注册/登录页）
 class AppAgreementCheckbox extends StatelessWidget {
-  final bool isAgree; // 勾选状态
-  final ValueChanged<bool> onChanged; // 勾选回调
-  final VoidCallback onUserAgreement; // 用户协议点击
-  final VoidCallback onPrivacyPolicy; // 隐私政策点击
+  final bool isAgree;
+  final ValueChanged<bool> onChanged;
+  final VoidCallback onUserAgreement;
+  final VoidCallback onPrivacyPolicy;
 
   const AppAgreementCheckbox({
     super.key,
@@ -890,27 +913,41 @@ class AppAgreementCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // 统一勾选框
-        AppCheckbox(value: isAgree, onChanged: onChanged),
-        AppGap.wSmall,
-        // 协议文字组
-        Wrap(
-          alignment: WrapAlignment.center,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            AppText.tip("我已阅读并同意"),
-            // 用户协议
-            AppTextButton(text: "《用户协议》", size: 24.sp, onTap: onUserAgreement),
-            // AppText.tip("和"),
-            // 隐私政策
-            AppTextButton(text: "《隐私政策》", size: 24.sp, onTap: onPrivacyPolicy),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.all(16.w),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // 勾选框
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppCheckbox(value: isAgree, onChanged: onChanged),
+              AppGap.wSmall,
+              AppText.tip(L10nUtils.iHaveReadAndAgree),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppTextButton(
+                text: "《${L10nUtils.userAgreement}》",
+                size: 24.sp,
+                onTap: onUserAgreement,
+              ),
+              AppGap.wSmall,
+              AppText.tip(L10nUtils.andText),
+              AppGap.wSmall,
+              AppTextButton(
+                text: "《${L10nUtils.privacyPolicy}》",
+                size: 24.sp,
+                onTap: onPrivacyPolicy,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

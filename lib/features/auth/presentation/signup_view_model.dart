@@ -33,7 +33,12 @@ class SignUpViewModel extends ChangeNotifier {
   String verifyCodeUniqueId = '';
 
   /// 协议勾选状态
-  bool isAgree = false;
+  bool _isAgree = false;
+  bool get isAgree => _isAgree;
+  set isAgree(bool value) {
+    _isAgree = value;
+    notifyListeners();
+  }
 
   // ====================== UI 状态 ======================
 

@@ -23,7 +23,7 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
   // ====================== 业务逻辑 ======================
 
   /// 注册提交
-  Future<void> _register() async {
+  Future<void> _register(BuildContext context) async {
     final vm = context.read<SignUpViewModel>();
 
     // 协议校验
@@ -74,12 +74,12 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
   }
 
   /// 注册按钮 — 监听 isLoading 控制禁用状态
-  Widget _registerButton() {
+  Widget _registerButton(BuildContext context) {
     return Selector<SignUpViewModel, bool>(
       selector: (_, vm) => vm.isLoading,
       builder: (_, isLoading, _) {
         return AppButton(
-          onTap: isLoading ? null : _register,
+          onTap: isLoading ? null : () => _register(context),
           text: L10nUtils.register,
         );
       },
@@ -91,75 +91,100 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => SignUpViewModel(),
-      child: _buildScaffold(),
+      builder: (context, child) => _buildScaffold(context),
     );
   }
 
-  Widget _buildScaffold() {
+  Widget _buildScaffold(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBody: true,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Stack(
-          fit: StackFit.expand,
+        child: Column(
           children: [
-            SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AppGap.hLarge,
-                    AppGap.hLarge,
-                    _appLogo(),
-                    AppGap.hLarge,
-                    _registerTitle(),
-                    AppGap.hLarge,
-                    accountInput(
-                      suffixIcon: ClearButton(controller: accountController),
-                    ),
-                    AppGap.hSmall,
-                    VerifyCodeInput(
-                      accountController: accountController,
-                      verifyScene: VerifyScene.register,
-                      verifyType: VerifyType.mobile,
-                      verifyCodeController: verifyCodeController,
-                      onUniqueIdChanged: (uniqueId) {
-                        context.read<SignUpViewModel>().verifyCodeUniqueId =
-                            uniqueId;
-                      },
-                    ),
-                    SizedBox(height: 200.h),
-                    _registerButton(),
-                    _agreementWidget(),
-                    AppGap.hNormal,
-                  ],
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AppGap.hLarge,
+                      AppGap.hLarge,
+                      _appLogo(),
+                      AppGap.hLarge,
+                      _registerTitle(),
+                      AppGap.hLarge,
+                      accountInput(
+                        suffixIcon: ClearButton(controller: accountController),
+                      ),
+                      AppGap.hSmall,
+                      VerifyCodeInput(
+                        accountController: accountController,
+                        verifyScene: VerifyScene.register,
+                        verifyType: VerifyType.mobile,
+                        verifyCodeController: verifyCodeController,
+                        onUniqueIdChanged: (uniqueId) {
+                          context.read<SignUpViewModel>().verifyCodeUniqueId =
+                              uniqueId;
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
+            _bottomFixedArea(context),
           ],
         ),
-      ),
-      bottomNavigationBar: authBottomNav(
-        hint: L10nUtils.hasAccount,
-        actionText: L10nUtils.login,
-        onTap: () => NavigatorUtils.goNamed(RouteNames.signin),
       ),
     );
   }
 
+  Widget _bottomFixedArea(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+      child: Column(
+        children: [
+          _registerButton(context),
+          _agreementWidget(context),
+          AppGap.hSuperSmall,
+          _bottomNavWidget(),
+          AppGap.hSuperSmall,
+        ],
+      ),
+    );
+  }
+
+  Widget _bottomNavWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AppText.second(L10nUtils.hasAccount),
+        AppTextButton(
+          onTap: () => NavigatorUtils.goNamed(RouteNames.signin),
+          text: L10nUtils.login,
+        ),
+      ],
+    );
+  }
+
   /// 协议勾选组件 — 绑定 ViewModel 状态
-  Widget _agreementWidget() {
-    final vm = context.read<SignUpViewModel>();
-    return AppAgreementCheckbox(
-      isAgree: vm.isAgree,
-      onChanged: (value) => vm.isAgree = value,
-      onUserAgreement: () =>
-          toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
-      onPrivacyPolicy: () =>
-          toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
+  Widget _agreementWidget(BuildContext context) {
+    return Selector<SignUpViewModel, bool>(
+      selector: (_, vm) => vm.isAgree,
+      builder: (_, isAgree, _) {
+        return AppAgreementCheckbox(
+          isAgree: isAgree,
+          onChanged: (value) => context.read<SignUpViewModel>().isAgree = value,
+          onUserAgreement: () =>
+              toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
+          onPrivacyPolicy: () =>
+              toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
+        );
+      },
     );
   }
 }

@@ -60,6 +60,23 @@ class SystemSettingPage extends StatelessWidget {
     );
   }
 
+  Widget _buildLogoutContext(BuildContext context) {
+    return AppListItem(
+      title: L10nUtils.logout,
+      isTitleCenter: true,
+      showArrow: false,
+      onTap: () {
+        AppToast.showAppConfirmDialog(
+          title: L10nUtils.logout,
+          onConfirm: () async {
+            await AuthService().logout();
+            NavigatorUtils.goNamed(RouteNames.signin);
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,24 +89,11 @@ class SystemSettingPage extends StatelessWidget {
           _buildAccountContext(context),
           AppTip(tip: L10nUtils.general),
           _buildSystemContext(context),
-          AppTip(tip: "帮助&关于"),
+          AppTip(tip: L10nUtils.helpAbout),
           _buildVersionInfoContext(context),
-          AppListItem(
-            left: Icon(Icons.logout, color: AppColors.textSecond(context)),
-            title: L10nUtils.logout,
-            showArrow: false,
-            onTap: () {
-              AppToast.showAppConfirmDialog(
-                title: L10nUtils.logout,
-                onConfirm: () async {
-                  await AuthService().logout();
-                  NavigatorUtils.goNamed(RouteNames.signin);
-                },
-              );
-            },
-          ),
-
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+          AppTip(height: 20.h),
+          _buildLogoutContext(context),
+          Divider(height: 1.h, color: AppColors.divider(context)),
         ],
       ),
     );

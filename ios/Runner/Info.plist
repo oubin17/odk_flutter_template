@@ -57,5 +57,11 @@
 		<true/>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<!-- 相机权限描述 -->
+		<key>NSCameraUsageDescription</key>
+		<string>需要访问您的相机以拍摄头像</string>
+		<!-- 相册权限描述 -->
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>需要访问您的相册以选择头像</string>
 	</dict>
 </plist>

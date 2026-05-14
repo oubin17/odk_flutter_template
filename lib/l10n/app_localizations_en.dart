@@ -81,6 +81,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutUs => 'About Us';
 
   @override
+  String get helpAbout => 'Help & About';
+
+  @override
+  String get iHaveReadAndAgree => 'I have read and agree to the';
+
+  @override
+  String get andText => 'and';
+
+  @override
   String get deviceInfo => 'Device Info';
 
   @override
@@ -301,4 +310,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get cannotOpenAppStore =>
       'Unable to open app store, please search for updates manually';
+
+  @override
+  String get takePhoto => 'Take Photo';
+
+  @override
+  String get chooseFromAlbum => 'Choose from Album';
+
+  @override
+  String get cameraPermissionDenied =>
+      'Camera permission is required to take photos';
+
+  @override
+  String get photoPermissionDenied =>
+      'Photo library permission is required to select photos';
+
+  @override
+  String get permissionDeniedTip =>
+      'Permission denied, please enable in Settings';
+
+  @override
+  String get avatarUpdateSuccess => 'Avatar updated successfully';
+
+  @override
+  String get selectAvatar => 'Select Avatar';
+
+  @override
+  String get saving => 'Saving...';
 }
