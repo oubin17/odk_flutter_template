@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/config/env.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
-import 'package:odk_flutter_template/widgets/mixins/mounted_safe_mixin.dart';
-import 'package:odk_flutter_template/core/utils/tool_utils.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
-import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
-import 'package:odk_flutter_template/gen/assets.gen.dart';
+import 'package:odk_flutter_template/features/auth/presentation/auth_mixin.dart';
+import 'package:odk_flutter_template/features/auth/presentation/signin_view_model.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_countdown/verify_code_input.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
+import 'package:provider/provider.dart';
 
-// 登录页面（优化版，对齐注册页规范）
+/// 登录页面
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -23,86 +20,58 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> with MountedSafeMixin {
-  // 表单核心（私有规范）
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _accountController = TextEditingController();
-  final TextEditingController _verifyCodeController = TextEditingController();
+class _SignInPageState extends State<SignInPage> with AuthMixin {
+  // 密码控制器（登录页独有）
   final TextEditingController _passwordController = TextEditingController();
-
-  // 验证码实体
-  final VerificationCode _verificationCode = VerificationCode("", "");
-
-  // 登录状态
-  bool _isPasswordLogin = true;
-  // 🔥 协议勾选状态（合规必选）
-  bool _isAgree = false;
 
   @override
   void dispose() {
-    // 统一释放资源，防止内存泄漏
-    _accountController.dispose();
-    _verifyCodeController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
-  /// 跳转到协议页面
-  void _toAgreementPage(String title, String url) {
-    NavigatorUtils.pushNamed(
-      RouteNames.agreement,
-      queryParameters: {'title': title, 'url': url},
-    );
-  }
+  // ====================== 业务逻辑 ======================
 
   /// 登录提交
   Future<void> _login() async {
-    // 🔥 协议必选校验
-    if (!_isAgree) {
-      AppToast.showToast(L10nUtils.agreeTermsFirst);
+    final vm = context.read<SignInViewModel>();
+
+    // 协议校验
+    final agreementError = vm.checkAgreement();
+    if (agreementError != null) {
+      AppToast.showToast(agreementError);
       return;
     }
 
-    if (!(_formKey.currentState?.validate() ?? false)) return;
+    // 表单校验
+    if (!validateForm()) return;
 
-    _verificationCode.verifyCode = _verifyCodeController.text;
-    AppToast.showLoading();
+    // 防重复提交
+    if (vm.isLoading) return;
 
-    final UserLoginResponse? userEntity = await AuthService().login(
-      UserLoginRequest(
-        loginId: _accountController.text,
-        identifyType: _isPasswordLogin ? "1" : "2",
-        identifyValue: _isPasswordLogin ? _passwordController.text : null,
-        verificationCode: _isPasswordLogin ? null : _verificationCode,
-      ),
-    );
-
-    AppToast.dismiss();
-    if (userEntity == null) {
-      AppToast.showToast(L10nUtils.loginFailed);
+    // 同步表单数据到 ViewModel
+    vm.account = accountController.text;
+    if (vm.isPasswordLogin) {
+      vm.password = _passwordController.text;
     } else {
-      mountedSafeCallback(() {
-        NavigatorUtils.goNamed(RouteNames.home);
-      });
+      vm.verifyCode = verifyCodeController.text;
+    }
+
+    // Loading 由 ViewModel 内部管理（AppToast.showLoading/dismiss）
+    final response = await vm.login();
+
+    if (!mounted) return;
+
+    if (response != null) {
+      NavigatorUtils.goNamed(RouteNames.home);
+    } else {
+      AppToast.showToast(vm.errorMessage ?? L10nUtils.loginFailed);
     }
   }
 
-  // ====================== UI 组件拆分（对齐注册页） ======================
+  // ====================== UI 组件拆分 ======================
   Widget _signInTitle() {
     return AppText.customerTitle(L10nUtils.login, 50.sp, FontWeight.bold);
-  }
-
-  Widget _accountInput() {
-    return AppInput(
-      controller: _accountController,
-      label: L10nUtils.account,
-      prefixIcon: Icon(
-        Icons.phone_outlined,
-        size: 32.w,
-        color: AppColors.textGray(context),
-      ),
-      validator: ToolUtils.checkPhoneValidator,
-    );
   }
 
   Widget _passwordInput() {
@@ -123,111 +92,119 @@ class _SignInPageState extends State<SignInPage> with MountedSafeMixin {
     );
   }
 
-  /// 验证码输入框（响应式倒计时）
-  Widget _verifyCodeInput() {
-    return VerifyCodeInput(
-      accountController: _accountController,
-      verifyScene: VerifyScene.login,
-      verifyType: VerifyType.mobile,
-      verifyCodeController: _verifyCodeController,
-      onUniqueIdChanged: (uniqueId) {
-        _verificationCode.uniqueId = uniqueId;
-      },
-    );
-  }
-
   /// 切换登录方式
   Widget _switchLoginType() {
     return Align(
       alignment: Alignment.centerRight,
       child: AppTextButton(
         text: L10nUtils.switchLoginType,
-        onTap: () => setState(() => _isPasswordLogin = !_isPasswordLogin),
+        onTap: () => context.read<SignInViewModel>().toggleLoginType(),
       ),
     );
   }
 
-  /// 协议勾选框（复用注册页组件，右对齐）
-  Widget _agreementWidget() {
-    return AppAgreementCheckbox(
-      isAgree: _isAgree,
-      onChanged: (value) => setState(() => _isAgree = value),
-      onUserAgreement: () =>
-          _toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
-      onPrivacyPolicy: () =>
-          _toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
-    );
-  }
-
+  /// 登录按钮 — 监听 isLoading 控制禁用状态
   Widget _loginButton() {
-    return AppButton(onTap: _login, text: L10nUtils.login);
-  }
-
-  Widget _bottomRegisterText() {
-    return Padding(
-      padding: EdgeInsets.all(60.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppText.second(L10nUtils.noAccount),
-          AppTextButton(
-            onTap: () => NavigatorUtils.goNamed(RouteNames.signup),
-            text: L10nUtils.register,
-          ),
-        ],
-      ),
+    return Selector<SignInViewModel, bool>(
+      selector: (_, vm) => vm.isLoading,
+      builder: (_, isLoading, _) {
+        return AppButton(
+          onTap: isLoading ? null : _login,
+          text: L10nUtils.login,
+        );
+      },
     );
   }
 
   // ====================== 主布局 ======================
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => SignInViewModel(),
+      child: _buildScaffold(),
+    );
+  }
+
+  Widget _buildScaffold() {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       extendBody: true,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // 背景图
-          Image.asset(
-            Assets.images.login.loginRegist.path,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-          // 内容区域
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AppGap.hLarge,
-                  AppGap.hLarge,
-                  _signInTitle(),
-                  AppGap.hNormal,
-                  _accountInput(),
-                  AppGap.hNormal,
-                  // 动态切换登录方式
-                  if (_isPasswordLogin)
-                    _passwordInput()
-                  else
-                    _verifyCodeInput(),
-                  AppGap.hSuperSmall,
-                  _switchLoginType(),
-                  const Spacer(),
-                  _loginButton(),
-                  // 🔥 协议组件（和注册页统一）
-                  _agreementWidget(),
-                  AppGap.hNormal,
-                ],
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // 背景图
+            Image.asset(
+              Assets.images.login.loginRegist.path,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+            // 内容区域
+            SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 88.h),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppGap.hLarge,
+                    AppGap.hLarge,
+                    _signInTitle(),
+                    AppGap.hNormal,
+                    accountInput(),
+                    AppGap.hNormal,
+                    // 动态切换登录方式
+                    Selector<SignInViewModel, bool>(
+                      selector: (_, vm) => vm.isPasswordLogin,
+                      builder: (_, isPasswordLogin, _) {
+                        if (isPasswordLogin) {
+                          return _passwordInput();
+                        }
+                        return VerifyCodeInput(
+                          accountController: accountController,
+                          verifyScene: VerifyScene.login,
+                          verifyType: VerifyType.mobile,
+                          verifyCodeController: verifyCodeController,
+                          onUniqueIdChanged: (uniqueId) {
+                            context.read<SignInViewModel>().verifyCodeUniqueId =
+                                uniqueId;
+                          },
+                        );
+                      },
+                    ),
+                    AppGap.hSuperSmall,
+                    _switchLoginType(),
+                    SizedBox(height: 200.h),
+                    _loginButton(),
+                    _agreementWidget(),
+                    AppGap.hNormal,
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-      bottomNavigationBar: _bottomRegisterText(),
+      bottomNavigationBar: authBottomNav(
+        hint: L10nUtils.noAccount,
+        actionText: L10nUtils.register,
+        onTap: () => NavigatorUtils.goNamed(RouteNames.signup),
+      ),
+    );
+  }
+
+  /// 协议勾选组件
+  Widget _agreementWidget() {
+    final vm = context.read<SignInViewModel>();
+    return AppAgreementCheckbox(
+      isAgree: vm.isAgree,
+      onChanged: (value) => vm.isAgree = value,
+      onUserAgreement: () =>
+          toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
+      onPrivacyPolicy: () =>
+          toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
     );
   }
 }
