@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class AgreementPage extends StatefulWidget {
@@ -26,9 +26,8 @@ class _AgreementPageState extends State<AgreementPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // 直接用，自动显示返回按钮！
-      appBar: BasicAppBar(title: AppText(widget.title)),
+    return AppPage(
+      title: AppText(widget.title),
       body: WebViewWidget(controller: _controller),
     );
   }

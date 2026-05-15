@@ -452,5 +452,38 @@
   "saving": "Saving...",
   "@saving": {
     "description": "保存中"
+  },
+
+  "loading": "Loading...",
+  "@loading": {
+    "description": "加载中"
+  },
+  "emptyData": "No data",
+  "@emptyData": {
+    "description": "暂无数据"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "重试"
+  },
+  "pageNotFound": "Page Not Found",
+  "@pageNotFound": {
+    "description": "页面未找到"
+  },
+  "pageNotFoundDesc": "The page you are looking for does not exist",
+  "@pageNotFoundDesc": {
+    "description": "页面未找到描述"
+  },
+  "networkErrorDesc": "Network connection error, please check your network and retry",
+  "@networkErrorDesc": {
+    "description": "网络错误描述"
+  },
+  "serverErrorDesc": "Server is temporarily unavailable, please try again later",
+  "@serverErrorDesc": {
+    "description": "服务器错误描述"
+  },
+  "unknownErrorDesc": "Something went wrong, please try again later",
+  "@unknownErrorDesc": {
+    "description": "未知错误描述"
   }
 }

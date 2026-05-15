@@ -324,4 +324,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get saving => '保存中...';
+
+  @override
+  String get loading => '加载中...';
+
+  @override
+  String get emptyData => '暂无数据';
+
+  @override
+  String get retry => '重试';
+
+  @override
+  String get pageNotFound => '页面未找到';
+
+  @override
+  String get pageNotFoundDesc => '您访问的页面不存在';
+
+  @override
+  String get networkErrorDesc => '网络连接异常，请检查网络后重试';
+
+  @override
+  String get serverErrorDesc => '服务器开小差了，请稍后重试';
+
+  @override
+  String get unknownErrorDesc => '出了点问题，请稍后重试';
 }

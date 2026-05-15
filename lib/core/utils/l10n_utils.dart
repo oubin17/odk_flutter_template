@@ -162,4 +162,14 @@ class L10nUtils {
   static String get avatarUpdateSuccess => _localizations!.avatarUpdateSuccess;
   static String get selectAvatar => _localizations!.selectAvatar;
   static String get saving => _localizations!.saving;
+
+  // ======================== 状态页面 ========================
+  static String get loading => _localizations!.loading;
+  static String get emptyData => _localizations!.emptyData;
+  static String get retry => _localizations!.retry;
+  static String get pageNotFound => _localizations!.pageNotFound;
+  static String get pageNotFoundDesc => _localizations!.pageNotFoundDesc;
+  static String get networkErrorDesc => _localizations!.networkErrorDesc;
+  static String get serverErrorDesc => _localizations!.serverErrorDesc;
+  static String get unknownErrorDesc => _localizations!.unknownErrorDesc;
 }

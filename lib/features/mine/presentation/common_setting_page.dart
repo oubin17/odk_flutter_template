@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +12,8 @@ class CommonSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BasicAppBar(title: AppText(L10nUtils.commonSetting)),
+    return AppPage(
+      title: AppText(L10nUtils.commonSetting),
       body: ListView(
         children: [
           // 主题切换 + 图标

@@ -5,7 +5,7 @@ import 'package:odk_flutter_template/features/home/domain/home_resume_service.da
 import 'package:odk_flutter_template/features/home/presentation/widgets/projectinfo_gridview_widget.dart';
 import 'package:odk_flutter_template/features/home/presentation/widgets/projectinfo_table_widget.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 import 'package:odk_flutter_template/widgets/futurebuilder/common_future_builder.dart';
 
 class IndexPageData {

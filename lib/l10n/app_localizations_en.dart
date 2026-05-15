@@ -337,4 +337,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saving => 'Saving...';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get emptyData => 'No data';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get pageNotFound => 'Page Not Found';
+
+  @override
+  String get pageNotFoundDesc => 'The page you are looking for does not exist';
+
+  @override
+  String get networkErrorDesc =>
+      'Network connection error, please check your network and retry';
+
+  @override
+  String get serverErrorDesc =>
+      'Server is temporarily unavailable, please try again later';
+
+  @override
+  String get unknownErrorDesc => 'Something went wrong, please try again later';
 }

@@ -6,7 +6,7 @@ import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
 import 'package:odk_flutter_template/features/basic_user/domain/user_query_service.dart';
 import 'package:odk_flutter_template/l10n/app_localizations.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 
 class FirstIndexPage extends StatelessWidget {
   const FirstIndexPage({super.key});

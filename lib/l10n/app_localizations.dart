@@ -715,6 +715,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Saving...'**
   String get saving;
+
+  /// 加载中
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// 暂无数据
+  ///
+  /// In en, this message translates to:
+  /// **'No data'**
+  String get emptyData;
+
+  /// 重试
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// 页面未找到
+  ///
+  /// In en, this message translates to:
+  /// **'Page Not Found'**
+  String get pageNotFound;
+
+  /// 页面未找到描述
+  ///
+  /// In en, this message translates to:
+  /// **'The page you are looking for does not exist'**
+  String get pageNotFoundDesc;
+
+  /// 网络错误描述
+  ///
+  /// In en, this message translates to:
+  /// **'Network connection error, please check your network and retry'**
+  String get networkErrorDesc;
+
+  /// 服务器错误描述
+  ///
+  /// In en, this message translates to:
+  /// **'Server is temporarily unavailable, please try again later'**
+  String get serverErrorDesc;
+
+  /// 未知错误描述
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong, please try again later'**
+  String get unknownErrorDesc;
 }
 
 class _AppLocalizationsDelegate

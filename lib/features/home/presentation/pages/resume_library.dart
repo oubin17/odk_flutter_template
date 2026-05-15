@@ -3,7 +3,7 @@ import 'package:odk_flutter_template/features/home/data/models/resume_library.da
 import 'package:odk_flutter_template/features/home/domain/home_resume_service.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 
 class ResumeLibraryPage extends StatefulWidget {
   const ResumeLibraryPage({super.key});
