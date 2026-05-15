@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/extend_infodto.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/extend_infodto.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/user_regist_request.dart';
+import 'package:odk_flutter_template/features/auth/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';

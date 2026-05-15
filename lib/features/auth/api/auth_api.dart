@@ -1,7 +1,7 @@
 import 'package:odk_flutter_template/core/network/api_service.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/user_regist_request.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/user_login_request.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/userlogin_response.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class AuthApi {

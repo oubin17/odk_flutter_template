@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
+import 'package:odk_flutter_template/features/content/presentation/content_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/first_index.dart';
-import 'package:odk_flutter_template/features/home/presentation/pages/private_resume_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/profile_page.dart';
-import 'package:odk_flutter_template/features/home/presentation/pages/resume_library.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,14 +18,13 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const FirstIndexPage(),
-    const PrivateResumePage(),
-    const ResumeLibraryPage(),
+    const ContentPage(),
     const ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppPage(
       body: IndexedStack(index: _currentIndex, children: _pages),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -43,16 +43,18 @@ class _HomePageState extends State<HomePage> {
           });
         },
         items: [
-          const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.private_connectivity),
-            label: 'Private Library',
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home),
+            label: L10nUtils.home,
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
-            label: 'Resume Library',
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.explore),
+            label: L10nUtils.discover,
           ),
-          const BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的'),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person),
+            label: L10nUtils.mine,
+          ),
         ],
       ),
     );

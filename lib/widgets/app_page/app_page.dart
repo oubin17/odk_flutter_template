@@ -75,6 +75,9 @@ class AppPage extends StatelessWidget {
   /// 是否显示 AppBar（默认 true；设为 false 可隐藏 AppBar）
   final bool showAppBar;
 
+  /// 底部导航栏（如 BottomNavigationBar、BottomAppBar 等）
+  final Widget? bottomNavigationBar;
+
   const AppPage({
     super.key,
     this.title,
@@ -85,6 +88,7 @@ class AppPage extends StatelessWidget {
     this.padding,
     this.backgroundColor,
     this.showAppBar = true,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -93,6 +97,7 @@ class AppPage extends StatelessWidget {
       backgroundColor: backgroundColor ?? AppColors.bgPage(context),
       appBar: _buildAppBar(context),
       body: _buildBody(context),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 

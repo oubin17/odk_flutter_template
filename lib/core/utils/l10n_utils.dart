@@ -26,6 +26,7 @@ class L10nUtils {
   // ======================== 应用全局 ========================
   static String get appTitle => _localizations!.appTitle;
   static String get home => _localizations!.home;
+  static String get discover => _localizations!.discover;
   static String get mine => _localizations!.mine;
   static String get helpAbout => _localizations!.helpAbout;
   static String get iHaveReadAndAgree => _localizations!.iHaveReadAndAgree;
@@ -172,4 +173,14 @@ class L10nUtils {
   static String get networkErrorDesc => _localizations!.networkErrorDesc;
   static String get serverErrorDesc => _localizations!.serverErrorDesc;
   static String get unknownErrorDesc => _localizations!.unknownErrorDesc;
+
+  // ======================== 下拉刷新/上拉加载 ========================
+  static String get pullToRefresh => _localizations!.pullToRefresh;
+  static String get releaseToRefresh => _localizations!.releaseToRefresh;
+  static String get refreshComplete => _localizations!.refreshComplete;
+  static String get pullToLoadMore => _localizations!.pullToLoadMore;
+  static String get releaseToLoadMore => _localizations!.releaseToLoadMore;
+  static String get loadingMore => _localizations!.loadingMore;
+  static String get noMoreData => _localizations!.noMoreData;
+  static String get loadFailed => _localizations!.loadFailed;
 }

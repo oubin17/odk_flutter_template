@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/storage/secure_storage_manager.dart';
 import 'package:odk_flutter_template/core/storage/storage_key.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
-import 'package:odk_flutter_template/features/basic_user/data/models/user_query/user_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/models/user_query/user_entity.dart';
 
 class UserProvider extends ChangeNotifier {
   UserEntity? _userEntity;

@@ -54,6 +54,10 @@
   "@home": {
     "description": "首页"
   },
+  "discover": "Discover",
+  "@discover": {
+    "description": "发现"
+  },
   "mine": "Mine",
   "@mine": {
     "description": "我的"
@@ -485,5 +489,38 @@
   "unknownErrorDesc": "Something went wrong, please try again later",
   "@unknownErrorDesc": {
     "description": "未知错误描述"
+  },
+
+  "pullToRefresh": "Pull to refresh",
+  "@pullToRefresh": {
+    "description": "下拉刷新"
+  },
+  "releaseToRefresh": "Release to refresh",
+  "@releaseToRefresh": {
+    "description": "释放刷新"
+  },
+  "refreshComplete": "Refresh complete",
+  "@refreshComplete": {
+    "description": "刷新完成"
+  },
+  "pullToLoadMore": "Pull up to load more",
+  "@pullToLoadMore": {
+    "description": "上拉加载更多"
+  },
+  "releaseToLoadMore": "Release to load more",
+  "@releaseToLoadMore": {
+    "description": "释放加载更多"
+  },
+  "loadingMore": "Loading...",
+  "@loadingMore": {
+    "description": "正在加载"
+  },
+  "noMoreData": "No more data",
+  "@noMoreData": {
+    "description": "没有更多数据"
+  },
+  "loadFailed": "Load failed, tap to retry",
+  "@loadFailed": {
+    "description": "加载失败，点击重试"
   }
 }

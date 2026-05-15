@@ -176,6 +176,12 @@ abstract class AppLocalizations {
   /// **'Home'**
   String get home;
 
+  /// 发现
+  ///
+  /// In en, this message translates to:
+  /// **'Discover'**
+  String get discover;
+
   /// 我的
   ///
   /// In en, this message translates to:
@@ -763,6 +769,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong, please try again later'**
   String get unknownErrorDesc;
+
+  /// 下拉刷新
+  ///
+  /// In en, this message translates to:
+  /// **'Pull to refresh'**
+  String get pullToRefresh;
+
+  /// 释放刷新
+  ///
+  /// In en, this message translates to:
+  /// **'Release to refresh'**
+  String get releaseToRefresh;
+
+  /// 刷新完成
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh complete'**
+  String get refreshComplete;
+
+  /// 上拉加载更多
+  ///
+  /// In en, this message translates to:
+  /// **'Pull up to load more'**
+  String get pullToLoadMore;
+
+  /// 释放加载更多
+  ///
+  /// In en, this message translates to:
+  /// **'Release to load more'**
+  String get releaseToLoadMore;
+
+  /// 正在加载
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingMore;
+
+  /// 没有更多数据
+  ///
+  /// In en, this message translates to:
+  /// **'No more data'**
+  String get noMoreData;
+
+  /// 加载失败，点击重试
+  ///
+  /// In en, this message translates to:
+  /// **'Load failed, tap to retry'**
+  String get loadFailed;
 }
 
 class _AppLocalizationsDelegate

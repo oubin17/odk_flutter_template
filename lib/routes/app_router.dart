@@ -12,8 +12,7 @@ import 'package:odk_flutter_template/features/mine/presentation/user_info_page.d
 import 'package:odk_flutter_template/features/mine/presentation/user_info_update_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/version_info_page.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
-import 'package:odk_flutter_template/routes/pages/agreement_page.dart';
-import 'package:odk_flutter_template/routes/pages/todo_detail.dart';
+import 'package:odk_flutter_template/widgets/app_webview/agreement_page.dart';
 import 'package:odk_flutter_template/widgets/app_status/not_found.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +30,6 @@ class RouteNames {
   static const String passwordManager = 'PasswordManager';
   static const String versionInfo = 'VersionInfo';
   static const String home = 'Home';
-  static const String detail = 'Detail';
   static const String notFound = 'NotFound';
   static const String agreement = 'Agreement';
 }
@@ -48,7 +46,6 @@ class RoutePaths {
   static const String passwordManager = '/passwordManager';
   static const String versionInfo = '/version';
   static const String home = '/home';
-  static const String detail = '/detail/:id';
   static const String notFound = '/notFound';
   static const String agreement = '/agreement';
 }
@@ -105,12 +102,6 @@ class AppRouter {
         path: RoutePaths.home,
         name: RouteNames.home,
         builder: (context, state) => const HomePage(),
-      ),
-      GoRoute(
-        path: RoutePaths.detail,
-        name: RouteNames.detail,
-        builder: (context, state) =>
-            TodoDetail(id: state.pathParameters['id']!),
       ),
       GoRoute(
         path: RoutePaths.userInfo,

@@ -18,6 +18,7 @@
 
   "appTitle": "ODK Flutter 模板",
   "home": "首页",
+  "discover": "发现",
   "mine": "我的",
 
   "systemSetting": "设置",
@@ -137,5 +138,14 @@
   "pageNotFoundDesc": "您访问的页面不存在",
   "networkErrorDesc": "网络连接异常，请检查网络后重试",
   "serverErrorDesc": "服务器开小差了，请稍后重试",
-  "unknownErrorDesc": "出了点问题，请稍后重试"
+  "unknownErrorDesc": "出了点问题，请稍后重试",
+
+  "pullToRefresh": "下拉刷新",
+  "releaseToRefresh": "释放刷新",
+  "refreshComplete": "刷新完成",
+  "pullToLoadMore": "上拉加载更多",
+  "releaseToLoadMore": "释放加载更多",
+  "loadingMore": "正在加载...",
+  "noMoreData": "没有更多数据",
+  "loadFailed": "加载失败，点击重试"
 }

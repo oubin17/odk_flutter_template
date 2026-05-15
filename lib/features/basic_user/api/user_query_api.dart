@@ -1,5 +1,5 @@
 import 'package:odk_flutter_template/core/network/api_service.dart';
-import 'package:odk_flutter_template/features/basic_user/data/models/user_query/user_entity.dart';
+import 'package:odk_flutter_template/features/basic_user/models/user_query/user_entity.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class UserQueryApi {

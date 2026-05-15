@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
+import 'package:odk_flutter_template/features/auth/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/service/verify_code_service.dart';
 import 'package:odk_flutter_template/widgets/app_countdown/countdown_controller.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';

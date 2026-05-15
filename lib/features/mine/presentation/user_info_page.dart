@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
-import 'package:odk_flutter_template/features/basic_user/data/models/user_query/gender_enum.dart';
+import 'package:odk_flutter_template/features/basic_user/models/user_query/gender_enum.dart';
 import 'package:odk_flutter_template/features/mine/presentation/user_info_update_page.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';

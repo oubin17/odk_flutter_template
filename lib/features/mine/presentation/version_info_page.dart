@@ -4,7 +4,7 @@ import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/core/utils/version_utils.dart';
 import 'package:odk_flutter_template/features/mine/service/version_check_service.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
-import 'package:odk_flutter_template/features/mine/data/models/app_version_info.dart';
+import 'package:odk_flutter_template/features/mine/models/app_version_info.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/widgets/mixins/mounted_safe_mixin.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';

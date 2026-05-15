@@ -48,6 +48,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get home => '首页';
 
   @override
+  String get discover => '发现';
+
+  @override
   String get mine => '我的';
 
   @override
@@ -348,4 +351,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get unknownErrorDesc => '出了点问题，请稍后重试';
+
+  @override
+  String get pullToRefresh => '下拉刷新';
+
+  @override
+  String get releaseToRefresh => '释放刷新';
+
+  @override
+  String get refreshComplete => '刷新完成';
+
+  @override
+  String get pullToLoadMore => '上拉加载更多';
+
+  @override
+  String get releaseToLoadMore => '释放加载更多';
+
+  @override
+  String get loadingMore => '正在加载...';
+
+  @override
+  String get noMoreData => '没有更多数据';
+
+  @override
+  String get loadFailed => '加载失败，点击重试';
 }

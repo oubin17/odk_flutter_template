@@ -48,6 +48,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home => 'Home';
 
   @override
+  String get discover => 'Discover';
+
+  @override
   String get mine => 'Mine';
 
   @override
@@ -363,4 +366,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknownErrorDesc => 'Something went wrong, please try again later';
+
+  @override
+  String get pullToRefresh => 'Pull to refresh';
+
+  @override
+  String get releaseToRefresh => 'Release to refresh';
+
+  @override
+  String get refreshComplete => 'Refresh complete';
+
+  @override
+  String get pullToLoadMore => 'Pull up to load more';
+
+  @override
+  String get releaseToLoadMore => 'Release to load more';
+
+  @override
+  String get loadingMore => 'Loading...';
+
+  @override
+  String get noMoreData => 'No more data';
+
+  @override
+  String get loadFailed => 'Load failed, tap to retry';
 }

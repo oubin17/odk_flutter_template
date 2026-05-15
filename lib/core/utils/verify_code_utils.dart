@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/core/utils/tool_utils.dart';
-import 'package:odk_flutter_template/features/auth/data/models/verify_code/verification_code_request.dart';
+import 'package:odk_flutter_template/features/auth/models/verify_code/verification_code_request.dart';
 import 'package:odk_flutter_template/features/auth/service/verify_code_service.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 

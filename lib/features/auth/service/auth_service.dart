@@ -1,9 +1,9 @@
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/utils/encrypt_utils.dart';
-import 'package:odk_flutter_template/features/auth/data/api/auth_api.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/user_regist_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/user_login_request.dart';
-import 'package:odk_flutter_template/features/auth/data/models/auth/userlogin_response.dart';
+import 'package:odk_flutter_template/features/auth/api/auth_api.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/user_regist_request.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/user_login_request.dart';
+import 'package:odk_flutter_template/features/auth/models/auth/userlogin_response.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class AuthService {
