@@ -1,3 +1,4 @@
+export 'package:odk_flutter_template/widgets/app_widgets/app_debounce_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -598,7 +599,6 @@ class ClearButton extends StatelessWidget {
 }
 
 /// 通用列表项
-/// 通用列表项
 class AppListItem extends StatelessWidget {
   final Widget? left;
   final String title;
@@ -891,7 +891,7 @@ class AppCheckbox extends StatelessWidget {
         height: size.w,
         decoration: BoxDecoration(
           color: disabled
-              ? AppColors.textGray(context).withOpacity(0.3)
+              ? AppColors.textGray(context).withAlpha(77)
               : (value ? AppColors.primary(context) : Colors.transparent),
           borderRadius: BorderRadius.circular(8.w),
           border: Border.all(

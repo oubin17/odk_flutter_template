@@ -46,9 +46,6 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
     // 表单校验
     if (!validateForm()) return;
 
-    // 防重复提交
-    if (vm.isLoading) return;
-
     // 同步表单数据到 ViewModel
     vm.account = accountController.text;
     if (vm.isPasswordLogin) {
@@ -58,6 +55,7 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
     }
 
     // Loading 由 ViewModel 内部管理（AppToast.showLoading/dismiss）
+    // 防重复点击由 AppDebounceButton 自动处理，无需手动判断 isLoading
     final response = await vm.login();
 
     if (!mounted) return;
@@ -103,16 +101,11 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
     );
   }
 
-  /// 登录按钮 — 监听 isLoading 控制禁用状态
+  /// 登录按钮 — AppDebounceButton 内置防重复点击
   Widget _loginButton(BuildContext context) {
-    return Selector<SignInViewModel, bool>(
-      selector: (_, vm) => vm.isLoading,
-      builder: (_, isLoading, _) {
-        return AppButton(
-          onTap: isLoading ? null : () => _login(context),
-          text: L10nUtils.login,
-        );
-      },
+    return AppDebounceButton(
+      text: L10nUtils.login,
+      onTap: () => _login(context),
     );
   }
 
@@ -245,15 +238,5 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
         );
       },
     );
-
-    // final vm = context.read<SignInViewModel>();
-    // return AppAgreementCheckbox(
-    //   isAgree: vm.isAgree,
-    //   onChanged: (value) => vm.isAgree = value,
-    //   onUserAgreement: () =>
-    //       toAgreementPage(L10nUtils.userAgreement, Env.userAgreementUrl),
-    //   onPrivacyPolicy: () =>
-    //       toAgreementPage(L10nUtils.privacyPolicy, Env.privacyPolicyUrl),
-    // );
   }
 }

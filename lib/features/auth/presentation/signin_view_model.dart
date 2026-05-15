@@ -11,8 +11,8 @@ import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 /// 职责：
 /// - 管理表单状态（账号、密码/验证码、登录方式、协议勾选）
 /// - 执行登录流程（校验 → 组装请求 → 调用 API → 返回结果）
-/// - 管理 Loading 状态（UI 通过 Selector 监听 isLoading）
 ///
+/// 防重复点击由 AppDebounceButton 在 UI 层处理，ViewModel 不再管理 isLoading
 /// 可独立单元测试，不依赖 Flutter Widget 生命周期
 class SignInViewModel extends ChangeNotifier {
   final AuthService _authService;
@@ -43,10 +43,6 @@ class SignInViewModel extends ChangeNotifier {
   }
 
   // ====================== UI 状态 ======================
-
-  /// 是否正在提交
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
 
   /// 错误信息（UI 展示用）
   String? _errorMessage;
@@ -81,10 +77,8 @@ class SignInViewModel extends ChangeNotifier {
   ///
   /// 返回 [UserLoginResponse?]，UI 层根据结果决定后续操作（Toast、导航等）
   Future<UserLoginResponse?> login() async {
-    _isLoading = true;
     _errorMessage = null;
     _loginResult = null;
-    notifyListeners();
 
     AppToast.showLoading();
 
@@ -126,9 +120,7 @@ class SignInViewModel extends ChangeNotifier {
       _loginResult = null;
       return null;
     } finally {
-      _isLoading = false;
       AppToast.dismiss();
-      notifyListeners();
     }
   }
 }
