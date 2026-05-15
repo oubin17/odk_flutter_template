@@ -14,7 +14,7 @@ import 'package:odk_flutter_template/features/mine/presentation/version_info_pag
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/pages/agreement_page.dart';
 import 'package:odk_flutter_template/routes/pages/todo_detail.dart';
-import 'package:odk_flutter_template/routes/pages/not_found.dart';
+import 'package:odk_flutter_template/widgets/app_status/not_found.dart';
 import 'package:provider/provider.dart';
 
 // ====================== 路由名称常量类（已删除Splash） ======================
