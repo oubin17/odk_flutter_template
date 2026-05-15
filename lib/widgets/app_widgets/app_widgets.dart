@@ -177,18 +177,33 @@ class AppTip extends StatelessWidget {
 
 /// 统一间距组件
 class AppGap {
-  // 垂直间距
+  // ===================== 预设垂直间距 =====================
   static Widget hSuperSmall = SizedBox(height: 10.h);
   static Widget hSmall = SizedBox(height: 20.h);
   static Widget hNormal = SizedBox(height: 30.h);
   static Widget hLarge = SizedBox(height: 40.h);
   static Widget hXL = SizedBox(height: 60.h);
 
-  // 水平间距
+  // ===================== 预设水平间距 =====================
+  static Widget wSuperSmall = SizedBox(width: 10.w);
   static Widget wSmall = SizedBox(width: 20.w);
   static Widget wNormal = SizedBox(width: 30.w);
   static Widget wLarge = SizedBox(width: 40.w);
   static Widget wXL = SizedBox(width: 60.w);
+
+  // ===================== 自定义间距 =====================
+
+  /// 自定义垂直间距
+  /// [height] 逻辑像素值，内部自动适配屏幕（.h）
+  ///
+  /// 示例：AppGap.h(24) → SizedBox(height: 24.h)
+  static Widget h(double height) => SizedBox(height: height.h);
+
+  /// 自定义水平间距
+  /// [width] 逻辑像素值，内部自动适配屏幕（.w）
+  ///
+  /// 示例：AppGap.w(24) → SizedBox(width: 24.w)
+  static Widget w(double width) => SizedBox(width: width.w);
 }
 
 /// 统一卡片

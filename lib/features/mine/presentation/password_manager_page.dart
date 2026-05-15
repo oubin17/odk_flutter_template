@@ -10,8 +10,8 @@ import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_countdown/countdown_controller.dart';
 import 'package:odk_flutter_template/widgets/app_countdown/verify_code_input.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:provider/provider.dart';
 
@@ -60,11 +60,14 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
     super.dispose();
   }
 
+  // ===================== 保存逻辑 =====================
+
   Future<void> _handleSave() async {
     if (!_formKey.currentState!.validate()) return;
-    final oldPwd = _oldPwdController.text.trim();
+
     final newPwd = _newPwdController.text.trim();
     ServiceResponse response;
+
     switch (widget.type) {
       case PasswordManagerType.set:
         _verificationCode.verifyCode = _verifyCodeController.text.trim();
@@ -78,12 +81,13 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
       case PasswordManagerType.change:
         response = await UserIdentifyService().updatePassword(
           PasswordUpdateRequest(
-            oldIdentifyValue: oldPwd,
+            oldIdentifyValue: _oldPwdController.text.trim(),
             newIdentifyValue: newPwd,
           ),
         );
         break;
     }
+
     if (!response.success) {
       AppToast.showToast(L10nUtils.operationFailed);
       return;
@@ -92,6 +96,9 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
     NavigatorUtils.pop();
   }
 
+  // ===================== UI 构建 =====================
+
+  /// 密码输入项
   Widget _buildPasswordItem(
     TextEditingController controller,
     String title,
@@ -105,12 +112,15 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
       obscure: true,
       validator:
           validator ??
-          (value) => value?.trim().isEmpty ?? true ? L10nUtils.pleaseEnterPassword : null,
+          (value) => value?.trim().isEmpty ?? true
+              ? L10nUtils.pleaseEnterPassword
+              : null,
       suffixIcon: ClearButton(controller: controller),
     );
   }
 
-  Widget _verifyCodeInput() {
+  /// 验证码输入
+  Widget _buildVerifyCodeInput() {
     final userProvider = context.read<UserProvider>();
     final phone = userProvider.userEntity?.accessToken.tokenValue ?? "";
     return VerifyCodeInput(
@@ -123,75 +133,85 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
     );
   }
 
+  /// 设置密码表单
+  Widget _buildSetPasswordForm() {
+    return AppCard(
+      showShadow: false,
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      child: Column(
+        children: [
+          _buildPasswordItem(
+            _newPwdController,
+            L10nUtils.newPassword,
+            L10nUtils.pleaseEnterNewPassword,
+          ),
+          _buildVerifyCodeInput(),
+        ],
+      ),
+    );
+  }
+
+  /// 修改密码表单
+  Widget _buildChangePasswordForm() {
+    return AppCard(
+      showShadow: false,
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      child: Column(
+        children: [
+          _buildPasswordItem(
+            _oldPwdController,
+            L10nUtils.oldPassword,
+            L10nUtils.pleaseEnterOldPassword,
+          ),
+          _buildPasswordItem(
+            _newPwdController,
+            L10nUtils.newPassword,
+            L10nUtils.pleaseEnterNewPassword,
+            validator: (value) {
+              final newPwd = value?.trim();
+              final oldPwd = _oldPwdController.text.trim();
+              if (newPwd == null || newPwd.isEmpty) {
+                return L10nUtils.pleaseEnterNewPassword;
+              }
+              if (newPwd == oldPwd) {
+                return L10nUtils.newPasswordCannotBeSameAsOld;
+              }
+              return null;
+            },
+          ),
+          _buildPasswordItem(
+            _confirmPwdController,
+            L10nUtils.confirmPassword,
+            L10nUtils.pleaseEnterConfirmPassword,
+            validator: (value) {
+              final confirmPwd = value?.trim();
+              final newPwd = _newPwdController.text.trim();
+              if (confirmPwd == null || confirmPwd.isEmpty) {
+                return L10nUtils.pleaseEnterConfirmPassword;
+              }
+              if (confirmPwd != newPwd) {
+                return L10nUtils.passwordsNotMatch;
+              }
+              return null;
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BasicAppBar(title: AppText(widget.title), onSave: _handleSave),
+    return AppPage(
+      title: AppText(widget.title),
+      onSave: _handleSave,
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 16.h),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              if (widget.type == PasswordManagerType.set)
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 26.w,
-                    vertical: 0.h,
-                  ),
-                  child: Column(
-                    children: [
-                      _buildPasswordItem(_newPwdController, L10nUtils.newPassword, L10nUtils.pleaseEnterNewPassword),
-                      _verifyCodeInput(),
-                    ],
-                  ),
-                ),
-              if (widget.type == PasswordManagerType.change)
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 26.w,
-                    vertical: 0.h,
-                  ),
-                  child: Column(
-                    children: [
-                      _buildPasswordItem(_oldPwdController, L10nUtils.oldPassword, L10nUtils.pleaseEnterOldPassword),
-                      _buildPasswordItem(
-                        _newPwdController,
-                        L10nUtils.newPassword,
-                        L10nUtils.pleaseEnterNewPassword,
-                        validator: (value) {
-                          final newPwd = value?.trim();
-                          final oldPwd = _oldPwdController.text.trim();
-                          if (newPwd == null || newPwd.isEmpty) {
-                            return L10nUtils.pleaseEnterNewPassword;
-                          }
-                          if (newPwd == oldPwd) {
-                            return L10nUtils.newPasswordCannotBeSameAsOld;
-                          }
-                          return null;
-                        },
-                      ),
-                      _buildPasswordItem(
-                        _confirmPwdController,
-                        L10nUtils.confirmPassword,
-                        L10nUtils.pleaseEnterConfirmPassword,
-                        validator: (value) {
-                          final confirmPwd = value?.trim();
-                          final newPwd = _newPwdController.text.trim();
-                          if (confirmPwd == null || confirmPwd.isEmpty) {
-                            return L10nUtils.pleaseEnterConfirmPassword;
-                          }
-                          if (confirmPwd != newPwd) {
-                            return L10nUtils.passwordsNotMatch;
-                          }
-                          return null;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
+          child: switch (widget.type) {
+            PasswordManagerType.set => _buildSetPasswordForm(),
+            PasswordManagerType.change => _buildChangePasswordForm(),
+          },
         ),
       ),
     );

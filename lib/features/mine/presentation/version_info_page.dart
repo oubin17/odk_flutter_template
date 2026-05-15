@@ -7,8 +7,8 @@ import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/features/mine/data/models/app_version_info.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/widgets/mixins/mounted_safe_mixin.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
@@ -103,9 +103,9 @@ class _VersionInfoPageState extends State<VersionInfoPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.bgPage(context),
-      appBar: BasicAppBar(title: AppText(L10nUtils.versionInfo)),
+    return AppPage(
+      title: AppText(L10nUtils.versionInfo),
+      padding: EdgeInsets.zero,
       body: SingleChildScrollView(
         child: SizedBox(
           width: double.infinity,

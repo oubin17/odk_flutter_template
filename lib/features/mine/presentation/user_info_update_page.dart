@@ -8,8 +8,8 @@ import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/basic_user/data/models/user_profile/user_profile_request.dart';
 import 'package:odk_flutter_template/features/basic_user/domain/user_profile_service.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -38,9 +38,9 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   late final TextEditingController _birthdayController;
 
   // 头像相关状态
-  String? _avatarUrl; // 网络头像 URL
-  XFile? _selectedImage; // 本地选中的图片
-  bool _isSaving = false; // 保存中状态
+  String? _avatarUrl;
+  XFile? _selectedImage;
+  bool _isSaving = false;
 
   @override
   void initState() {
@@ -53,7 +53,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
           ? DateTimeUtils.dateToDateStr(_selectedBirthday)
           : '',
     );
-    // 初始化头像 URL
     if (widget.type == UserInfoUpdateType.avatar) {
       _avatarUrl = widget.value;
     }
@@ -66,7 +65,8 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
     super.dispose();
   }
 
-  // 🔥 底部弹出 原生年月日滚轮选择器
+  // ===================== 日期选择 =====================
+
   Future<void> _showBottomDatePicker() async {
     AppBottomDatePicker.show(
       context: context,
@@ -82,7 +82,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
 
   // ===================== 权限请求 =====================
 
-  /// 请求相机权限
   Future<bool> _requestCameraPermission() async {
     final status = await Permission.camera.status;
     if (status.isGranted) return true;
@@ -90,7 +89,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
     final result = await Permission.camera.request();
     if (result.isGranted) return true;
 
-    // 永久拒绝，引导去设置
     if (result.isPermanentlyDenied) {
       if (mounted) {
         AppToast.showAppConfirmDialog(
@@ -108,16 +106,13 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
     return false;
   }
 
-  /// 请求相册权限
   Future<bool> _requestPhotoPermission() async {
-    // iOS 14+ 使用 photos 权限，Android 使用 storage
     final status = await Permission.photos.status;
     if (status.isGranted) return true;
 
     final result = await Permission.photos.request();
     if (result.isGranted) return true;
 
-    // 永久拒绝，引导去设置
     if (result.isPermanentlyDenied) {
       if (mounted) {
         AppToast.showAppConfirmDialog(
@@ -137,7 +132,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
 
   // ===================== 图片选择 =====================
 
-  /// 从相机拍照
   Future<void> _pickFromCamera() async {
     final hasPermission = await _requestCameraPermission();
     if (!hasPermission) return;
@@ -151,16 +145,13 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         imageQuality: 85,
       );
       if (image != null) {
-        setState(() {
-          _selectedImage = image;
-        });
+        setState(() => _selectedImage = image);
       }
     } catch (e) {
       AppToast.showToast(L10nUtils.error);
     }
   }
 
-  /// 从相册选择
   Future<void> _pickFromGallery() async {
     final hasPermission = await _requestPhotoPermission();
     if (!hasPermission) return;
@@ -174,9 +165,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         imageQuality: 85,
       );
       if (image != null) {
-        setState(() {
-          _selectedImage = image;
-        });
+        setState(() => _selectedImage = image);
       }
     } catch (e) {
       AppToast.showToast(L10nUtils.error);
@@ -191,95 +180,89 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       backgroundColor: Colors.transparent,
       builder: (ctx) => Container(
         decoration: BoxDecoration(
-          color: AppColors.bgPage(context),
+          color: AppColors.card(context),
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.w)),
         ),
         child: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // 标题
-              Container(
-                height: 80.h,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: AppColors.divider(context),
-                      width: 1,
-                    ),
-                  ),
-                ),
-                child: AppText.body(
-                  L10nUtils.selectAvatar,
-                  color: AppColors.textGray(context),
-                ),
+              _buildActionSheetHeader(L10nUtils.selectAvatar),
+              _buildActionSheetItem(
+                icon: Icons.camera_alt_outlined,
+                text: L10nUtils.takePhoto,
+                onTap: _pickFromCamera,
               ),
-              // 拍照
-              InkWell(
-                onTap: () {
-                  NavigatorUtils.pop();
-                  _pickFromCamera();
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 28.h),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.camera_alt_outlined,
-                        size: 36.w,
-                        color: AppColors.primary(context),
-                      ),
-                      AppGap.wNormal,
-                      AppText.body(L10nUtils.takePhoto),
-                    ],
-                  ),
-                ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: Divider(height: 1.h, color: AppColors.divider(context)),
               ),
-              Divider(height: 1.h, color: AppColors.divider(context)),
-              // 相册
-              InkWell(
-                onTap: () {
-                  NavigatorUtils.pop();
-                  _pickFromGallery();
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 28.h),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.photo_library_outlined,
-                        size: 36.w,
-                        color: AppColors.primary(context),
-                      ),
-                      AppGap.wNormal,
-                      AppText.body(L10nUtils.chooseFromAlbum),
-                    ],
-                  ),
-                ),
+              _buildActionSheetItem(
+                icon: Icons.photo_library_outlined,
+                text: L10nUtils.chooseFromAlbum,
+                onTap: _pickFromGallery,
               ),
-              // 取消按钮
               Divider(height: 8.h, color: AppColors.divider(context)),
-              InkWell(
-                onTap: () => NavigatorUtils.pop(),
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 28.h),
-                  alignment: Alignment.center,
-                  child: AppText.body(
-                    L10nUtils.cancel,
-                    color: AppColors.textGray(context),
-                  ),
-                ),
-              ),
+              _buildActionSheetCancel(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  /// ActionSheet 标题栏
+  Widget _buildActionSheetHeader(String title) {
+    return Container(
+      height: 80.h,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: AppColors.divider(context), width: 1),
+        ),
+      ),
+      child: AppText.body(title, color: AppColors.textGray(context)),
+    );
+  }
+
+  /// ActionSheet 选项行
+  Widget _buildActionSheetItem({
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: () {
+        NavigatorUtils.pop();
+        onTap();
+      },
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 28.h),
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 36.w, color: AppColors.primary(context)),
+            AppGap.wNormal,
+            AppText.body(text),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// ActionSheet 取消按钮
+  Widget _buildActionSheetCancel() {
+    return InkWell(
+      onTap: () => NavigatorUtils.pop(),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 28.h),
+        alignment: Alignment.center,
+        child: AppText.body(
+          L10nUtils.cancel,
+          color: AppColors.textGray(context),
         ),
       ),
     );
@@ -288,7 +271,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   // ===================== 保存逻辑 =====================
 
   void _handleSave() async {
-    if (_isSaving) return; // 防止重复提交
+    if (_isSaving) return;
 
     switch (widget.type) {
       case UserInfoUpdateType.nickname:
@@ -357,10 +340,11 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
 
   // ===================== UI 构建 =====================
 
-  /// 构建昵称输入框
+  /// 昵称输入框
   Widget _buildNicknameInputWidget() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+    return AppCard(
+      showShadow: false,
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
       child: AppInput(
         controller: _nicknameController,
         validator: (value) => value?.trim().isEmpty ?? true
@@ -371,14 +355,18 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
     );
   }
 
-  /// 微信风格性别选择
+  /// 性别选择
   Widget _buildGenderInputWidget() {
-    return Container(
-      color: Colors.white,
+    return AppCard(
+      showShadow: false,
+      padding: EdgeInsets.zero,
       child: Column(
         children: [
           _buildGenderItem(L10nUtils.male, "1"),
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 40.w),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
+            child: Divider(height: 1.h, color: AppColors.divider(context)),
+          ),
           _buildGenderItem(L10nUtils.female, "2"),
         ],
       ),
@@ -390,11 +378,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {
-        setState(() {
-          _selectedGender = value;
-        });
-      },
+      onTap: () => setState(() => _selectedGender = value),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 18.h),
@@ -410,10 +394,11 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
     );
   }
 
-  /// 生日输入框：只读 + 点击弹出底部选择器
+  /// 生日输入框
   Widget _buildBirthdayInputWidget() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+    return AppCard(
+      showShadow: false,
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
       child: AppInput(
         controller: _birthdayController,
         readOnly: true,
@@ -424,7 +409,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
     );
   }
 
-  /// 🔥 头像更新页面
+  /// 头像更新页面
   Widget _buildAvatarInputWidget() {
     return Column(
       children: [
@@ -433,14 +418,11 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
           onTap: _showImageSourceActionSheet,
           child: Container(
             width: double.infinity,
-            color: AppColors.bgPage(context),
             padding: EdgeInsets.symmetric(vertical: 60.h),
             alignment: Alignment.center,
             child: Stack(
               children: [
-                // 头像
                 _buildAvatarDisplay(),
-                // 右下角编辑图标
                 Positioned(
                   right: 0,
                   bottom: 0,
@@ -466,10 +448,12 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
             ),
           ),
         ),
+
+        AppGap.hNormal,
+
         // 底部选择区域
-        Container(
-          color: AppColors.bgPage(context),
-          padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 30.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -478,14 +462,12 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
                 color: AppColors.textGray(context),
               ),
               AppGap.hNormal,
-              // 拍照按钮
               _buildAvatarOptionButton(
                 icon: Icons.camera_alt_outlined,
                 text: L10nUtils.takePhoto,
                 onTap: _pickFromCamera,
               ),
               AppGap.hSmall,
-              // 相册按钮
               _buildAvatarOptionButton(
                 icon: Icons.photo_library_outlined,
                 text: L10nUtils.chooseFromAlbum,
@@ -502,7 +484,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   Widget _buildAvatarDisplay() {
     final double avatarSize = 200.w;
 
-    // 优先显示本地选中的图片
     if (_selectedImage != null) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(avatarSize),
@@ -520,7 +501,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       );
     }
 
-    // 显示网络头像
     if (_avatarUrl != null && _avatarUrl!.isNotEmpty) {
       return AppAvatar(
         imgUrl: _avatarUrl,
@@ -529,7 +509,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       );
     }
 
-    // 默认头像
     return AppAvatar(size: avatarSize, shape: AppAvatarShape.circle);
   }
 
@@ -568,25 +547,19 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   }
 
   Widget _buildInputWidget() {
-    switch (widget.type) {
-      case UserInfoUpdateType.nickname:
-        return _buildNicknameInputWidget();
-      case UserInfoUpdateType.gender:
-        return _buildGenderInputWidget();
-      case UserInfoUpdateType.birthday:
-        return _buildBirthdayInputWidget();
-      case UserInfoUpdateType.avatar:
-        return _buildAvatarInputWidget();
-    }
+    return switch (widget.type) {
+      UserInfoUpdateType.nickname => _buildNicknameInputWidget(),
+      UserInfoUpdateType.gender => _buildGenderInputWidget(),
+      UserInfoUpdateType.birthday => _buildBirthdayInputWidget(),
+      UserInfoUpdateType.avatar => _buildAvatarInputWidget(),
+    };
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BasicAppBar(
-        title: AppText(widget.title),
-        onSave: _isSaving ? null : _handleSave,
-      ),
+    return AppPage(
+      title: AppText(widget.title),
+      onSave: _isSaving ? null : _handleSave,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

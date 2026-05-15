@@ -75,68 +75,6 @@ class CommonSettingPage extends StatelessWidget {
             },
           ),
           Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-
-          // 关于我们 + 图标
-          // AppListItem(
-          //   left: Icon(
-          //     Icons.info_outline,
-          //     color: AppColors.textSecond(context),
-          //   ),
-          //   title: L10nUtils.aboutUs,
-          //   onTap: () {
-          //     // Fluttertoast.showToast(msg: "操作成功！");
-          //     AppToast.showLoading(
-          //       loading: L10nUtils.todo,
-          //       displayTime: const Duration(seconds: 1),
-          //     );
-          //   },
-          // ),
-          // Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-
-          // // 版本信息 + 图标
-          // AppListItem(
-          //   left: Icon(
-          //     Icons.system_update_outlined,
-          //     color: AppColors.textSecond(context),
-          //   ),
-          //   title: L10nUtils.versionInfo,
-          //   // desc: "1.0.0",
-          //   onTap: () {
-          //     // SmartDialog.show(builder: (context) => const AppInfoPage());
-          //     AppToast.show(const AppInfoPage());
-          //   },
-          // ),
-          // Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-          // // 设备信息 + 图标
-          // AppListItem(
-          //   left: Icon(
-          //     Icons.device_hub_outlined,
-          //     color: AppColors.textSecond(context),
-          //   ),
-          //   title: L10nUtils.deviceInfo,
-          //   // desc: "1.0.0",
-          //   onTap: () {
-          //     AppToast.show(const DeviceInfoPage());
-          //   },
-          // ),
-
-          // Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-          // // Spacer(),
-          // AppListItem(
-          //   left: Icon(Icons.logout, color: AppColors.textSecond(context)),
-          //   title: L10nUtils.logout,
-          //   showArrow: false,
-          //   onTap: () {
-          //     AppToast.showAppConfirmDialog(
-          //       title: L10nUtils.logout,
-          //       onConfirm: () async {
-          //         await AuthService().logout();
-          //         // ignore: use_build_context_synchronously
-          //         NavigatorUtils.goNamed(RouteNames.signin);
-          //       },
-          //     );
-          //   },
-          // ),
         ],
       ),
     );

@@ -29,7 +29,7 @@ class AppTheme {
   static const Color _darkDivider = Color(0xFF2C2C2C);
 
   static const Color _lightSecondDivider = Color.fromARGB(255, 223, 222, 222);
-  static const Color _darkSecondDivider = Color.fromARGB(255, 67, 67, 67);
+  static const Color _darkSecondDivider = Color.fromARGB(255, 170, 170, 170);
 
   /// 四、文字色组（主/次/提示/禁用）
   static const Color _lightTextMain = Color(0xFF1D2129);

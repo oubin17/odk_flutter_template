@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:odk_flutter_template/gen/assets.gen.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -12,15 +13,15 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.bgPage(context),
+    return AppPage(
+      showAppBar: false,
+      padding: EdgeInsets.only(
+        left: 16.w,
+        right: 16.w,
+        top: 64.h,
+        bottom: 16.h,
+      ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          left: 16.h,
-          right: 16.h,
-          top: 64.h,
-          bottom: 16.h,
-        ),
         child: Column(children: [AppGap.hSmall, _buildInfoCard()]),
       ),
     );
@@ -35,50 +36,66 @@ class ProfilePage extends StatelessWidget {
         final user = provider.userEntity;
 
         return Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
           child: Column(
             children: [
+              // 顶部操作栏：设置按钮右对齐
               Row(
-                // 关键：让Row内所有子组件垂直居中对齐（头像、文本、按钮组对齐）
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  AppGap.wSmall,
-                  AppAvatar(
-                    assetPath: user?.isAdmin == true
-                        ? Assets.images.profile.admin.path
-                        : Assets.images.profile.employee.path,
-                    size: 300.w,
-                  ),
-                  AppGap.wNormal,
-                  AppText(
-                    user?.userProfile?.userName ?? "",
-                    size: 35.sp,
-                    weight: FontWeight.w500,
-                  ),
-                  // ✅ 核心：添加Spacer，自动填充水平剩余空间，将后面的按钮组挤到最右侧
-                  const Spacer(),
-                  Column(
-                    // 关键：让Column宽度自适应（不占满剩余空间）
-                    mainAxisSize: MainAxisSize.min,
-                    // 关键：按钮组自身右对齐
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      AppIconButton(
-                        icon: Icons.settings_sharp,
-                        iconColor: AppColors.iconColor,
-                        size: 38.w,
-                        onTap: () =>
-                            context.pushNamed(RouteNames.systemSetting),
-                      ),
-                      AppIconButton(
-                        icon: Icons.edit,
-                        size: 30.w,
-                        onTap: () => context.pushNamed(RouteNames.userInfo),
-                      ),
-                    ],
+                  AppIconButton(
+                    icon: Icons.settings_outlined,
+                    iconColor: AppColors.iconColor,
+                    size: 40.w,
+                    btnSize: 72.w,
+                    onTap: () => context.pushNamed(RouteNames.systemSetting),
                   ),
                 ],
+              ),
+              AppGap.hSmall,
+
+              // 头像 + 编辑按钮（叠加布局）
+              GestureDetector(
+                onTap: () => context.pushNamed(RouteNames.userInfo),
+                child: Stack(
+                  children: [
+                    AppAvatar(
+                      assetPath: Assets.images.profile.employee.path,
+                      size: 300.w,
+                    ),
+                    // 编辑小图标覆盖在头像右下角
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        width: 64.w,
+                        height: 64.w,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary(context),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.card(context),
+                            width: 3.w,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.edit,
+                          size: 28.w,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              AppGap.hNormal,
+
+              // 用户名居中显示
+              AppText(
+                user?.userProfile?.userName ?? "",
+                size: 36.sp,
+                weight: FontWeight.w600,
+                align: TextAlign.center,
               ),
               AppGap.hSuperSmall,
 

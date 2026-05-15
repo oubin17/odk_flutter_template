@@ -4,12 +4,28 @@ import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/appbar/app_bar.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 class SystemSettingPage extends StatelessWidget {
   const SystemSettingPage({super.key});
+
+  /// 分组标题
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: EdgeInsets.only(left: 30.w, bottom: 8.h, top: 4.h),
+      child: AppText.tip(title),
+    );
+  }
+
+  /// 分组内分割线
+  Widget _buildDivider(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      child: Divider(height: 1.h, color: AppColors.divider(context)),
+    );
+  }
 
   Widget _buildAccountContext(BuildContext context) {
     return Column(
@@ -20,8 +36,7 @@ class SystemSettingPage extends StatelessWidget {
             NavigatorUtils.pushNamed(RouteNames.userInfo);
           },
         ),
-        Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
-
+        _buildDivider(context),
         AppListItem(
           title: L10nUtils.accountSecurity,
           onTap: () {
@@ -41,7 +56,6 @@ class SystemSettingPage extends StatelessWidget {
             NavigatorUtils.pushNamed(RouteNames.commonSetting);
           },
         ),
-        Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
       ],
     );
   }
@@ -55,7 +69,6 @@ class SystemSettingPage extends StatelessWidget {
             NavigatorUtils.pushNamed(RouteNames.versionInfo);
           },
         ),
-        Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
       ],
     );
   }
@@ -79,21 +92,44 @@ class SystemSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.bgPage(context),
-      appBar: BasicAppBar(title: AppText(L10nUtils.systemSetting)),
+    return AppPage(
+      title: AppText(L10nUtils.systemSetting),
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
         children: [
-          AppTip(tip: L10nUtils.account),
-          _buildAccountContext(context),
-          AppTip(tip: L10nUtils.general),
-          _buildSystemContext(context),
-          AppTip(tip: L10nUtils.helpAbout),
-          _buildVersionInfoContext(context),
-          AppTip(height: 20.h),
-          _buildLogoutContext(context),
-          Divider(height: 1.h, color: AppColors.divider(context)),
+          // 账号分组
+          _buildSectionTitle(L10nUtils.account),
+          AppCard(
+            showShadow: false,
+            padding: EdgeInsets.zero,
+            child: _buildAccountContext(context),
+          ),
+
+          AppGap.h(24),
+
+          // 通用分组
+          _buildSectionTitle(L10nUtils.general),
+          AppCard(
+            showShadow: false,
+            padding: EdgeInsets.zero,
+            child: _buildSystemContext(context),
+          ),
+
+          AppGap.h(24),
+          // 帮助关于分组
+          _buildSectionTitle(L10nUtils.helpAbout),
+          AppCard(
+            showShadow: false,
+            padding: EdgeInsets.zero,
+            child: _buildVersionInfoContext(context),
+          ),
+          AppGap.hLarge,
+
+          // 退出登录
+          AppCard(
+            showShadow: false,
+            padding: EdgeInsets.zero,
+            child: _buildLogoutContext(context),
+          ),
         ],
       ),
     );
