@@ -3,8 +3,9 @@ import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/content/presentation/content_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/first_index.dart';
 import 'package:odk_flutter_template/features/mine/presentation/profile_page.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_bottom_nav_bar.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_floating_nav_bar.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
-import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,43 +20,44 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const FirstIndexPage(),
     const ContentPage(),
+    const ContentPage(),
     const ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return AppPage(
-      body: IndexedStack(index: _currentIndex, children: _pages),
-      bottomNavigationBar: BottomNavigationBar(
+      padding: EdgeInsets.zero,
+
+      /// 使用 Scaffold 自带的底部导航栏
+      // body: IndexedStack(index: _currentIndex, children: _pages),
+      // bottomNavigationBar: AppBottomNavBar(
+      //   currentIndex: _currentIndex,
+      //   items: [
+      //     AppBottomNavItem(icon: Icons.home, label: L10nUtils.home),
+      //     AppBottomNavItem(icon: Icons.explore, label: L10nUtils.discover),
+      //     AppBottomNavItem(icon: Icons.explore, label: L10nUtils.discover),
+      //     AppBottomNavItem(icon: Icons.person, label: L10nUtils.mine),
+      //   ],
+      //   onTap: (index) => setState(() => _currentIndex = index),
+      // ),
+
+      /// 使用自定义的浮动底部导航栏（需要将 body 包裹在 AppFloatingNavBar.wrap 中）
+      body: AppFloatingNavBar.wrap(
+        context: context,
         currentIndex: _currentIndex,
-
-        // 1. 核心：设置选中时的颜色
-        selectedItemColor: AppColors.primary(context),
-
-        // 2. 核心：设置未选中时的颜色
-        unselectedItemColor: Colors.grey,
-
-        // 3. 关键：固定模式，确保未选中时也显示文字
-        type: BottomNavigationBarType.fixed,
+        items: [
+          const AppFloatingNavItem(icon: Icons.home),
+          const AppFloatingNavItem(icon: Icons.explore),
+          const AppFloatingNavItem(icon: Icons.explore),
+          const AppFloatingNavItem(icon: Icons.person),
+        ],
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: L10nUtils.home,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.explore),
-            label: L10nUtils.discover,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: L10nUtils.mine,
-          ),
-        ],
+        child: IndexedStack(index: _currentIndex, children: _pages),
       ),
     );
   }
