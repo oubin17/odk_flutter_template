@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/core/utils/date_time_utils.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/basic_user/models/user_profile/user_profile_request.dart';
@@ -106,33 +107,17 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
     return false;
   }
 
-  Future<bool> _requestPhotoPermission() async {
-    final status = await Permission.photos.status;
-    if (status.isGranted) return true;
-
-    final result = await Permission.photos.request();
-    if (result.isGranted) return true;
-
-    if (result.isPermanentlyDenied) {
-      if (mounted) {
-        AppToast.showAppConfirmDialog(
-          title: L10nUtils.photoPermissionDenied,
-          msg: L10nUtils.permissionDeniedTip,
-          onConfirm: () => openAppSettings(),
-        );
-      }
-      return false;
-    }
-
-    if (mounted) {
-      AppToast.showToast(L10nUtils.photoPermissionDenied);
-    }
-    return false;
-  }
-
   // ===================== 图片选择 =====================
 
   Future<void> _pickFromCamera() async {
+    // 模拟器不支持相机
+    if (GlobalInfo.instance.isSimulator) {
+      if (mounted) {
+        AppToast.showToast(L10nUtils.cameraNotAvailableOnSimulator);
+      }
+      return;
+    }
+
     final hasPermission = await _requestCameraPermission();
     if (!hasPermission) return;
 
@@ -153,9 +138,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   }
 
   Future<void> _pickFromGallery() async {
-    final hasPermission = await _requestPhotoPermission();
-    if (!hasPermission) return;
-
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(
@@ -168,6 +150,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         setState(() => _selectedImage = image);
       }
     } catch (e) {
+      // image_picker 内部已处理相册权限请求，失败时提示错误
       AppToast.showToast(L10nUtils.error);
     }
   }
@@ -272,69 +255,75 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
 
   void _handleSave() async {
     if (_isSaving) return;
+    setState(() => _isSaving = true);
+    AppToast.showLoading(loading: L10nUtils.saving);
 
-    switch (widget.type) {
-      case UserInfoUpdateType.nickname:
-        final newNickname = _nicknameController.text.trim();
-        if (newNickname.isEmpty) {
-          AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.nickname));
-          return;
-        }
-        await UserProfileService().updateProfile(
-          UserProfileRequest(userName: newNickname),
-        );
-        break;
-      case UserInfoUpdateType.gender:
-        if (_selectedGender == null) {
-          AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.gender));
-          return;
-        }
-        await UserProfileService().updateProfile(
-          UserProfileRequest(gender: _selectedGender),
-        );
-        break;
-      case UserInfoUpdateType.birthday:
-        if (_selectedBirthday == null) {
-          AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.birthday));
-          return;
-        }
-        await UserProfileService().updateProfile(
-          UserProfileRequest(
-            birthDay: DateTimeUtils.dateToDateStr(_selectedBirthday),
-          ),
-        );
-        break;
-      case UserInfoUpdateType.avatar:
-        if (_selectedImage == null) {
-          AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.avatar));
-          return;
-        }
-        setState(() => _isSaving = true);
-        AppToast.showLoading(loading: L10nUtils.saving);
-        try {
-          await UserProfileService().updateAvatar(_selectedImage!.path);
-          AppToast.dismiss();
-          if (mounted) {
-            AppToast.showToast(L10nUtils.avatarUpdateSuccess);
+    try {
+      switch (widget.type) {
+        case UserInfoUpdateType.nickname:
+          final newNickname = _nicknameController.text.trim();
+          if (newNickname.isEmpty) {
+            AppToast.dismiss();
+            AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.nickname));
+            return;
           }
-        } catch (e) {
-          AppToast.dismiss();
-          if (mounted) {
+          await UserProfileService().updateProfile(
+            UserProfileRequest(userName: newNickname),
+          );
+          break;
+        case UserInfoUpdateType.gender:
+          if (_selectedGender == null) {
+            AppToast.dismiss();
+            AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.gender));
+            return;
+          }
+          await UserProfileService().updateProfile(
+            UserProfileRequest(gender: _selectedGender),
+          );
+          break;
+        case UserInfoUpdateType.birthday:
+          if (_selectedBirthday == null) {
+            AppToast.dismiss();
+            AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.birthday));
+            return;
+          }
+          await UserProfileService().updateProfile(
+            UserProfileRequest(
+              birthDay: DateTimeUtils.dateToDateStr(_selectedBirthday),
+            ),
+          );
+          break;
+        case UserInfoUpdateType.avatar:
+          if (_selectedImage == null) {
+            AppToast.dismiss();
+            AppToast.showToast(L10nUtils.fieldNotEmptyTip(L10nUtils.avatar));
+            return;
+          }
+          final avatarUrl = await UserProfileService().updateAvatar(
+            _selectedImage!.path,
+          );
+          if (avatarUrl.isEmpty) {
+            AppToast.dismiss();
             AppToast.showToast(L10nUtils.uploadFailed);
+            return;
           }
-        } finally {
-          if (mounted) {
-            setState(() => _isSaving = false);
-          }
-        }
-        break;
-    }
+          break;
+      }
 
-    if (widget.type != UserInfoUpdateType.avatar) {
-      AppToast.showToast(L10nUtils.success);
-    }
-    if (mounted) {
-      NavigatorUtils.pop();
+      AppToast.dismiss();
+      if (mounted) {
+        AppToast.showToast(L10nUtils.success);
+        NavigatorUtils.pop();
+      }
+    } catch (e) {
+      AppToast.dismiss();
+      if (mounted) {
+        AppToast.showToast(L10nUtils.uploadFailed);
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isSaving = false);
+      }
     }
   }
 
@@ -427,8 +416,8 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
                   right: 0,
                   bottom: 0,
                   child: Container(
-                    width: 56.w,
-                    height: 56.w,
+                    width: 40.w,
+                    height: 40.w,
                     decoration: BoxDecoration(
                       color: AppColors.primary(context),
                       shape: BoxShape.circle,

@@ -722,6 +722,12 @@ abstract class AppLocalizations {
   /// **'Saving...'**
   String get saving;
 
+  /// 模拟器不支持相机，请使用真机测试
+  ///
+  /// In en, this message translates to:
+  /// **'Camera is not available on simulator, please test on a real device'**
+  String get cameraNotAvailableOnSimulator;
+
   /// 加载中
   ///
   /// In en, this message translates to:

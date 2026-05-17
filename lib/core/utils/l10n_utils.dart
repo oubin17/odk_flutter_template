@@ -163,6 +163,8 @@ class L10nUtils {
   static String get avatarUpdateSuccess => _localizations!.avatarUpdateSuccess;
   static String get selectAvatar => _localizations!.selectAvatar;
   static String get saving => _localizations!.saving;
+  static String get cameraNotAvailableOnSimulator =>
+      _localizations!.cameraNotAvailableOnSimulator;
 
   // ======================== 状态页面 ========================
   static String get loading => _localizations!.loading;

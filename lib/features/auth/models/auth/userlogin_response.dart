@@ -17,7 +17,7 @@ class UserLoginResponse extends UserEntity {
     required super.userStatus,
     required super.accessToken,
     super.roles,
-    super.userProfile,
+    required super.userProfile,
   });
 
   factory UserLoginResponse.fromJson(Map<String, dynamic> json) =>

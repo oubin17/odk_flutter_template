@@ -95,6 +95,9 @@ class GlobalInfo {
   /// 是否为 Web 平台
   late bool isWeb;
 
+  /// 是否为模拟器（非真机）
+  bool get isSimulator => isMobile && !isPhysicalDevice;
+
   // ======================== 网络信息 ========================
 
   /// 设备语言标签，如 "zh-CN"、"en-US"

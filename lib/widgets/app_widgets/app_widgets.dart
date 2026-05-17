@@ -725,19 +725,9 @@ class AppAvatar extends StatelessWidget {
     );
   }
 
-  // 构建图片内容：本地图片 → 网络图片 → 默认图标
+  // 构建图片内容：网络图片 → 本地资源 → 默认图标
   Widget _buildImageContent(BuildContext context) {
-    // 1. 优先显示本地资源图片
-    if (assetPath != null && assetPath!.isNotEmpty) {
-      return Image.asset(
-        assetPath!,
-        fit: BoxFit.cover,
-        width: size.w,
-        height: size.w,
-      );
-    }
-
-    // 2. 其次显示网络图片（带缓存+占位+错误）
+    // 1. 优先显示网络图片（带缓存+占位+错误）
     if (imgUrl != null && imgUrl!.isNotEmpty) {
       return CachedNetworkImage(
         imageUrl: imgUrl!,
@@ -750,7 +740,25 @@ class AppAvatar extends StatelessWidget {
             strokeWidth: 2.w,
           ),
         ),
-        errorWidget: (context, url, error) => _defaultIcon(context),
+        errorWidget: (context, url, error) =>
+            assetPath != null && assetPath!.isNotEmpty
+            ? Image.asset(
+                assetPath!,
+                fit: BoxFit.cover,
+                width: size.w,
+                height: size.w,
+              )
+            : _defaultIcon(context),
+      );
+    }
+
+    // 2. 其次显示本地资源图片
+    if (assetPath != null && assetPath!.isNotEmpty) {
+      return Image.asset(
+        assetPath!,
+        fit: BoxFit.cover,
+        width: size.w,
+        height: size.w,
       );
     }
 

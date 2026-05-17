@@ -22,6 +22,11 @@ class UserProfileApi {
     final formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(filePath, filename: 'avatar.jpg'),
     });
-    return await ApiService().post('/user/profile/avatar/upload', formData);
+    return await ApiService().post('/user/profile/upload/avatar', formData);
+  }
+
+  /// 获取用户头像 URL
+  Future<ServiceResponse> getAvatarUrl() async {
+    return await ApiService().get('/user/profile/avatar/url');
   }
 }

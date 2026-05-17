@@ -29,18 +29,8 @@ class UserInfoPage extends StatelessWidget {
       right: Padding(
         padding: const EdgeInsets.only(right: 20.0),
         child: AppAvatar(
-          imgUrl:
-              (user?.userProfile?.avatarUrl != null &&
-                  user!.userProfile!.avatarUrl!.isNotEmpty)
-              ? user.userProfile!.avatarUrl
-              : null,
-          assetPath:
-              (user?.userProfile?.avatarUrl == null ||
-                  user!.userProfile!.avatarUrl!.isEmpty)
-              ? (user?.isAdmin == true
-                    ? Assets.images.profile.admin.path
-                    : Assets.images.profile.employee.path)
-              : null,
+          imgUrl: user?.userProfile.avatarUrl,
+          assetPath: Assets.images.profile.admin.path,
           size: 80.w,
         ),
       ),

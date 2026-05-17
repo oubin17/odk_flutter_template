@@ -342,6 +342,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saving => 'Saving...';
 
   @override
+  String get cameraNotAvailableOnSimulator =>
+      'Camera is not available on simulator, please test on a real device';
+
+  @override
   String get loading => 'Loading...';
 
   @override

@@ -457,6 +457,10 @@
   "@saving": {
     "description": "保存中"
   },
+  "cameraNotAvailableOnSimulator": "Camera is not available on simulator, please test on a real device",
+  "@cameraNotAvailableOnSimulator": {
+    "description": "模拟器不支持相机，请使用真机测试"
+  },
 
   "loading": "Loading...",
   "@loading": {

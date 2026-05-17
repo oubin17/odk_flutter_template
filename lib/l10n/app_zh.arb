@@ -130,6 +130,7 @@
   "avatarUpdateSuccess": "头像更新成功",
   "selectAvatar": "选择头像",
   "saving": "保存中...",
+  "cameraNotAvailableOnSimulator": "模拟器不支持相机，请使用真机测试",
 
   "loading": "加载中...",
   "emptyData": "暂无数据",

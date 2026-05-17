@@ -329,6 +329,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get saving => '保存中...';
 
   @override
+  String get cameraNotAvailableOnSimulator => '模拟器不支持相机，请使用真机测试';
+
+  @override
   String get loading => '加载中...';
 
   @override

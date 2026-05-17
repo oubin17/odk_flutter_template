@@ -18,11 +18,9 @@ UserLoginResponse _$UserLoginResponseFromJson(Map<String, dynamic> json) =>
       roles: (json['roles'] as List<dynamic>?)
           ?.map((e) => RoleEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      userProfile: json['userProfile'] == null
-          ? null
-          : UserProfileEntity.fromJson(
-              json['userProfile'] as Map<String, dynamic>,
-            ),
+      userProfile: UserProfileEntity.fromJson(
+        json['userProfile'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$UserLoginResponseToJson(UserLoginResponse instance) =>
@@ -32,6 +30,6 @@ Map<String, dynamic> _$UserLoginResponseToJson(UserLoginResponse instance) =>
       'userStatus': instance.userStatus,
       'accessToken': instance.accessToken.toJson(),
       'roles': instance.roles?.map((e) => e.toJson()).toList(),
-      'userProfile': instance.userProfile?.toJson(),
+      'userProfile': instance.userProfile.toJson(),
       'token': instance.token,
     };

@@ -12,7 +12,7 @@ class UserEntity {
   String userStatus;
   AccessTokenEntity accessToken;
   List<RoleEntity>? roles;
-  UserProfileEntity? userProfile;
+  UserProfileEntity userProfile;
 
   bool get isAdmin => roles?.any((role) => role.roleCode == 'ADMIN') ?? false;
   // bool get isAdmin => accessToken.tokenValue == 'admin';
@@ -23,7 +23,7 @@ class UserEntity {
     required this.userStatus,
     required this.accessToken,
     this.roles,
-    this.userProfile,
+    required this.userProfile,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>

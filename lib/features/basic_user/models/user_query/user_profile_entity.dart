@@ -7,12 +7,14 @@ class UserProfileEntity {
   String? userName;
   String? gender;
   String? birthDay;
+  String? avatar;
   String? avatarUrl;
 
   UserProfileEntity({
     this.userName,
     this.gender,
     this.birthDay,
+    this.avatar,
     this.avatarUrl,
   });
 

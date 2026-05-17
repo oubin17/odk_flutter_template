@@ -60,30 +60,9 @@ class ProfilePage extends StatelessWidget {
                 child: Stack(
                   children: [
                     AppAvatar(
-                      assetPath: Assets.images.profile.employee.path,
+                      imgUrl: user?.userProfile.avatarUrl,
+                      assetPath: Assets.images.profile.admin.path,
                       size: 300.w,
-                    ),
-                    // 编辑小图标覆盖在头像右下角
-                    Positioned(
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                        width: 64.w,
-                        height: 64.w,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary(context),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.card(context),
-                            width: 3.w,
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.edit,
-                          size: 28.w,
-                          color: Colors.white,
-                        ),
-                      ),
                     ),
                   ],
                 ),
@@ -92,7 +71,7 @@ class ProfilePage extends StatelessWidget {
 
               // 用户名居中显示
               AppText(
-                user?.userProfile?.userName ?? "",
+                user?.userProfile.userName ?? "",
                 size: 36.sp,
                 weight: FontWeight.w600,
                 align: TextAlign.center,
