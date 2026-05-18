@@ -47,10 +47,10 @@ class _HomePageState extends State<HomePage> {
         context: context,
         currentIndex: _currentIndex,
         items: [
-          const AppFloatingNavItem(icon: Icons.home),
-          const AppFloatingNavItem(icon: Icons.explore),
-          const AppFloatingNavItem(icon: Icons.explore),
-          const AppFloatingNavItem(icon: Icons.person),
+          AppFloatingNavItem(icon: Icons.home, label: L10nUtils.home),
+          AppFloatingNavItem(icon: Icons.explore, label: L10nUtils.discover),
+          AppFloatingNavItem(icon: Icons.explore, label: L10nUtils.discover),
+          AppFloatingNavItem(icon: Icons.person, label: L10nUtils.mine),
         ],
         onTap: (index) {
           setState(() {
