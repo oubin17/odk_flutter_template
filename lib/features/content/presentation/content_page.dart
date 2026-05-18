@@ -1,8 +1,10 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/features/content/models/content_item.dart';
-import 'package:odk_flutter_template/features/content/presentation/content_detail_page.dart';
+import 'package:odk_flutter_template/features/content/service/content_service.dart';
+import 'package:odk_flutter_template/models/request/page_request.dart';
+import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 import 'package:odk_flutter_template/widgets/app_refresh/app_refresh_list.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
@@ -10,7 +12,8 @@ import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 /// 小红书风格内容首页
 ///
 /// 使用 [AppRefreshList] 实现下拉刷新 + 上拉加载，
-/// 使用 [MasonryGridView] 实现瀑布流布局。
+/// 支持单列列表和双列瀑布流两种布局模式，修改 [mode] 即可切换。
+/// 数据通过 [ContentService] 分页接口获取。
 class ContentPage extends StatefulWidget {
   const ContentPage({super.key});
 
@@ -22,106 +25,23 @@ class _ContentPageState extends State<ContentPage> {
   /// 刷新控制器
   final _refreshController = AppRefreshListController();
 
-  /// 模拟数据 ID 计数器
-  int _idCounter = 0;
+  /// 内容服务
+  final _contentService = ContentService();
 
-  // ===================== 模拟数据 =====================
+  // ===================== 数据请求 =====================
 
-  /// 预设标题
-  static const List<String> _titles = [
-    '今日穿搭分享｜秋冬必备的奶茶色大衣',
-    '厨房小白也能搞定的懒人食谱',
-    '周末探店｜藏在巷子里的宝藏咖啡厅',
-    '旅行攻略｜三天两夜玩转大理',
-    '居家好物推荐｜提升幸福感的小物件',
-    '健身打卡第30天｜分享我的减脂餐',
-    '读书笔记｜这本小说让我熬夜看完',
-    '手账排版灵感｜极简风月计划',
-    '护肤心得｜干皮秋冬保湿攻略',
-    '摄影技巧｜手机也能拍出大片感',
-    '宠物日常｜我家猫又拆家了',
-    '职场分享｜新人如何快速融入团队',
-  ];
-
-  /// 预设作者名
-  static const List<String> _authors = [
-    '小橘子',
-    '奶茶控',
-    '旅行者Amy',
-    '厨神小白',
-    '读书人',
-    '健身达人',
-    '手账少女',
-    '护肤博主',
-    '摄影师老王',
-    '铲屎官',
-    '职场新人',
-    '居家达人',
-  ];
-
-  /// 预设颜色（用于图片/头像占位）
-  static const List<int> _colors = [
-    0xFFE8F0FF,
-    0xFFFFE8E8,
-    0xFFE8FFE8,
-    0xFFFFF5E8,
-    0xFFF0E8FF,
-    0xFFE8FFFF,
-    0xFFFFE8F5,
-    0xFFE8E8FF,
-    0xFFFFF0E8,
-    0xFFE8F5E8,
-  ];
-
-  /// 图片占位高度范围
-  static const double _minImageHeight = 120;
-  static const double _maxImageHeight = 240;
-
-  /// 生成模拟数据
-  List<ContentItem> _generateMockData(int page) {
-    final random = Random();
-    final List<ContentItem> items = [];
-
-    for (int i = 0; i < 10; i++) {
-      _idCounter++;
-      items.add(
-        ContentItem(
-          id: '$_idCounter',
-          title: _titles[random.nextInt(_titles.length)],
-          authorName: _authors[random.nextInt(_authors.length)],
-          avatarColor: _colors[random.nextInt(_colors.length)],
-          likeCount: random.nextInt(9999),
-          imageHeight:
-              _minImageHeight +
-              random
-                  .nextInt((_maxImageHeight - _minImageHeight).toInt())
-                  .toDouble(),
-          imageColor: _colors[random.nextInt(_colors.length)],
-        ),
-      );
-    }
-
-    return items;
-  }
-
-  /// 模拟网络请求：下拉刷新
+  /// 下拉刷新：请求第一页数据
   Future<List<ContentItem>> _onRefresh(int page) async {
-    // 模拟网络延迟
-    await Future.delayed(const Duration(milliseconds: 800));
-    // 刷新时重置 ID 计数器，模拟全新数据
-    _idCounter = (page - 1) * 10;
-    return _generateMockData(page);
+    final pageRequest = PageRequest.withValues(page: page, size: 10);
+    final pageResponse = await _contentService.getContentList(pageRequest);
+    return pageResponse.pageList.toList();
   }
 
-  /// 模拟网络请求：上拉加载
+  /// 上拉加载：请求下一页数据
   Future<List<ContentItem>> _onLoadMore(int page) async {
-    // 模拟网络延迟
-    await Future.delayed(const Duration(milliseconds: 1000));
-    // 第5页后模拟没有更多数据
-    if (page > 5) {
-      return [];
-    }
-    return _generateMockData(page);
+    final pageRequest = PageRequest.withValues(page: page, size: 10);
+    final pageResponse = await _contentService.getContentList(pageRequest);
+    return pageResponse.pageList.toList();
   }
 
   // ===================== 构建UI =====================
@@ -132,6 +52,13 @@ class _ContentPageState extends State<ContentPage> {
       appBar: const BasicAppBar(title: AppText('发现')),
       body: AppRefreshList<ContentItem>(
         controller: _refreshController,
+        // 🔧 切换布局模式：修改此处即可
+        // - AppRefreshListMode.list：单列列表
+        // - AppRefreshListMode.masonryGrid：双列瀑布流
+        mode: AppRefreshListMode.masonryGrid,
+        crossAxisCount: 2,
+        mainAxisSpacing: 8.h,
+        crossAxisSpacing: 8.w,
         onRefresh: _onRefresh,
         onLoadMore: _onLoadMore,
         pageSize: 10,
@@ -146,11 +73,12 @@ class _ContentPageState extends State<ContentPage> {
     );
   }
 
-  /// 跳转详情页
+  /// 跳转详情页（通过路由传 id，详情页自行请求数据）
   void _navigateToDetail(BuildContext context, ContentItem item) {
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => ContentDetailPage(item: item)));
+    NavigatorUtils.pushNamed(
+      RouteNames.contentDetail,
+      queryParameters: {'id': item.id},
+    );
   }
 }
 

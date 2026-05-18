@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:odk_flutter_template/features/mine/models/app_version_info.dart';
+import 'package:odk_flutter_template/features/mine/models/app_version/app_version_info.dart';
 
 part 'version_check_result.g.dart';
 

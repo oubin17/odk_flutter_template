@@ -12,8 +12,16 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onSave;
   // 保存按钮文案
   final String? saveText;
+  // 右侧自定义操作按钮列表（与 onSave 互斥，优先使用 actions）
+  final List<Widget>? actions;
 
-  const BasicAppBar({super.key, this.title, this.onSave, this.saveText});
+  const BasicAppBar({
+    super.key,
+    this.title,
+    this.onSave,
+    this.saveText,
+    this.actions,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +51,23 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
           : null,
-      // 右上角：使用项目统一的 AppTextButton
-      actions: [
-        if (onSave != null)
-          Padding(
-            // 右侧内边距，避免按钮贴边
-            padding: EdgeInsets.only(right: 16.w),
-            child: AppTextButton(
-              text: saveText ?? L10nUtils.save,
-              onTap: onSave!,
-              // 适配主题主色，和项目所有按钮保持一致
-              color: AppColors.primary(context),
-              size: 26.sp, // 统一字体大小
-            ),
-          ),
-      ],
+      // 右上角：优先使用自定义 actions，否则使用保存按钮
+      actions:
+          actions ??
+          [
+            if (onSave != null)
+              Padding(
+                // 右侧内边距，避免按钮贴边
+                padding: EdgeInsets.only(right: 16.w),
+                child: AppTextButton(
+                  text: saveText ?? L10nUtils.save,
+                  onTap: onSave!,
+                  // 适配主题主色，和项目所有按钮保持一致
+                  color: AppColors.primary(context),
+                  size: 26.sp, // 统一字体大小
+                ),
+              ),
+          ],
     );
   }
 

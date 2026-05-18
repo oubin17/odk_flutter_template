@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/widgets/app_status/app_status_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
@@ -20,6 +21,15 @@ enum LoadMoreStatus {
   failed,
 }
 
+/// 列表布局模式
+enum AppRefreshListMode {
+  /// 单列列表（默认，一行一个内容）
+  list,
+
+  /// 双列瀑布流（小红书风格，两列交错布局）
+  masonryGrid,
+}
+
 /// 通用下拉刷新 + 上拉加载列表组件
 ///
 /// 列表页标配组件，封装分页加载逻辑，统一空数据、加载中、加载失败等状态。
@@ -33,14 +43,23 @@ enum LoadMoreStatus {
 /// - 首次加载状态：数据为空且正在加载时显示 loading
 /// - 安全 setState：内置 [MountedSafeMixin]，异步操作后自动检查 mounted
 /// - 国际化：所有提示文案通过 L10nUtils 自动适配
+/// - 双列瀑布流：通过 [mode] 切换布局风格
 ///
 /// **使用示例：**
 ///
 /// ```dart
-/// // 基础用法
+/// // 基础用法（单列列表）
 /// AppRefreshList<String>(
 ///   onRefresh: (page) => api.fetchList(page),
 ///   itemBuilder: (context, item, index) => ListTile(title: Text(item)),
+/// )
+///
+/// // 双列瀑布流（小红书风格）
+/// AppRefreshList<String>(
+///   mode: AppRefreshListMode.masonryGrid,
+///   crossAxisCount: 2,
+///   onRefresh: (page) => api.fetchList(page),
+///   itemBuilder: (context, item, index) => Card(child: Text(item)),
 /// )
 ///
 /// // 自定义每页数量 + 空数据文案
@@ -78,7 +97,8 @@ class AppRefreshList<T> extends StatefulWidget {
   /// 列表项构建器
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
 
-  /// 分隔线构建器（不设置时使用默认 1px 分割线）
+  /// 分隔线构建器（仅 [AppRefreshListMode.list] 模式生效）
+  /// 不设置时使用默认 1px 分割线
   final Widget Function(BuildContext context, int index)? separatorBuilder;
 
   /// ===================== 分页配置 =====================
@@ -101,6 +121,18 @@ class AppRefreshList<T> extends StatefulWidget {
 
   /// ===================== 样式配置 =====================
 
+  /// 列表布局模式（默认单列列表）
+  final AppRefreshListMode mode;
+
+  /// 瀑布流列数（仅 [AppRefreshListMode.masonryGrid] 模式生效，默认 2）
+  final int crossAxisCount;
+
+  /// 瀑布流主轴间距（仅 [AppRefreshListMode.masonryGrid] 模式生效）
+  final double mainAxisSpacing;
+
+  /// 瀑布流交叉轴间距（仅 [AppRefreshListMode.masonryGrid] 模式生效）
+  final double crossAxisSpacing;
+
   /// 列表内边距
   final EdgeInsetsGeometry? padding;
 
@@ -122,6 +154,9 @@ class AppRefreshList<T> extends StatefulWidget {
   /// 自定义加载更多指示器
   final Widget Function(LoadMoreStatus status)? loadMoreBuilder;
 
+  /// 触发上拉加载的提前量（距离底部多少像素时触发，默认 300）
+  final double loadMoreTriggerDistance;
+
   const AppRefreshList({
     super.key,
     required this.onRefresh,
@@ -132,6 +167,10 @@ class AppRefreshList<T> extends StatefulWidget {
     this.emptyText,
     this.emptyWidget,
     this.controller,
+    this.mode = AppRefreshListMode.list,
+    this.crossAxisCount = 2,
+    this.mainAxisSpacing = 8.0,
+    this.crossAxisSpacing = 8.0,
     this.padding,
     this.reverse = false,
     this.scrollController,
@@ -139,6 +178,7 @@ class AppRefreshList<T> extends StatefulWidget {
     this.enableRefresh = true,
     this.enableLoadMore = true,
     this.loadMoreBuilder,
+    this.loadMoreTriggerDistance = 300,
   });
 
   @override
@@ -316,7 +356,7 @@ class _AppRefreshListState<T> extends State<AppRefreshList<T>>
     }
 
     // 4. 有数据：构建列表
-    Widget listWidget = _buildListView();
+    Widget listWidget = _buildListByMode();
 
     // 5. 包裹下拉刷新
     if (widget.enableRefresh) {
@@ -331,7 +371,17 @@ class _AppRefreshListState<T> extends State<AppRefreshList<T>>
     return listWidget;
   }
 
-  /// 构建列表视图
+  /// 根据布局模式构建列表
+  Widget _buildListByMode() {
+    switch (widget.mode) {
+      case AppRefreshListMode.list:
+        return _buildListView();
+      case AppRefreshListMode.masonryGrid:
+        return _buildMasonryGridView();
+    }
+  }
+
+  /// 构建单列列表视图
   Widget _buildListView() {
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
@@ -360,6 +410,30 @@ class _AppRefreshListState<T> extends State<AppRefreshList<T>>
     );
   }
 
+  /// 构建双列瀑布流视图
+  Widget _buildMasonryGridView() {
+    return NotificationListener<ScrollNotification>(
+      onNotification: _handleScrollNotification,
+      child: MasonryGridView.count(
+        controller: widget.scrollController,
+        padding: widget.padding,
+        reverse: widget.reverse,
+        scrollDirection: widget.scrollDirection,
+        crossAxisCount: widget.crossAxisCount,
+        mainAxisSpacing: widget.mainAxisSpacing,
+        crossAxisSpacing: widget.crossAxisSpacing,
+        itemCount: _dataList.length + 1, // +1 为底部加载指示器
+        itemBuilder: (context, index) {
+          // 最后一项：加载更多指示器（跨列显示）
+          if (index >= _dataList.length) {
+            return _buildLoadMoreIndicator();
+          }
+          return widget.itemBuilder(context, _dataList[index], index);
+        },
+      ),
+    );
+  }
+
   /// 默认分隔线
   Widget _defaultSeparator(BuildContext context) {
     return Divider(
@@ -376,8 +450,9 @@ class _AppRefreshListState<T> extends State<AppRefreshList<T>>
     // 只有滚动到接近底部时才触发加载
     if (notification is ScrollUpdateNotification) {
       final metrics = notification.metrics;
-      // 距离底部不足 100 像素时触发
-      if (metrics.maxScrollExtent - metrics.pixels < 100 &&
+      // 距离底部不足 loadMoreTriggerDistance 像素时触发
+      if (metrics.maxScrollExtent - metrics.pixels <
+              widget.loadMoreTriggerDistance &&
           _loadMoreStatus != LoadMoreStatus.loading &&
           _loadMoreStatus != LoadMoreStatus.noMore &&
           !_isRefreshing) {

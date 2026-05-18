@@ -1,5 +1,5 @@
-import 'package:odk_flutter_template/features/basic_user/api/user_profile_api.dart';
-import 'package:odk_flutter_template/features/basic_user/models/user_profile/user_profile_request.dart';
+import 'package:odk_flutter_template/features/mine/api/user_profile_api.dart';
+import 'package:odk_flutter_template/features/mine/models/user_profile/user_profile_request.dart';
 import 'package:odk_flutter_template/features/basic_user/service/user_query_service.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 

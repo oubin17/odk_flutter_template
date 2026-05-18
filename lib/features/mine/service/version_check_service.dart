@@ -5,11 +5,11 @@ import 'package:odk_flutter_template/common/app_info/global_info.dart';
 import 'package:odk_flutter_template/core/constants/sys_constants.dart';
 import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/core/utils/version_utils.dart';
-import 'package:odk_flutter_template/features/mine/models/app_version_info.dart';
+import 'package:odk_flutter_template/features/mine/models/app_version/app_version_info.dart';
 import 'package:odk_flutter_template/features/system/models/sys_global_config_dto.dart';
 import 'package:odk_flutter_template/features/system/service/system_service.dart';
 
-import '../models/version_check_result.dart';
+import '../models/app_version/version_check_result.dart';
 
 /// 版本检查服务
 class VersionCheckService {

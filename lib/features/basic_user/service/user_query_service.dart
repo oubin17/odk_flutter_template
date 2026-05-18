@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/storage/secure_storage_manager.dart';
 import 'package:odk_flutter_template/core/storage/storage_key.dart';
-import 'package:odk_flutter_template/features/basic_user/api/user_profile_api.dart';
+import 'package:odk_flutter_template/features/mine/api/user_profile_api.dart';
 import 'package:odk_flutter_template/features/basic_user/api/user_query_api.dart';
 import 'package:odk_flutter_template/features/basic_user/models/user_query/user_entity.dart';
 

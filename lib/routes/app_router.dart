@@ -106,15 +106,14 @@ class AppRouter {
         name: RouteNames.home,
         builder: (context, state) => const HomePage(),
       ),
-      // GoRoute(
-      //   path: RoutePaths.contentDetail,
-      //   name: RouteNames.contentDetail,
-
-      //   builder: (context, state) {
-      //     final item = state.uri.queryParameters['item'];
-      //     return const ContentDetailPage(item: item);
-      //   },
-      // ),
+      GoRoute(
+        path: RoutePaths.contentDetail,
+        name: RouteNames.contentDetail,
+        builder: (context, state) {
+          final id = state.uri.queryParameters['id'] ?? '';
+          return ContentDetailPage(id: id);
+        },
+      ),
       GoRoute(
         path: RoutePaths.userInfo,
         name: RouteNames.userInfo,

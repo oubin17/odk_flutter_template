@@ -30,4 +30,28 @@ class ContentItem {
     required this.imageHeight,
     required this.imageColor,
   });
+
+  factory ContentItem.fromJson(Map<String, dynamic> json) {
+    return ContentItem(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      authorName: json['authorName'] as String,
+      avatarColor: json['avatarColor'] as int,
+      likeCount: json['likeCount'] as int,
+      imageHeight: (json['imageHeight'] as num).toDouble(),
+      imageColor: json['imageColor'] as int,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'authorName': authorName,
+      'avatarColor': avatarColor,
+      'likeCount': likeCount,
+      'imageHeight': imageHeight,
+      'imageColor': imageColor,
+    };
+  }
 }
