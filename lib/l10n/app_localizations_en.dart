@@ -330,7 +330,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get permissionDeniedTip =>
-      'Permission denied, please enable in Settings';
+      'Permission denied, please find this app in Settings and enable Camera access';
 
   @override
   String get avatarUpdateSuccess => 'Avatar updated successfully';

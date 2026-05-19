@@ -447,6 +447,7 @@ class AppInput extends StatelessWidget {
   final Widget? prefixIcon; // 统一保留，兼容图标/文字
   final TextInputType? keyboardType;
   final bool readOnly;
+  final bool hideUnderline;
 
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
@@ -464,6 +465,7 @@ class AppInput extends StatelessWidget {
     this.prefixIcon,
     this.keyboardType,
     this.readOnly = false,
+    this.hideUnderline = false,
     this.validator,
     this.onSaved,
     this.onChanged,
@@ -516,24 +518,30 @@ class AppInput extends StatelessWidget {
                 child: suffixIcon,
               )
             : null,
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
+        border: hideUnderline
+            ? InputBorder.none
+            : UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryLight(context),
+                  width: 1.w,
+                ),
+              ),
+        enabledBorder: hideUnderline
+            ? InputBorder.none
+            : UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryLight(context),
+                  width: 1.w,
+                ),
+              ),
+        focusedBorder: hideUnderline
+            ? InputBorder.none
+            : UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryLight(context),
+                  width: 1.w,
+                ),
+              ),
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 1.h),
         errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
       ),

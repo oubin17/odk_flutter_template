@@ -441,7 +441,7 @@
   "@photoPermissionDenied": {
     "description": "需要相册权限才能选择照片"
   },
-  "permissionDeniedTip": "Permission denied, please enable in Settings",
+  "permissionDeniedTip": "Permission denied, please find this app in Settings and enable Camera access",
   "@permissionDeniedTip": {
     "description": "权限被拒绝，请在设置中开启"
   },

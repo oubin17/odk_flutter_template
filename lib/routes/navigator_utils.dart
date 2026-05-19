@@ -59,8 +59,10 @@ class NavigatorUtils {
     AppRouter.router.push(path);
   }
 
-  // 5. 新增：返回
+  // 5. 新增：返回（安全版本）
   static void pop() {
-    AppRouter.router.pop();
+    if (AppRouter.router.canPop()) {
+      AppRouter.router.pop();
+    }
   }
 }

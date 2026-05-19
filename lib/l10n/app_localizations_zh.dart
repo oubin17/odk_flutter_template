@@ -317,7 +317,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get photoPermissionDenied => '需要相册权限才能选择照片';
 
   @override
-  String get permissionDeniedTip => '权限被拒绝，请在设置中开启';
+  String get permissionDeniedTip => '权限被拒绝，请在设置中找到本应用，开启相机权限';
 
   @override
   String get avatarUpdateSuccess => '头像更新成功';

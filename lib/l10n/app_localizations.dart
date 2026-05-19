@@ -701,7 +701,7 @@ abstract class AppLocalizations {
   /// 权限被拒绝，请在设置中开启
   ///
   /// In en, this message translates to:
-  /// **'Permission denied, please enable in Settings'**
+  /// **'Permission denied, please find this app in Settings and enable Camera access'**
   String get permissionDeniedTip;
 
   /// 头像更新成功

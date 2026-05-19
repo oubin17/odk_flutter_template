@@ -333,13 +333,14 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   Widget _buildNicknameInputWidget() {
     return AppCard(
       showShadow: false,
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 30.w),
       child: AppInput(
         controller: _nicknameController,
         validator: (value) => value?.trim().isEmpty ?? true
             ? L10nUtils.fieldNotEmptyTip(L10nUtils.nickname)
             : null,
         suffixIcon: ClearButton(controller: _nicknameController),
+        hideUnderline: true,
       ),
     );
   }
@@ -387,13 +388,14 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   Widget _buildBirthdayInputWidget() {
     return AppCard(
       showShadow: false,
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 30.w),
       child: AppInput(
         controller: _birthdayController,
         readOnly: true,
         onTap: _showBottomDatePicker,
         hint: L10nUtils.birthday,
         suffixIcon: const Icon(Icons.calendar_today),
+        hideUnderline: true,
       ),
     );
   }
