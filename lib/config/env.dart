@@ -15,8 +15,10 @@ class ConfigKey {
   // 👇 新增：签名密钥 Key（统一管理，杜绝硬编码）
   static const String signSecret = 'signSecret';
 
-  static const String userAgreementUrl = 'https://www.example.com/agreement';
-  static const String privacyPolicyUrl = 'https://www.example.com/privacy';
+  static const String userAgreementUrl =
+      'http://8.133.253.216/mixed-service/agreements/user_agreement.html';
+  static const String privacyPolicyUrl =
+      'http://8.133.253.216/mixed-service/agreements/privacy_policy.html';
 }
 
 // 3. 公共配置（使用常量 Key，无硬编码）
@@ -36,8 +38,10 @@ const Map<String, String> devVariables = {
 
   // 开发环境专属密钥
   ConfigKey.signSecret: 'flutter_app_dev_sign_secret_2025',
-  ConfigKey.userAgreementUrl: 'https://www.example.com/agreement',
-  ConfigKey.privacyPolicyUrl: 'https://www.example.com/privacy',
+  ConfigKey.userAgreementUrl:
+      'http://8.133.253.216/mixed-service/agreements/user_agreement.html',
+  ConfigKey.privacyPolicyUrl:
+      'http://8.133.253.216/mixed-service/agreements/privacy_policy.html',
 };
 
 const Map<String, String> testVariables = {

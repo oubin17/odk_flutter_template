@@ -80,10 +80,18 @@ class _AgreementPageState extends State<AgreementPage> {
   /// 是否正在加载
   bool _isLoading = true;
 
+  /// 是否加载失败
+  bool _hasError = false;
+
+  /// 错误信息
+  String _errorMessage = '';
+
   @override
   void initState() {
     super.initState();
     _title = widget.title;
+
+    debugPrint('🔗 AgreementPage 加载 URL: ${widget.url}');
 
     _controller = WebViewController()
       // 启用 JS 支持
@@ -100,19 +108,23 @@ class _AgreementPageState extends State<AgreementPage> {
         NavigationDelegate(
           // 页面开始加载
           onPageStarted: (String url) {
+            debugPrint('🔗 WebView 开始加载: $url');
             setState(() {
               _isLoading = true;
               _loadingProgress = 0;
+              _hasError = false;
             });
           },
           // 加载进度更新
           onProgress: (int progress) {
+            debugPrint('🔗 WebView 加载进度: $progress%');
             setState(() {
               _loadingProgress = progress / 100.0;
             });
           },
           // 页面加载完成
           onPageFinished: (String url) async {
+            debugPrint('🔗 WebView 加载完成: $url');
             setState(() {
               _isLoading = false;
               _loadingProgress = 1.0;
@@ -128,8 +140,40 @@ class _AgreementPageState extends State<AgreementPage> {
               _syncCookies();
             }
           },
+          // 🔥 新增：HTTP 错误处理
+          onHttpError: (HttpResponseError error) {
+            debugPrint('🔴 WebView HTTP 错误: ${error.response?.statusCode}');
+            if (error.response?.statusCode == 404 ||
+                error.response?.statusCode == 403) {
+              setState(() {
+                _hasError = true;
+                _errorMessage = 'HTTP ${error.response?.statusCode}';
+              });
+            }
+          },
+          // 🔥 新增：资源加载错误处理
+          onWebResourceError: (WebResourceError error) {
+            debugPrint(
+              '🔴 WebView 资源加载错误: '
+              'code=${error.errorCode}, '
+              'description=${error.description}, '
+              'errorType=${error.errorType}, '
+              'url=${error.url}',
+            );
+
+            // 忽略子资源加载错误（只关注主页面加载失败）
+            if (error.url == widget.url ||
+                error.url == null ||
+                error.url!.isEmpty) {
+              setState(() {
+                _hasError = true;
+                _errorMessage = error.description;
+              });
+            }
+          },
           // 处理导航请求（可用于拦截特定 URL）
           onNavigationRequest: (NavigationRequest request) {
+            debugPrint('🔗 WebView 导航请求: ${request.url}');
             return NavigationDecision.navigate;
           },
         ),
@@ -243,15 +287,65 @@ class _AgreementPageState extends State<AgreementPage> {
       padding: EdgeInsets.zero,
       body: Stack(
         children: [
-          // WebView 主体
-          WebViewWidget(controller: _controller),
+          // WebView 主体 — 使用 Positioned.fill 确保在 iOS WKWebView 上有明确尺寸约束
+          Positioned.fill(child: WebViewWidget(controller: _controller)),
 
           // 顶部加载进度条
-          if (_isLoading)
+          if (_isLoading && !_hasError)
             Positioned(top: 0, left: 0, right: 0, child: _buildProgressBar()),
+
+          // 🔥 新增：加载失败时显示错误提示
+          if (_hasError) _buildErrorWidget(context),
         ],
       ),
     );
+  }
+
+  /// 构建加载失败提示
+  Widget _buildErrorWidget(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 40.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 80.w,
+              color: AppColors.textGray(context),
+            ),
+            SizedBox(height: 24.h),
+            AppText.second('页面加载失败'),
+            SizedBox(height: 8.h),
+            AppText.second(
+              _errorMessage.isNotEmpty ? _errorMessage : '请检查网络连接后重试',
+            ),
+            SizedBox(height: 32.h),
+            AppDebounceButton(text: '重新加载', onTap: () async => _reload()),
+            SizedBox(height: 16.h),
+            // 显示当前 URL 便于调试
+            Text(
+              widget.url,
+              style: TextStyle(
+                fontSize: 22.sp,
+                color: AppColors.textGray(context),
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 重新加载页面
+  void _reload() {
+    setState(() {
+      _hasError = false;
+      _isLoading = true;
+      _loadingProgress = 0;
+    });
+    _controller.reload();
   }
 
   /// 构建线性进度条

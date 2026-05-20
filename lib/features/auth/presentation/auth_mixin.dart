@@ -46,10 +46,19 @@ mixin AuthMixin<T extends StatefulWidget> on State<T> {
   // ====================== 协议跳转 ======================
 
   /// 跳转到协议页面
+  ///
+  /// 自动根据当前系统语言拼接 `?lang=zh/en` 参数，
+  /// HTML 页面通过 JS 读取该参数切换中英文版本。
   void toAgreementPage(String title, String url) {
+    // 获取当前系统语言，自动拼接 lang 参数
+    final currentLocale = Localizations.localeOf(context);
+    final lang = currentLocale.languageCode; // 'zh' 或 'en'
+    final separator = url.contains('?') ? '&' : '?';
+    final localizedUrl = '$url${separator}lang=$lang';
+
     NavigatorUtils.pushNamed(
       RouteNames.agreement,
-      queryParameters: {'title': title, 'url': url},
+      queryParameters: {'title': title, 'url': localizedUrl},
     );
   }
 
