@@ -568,11 +568,15 @@ class AppInputPrefix extends StatelessWidget {
       width: width.w,
       // 左对齐，文字超长自动换行（可选）
       alignment: Alignment.centerLeft,
-      child: AppText(
-        text,
-        size: 28.sp,
-        color: AppColors.textMain(context),
-        maxLines: 1,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.centerLeft,
+        child: AppText(
+          text,
+          size: 28.sp,
+          color: AppColors.textMain(context),
+          maxLines: 1,
+        ),
       ),
     );
   }
