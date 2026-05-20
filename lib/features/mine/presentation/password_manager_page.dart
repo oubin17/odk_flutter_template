@@ -110,6 +110,7 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
       hint: hint,
       prefixIcon: AppInputPrefix(title, width: 240.w),
       obscure: true,
+      hideUnderline: true,
       validator:
           validator ??
           (value) => value?.trim().isEmpty ?? true
@@ -127,6 +128,7 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
       account: phone,
       verifyScene: VerifyScene.resetPassword,
       verifyCodeController: _verifyCodeController,
+      hideUnderline: true,
       onUniqueIdChanged: (uniqueId) {
         _verificationCode.uniqueId = uniqueId;
       },
@@ -137,7 +139,7 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
   Widget _buildSetPasswordForm() {
     return AppCard(
       showShadow: false,
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
+      padding: EdgeInsets.symmetric(vertical: 5.w, horizontal: 30.w),
       child: Column(
         children: [
           _buildPasswordItem(
@@ -145,7 +147,9 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
             L10nUtils.newPassword,
             L10nUtils.pleaseEnterNewPassword,
           ),
+          const AppDivider(),
           _buildVerifyCodeInput(),
+          const AppDivider(),
         ],
       ),
     );

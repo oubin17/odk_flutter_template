@@ -216,7 +216,7 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
       children: [
         AppText.second(L10nUtils.noAccount),
         AppTextButton(
-          onTap: () => NavigatorUtils.goNamed(RouteNames.signup),
+          onTap: () => NavigatorUtils.pushNamed(RouteNames.signup),
           text: L10nUtils.register,
         ),
       ],

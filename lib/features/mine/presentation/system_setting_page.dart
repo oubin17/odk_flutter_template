@@ -19,14 +19,6 @@ class SystemSettingPage extends StatelessWidget {
     );
   }
 
-  /// 分组内分割线
-  Widget _buildDivider(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
-      child: Divider(height: 1.h, color: AppColors.divider(context)),
-    );
-  }
-
   Widget _buildAccountContext(BuildContext context) {
     return Column(
       children: [
@@ -36,7 +28,7 @@ class SystemSettingPage extends StatelessWidget {
             NavigatorUtils.pushNamed(RouteNames.userInfo);
           },
         ),
-        _buildDivider(context),
+        const AppDivider(),
         AppListItem(
           title: L10nUtils.accountSecurity,
           onTap: () {

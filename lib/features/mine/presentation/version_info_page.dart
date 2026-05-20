@@ -133,10 +133,6 @@ class _VersionInfoPageState extends State<VersionInfoPage>
               ),
               AppGap.hNormal,
 
-              // ====== 版本更新提示区域 ======
-              _buildUpdateHint(context),
-
-              AppGap.hXL,
               // 版本详情卡片
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
@@ -150,19 +146,19 @@ class _VersionInfoPageState extends State<VersionInfoPage>
                         label: L10nUtils.appName,
                         value: _globalInfo.appName,
                       ),
-                      Divider(height: 1.h, color: AppColors.divider(context)),
+                      const AppDivider(padding: 0),
                       _buildInfoRow(
                         context,
                         label: L10nUtils.packageName,
                         value: _globalInfo.packageName,
                       ),
-                      Divider(height: 1.h, color: AppColors.divider(context)),
+                      const AppDivider(padding: 0),
                       _buildInfoRow(
                         context,
                         label: L10nUtils.versionNumber,
                         value: _globalInfo.appVersion,
                       ),
-                      Divider(height: 1.h, color: AppColors.divider(context)),
+                      const AppDivider(padding: 0),
                       _buildInfoRow(
                         context,
                         label: L10nUtils.buildNumber,
@@ -172,6 +168,9 @@ class _VersionInfoPageState extends State<VersionInfoPage>
                   ),
                 ),
               ),
+              AppGap.hXL,
+              // ====== 版本更新提示区域 ======
+              _buildUpdateHint(context),
               AppGap.hXL,
               // 版权信息
               AppText.tip('© ${DateTime.now().year} ${_globalInfo.appName}'),

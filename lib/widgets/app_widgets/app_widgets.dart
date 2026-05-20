@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/common/theme/app_theme.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
-import 'package:odk_flutter_template/routes/navigator_utils.dart';
 
 /// 全局统一颜色（适配明暗主题）
 class AppColors {
@@ -314,15 +313,17 @@ class AppIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double actualBtnSize = btnSize ?? 60.w;
+    final bool hasBg = bgColor != null && bgColor != Colors.transparent;
     return InkWell(
       onTap: disabled ? null : onTap,
-      borderRadius: BorderRadius.circular(16.w),
+      borderRadius: BorderRadius.circular(hasBg ? actualBtnSize / 2 : 16.w),
       child: Container(
-        width: btnSize ?? 60.w,
-        height: btnSize ?? 60.w,
+        width: actualBtnSize,
+        height: actualBtnSize,
         decoration: BoxDecoration(
           color: bgColor ?? Colors.transparent,
-          borderRadius: BorderRadius.circular(16.w),
+          borderRadius: BorderRadius.circular(hasBg ? actualBtnSize / 2 : 16.w),
         ),
         child: Icon(
           icon,
@@ -597,9 +598,11 @@ class ClearButton extends StatelessWidget {
         // 输入框为空时，不显示按钮
         if (controller.text.isEmpty) return const SizedBox();
 
-        // 有内容时，显示删除图标
+        // 有内容时，显示删除图标（紧凑圆圈包裹）
         return AppIconButton(
-          icon: Icons.clear,
+          icon: Icons.cancel,
+          size: 32.w,
+          iconColor: AppColors.textGray(context).withAlpha(80),
           onTap: () {
             // 一键清空文本
             controller.clear();
@@ -833,8 +836,13 @@ class AppBottomDatePicker {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // 取消
+                      // 使用 Navigator.of(context).pop() 关闭 BottomSheet，
+                      // 而非 NavigatorUtils.pop()（GoRouter.pop()）。
+                      // 原因：showModalBottomSheet 由 Flutter 原生 Navigator 管理，
+                      // GoRouter.pop() 虽然底层也调用 Navigator.pop()，但语义不明确，
+                      // 且在 GoRouter 与 Navigator 路由栈不同步时可能 pop 错误的路由。
                       TextButton(
-                        onPressed: () => NavigatorUtils.pop(),
+                        onPressed: () => Navigator.of(context).pop(),
                         child: AppText.tip(
                           L10nUtils.cancel,
                           color: AppColors.textGray(context),
@@ -846,7 +854,8 @@ class AppBottomDatePicker {
                           if (selectedDate != null) {
                             onConfirm(selectedDate!);
                           }
-                          NavigatorUtils.pop();
+                          // 同上，使用 Navigator.of(context).pop() 关闭 BottomSheet
+                          Navigator.of(context).pop();
                         },
                         child: AppText.body(
                           L10nUtils.confirm,
@@ -1041,6 +1050,37 @@ class AppDot extends StatelessWidget {
       decoration: BoxDecoration(
         color: color ?? AppColors.error,
         shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
+/// 通用分割线组件（支持自定义颜色和左右边距）
+///
+/// 示例：
+/// ```dart
+/// AppDivider(),                              // 默认：主题分割线色 + 30.w 左右边距
+/// AppDivider(color: Colors.red, padding: 20), // 自定义颜色和边距
+/// ```
+class AppDivider extends StatelessWidget {
+  /// 分割线颜色，默认使用主题分割线色 [AppColors.divider]
+  final Color? color;
+
+  /// 左右边距（逻辑像素），默认 30
+  final double padding;
+
+  /// 分割线高度，默认 1
+  final double height;
+
+  const AppDivider({super.key, this.color, this.padding = 30, this.height = 1});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: padding.w),
+      child: Divider(
+        height: height.h,
+        color: color ?? AppColors.divider(context),
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odk_flutter_template/features/home/data/models/resume_library.dart';
 import 'package:odk_flutter_template/features/home/domain/home_resume_service.dart';
-import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 
@@ -259,14 +258,20 @@ class _ResumeLibraryPageState extends State<ResumeLibraryPage> {
                 title: const Text('男'),
                 onTap: () {
                   _genderController.text = '男';
-                  NavigatorUtils.pop();
+                  // 使用 Navigator.of(context).pop() 关闭 Dialog，
+                  // 而非 NavigatorUtils.pop()（GoRouter.pop()）。
+                  // 原因：showDialog 由 Flutter 原生 Navigator 管理，
+                  // GoRouter.pop() 虽然底层也调用 Navigator.pop()，但语义不明确，
+                  // 且在 GoRouter 与 Navigator 路由栈不同步时可能 pop 错误的路由。
+                  Navigator.of(context).pop();
                 },
               ),
               ListTile(
                 title: const Text('女'),
                 onTap: () {
                   _genderController.text = '女';
-                  NavigatorUtils.pop();
+                  // 同上，使用 Navigator.of(context).pop() 关闭 Dialog
+                  Navigator.of(context).pop();
                 },
               ),
             ],

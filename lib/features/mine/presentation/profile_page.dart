@@ -77,8 +77,7 @@ class ProfilePage extends StatelessWidget {
                 align: TextAlign.center,
               ),
               AppGap.hSuperSmall,
-
-              const Divider(),
+              const AppDivider(),
             ],
           ),
         );

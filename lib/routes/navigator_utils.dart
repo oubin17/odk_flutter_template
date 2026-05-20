@@ -1,6 +1,13 @@
 import 'package:odk_flutter_template/routes/app_router.dart';
 
 /// 全局导航管理工具
+/// | 方法 | 导航栈行为 | 能否返回 | 典型场景 |
+/// |------|-----------|---------|---------|
+/// | go / goNamed | 替换整个栈 | ❌ 不能 | 登录→首页、退出→登录 |
+/// | push / pushNamed | 压入栈顶 | ✅ 能 | 进入详情页、协议页 |
+/// | pushReplacementNamed | 替换栈顶 | ❌ 被替换页不能 | 登录→首页（保留更深层历史） |
+/// | pop | 弹出栈顶 | — | 返回上一页 |
+
 class NavigatorUtils {
   // 私有化构造，禁止实例化
   NavigatorUtils._();

@@ -178,14 +178,14 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
-                child: Divider(height: 1.h, color: AppColors.divider(context)),
+                child: const AppDivider(),
               ),
               _buildActionSheetItem(
                 icon: Icons.photo_library_outlined,
                 text: L10nUtils.chooseFromAlbum,
                 onTap: _pickFromGallery,
               ),
-              Divider(height: 8.h, color: AppColors.divider(context)),
+              const AppDivider(),
               _buildActionSheetCancel(),
             ],
           ),
@@ -216,7 +216,12 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   }) {
     return InkWell(
       onTap: () {
-        NavigatorUtils.pop();
+        // 使用 Navigator.of(context).pop() 关闭 BottomSheet，
+        // 而非 NavigatorUtils.pop()（GoRouter.pop()）。
+        // 原因：showModalBottomSheet 由 Flutter 原生 Navigator 管理，
+        // GoRouter.pop() 虽然底层也调用 Navigator.pop()，但语义不明确，
+        // 且在 GoRouter 与 Navigator 路由栈不同步时可能 pop 错误的路由。
+        Navigator.of(context).pop();
         onTap();
       },
       child: Container(
@@ -238,7 +243,8 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   /// ActionSheet 取消按钮
   Widget _buildActionSheetCancel() {
     return InkWell(
-      onTap: () => NavigatorUtils.pop(),
+      // 使用 Navigator.of(context).pop() 关闭 BottomSheet，原因同上
+      onTap: () => Navigator.of(context).pop(),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 28.h),
@@ -355,7 +361,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
           _buildGenderItem(L10nUtils.male, "1"),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.w),
-            child: Divider(height: 1.h, color: AppColors.divider(context)),
+            child: const AppDivider(),
           ),
           _buildGenderItem(L10nUtils.female, "2"),
         ],

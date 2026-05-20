@@ -87,6 +87,9 @@ class VerifyCodeInput extends StatefulWidget {
   /// 自动校验模式
   final AutovalidateMode? autovalidateMode;
 
+  /// 是否隐藏下划线，默认 false（显示下划线）
+  final bool hideUnderline;
+
   const VerifyCodeInput({
     super.key,
     this.accountController,
@@ -99,6 +102,7 @@ class VerifyCodeInput extends StatefulWidget {
     this.validator,
     this.onSaved,
     this.autovalidateMode,
+    this.hideUnderline = false,
   }) : assert(
          accountController != null || account != null,
          "Either accountController or account must be provided.",
@@ -204,6 +208,7 @@ class _VerifyCodeInputState extends State<VerifyCodeInput> {
           onSendCode: sendVerifyCode,
           isCounting: _countdownController.isCounting,
           countTime: _countdownController.countDown,
+          hideUnderline: widget.hideUnderline,
           validator:
               widget.validator ??
               (value) {
@@ -234,6 +239,9 @@ class AppCodeInput extends StatefulWidget {
   final void Function(String)? onChanged;
   final AutovalidateMode? autovalidateMode;
 
+  /// 是否隐藏下划线，默认 false（显示下划线）
+  final bool hideUnderline;
+
   const AppCodeInput({
     super.key,
     required this.controller,
@@ -245,6 +253,7 @@ class AppCodeInput extends StatefulWidget {
     this.onSaved,
     this.onChanged,
     this.autovalidateMode,
+    this.hideUnderline = false,
   });
 
   @override
@@ -270,36 +279,32 @@ class _AppCodeInputState extends State<AppCodeInput> {
           fontSize: 26.sp,
           color: AppColors.textGray(context),
         ),
-        // filled: true,
-        // fillColor: AppColors.card(context),
-        // border: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(16.w),
-        //   borderSide: BorderSide.none,
-        // ),
-        // border: OutlineInputBorder(
-        //   borderRadius: BorderRadius.circular(16.w),
-        //   borderSide: BorderSide(color: AppColors.divider(context), width: 1.w),
-        // ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
+        border: widget.hideUnderline
+            ? InputBorder.none
+            : UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryLight(context),
+                  width: 1.w,
+                ),
+              ),
         // 正常状态边框
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
+        enabledBorder: widget.hideUnderline
+            ? InputBorder.none
+            : UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryLight(context),
+                  width: 1.w,
+                ),
+              ),
         // 聚焦状态边框（和正常状态完全一样，不变色）
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryLight(context),
-            width: 1.w,
-          ),
-        ),
+        focusedBorder: widget.hideUnderline
+            ? InputBorder.none
+            : UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryLight(context),
+                  width: 1.w,
+                ),
+              ),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 22.h),
         // 错误提示样式（统一主题）
         errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),

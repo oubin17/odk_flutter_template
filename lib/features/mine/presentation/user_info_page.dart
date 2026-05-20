@@ -14,14 +14,6 @@ import 'package:provider/provider.dart';
 class UserInfoPage extends StatelessWidget {
   const UserInfoPage({super.key});
 
-  /// 分组内分割线
-  Widget _buildDivider(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.w),
-      child: Divider(height: 1.h, color: AppColors.divider(context)),
-    );
-  }
-
   /// 头像分组
   Widget _buildAvatarContext(BuildContext context, user) {
     return AppListItem(
@@ -66,7 +58,7 @@ class UserInfoPage extends StatelessWidget {
             );
           },
         ),
-        _buildDivider(context),
+        const AppDivider(),
         AppListItem(
           title: L10nUtils.gender,
           right: Padding(
@@ -87,7 +79,7 @@ class UserInfoPage extends StatelessWidget {
             );
           },
         ),
-        _buildDivider(context),
+        const AppDivider(),
         AppListItem(
           title: L10nUtils.birthday,
           right: Padding(
