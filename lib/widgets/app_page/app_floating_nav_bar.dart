@@ -100,7 +100,7 @@ class AppFloatingNavBar extends StatelessWidget {
     this.iconSize = 65,
     this.enableBlur = true,
     this.blurSigma = 10,
-    this.opacity = 0.7,
+    this.opacity = 0.85,
   });
 
   /// 便捷方法：用 Stack 将导航栏叠加在页面内容之上
@@ -123,7 +123,7 @@ class AppFloatingNavBar extends StatelessWidget {
     double iconSize = 68,
     bool enableBlur = true,
     double blurSigma = 10,
-    double opacity = 0.7,
+    double opacity = 0.85,
   }) {
     return Stack(
       children: [
@@ -161,9 +161,18 @@ class AppFloatingNavBar extends StatelessWidget {
     final primaryColor = selectedItemColor ?? AppColors.primary(context);
     final unselectedColor = unselectedItemColor ?? AppColors.textGray(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // 优化背景色：提高不透明度，让导航栏与页面内容有更明显的视觉分离
     final bgColor =
         backgroundColor ??
-        (isDark ? Colors.black.withAlpha(180) : Colors.white.withAlpha(180));
+        (isDark
+            ? const Color(0xFF1C1C1E).withAlpha(220)
+            : Colors.white.withAlpha(220));
+
+    // 边框颜色：亮色模式用浅灰边框，暗色模式用深灰边框
+    final borderColor = isDark
+        ? Colors.white.withAlpha(20)
+        : Colors.black.withAlpha(8);
 
     // 底部安全距离
     final bottomSafe = bottomPadding ?? MediaQuery.of(context).padding.bottom;
@@ -186,13 +195,23 @@ class AppFloatingNavBar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: bgColor,
                 borderRadius: BorderRadius.circular(borderRadius.w),
+                // 优化1：增强阴影，让导航栏有更明显的悬浮感
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withAlpha(25),
-                    blurRadius: 16.w,
-                    offset: Offset(0, 4.w),
+                    color: Colors.black.withAlpha(40),
+                    blurRadius: 24.w,
+                    offset: Offset(0, 8.w),
+                    spreadRadius: 2.w,
+                  ),
+                  // 添加一层更近的浅阴影，增加层次感
+                  BoxShadow(
+                    color: Colors.black.withAlpha(15),
+                    blurRadius: 8.w,
+                    offset: Offset(0, 2.w),
                   ),
                 ],
+                // 优化2：添加细边框，让导航栏轮廓更清晰
+                border: Border.all(color: borderColor, width: 1.w),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -207,6 +226,7 @@ class AppFloatingNavBar extends StatelessWidget {
                     color: color,
                     primaryColor: primaryColor,
                     iconSize: iconSize,
+                    isDark: isDark,
                     onTap: () => onTap(index),
                   );
                 }),
@@ -226,6 +246,7 @@ class _NavItemWidget extends StatelessWidget {
   final Color color;
   final Color primaryColor;
   final double iconSize;
+  final bool isDark;
   final VoidCallback onTap;
 
   const _NavItemWidget({
@@ -234,6 +255,7 @@ class _NavItemWidget extends StatelessWidget {
     required this.color,
     required this.primaryColor,
     required this.iconSize,
+    required this.isDark,
     required this.onTap,
   });
 
@@ -246,20 +268,36 @@ class _NavItemWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              isSelected ? (item.activeIcon ?? item.icon) : item.icon,
-              size: iconSize.w,
-              color: color,
+            // 优化3：选中项添加圆形高亮背景，增强视觉层次
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeInOut,
+              padding: EdgeInsets.all(isSelected ? 8.w : 8.w),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? primaryColor.withAlpha(isDark ? 30 : 20)
+                    : Colors.transparent,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                isSelected ? (item.activeIcon ?? item.icon) : item.icon,
+                size: iconSize.w,
+                color: color,
+              ),
             ),
             if (item.label != null) ...[
-              SizedBox(height: 4.h),
-              Text(
-                item.label!,
+              SizedBox(height: 2.h),
+              // 优化4：选中项文字添加微动画 + 加粗
+              AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOut,
                 style: TextStyle(
-                  fontSize: 20.sp,
+                  fontSize: isSelected ? 21.sp : 20.sp,
                   color: color,
-                  fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                  height: 1.2,
                 ),
+                child: Text(item.label!),
               ),
             ],
           ],

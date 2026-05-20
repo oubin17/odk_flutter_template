@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/mine/presentation/password_manager_page.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
