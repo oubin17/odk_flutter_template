@@ -394,4 +394,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loadFailed => 'Load failed, tap to retry';
+
+  @override
+  String get follow => 'Follow';
+
+  @override
+  String get unfollow => 'Unfollow';
+
+  @override
+  String get detail => 'Detail';
 }

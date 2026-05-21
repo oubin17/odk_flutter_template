@@ -378,4 +378,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get loadFailed => '加载失败，点击重试';
+
+  @override
+  String get follow => '关注';
+
+  @override
+  String get unfollow => '取消关注';
+
+  @override
+  String get detail => '详情';
 }

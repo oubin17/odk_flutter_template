@@ -148,5 +148,9 @@
   "releaseToLoadMore": "释放加载更多",
   "loadingMore": "正在加载...",
   "noMoreData": "没有更多数据",
-  "loadFailed": "加载失败，点击重试"
+  "loadFailed": "加载失败，点击重试",
+  "follow": "关注",
+  "unfollow": "取消关注",
+  "detail": "详情"
+
 }

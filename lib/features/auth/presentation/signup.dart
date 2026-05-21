@@ -54,17 +54,6 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
   }
 
   // ====================== UI 组件拆分 ======================
-  Widget _appLogo() {
-    return Align(
-      alignment: Alignment.topLeft,
-      child: AppAvatar(
-        assetPath: Assets.images.login.loginRegist.path,
-        size: 200.w,
-        shape: AppAvatarShape.square,
-      ),
-    );
-  }
-
   Widget _registerTitle() {
     return AppText.customerTitle(L10nUtils.register, 50.sp, FontWeight.bold);
   }

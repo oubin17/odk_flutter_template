@@ -185,4 +185,7 @@ class L10nUtils {
   static String get loadingMore => _localizations!.loadingMore;
   static String get noMoreData => _localizations!.noMoreData;
   static String get loadFailed => _localizations!.loadFailed;
+  static String get follow => _localizations!.follow;
+  static String get unfollow => _localizations!.unfollow;
+  static String get detail => _localizations!.detail;
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
@@ -45,7 +44,7 @@ class CommonSettingPage extends StatelessWidget {
               );
             },
           ),
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+          const AppDivider(padding: 30),
 
           Consumer<LocaleProvider>(
             builder: (context, localProvider, child) {
@@ -74,7 +73,7 @@ class CommonSettingPage extends StatelessWidget {
               );
             },
           ),
-          Divider(height: 1.h, color: AppColors.divider(context), indent: 60.w),
+          const AppDivider(padding: 30),
         ],
       ),
     );

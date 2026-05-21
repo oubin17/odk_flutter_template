@@ -49,7 +49,7 @@ class AppToast {
     SmartDialog.show(builder: (context) => widget);
   }
 
-  /// 通用确认弹窗
+  /// 通用确认弹窗（确认按钮使用 AppDebounceWrapper 防抖）
   static void showAppConfirmDialog({
     required String title,
     String? msg,
@@ -85,7 +85,7 @@ class AppToast {
               // 按钮行
               Row(
                 children: [
-                  // 取消按钮（原生）
+                  // 取消按钮
                   Expanded(
                     child: AppTextButton(
                       text: cancelText ?? L10nUtils.cancel,
@@ -93,13 +93,17 @@ class AppToast {
                     ),
                   ),
                   AppGap.wXL,
+                  // 确认按钮：使用 AppDebounceWrapper 防抖
                   Expanded(
-                    child: AppTextButton(
-                      text: confirmText ?? L10nUtils.confirm,
-                      onTap: () {
+                    child: AppDebounceWrapper(
+                      onTap: () async {
                         SmartDialog.dismiss();
                         onConfirm?.call();
                       },
+                      child: AppTextButton(
+                        text: confirmText ?? L10nUtils.confirm,
+                        onTap: null, // 点击由 AppDebounceWrapper 接管
+                      ),
                     ),
                   ),
                 ],

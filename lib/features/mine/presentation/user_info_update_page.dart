@@ -41,7 +41,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   // 头像相关状态
   String? _avatarUrl;
   XFile? _selectedImage;
-  bool _isSaving = false;
 
   @override
   void initState() {
@@ -260,8 +259,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   // ===================== 保存逻辑 =====================
 
   void _handleSave() async {
-    if (_isSaving) return;
-    setState(() => _isSaving = true);
     AppToast.showLoading(loading: L10nUtils.saving);
 
     try {
@@ -325,10 +322,6 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       AppToast.dismiss();
       if (mounted) {
         AppToast.showToast(L10nUtils.uploadFailed);
-      }
-    } finally {
-      if (mounted) {
-        setState(() => _isSaving = false);
       }
     }
   }
@@ -556,7 +549,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   Widget build(BuildContext context) {
     return AppPage(
       title: AppText(widget.title),
-      onSave: _isSaving ? null : _handleSave,
+      onSave: _handleSave,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -66,34 +66,47 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
     if (!_formKey.currentState!.validate()) return;
 
     final newPwd = _newPwdController.text.trim();
-    ServiceResponse response;
 
-    switch (widget.type) {
-      case PasswordManagerType.set:
-        _verificationCode.verifyCode = _verifyCodeController.text.trim();
-        response = await UserIdentifyService().resetPassword(
-          PasswordResetRequest(
-            identifyValue: newPwd,
-            verificationCode: _verificationCode,
-          ),
-        );
-        break;
-      case PasswordManagerType.change:
-        response = await UserIdentifyService().updatePassword(
-          PasswordUpdateRequest(
-            oldIdentifyValue: _oldPwdController.text.trim(),
-            newIdentifyValue: newPwd,
-          ),
-        );
-        break;
-    }
+    AppToast.showLoading();
 
-    if (!response.success) {
+    try {
+      ServiceResponse response;
+
+      switch (widget.type) {
+        case PasswordManagerType.set:
+          _verificationCode.verifyCode = _verifyCodeController.text.trim();
+          response = await UserIdentifyService().resetPassword(
+            PasswordResetRequest(
+              identifyValue: newPwd,
+              verificationCode: _verificationCode,
+            ),
+          );
+          break;
+        case PasswordManagerType.change:
+          response = await UserIdentifyService().updatePassword(
+            PasswordUpdateRequest(
+              oldIdentifyValue: _oldPwdController.text.trim(),
+              newIdentifyValue: newPwd,
+            ),
+          );
+          break;
+      }
+
+      AppToast.dismiss();
+
+      if (!mounted) return;
+
+      if (!response.success) {
+        AppToast.showToast(L10nUtils.operationFailed);
+        return;
+      }
+      AppToast.showToast(L10nUtils.success);
+      NavigatorUtils.pop();
+    } catch (e) {
+      AppToast.dismiss();
+      if (!mounted) return;
       AppToast.showToast(L10nUtils.operationFailed);
-      return;
     }
-    AppToast.showToast(L10nUtils.success);
-    NavigatorUtils.pop();
   }
 
   // ===================== UI 构建 =====================

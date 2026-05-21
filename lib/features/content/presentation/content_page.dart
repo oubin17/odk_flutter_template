@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/content/models/content_item.dart';
 import 'package:odk_flutter_template/features/content/service/content_service.dart';
 import 'package:odk_flutter_template/models/request/page_request.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
-import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_refresh/app_refresh_list.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
@@ -48,8 +49,8 @@ class _ContentPageState extends State<ContentPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const BasicAppBar(title: AppText('发现')),
+    return AppPage(
+      title: AppText(L10nUtils.discover),
       body: AppRefreshList<ContentItem>(
         controller: _refreshController,
         // 🔧 切换布局模式：修改此处即可
@@ -127,17 +128,7 @@ class _ContentCard extends StatelessWidget {
                       _buildAvatarPlaceholder(context),
                       AppGap.wSmall,
                       // 作者名
-                      Expanded(
-                        child: Text(
-                          item.authorName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            color: AppColors.textGray(context),
-                          ),
-                        ),
-                      ),
+                      Expanded(child: AppText.tip(item.authorName)),
                       // 点赞图标 + 数量
                       Icon(
                         Icons.favorite_outline,
@@ -145,12 +136,9 @@ class _ContentCard extends StatelessWidget {
                         color: AppColors.textGray(context),
                       ),
                       AppGap.wSuperSmall,
-                      Text(
+                      AppText.tip(
                         _formatLikeCount(item.likeCount),
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          color: AppColors.textGray(context),
-                        ),
+                        color: AppColors.textGray(context),
                       ),
                     ],
                   ),

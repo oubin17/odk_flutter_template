@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/content/models/content_detail_response.dart';
 import 'package:odk_flutter_template/features/content/service/content_service.dart';
-import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
+import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
 /// 内容详情页
@@ -31,8 +32,9 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const BasicAppBar(title: AppText('详情')),
+    return AppPage(
+      title: AppText(L10nUtils.detail),
+      padding: EdgeInsets.zero,
       body: FutureBuilder<ContentDetailResponse>(
         future: _detailFuture,
         builder: (context, snapshot) {
@@ -66,23 +68,16 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
             color: AppColors.textGray(context),
           ),
           AppGap.hNormal,
-          AppText.second('加载失败'),
+          AppText.second(L10nUtils.loadFailed),
           if (error != null) ...[
             AppGap.hSmall,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 40.w),
-              child: Text(
-                error.toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24.sp,
-                  color: AppColors.textGray(context),
-                ),
-              ),
+              child: AppText.tip(error.toString()),
             ),
           ],
           AppGap.hNormal,
-          ElevatedButton(onPressed: _retry, child: const Text('重试')),
+          AppOutlinedButton(text: L10nUtils.retry, onTap: _retry),
         ],
       ),
     );
@@ -122,10 +117,7 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
                 AppText.tip(detail.publishTime),
                 AppGap.hLarge,
                 // 正文内容
-                Text(
-                  detail.content,
-                  style: TextStyle(fontSize: 28.sp, height: 1.8),
-                ),
+                AppText.body(detail.content),
                 AppGap.hLarge,
                 // 标签
                 _buildTags(context, detail),
@@ -180,21 +172,26 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
           ),
         ),
         AppGap.wSmall,
-        Expanded(
-          child: Text(
-            detail.authorName,
-            style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w500),
-          ),
-        ),
+        Expanded(child: AppText.body(detail.authorName)),
         // 关注按钮
-        OutlinedButton(
-          onPressed: () {},
-          style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 4.h),
-            minimumSize: Size.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        SizedBox(
+          width: 140.w,
+          height: 56.h,
+          child: OutlinedButton(
+            onPressed: () {},
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(color: AppColors.primary(context), width: 1.w),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.w),
+              ),
+              padding: EdgeInsets.zero,
+            ),
+            child: AppText(
+              L10nUtils.follow,
+              color: AppColors.primary(context),
+              size: 24.sp,
+            ),
           ),
-          child: Text('关注', style: TextStyle(fontSize: 24.sp)),
         ),
       ],
     );
@@ -212,13 +209,7 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
             color: AppColors.bgPage(context),
             borderRadius: BorderRadius.circular(16.w),
           ),
-          child: Text(
-            '#$tag',
-            style: TextStyle(
-              fontSize: 24.sp,
-              color: AppColors.primary(context),
-            ),
-          ),
+          child: AppText.tip('#$tag', color: AppColors.primary(context)),
         );
       }).toList(),
     );
@@ -255,10 +246,7 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
       children: [
         Icon(icon, size: 28.w, color: AppColors.textGray(context)),
         AppGap.wSuperSmall,
-        Text(
-          _formatCount(count),
-          style: TextStyle(fontSize: 24.sp, color: AppColors.textGray(context)),
-        ),
+        AppText.tip(_formatCount(count), color: AppColors.textGray(context)),
       ],
     );
   }

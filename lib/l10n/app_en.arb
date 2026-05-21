@@ -526,5 +526,17 @@
   "loadFailed": "Load failed, tap to retry",
   "@loadFailed": {
     "description": "加载失败，点击重试"
+  },
+  "follow": "Follow",
+  "@follow": {
+    "description": "关注" 
+  },
+  "unfollow": "Unfollow",
+  "@unfollow": {
+    "description": "取消关注"
+  },
+  "detail": "Detail",
+  "@detail": {
+    "description": "详情"
   }
 }

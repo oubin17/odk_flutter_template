@@ -823,6 +823,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Load failed, tap to retry'**
   String get loadFailed;
+
+  /// 关注
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get follow;
+
+  /// 取消关注
+  ///
+  /// In en, this message translates to:
+  /// **'Unfollow'**
+  String get unfollow;
+
+  /// 详情
+  ///
+  /// In en, this message translates to:
+  /// **'Detail'**
+  String get detail;
 }
 
 class _AppLocalizationsDelegate

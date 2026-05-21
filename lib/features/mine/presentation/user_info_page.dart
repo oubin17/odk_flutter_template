@@ -118,9 +118,10 @@ class UserInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppPage(
       title: AppText(L10nUtils.profile),
-      body: Consumer<UserProvider>(
-        builder: (context, userProvider, child) {
-          final user = userProvider.userEntity;
+      body: Selector<UserProvider, dynamic>(
+        selector: (_, provider) => provider.userEntity,
+        builder: (context, userEntity, _) {
+          final user = userEntity;
           return ListView(
             children: [
               // 头像

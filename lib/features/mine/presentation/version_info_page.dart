@@ -90,7 +90,7 @@ class _VersionInfoPageState extends State<VersionInfoPage>
     required String value,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: EdgeInsets.symmetric(vertical: 20.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
