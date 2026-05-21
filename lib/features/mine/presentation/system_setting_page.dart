@@ -52,13 +52,22 @@ class SystemSettingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildVersionInfoContext(BuildContext context) {
+  Widget _buildHelpAboutContext(BuildContext context) {
     return Column(
       children: [
         AppListItem(
-          title: L10nUtils.versionInfo,
+          title: L10nUtils.feedback,
           onTap: () {
-            NavigatorUtils.pushNamed(RouteNames.versionInfo);
+            // 跳转到意见反馈页面（原生输入框+提交按钮）
+            NavigatorUtils.pushNamed(RouteNames.feedback);
+          },
+        ),
+        const AppDivider(),
+        AppListItem(
+          title: L10nUtils.about,
+          onTap: () {
+            // 跳转到关于页面（包含版本信息、关于我们、用户协议、隐私政策）
+            NavigatorUtils.pushNamed(RouteNames.about);
           },
         ),
       ],
@@ -112,7 +121,7 @@ class SystemSettingPage extends StatelessWidget {
           AppCard(
             showShadow: false,
             padding: EdgeInsets.zero,
-            child: _buildVersionInfoContext(context),
+            child: _buildHelpAboutContext(context),
           ),
           AppGap.hLarge,
 

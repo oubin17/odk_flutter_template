@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,11 +10,50 @@ import 'package:odk_flutter_template/l10n/app_localizations.dart';
 import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/widgets/app_root/privacy_policy_dialog.dart';
 import 'package:provider/provider.dart';
 
 /// 应用根组件（抽离所有UI初始化逻辑）
-class AppRoot extends StatelessWidget {
+class AppRoot extends StatefulWidget {
   const AppRoot({super.key});
+
+  @override
+  State<AppRoot> createState() => _AppRootState();
+}
+
+class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    // 监听应用生命周期，在应用首次可见时弹出隐私政策
+    WidgetsBinding.instance.addObserver(this);
+    // 延迟一帧执行，确保 MaterialApp 已完全构建
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkPrivacyPolicy();
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  /// 检查隐私政策同意状态
+  ///
+  /// 首次启动时弹出隐私政策弹窗，用户同意后才能使用应用
+  /// 这是国内应用市场（工信部）和 Apple App Store 的合规要求
+  Future<void> _checkPrivacyPolicy() async {
+    if (!mounted) return;
+    final context = AppRouter.routerKey.currentContext;
+    if (context == null) return;
+
+    final agreed = await PrivacyPolicyDialog.showIfNeeded(context);
+    if (!agreed && mounted) {
+      // 用户不同意隐私政策，退出应用
+      exit(0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

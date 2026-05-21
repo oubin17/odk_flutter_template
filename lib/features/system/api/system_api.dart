@@ -29,4 +29,9 @@ class SystemApi {
     }
     return SysGlobalConfigDto.fromJson(response.data as Map<String, dynamic>);
   }
+
+  /// 获取全局配置
+  Future<void> addFeedback(String content) async {
+    await ApiService().post('/sys/feedback/add', {'content': content});
+  }
 }

@@ -841,6 +841,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Detail'**
   String get detail;
+
+  /// 隐私政策弹窗标题
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy Notice'**
+  String get privacyPolicyDialogTitle;
+
+  /// 隐私政策弹窗内容
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for using this app! Before using it, please carefully read and agree to the {userAgreement} and {privacyPolicy}. We will strictly protect your personal information in accordance with the policy.'**
+  String privacyPolicyDialogContent(String userAgreement, String privacyPolicy);
+
+  /// 同意隐私政策
+  ///
+  /// In en, this message translates to:
+  /// **'Agree & Continue'**
+  String get privacyPolicyAgree;
+
+  /// 不同意隐私政策
+  ///
+  /// In en, this message translates to:
+  /// **'Disagree'**
+  String get privacyPolicyDisagree;
+
+  /// 不同意隐私政策提示
+  ///
+  /// In en, this message translates to:
+  /// **'You need to agree to the Privacy Policy to use this app'**
+  String get privacyPolicyDisagreeMessage;
+
+  /// 退出应用确认
+  ///
+  /// In en, this message translates to:
+  /// **'Exit App'**
+  String get privacyPolicyExitConfirm;
+
+  /// 退出应用确认信息
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot use this app without agreeing to the Privacy Policy. Are you sure you want to exit?'**
+  String get privacyPolicyExitMessage;
+
+  /// 注销账号
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// 注销账号警告
+  ///
+  /// In en, this message translates to:
+  /// **'After deleting your account, all your data will be permanently deleted and cannot be recovered. Please proceed with caution.'**
+  String get deleteAccountWarning;
+
+  /// 注销账号确认标题
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Account Deletion'**
+  String get deleteAccountConfirmTitle;
+
+  /// 注销账号确认信息
+  ///
+  /// In en, this message translates to:
+  /// **'This action is irreversible! After deletion, your account and all associated data will be permanently deleted and cannot be recovered. Are you sure you want to delete your account?'**
+  String get deleteAccountConfirmMessage;
+
+  /// 注销账号输入提示
+  ///
+  /// In en, this message translates to:
+  /// **'Type \"CONFIRM DELETE\" to continue'**
+  String get deleteAccountInputHint;
+
+  /// 注销账号输入匹配文本
+  ///
+  /// In en, this message translates to:
+  /// **'CONFIRM DELETE'**
+  String get deleteAccountInputMatch;
+
+  /// 注销账号按钮
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Deletion'**
+  String get deleteAccountButton;
+
+  /// 注销账号成功
+  ///
+  /// In en, this message translates to:
+  /// **'Account deleted successfully'**
+  String get deleteAccountSuccess;
+
+  /// 注销账号失败
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete account, please try again later'**
+  String get deleteAccountFailed;
+
+  /// 清理缓存
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Cache'**
+  String get clearCache;
+
+  /// 缓存大小
+  ///
+  /// In en, this message translates to:
+  /// **'Cache Size'**
+  String get cacheSize;
+
+  /// 缓存清理完成
+  ///
+  /// In en, this message translates to:
+  /// **'Cache cleared successfully'**
+  String get clearCacheSuccess;
+
+  /// 确认清理缓存
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear all cache data?'**
+  String get clearCacheConfirm;
+
+  /// 关于
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// 意见反馈
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedback;
+
+  /// 反馈邮箱
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback Email'**
+  String get feedbackEmail;
+
+  /// 意见反馈输入提示
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your suggestions'**
+  String get feedbackHint;
+
+  /// 提交反馈按钮
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Feedback'**
+  String get feedbackSubmit;
+
+  /// 反馈提交成功
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback submitted successfully, thank you!'**
+  String get feedbackSuccess;
+
+  /// 反馈提交失败
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to submit feedback, please try again later'**
+  String get feedbackFailed;
+
+  /// 反馈内容不能为空
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback content cannot be empty'**
+  String get feedbackContentRequired;
 }
 
 class _AppLocalizationsDelegate

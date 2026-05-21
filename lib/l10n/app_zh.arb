@@ -151,6 +151,47 @@
   "loadFailed": "加载失败，点击重试",
   "follow": "关注",
   "unfollow": "取消关注",
-  "detail": "详情"
+  "detail": "详情",
+
+  "privacyPolicyDialogTitle": "隐私政策提示",
+  "privacyPolicyDialogContent": "感谢您使用本应用！在使用前，请您仔细阅读并同意{userAgreement}和{privacyPolicy}。我们将严格按照政策内容保护您的个人信息安全。",
+  "@privacyPolicyDialogContent": {
+    "placeholders": {
+      "userAgreement": {
+        "type": "String"
+      },
+      "privacyPolicy": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyPolicyAgree": "同意并继续",
+  "privacyPolicyDisagree": "不同意",
+  "privacyPolicyDisagreeMessage": "您需要同意隐私政策才能使用本应用",
+  "privacyPolicyExitConfirm": "退出应用",
+  "privacyPolicyExitMessage": "不同意隐私政策将无法使用本应用，确认退出吗？",
+
+  "deleteAccount": "注销账号",
+  "deleteAccountWarning": "注销账号后，您的所有数据将被永久删除且无法恢复，请谨慎操作。",
+  "deleteAccountConfirmTitle": "确认注销账号",
+  "deleteAccountConfirmMessage": "此操作不可逆！注销后您的账号及所有关联数据将被永久删除，无法恢复。确认注销吗？",
+  "deleteAccountInputHint": "请输入\"确认注销\"以继续",
+  "deleteAccountInputMatch": "确认注销",
+  "deleteAccountButton": "确认注销",
+  "deleteAccountSuccess": "账号已注销",
+  "deleteAccountFailed": "注销失败，请稍后重试",
+  "clearCache": "清理缓存",
+  "cacheSize": "缓存大小",
+  "clearCacheSuccess": "缓存清理完成",
+  "clearCacheConfirm": "确认清理所有缓存数据吗？",
+  "about": "关于",
+  "aboutUs": "关于我们",
+  "feedback": "意见反馈",
+  "feedbackEmail": "反馈邮箱",
+  "feedbackHint": "请输入您的意见或建议",
+  "feedbackSubmit": "提交反馈",
+  "feedbackSuccess": "反馈提交成功，感谢您的建议！",
+  "feedbackFailed": "反馈提交失败，请稍后重试",
+  "feedbackContentRequired": "反馈内容不能为空"
 
 }

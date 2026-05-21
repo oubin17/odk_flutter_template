@@ -24,4 +24,9 @@ class SystemService {
   Future<SysGlobalConfigDto> globalConfig(String configKey) async {
     return await SystemApi().globalConfig(configKey);
   }
+
+  /// 提交用户反馈
+  Future<void> submitFeedback(String content) async {
+    await SystemApi().addFeedback(content);
+  }
 }

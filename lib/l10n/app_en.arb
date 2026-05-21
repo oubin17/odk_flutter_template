@@ -538,5 +538,131 @@
   "detail": "Detail",
   "@detail": {
     "description": "详情"
+  },
+
+  "privacyPolicyDialogTitle": "Privacy Policy Notice",
+  "@privacyPolicyDialogTitle": {
+    "description": "隐私政策弹窗标题"
+  },
+  "privacyPolicyDialogContent": "Thank you for using this app! Before using it, please carefully read and agree to the {userAgreement} and {privacyPolicy}. We will strictly protect your personal information in accordance with the policy.",
+  "@privacyPolicyDialogContent": {
+    "description": "隐私政策弹窗内容",
+    "placeholders": {
+      "userAgreement": {
+        "type": "String"
+      },
+      "privacyPolicy": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyPolicyAgree": "Agree & Continue",
+  "@privacyPolicyAgree": {
+    "description": "同意隐私政策"
+  },
+  "privacyPolicyDisagree": "Disagree",
+  "@privacyPolicyDisagree": {
+    "description": "不同意隐私政策"
+  },
+  "privacyPolicyDisagreeMessage": "You need to agree to the Privacy Policy to use this app",
+  "@privacyPolicyDisagreeMessage": {
+    "description": "不同意隐私政策提示"
+  },
+  "privacyPolicyExitConfirm": "Exit App",
+  "@privacyPolicyExitConfirm": {
+    "description": "退出应用确认"
+  },
+  "privacyPolicyExitMessage": "You cannot use this app without agreeing to the Privacy Policy. Are you sure you want to exit?",
+  "@privacyPolicyExitMessage": {
+    "description": "退出应用确认信息"
+  },
+
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "description": "注销账号"
+  },
+  "deleteAccountWarning": "After deleting your account, all your data will be permanently deleted and cannot be recovered. Please proceed with caution.",
+  "@deleteAccountWarning": {
+    "description": "注销账号警告"
+  },
+  "deleteAccountConfirmTitle": "Confirm Account Deletion",
+  "@deleteAccountConfirmTitle": {
+    "description": "注销账号确认标题"
+  },
+  "deleteAccountConfirmMessage": "This action is irreversible! After deletion, your account and all associated data will be permanently deleted and cannot be recovered. Are you sure you want to delete your account?",
+  "@deleteAccountConfirmMessage": {
+    "description": "注销账号确认信息"
+  },
+  "deleteAccountInputHint": "Type \"CONFIRM DELETE\" to continue",
+  "@deleteAccountInputHint": {
+    "description": "注销账号输入提示"
+  },
+  "deleteAccountInputMatch": "CONFIRM DELETE",
+  "@deleteAccountInputMatch": {
+    "description": "注销账号输入匹配文本"
+  },
+  "deleteAccountButton": "Confirm Deletion",
+  "@deleteAccountButton": {
+    "description": "注销账号按钮"
+  },
+  "deleteAccountSuccess": "Account deleted successfully",
+  "@deleteAccountSuccess": {
+    "description": "注销账号成功"
+  },
+  "deleteAccountFailed": "Failed to delete account, please try again later",
+  "@deleteAccountFailed": {
+    "description": "注销账号失败"
+  },
+  "clearCache": "Clear Cache",
+  "@clearCache": {
+    "description": "清理缓存"
+  },
+  "cacheSize": "Cache Size",
+  "@cacheSize": {
+    "description": "缓存大小"
+  },
+  "clearCacheSuccess": "Cache cleared successfully",
+  "@clearCacheSuccess": {
+    "description": "缓存清理完成"
+  },
+  "clearCacheConfirm": "Are you sure you want to clear all cache data?",
+  "@clearCacheConfirm": {
+    "description": "确认清理缓存"
+  },
+  "about": "About",
+  "@about": {
+    "description": "关于"
+  },
+  "aboutUs": "About Us",
+  "@aboutUs": {
+    "description": "关于我们"
+  },
+  "feedback": "Feedback",
+  "@feedback": {
+    "description": "意见反馈"
+  },
+  "feedbackEmail": "Feedback Email",
+  "@feedbackEmail": {
+    "description": "反馈邮箱"
+  },
+  "feedbackHint": "Please enter your suggestions",
+  "@feedbackHint": {
+    "description": "意见反馈输入提示"
+  },
+  "feedbackSubmit": "Submit Feedback",
+  "@feedbackSubmit": {
+    "description": "提交反馈按钮"
+  },
+  "feedbackSuccess": "Feedback submitted successfully, thank you!",
+  "@feedbackSuccess": {
+    "description": "反馈提交成功"
+  },
+  "feedbackFailed": "Failed to submit feedback, please try again later",
+  "@feedbackFailed": {
+    "description": "反馈提交失败"
+  },
+  "feedbackContentRequired": "Feedback content cannot be empty",
+  "@feedbackContentRequired": {
+    "description": "反馈内容不能为空"
   }
 }

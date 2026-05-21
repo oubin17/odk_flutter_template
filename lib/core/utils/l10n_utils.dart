@@ -188,4 +188,55 @@ class L10nUtils {
   static String get follow => _localizations!.follow;
   static String get unfollow => _localizations!.unfollow;
   static String get detail => _localizations!.detail;
+
+  // ======================== 隐私政策弹窗 ========================
+  static String get privacyPolicyDialogTitle =>
+      _localizations!.privacyPolicyDialogTitle;
+  static String privacyPolicyDialogContent(
+    String userAgreement,
+    String privacyPolicy,
+  ) => _localizations!.privacyPolicyDialogContent(userAgreement, privacyPolicy);
+  static String get privacyPolicyAgree => _localizations!.privacyPolicyAgree;
+  static String get privacyPolicyDisagree =>
+      _localizations!.privacyPolicyDisagree;
+  static String get privacyPolicyDisagreeMessage =>
+      _localizations!.privacyPolicyDisagreeMessage;
+  static String get privacyPolicyExitConfirm =>
+      _localizations!.privacyPolicyExitConfirm;
+  static String get privacyPolicyExitMessage =>
+      _localizations!.privacyPolicyExitMessage;
+
+  // ======================== 账号注销 ========================
+  static String get deleteAccount => _localizations!.deleteAccount;
+  static String get deleteAccountWarning =>
+      _localizations!.deleteAccountWarning;
+  static String get deleteAccountConfirmTitle =>
+      _localizations!.deleteAccountConfirmTitle;
+  static String get deleteAccountConfirmMessage =>
+      _localizations!.deleteAccountConfirmMessage;
+  static String get deleteAccountInputHint =>
+      _localizations!.deleteAccountInputHint;
+  static String get deleteAccountInputMatch =>
+      _localizations!.deleteAccountInputMatch;
+  static String get deleteAccountButton => _localizations!.deleteAccountButton;
+  static String get deleteAccountSuccess =>
+      _localizations!.deleteAccountSuccess;
+  static String get deleteAccountFailed => _localizations!.deleteAccountFailed;
+
+  // ======================== 缓存清理 ========================
+  static String get clearCache => _localizations!.clearCache;
+  static String get cacheSize => _localizations!.cacheSize;
+  static String get clearCacheSuccess => _localizations!.clearCacheSuccess;
+  static String get clearCacheConfirm => _localizations!.clearCacheConfirm;
+
+  // ======================== 关于/反馈 ========================
+  static String get about => _localizations!.about;
+  static String get feedback => _localizations!.feedback;
+  static String get feedbackEmail => _localizations!.feedbackEmail;
+  static String get feedbackHint => _localizations!.feedbackHint;
+  static String get feedbackSubmit => _localizations!.feedbackSubmit;
+  static String get feedbackSuccess => _localizations!.feedbackSuccess;
+  static String get feedbackFailed => _localizations!.feedbackFailed;
+  static String get feedbackContentRequired =>
+      _localizations!.feedbackContentRequired;
 }

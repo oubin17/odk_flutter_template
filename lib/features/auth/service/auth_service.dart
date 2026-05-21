@@ -68,4 +68,10 @@ class AuthService {
   Future<void> afterLogout() async {
     await UserSessionService().clearSession(clearAllStorage: true);
   }
+
+  /// 删除账户
+  Future<void> deletion() async {
+    await AuthApi().deletion();
+    await afterLogout();
+  }
 }

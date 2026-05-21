@@ -5,7 +5,10 @@ import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
 import 'package:odk_flutter_template/features/content/presentation/content_detail_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/home.dart';
+import 'package:odk_flutter_template/features/mine/presentation/about_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/common_setting_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/delete_account_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/feedback_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/password_manager_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/security_setting_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/system_setting_page.dart';
@@ -34,6 +37,9 @@ class RouteNames {
   static const String contentDetail = 'contentDetail';
   static const String notFound = 'NotFound';
   static const String agreement = 'Agreement';
+  static const String deleteAccount = 'DeleteAccount';
+  static const String about = 'About';
+  static const String feedback = 'Feedback';
 }
 
 // ====================== 路由路径常量（已删除Splash） ======================
@@ -51,6 +57,9 @@ class RoutePaths {
   static const String contentDetail = '/contentDetail';
   static const String notFound = '/notFound';
   static const String agreement = '/agreement';
+  static const String deleteAccount = '/deleteAccount';
+  static const String about = '/about';
+  static const String feedback = '/feedback';
 }
 
 class AppRouter {
@@ -186,6 +195,21 @@ class AppRouter {
           final url = state.uri.queryParameters['url'] ?? '';
           return AgreementPage(title: title, url: url);
         },
+      ),
+      GoRoute(
+        path: RoutePaths.deleteAccount,
+        name: RouteNames.deleteAccount,
+        builder: (context, state) => const DeleteAccountPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.about,
+        name: RouteNames.about,
+        builder: (context, state) => const AboutPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.feedback,
+        name: RouteNames.feedback,
+        builder: (context, state) => const FeedbackPage(),
       ),
       GoRoute(
         path: RoutePaths.notFound,

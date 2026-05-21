@@ -16,9 +16,12 @@ class ConfigKey {
   static const String signSecret = 'signSecret';
 
   static const String userAgreementUrl =
-      'http://8.133.253.216/mixed-service/agreements/user_agreement.html';
+      'http://8.133.253.216/mixed-service/webview/user_agreement.html';
   static const String privacyPolicyUrl =
-      'http://8.133.253.216/mixed-service/agreements/privacy_policy.html';
+      'http://8.133.253.216/mixed-service/webview/privacy_policy.html';
+
+  static const String aboutUsUrl =
+      'http://8.133.253.216/mixed-service/webview/about_us.html';
 }
 
 // 3. 公共配置（使用常量 Key，无硬编码）
@@ -39,9 +42,12 @@ const Map<String, String> devVariables = {
   // 开发环境专属密钥
   ConfigKey.signSecret: 'flutter_app_dev_sign_secret_2025',
   ConfigKey.userAgreementUrl:
-      'http://8.133.253.216/mixed-service/agreements/user_agreement.html',
+      'http://8.133.253.216/mixed-service/webview/user_agreement.html',
   ConfigKey.privacyPolicyUrl:
-      'http://8.133.253.216/mixed-service/agreements/privacy_policy.html',
+      'http://8.133.253.216/mixed-service/webview/privacy_policy.html',
+
+  ConfigKey.aboutUsUrl:
+      'http://8.133.253.216/mixed-service/webview/about_us.html',
 };
 
 const Map<String, String> testVariables = {
@@ -77,4 +83,5 @@ class Env {
   static String get signSecret => get(ConfigKey.signSecret);
   static String get userAgreementUrl => get(ConfigKey.userAgreementUrl);
   static String get privacyPolicyUrl => get(ConfigKey.privacyPolicyUrl);
+  static String get aboutUsUrl => get(ConfigKey.aboutUsUrl);
 }

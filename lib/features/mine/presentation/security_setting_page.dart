@@ -43,6 +43,18 @@ class SecuritySettingPage extends StatelessWidget {
     );
   }
 
+  /// 危险操作分组（注销账号）
+  Widget _buildDangerContext(BuildContext context) {
+    return AppListItem(
+      title: L10nUtils.deleteAccount,
+      isTitleCenter: true,
+      showArrow: false,
+      onTap: () {
+        NavigatorUtils.pushNamed(RouteNames.deleteAccount);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppPage(
@@ -53,6 +65,13 @@ class SecuritySettingPage extends StatelessWidget {
             showShadow: false,
             padding: EdgeInsets.zero,
             child: _buildPasswordContext(context),
+          ),
+          AppGap.h(24),
+          // 危险操作区域
+          AppCard(
+            showShadow: false,
+            padding: EdgeInsets.zero,
+            child: _buildDangerContext(context),
           ),
         ],
       ),

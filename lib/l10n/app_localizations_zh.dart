@@ -387,4 +387,94 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get detail => '详情';
+
+  @override
+  String get privacyPolicyDialogTitle => '隐私政策提示';
+
+  @override
+  String privacyPolicyDialogContent(
+    String userAgreement,
+    String privacyPolicy,
+  ) {
+    return '感谢您使用本应用！在使用前，请您仔细阅读并同意$userAgreement和$privacyPolicy。我们将严格按照政策内容保护您的个人信息安全。';
+  }
+
+  @override
+  String get privacyPolicyAgree => '同意并继续';
+
+  @override
+  String get privacyPolicyDisagree => '不同意';
+
+  @override
+  String get privacyPolicyDisagreeMessage => '您需要同意隐私政策才能使用本应用';
+
+  @override
+  String get privacyPolicyExitConfirm => '退出应用';
+
+  @override
+  String get privacyPolicyExitMessage => '不同意隐私政策将无法使用本应用，确认退出吗？';
+
+  @override
+  String get deleteAccount => '注销账号';
+
+  @override
+  String get deleteAccountWarning => '注销账号后，您的所有数据将被永久删除且无法恢复，请谨慎操作。';
+
+  @override
+  String get deleteAccountConfirmTitle => '确认注销账号';
+
+  @override
+  String get deleteAccountConfirmMessage =>
+      '此操作不可逆！注销后您的账号及所有关联数据将被永久删除，无法恢复。确认注销吗？';
+
+  @override
+  String get deleteAccountInputHint => '请输入\"确认注销\"以继续';
+
+  @override
+  String get deleteAccountInputMatch => '确认注销';
+
+  @override
+  String get deleteAccountButton => '确认注销';
+
+  @override
+  String get deleteAccountSuccess => '账号已注销';
+
+  @override
+  String get deleteAccountFailed => '注销失败，请稍后重试';
+
+  @override
+  String get clearCache => '清理缓存';
+
+  @override
+  String get cacheSize => '缓存大小';
+
+  @override
+  String get clearCacheSuccess => '缓存清理完成';
+
+  @override
+  String get clearCacheConfirm => '确认清理所有缓存数据吗？';
+
+  @override
+  String get about => '关于';
+
+  @override
+  String get feedback => '意见反馈';
+
+  @override
+  String get feedbackEmail => '反馈邮箱';
+
+  @override
+  String get feedbackHint => '请输入您的意见或建议';
+
+  @override
+  String get feedbackSubmit => '提交反馈';
+
+  @override
+  String get feedbackSuccess => '反馈提交成功，感谢您的建议！';
+
+  @override
+  String get feedbackFailed => '反馈提交失败，请稍后重试';
+
+  @override
+  String get feedbackContentRequired => '反馈内容不能为空';
 }

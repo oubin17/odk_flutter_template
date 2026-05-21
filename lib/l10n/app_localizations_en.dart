@@ -403,4 +403,100 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get detail => 'Detail';
+
+  @override
+  String get privacyPolicyDialogTitle => 'Privacy Policy Notice';
+
+  @override
+  String privacyPolicyDialogContent(
+    String userAgreement,
+    String privacyPolicy,
+  ) {
+    return 'Thank you for using this app! Before using it, please carefully read and agree to the $userAgreement and $privacyPolicy. We will strictly protect your personal information in accordance with the policy.';
+  }
+
+  @override
+  String get privacyPolicyAgree => 'Agree & Continue';
+
+  @override
+  String get privacyPolicyDisagree => 'Disagree';
+
+  @override
+  String get privacyPolicyDisagreeMessage =>
+      'You need to agree to the Privacy Policy to use this app';
+
+  @override
+  String get privacyPolicyExitConfirm => 'Exit App';
+
+  @override
+  String get privacyPolicyExitMessage =>
+      'You cannot use this app without agreeing to the Privacy Policy. Are you sure you want to exit?';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountWarning =>
+      'After deleting your account, all your data will be permanently deleted and cannot be recovered. Please proceed with caution.';
+
+  @override
+  String get deleteAccountConfirmTitle => 'Confirm Account Deletion';
+
+  @override
+  String get deleteAccountConfirmMessage =>
+      'This action is irreversible! After deletion, your account and all associated data will be permanently deleted and cannot be recovered. Are you sure you want to delete your account?';
+
+  @override
+  String get deleteAccountInputHint => 'Type \"CONFIRM DELETE\" to continue';
+
+  @override
+  String get deleteAccountInputMatch => 'CONFIRM DELETE';
+
+  @override
+  String get deleteAccountButton => 'Confirm Deletion';
+
+  @override
+  String get deleteAccountSuccess => 'Account deleted successfully';
+
+  @override
+  String get deleteAccountFailed =>
+      'Failed to delete account, please try again later';
+
+  @override
+  String get clearCache => 'Clear Cache';
+
+  @override
+  String get cacheSize => 'Cache Size';
+
+  @override
+  String get clearCacheSuccess => 'Cache cleared successfully';
+
+  @override
+  String get clearCacheConfirm =>
+      'Are you sure you want to clear all cache data?';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get feedback => 'Feedback';
+
+  @override
+  String get feedbackEmail => 'Feedback Email';
+
+  @override
+  String get feedbackHint => 'Please enter your suggestions';
+
+  @override
+  String get feedbackSubmit => 'Submit Feedback';
+
+  @override
+  String get feedbackSuccess => 'Feedback submitted successfully, thank you!';
+
+  @override
+  String get feedbackFailed =>
+      'Failed to submit feedback, please try again later';
+
+  @override
+  String get feedbackContentRequired => 'Feedback content cannot be empty';
 }

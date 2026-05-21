@@ -43,4 +43,9 @@ class AuthApi {
   Future<void> logout() async {
     await ApiService().post('/user/logout', {});
   }
+
+  /// 删除账户
+  Future<void> deletion() async {
+    await ApiService().post('/user/status/deletion', {});
+  }
 }
