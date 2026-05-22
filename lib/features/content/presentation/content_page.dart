@@ -50,7 +50,7 @@ class _ContentPageState extends State<ContentPage> {
   @override
   Widget build(BuildContext context) {
     return AppPage(
-      title: AppText(L10nUtils.discover),
+      title: AppText(L10nUtils.of(context).discover),
       body: AppRefreshList<ContentItem>(
         controller: _refreshController,
         // 🔧 切换布局模式：修改此处即可

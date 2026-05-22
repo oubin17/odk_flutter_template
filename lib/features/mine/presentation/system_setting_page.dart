@@ -96,7 +96,7 @@ class SystemSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage(
-      title: AppText(L10nUtils.systemSetting),
+      title: AppText(L10nUtils.of(context).systemSetting),
       body: ListView(
         children: [
           // 账号分组

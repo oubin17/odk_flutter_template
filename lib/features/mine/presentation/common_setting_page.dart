@@ -37,22 +37,22 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
   @override
   Widget build(BuildContext context) {
     return AppPage(
-      title: AppText(L10nUtils.commonSetting),
+      title: AppText(L10nUtils.of(context).commonSetting),
       body: ListView(
         children: [
           // 主题切换 + 图标
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
               final currentMode = themeProvider.isDarkMode
-                  ? L10nUtils.darkMode
-                  : L10nUtils.lightMode;
+                  ? L10nUtils.of(context).darkMode
+                  : L10nUtils.of(context).lightMode;
               return AppListItem(
                 left: AppIcon(
                   themeProvider.isDarkMode
                       ? Icons.dark_mode_outlined
                       : Icons.light_mode_outlined,
                 ),
-                title: L10nUtils.themeMode,
+                title: L10nUtils.of(context).themeMode,
                 desc: currentMode,
                 showArrow: false,
                 onTap: () {
@@ -91,10 +91,10 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
           // 缓存清理
           AppListItem(
             left: const AppIcon(Icons.cleaning_services_outlined),
-            title: L10nUtils.clearCache,
+            title: L10nUtils.of(context).clearCache,
             desc: _cacheSize.isNotEmpty
-                ? '${L10nUtils.cacheSize}: $_cacheSize'
-                : '${L10nUtils.cacheSize}: --',
+                ? '${L10nUtils.of(context).cacheSize}: $_cacheSize'
+                : '${L10nUtils.of(context).cacheSize}: --',
             showArrow: false,
             onTap: () => _clearCache(context),
           ),

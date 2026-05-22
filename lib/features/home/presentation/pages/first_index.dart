@@ -19,7 +19,7 @@ class FirstIndexPage extends StatelessWidget {
     String enDate = DateFormat('EEEE, MMMM dd, yyyy', 'en_US').format(now);
 
     return AppPage(
-      title: AppText(L10nUtils.home),
+      title: AppText(L10nUtils.of(context).home),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

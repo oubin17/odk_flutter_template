@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:odk_flutter_template/l10n/app_localizations.dart';
+import 'package:odk_flutter_template/routes/app_router.dart';
 
 /// 国际化静态工具类（🔥 全局静态调用，无需context）
 class L10nUtils {
@@ -10,6 +11,31 @@ class L10nUtils {
     _localizations = AppLocalizations.of(context);
   }
 
+  /// 强制更新缓存（在语言切换时调用）
+  // static void update() {
+  //   final rootContext = AppRouter.routerKey.currentContext;
+  //   if (rootContext != null) {
+  //     _localizations = AppLocalizations.of(rootContext);
+  //   }
+  // }
+
+  /// 内部统一获取本地化实例
+  // static AppLocalizations get _loc {
+  //   // 优先从根 context 获取（动态）
+  //   final rootContext = AppRouter.routerKey.currentContext;
+  //   if (rootContext != null) {
+  //     final loc = AppLocalizations.of(rootContext);
+  //     if (loc != null) return loc;
+  //   }
+
+  //   // 降级到静态缓存（兼容无 context 场景）
+  //   assert(
+  //     _localizations != null,
+  //     "L10nUtils 未初始化，请在 MaterialApp builder 中调用 L10nUtils.init()",
+  //   );
+  //   return _localizations!;
+  // }
+
   /// 内部统一获取根上下文本地化实例
   // static AppLocalizations get _loc {
   //   final rootContext = AppRouter.routerKey.currentContext;
@@ -17,10 +43,11 @@ class L10nUtils {
   //   return AppLocalizations.of(rootContext!)!;
   // }
 
-  // // 统一入口，实时获取当前上下文语种
-  // static AppLocalizations of(BuildContext context) {
-  //   return AppLocalizations.of(context)!;
-  // }
+  // 统一入口，实时获取当前上下文语种
+  ///为什么 of(context) 能自动更新？ 因为 Localizations.of(context) 建立了依赖关系，语言变化时 Flutter 会自动重建依赖它的 widget 为什么静态调用不能自动更新？ 因为静态调用不依赖 context，Flutter 不知道需要重建这个 widget 最佳方案？ 混合模式：Widget 中用 of(context) ，无 context 场景用静态属性 + 主动更新缓存
+  static AppLocalizations of(BuildContext context) {
+    return AppLocalizations.of(context)!;
+  }
 
   // ======================== 通用 ========================
   static String get confirm => _localizations!.confirm;
