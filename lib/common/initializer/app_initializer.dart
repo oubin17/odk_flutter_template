@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:odk_flutter_template/common/app_info/global_info.dart';
+import 'package:odk_flutter_template/core/crash/bugly_service.dart';
 import 'package:odk_flutter_template/core/network/check/network_utils.dart';
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
-import 'package:odk_flutter_template/core/utils/log_utils.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 
 class AppInitializer {
@@ -36,16 +34,8 @@ class AppInitializer {
     userProvider = UserProvider();
     await userProvider.refresh();
     UserSessionService().bindUserProvider(userProvider);
-    // 捕获 UI 崩溃
-    FlutterError.onError = (FlutterErrorDetails details) {
-      Log.e("🔥 UI 全局崩溃", error: details.exception, stackTrace: details.stack);
-      FlutterError.presentError(details);
-    };
 
-    // 捕获 异步/原生 崩溃
-    PlatformDispatcher.instance.onError = (error, stack) {
-      Log.e("🔥 异步全局崩溃", error: error, stackTrace: stack);
-      return true;
-    };
+    // 8. 初始化 Bugly 崩溃监控（需要在 FlavorConfig 配置之后调用，以读取 appId）
+    await BuglyService.instance.init();
   }
 }

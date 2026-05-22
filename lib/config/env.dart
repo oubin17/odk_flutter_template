@@ -22,6 +22,11 @@ class ConfigKey {
 
   static const String aboutUsUrl =
       'http://8.133.253.216/mixed-service/webview/about_us.html';
+
+  // 👇 Bugly 崩溃监控配置 Key
+  static const String buglyAndroidAppId = 'buglyAndroidAppId';
+  static const String buglyIOSAppId = 'buglyIOSAppId';
+  static const String buglyChannel = 'buglyChannel';
 }
 
 // 3. 公共配置（使用常量 Key，无硬编码）
@@ -48,6 +53,11 @@ const Map<String, String> devVariables = {
 
   ConfigKey.aboutUsUrl:
       'http://8.133.253.216/mixed-service/webview/about_us.html',
+
+  // Bugly 崩溃监控（开发环境）
+  ConfigKey.buglyAndroidAppId: '614d64d438', // ⚠️ 替换为你在 Bugly 注册的 Android AppId
+  ConfigKey.buglyIOSAppId: '37b72d0b02', // ⚠️ 替换为你在 Bugly 注册的 iOS AppId
+  ConfigKey.buglyChannel: 'dev', // 渠道标识
 };
 
 const Map<String, String> testVariables = {
@@ -56,6 +66,12 @@ const Map<String, String> testVariables = {
 
   // 测试环境专属密钥
   ConfigKey.signSecret: 'flutter_app_test_sign_secret_2025',
+
+  // Bugly 崩溃监控（测试环境）
+  ConfigKey.buglyAndroidAppId:
+      'YOUR_ANDROID_APP_ID', // ⚠️ 替换为你在 Bugly 注册的 Android AppId
+  ConfigKey.buglyIOSAppId: 'YOUR_IOS_APP_ID', // ⚠️ 替换为你在 Bugly 注册的 iOS AppId
+  ConfigKey.buglyChannel: 'test', // 渠道标识
 };
 
 const Map<String, String> prodVariables = {
@@ -64,6 +80,12 @@ const Map<String, String> prodVariables = {
 
   // 生产环境专属密钥
   ConfigKey.signSecret: 'flutter_app_prod_sign_secret_2025',
+
+  // Bugly 崩溃监控（生产环境）
+  ConfigKey.buglyAndroidAppId:
+      'YOUR_ANDROID_APP_ID', // ⚠️ 替换为你在 Bugly 注册的 Android AppId
+  ConfigKey.buglyIOSAppId: 'YOUR_IOS_APP_ID', // ⚠️ 替换为你在 Bugly 注册的 iOS AppId
+  ConfigKey.buglyChannel: 'prod', // 渠道标识
 };
 
 // 5. 【可选推荐】封装快捷获取方法 → 彻底告别字符串！
@@ -84,4 +106,8 @@ class Env {
   static String get userAgreementUrl => get(ConfigKey.userAgreementUrl);
   static String get privacyPolicyUrl => get(ConfigKey.privacyPolicyUrl);
   static String get aboutUsUrl => get(ConfigKey.aboutUsUrl);
+  // 👇 Bugly 崩溃监控快捷访问
+  static String get buglyAndroidAppId => get(ConfigKey.buglyAndroidAppId);
+  static String get buglyIOSAppId => get(ConfigKey.buglyIOSAppId);
+  static String get buglyChannel => get(ConfigKey.buglyChannel);
 }

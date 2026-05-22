@@ -19,6 +19,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <!-- Bugly 崩溃监控：读取设备信息（非必须，不添加则无法获取设备型号等辅助信息） -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
         android:label="odk_flutter_template"

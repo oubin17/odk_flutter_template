@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:odk_flutter_template/config/env.dart';
+import 'package:odk_flutter_template/core/crash/bugly_service.dart';
 
 /// ======================== 整合版 全局日志工具类 ========================
 /// 融合：自定义Log风格 + logger核心能力
@@ -56,10 +57,13 @@ class Log {
       if (stackTrace != null) _logger.e('   堆栈信息 → \n$stackTrace');
     }
 
-    // 生产环境：上报崩溃（Sentry/Firebase）
+    // 生产环境：上报崩溃到 Bugly
     if (!kDebugMode && error != null) {
-      // 这里后续集成 Sentry 上报
-      // Sentry.captureException(error, stackTrace: stackTrace);
+      BuglyService.instance.reportException(
+        message: message,
+        detail: '${error.toString()}\n${stackTrace?.toString() ?? ''}',
+        type: error.runtimeType.toString(),
+      );
     }
   }
 

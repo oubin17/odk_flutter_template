@@ -1,3 +1,4 @@
+import 'package:odk_flutter_template/core/crash/bugly_service.dart';
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/utils/encrypt_utils.dart';
 import 'package:odk_flutter_template/features/auth/api/auth_api.dart';
@@ -55,6 +56,10 @@ class AuthService {
       token: response.token,
       updateToken: true,
     );
+    // 🔥 设置 Bugly 用户标识，便于在 Bugly 后台按用户筛选崩溃
+    if (response.userId.isNotEmpty) {
+      await BuglyService.instance.setUserId(response.userId);
+    }
   }
 
   /// 登录方法，返回用户 ID
@@ -67,6 +72,8 @@ class AuthService {
   /// 登出后需要执行的操作，清除 storage 中的所有数据
   Future<void> afterLogout() async {
     await UserSessionService().clearSession(clearAllStorage: true);
+    // 🔥 清除 Bugly 用户标识
+    await BuglyService.instance.setUserId('');
   }
 
   /// 删除账户

@@ -382,6 +382,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_bugly:
+    dependency: "direct main"
+    description:
+      name: flutter_bugly
+      sha256: ee8e8c2454e2a74a65dc28cf36b46d0bfe10353e4abfde73411bf03f90f05f08
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   flutter_cache_manager:
     dependency: "direct main"
     description:

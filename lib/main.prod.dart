@@ -1,115 +1,41 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:odk_flutter_template/common/theme/app_theme.dart';
+import 'package:odk_flutter_template/common/initializer/app_initializer.dart';
 import 'package:odk_flutter_template/config/env.dart';
-import 'package:odk_flutter_template/core/storage/storage_manager.dart';
-import 'package:odk_flutter_template/core/session/user_session_service.dart';
-import 'package:odk_flutter_template/core/utils/log_utils.dart';
-import 'package:odk_flutter_template/core/network/check/network_utils.dart';
+import 'package:odk_flutter_template/core/crash/bugly_service.dart';
+import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
-import 'package:odk_flutter_template/providers/user/user_provider.dart';
-import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/widgets/app_root/app_root.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  // 确保 Flutter 引擎绑定初始化
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // ========== 新增：初始化网络监听 ==========
-  await NetworkCheck.instance.initNetworkListen();
-
-  // 配置环境变量
+  // 1. 先配置环境变量，确保 Env 能正确读取配置（如 Bugly appId）
   FlavorConfig(name: Environment.prod.name, variables: prodVariables);
 
-  // 🔥 新增：保留原生启动屏，不自动关闭
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // 2. 执行应用初始化（内部包含 Bugly 初始化）
+  await AppInitializer.instance.init();
 
-  // 1. 初始化普通存储
-  await StorageManager.init();
-  // 启动时恢复用户登录状态
+  // 3. 设置 Bugly 异常捕获处理器（替代 postCatchedException，避免 Zone mismatch）
+  BuglyService.instance.setupExceptionHandler();
 
-  final userProvider = UserProvider();
-  await userProvider.refresh();
-  UserSessionService().bindUserProvider(userProvider);
-
-  // 捕获 UI 崩溃
-  FlutterError.onError = (FlutterErrorDetails details) {
-    Log.e("🔥 UI 全局崩溃", error: details.exception, stackTrace: details.stack);
-    FlutterError.presentError(details);
-  };
-
-  // 捕获 异步/原生 崩溃
-  PlatformDispatcher.instance.onError = (error, stack) {
-    Log.e("🔥 异步全局崩溃", error: error, stackTrace: stack);
-    return true;
-  };
-
+  // 4. 启动应用（在 root zone 中执行，避免 Zone mismatch）
   runApp(
     MultiProvider(
       providers: [
         // 注入用户Provider
-        ChangeNotifierProvider(create: (context) => userProvider),
+        ChangeNotifierProvider(
+          create: (context) => AppInitializer.instance.userProvider,
+        ),
         // 注入主题Provider
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        // 注入语言Provider
+        ChangeNotifierProvider(create: (context) => LocaleProvider()),
       ],
-      child: const MyApp(),
+      child: const AppRoot(),
     ),
   );
 
-  // 🔥 4. 所有初始化/校验完成 → 关闭原生启动屏
-  // 直接显示目标页面，无任何切换
+  // 5. 所有初始化/校验完成 → 关闭原生启动屏
   FlutterNativeSplash.remove();
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // 🔥 核心：ScreenUtilInit 包裹整个应用
-    // 宽度、圆角、水平间距 → 用 .w
-    // 字体大小 → 用 .sp
-    // 高度 → 用 .h
-    return ScreenUtilInit(
-      // 设计稿尺寸（UI给你的标准尺寸，二选一）
-      designSize: const Size(750, 1334), // 手机常用（推荐）
-      minTextAdapt: true, // 最小文字适配
-      splitScreenMode: true, // 支持分屏模式适配
-      // 你的应用主体
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, child) {
-          return MaterialApp.router(
-            // 绑定路由配置
-            routerConfig: AppRouter.router,
-            // 关闭调试标识
-            debugShowCheckedModeBanner: false,
-            // 🔥 5.x 保留这个初始化即可
-            builder: FlutterSmartDialog.init(),
-            // 绑定主题
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: _getThemeMode(themeProvider.themeMode),
-          );
-        },
-      ),
-    );
-  }
-
-  // 转换主题模式
-  ThemeMode _getThemeMode(ThemeModeType type) {
-    switch (type) {
-      case ThemeModeType.light:
-        return ThemeMode.light;
-      case ThemeModeType.dark:
-        return ThemeMode.dark;
-      case ThemeModeType.system:
-        return ThemeMode.system;
-    }
-  }
 }
