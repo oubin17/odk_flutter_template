@@ -268,11 +268,9 @@ class _NavItemWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 优化3：选中项添加圆形高亮背景，增强视觉层次
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeInOut,
-              padding: EdgeInsets.all(isSelected ? 8.w : 8.w),
+            // 选中项添加圆形高亮背景，增强视觉层次
+            Container(
+              padding: EdgeInsets.all(8.w),
               decoration: BoxDecoration(
                 color: isSelected
                     ? primaryColor.withAlpha(isDark ? 30 : 20)
@@ -286,11 +284,9 @@ class _NavItemWidget extends StatelessWidget {
               ),
             ),
             if (item.label != null) ...[
-              SizedBox(height: 2.h),
-              // 优化4：选中项文字添加微动画 + 加粗
-              AnimatedDefaultTextStyle(
-                duration: const Duration(milliseconds: 250),
-                curve: Curves.easeInOut,
+              AppGap.h(2),
+              // 选中项文字加粗
+              DefaultTextStyle(
                 style: TextStyle(
                   fontSize: isSelected ? 21.sp : 20.sp,
                   color: color,

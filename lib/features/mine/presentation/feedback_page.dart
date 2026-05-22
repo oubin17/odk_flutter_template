@@ -85,26 +85,11 @@ class _FeedbackPageState extends State<FeedbackPage> with MountedSafeMixin {
     return AppCard(
       showShadow: false,
       padding: EdgeInsets.zero,
-      child: TextField(
+      child: AppTextArea(
         controller: _feedbackController,
-        onChanged: (_) => setState(() {}),
-        maxLines: 10,
-        minLines: 8,
+        hint: L10nUtils.feedbackHint,
         maxLength: 1000,
-        decoration: InputDecoration(
-          hintText: L10nUtils.feedbackHint,
-          hintStyle: TextStyle(
-            fontSize: 28.sp,
-            color: AppColors.textGray(context),
-          ),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.all(24.w),
-          counterStyle: TextStyle(
-            fontSize: 24.sp,
-            color: AppColors.textGray(context),
-          ),
-        ),
-        style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
+        onChanged: (_) => setState(() {}),
       ),
     );
   }

@@ -97,53 +97,23 @@ class _PrivacyPolicyDialogContentState
               weight: FontWeight.w600,
               align: TextAlign.center,
             ),
-            SizedBox(height: 32.h),
+            AppGap.h(32),
 
             // 内容（含可点击的协议链接）
             _buildContentWithLinks(context),
-            SizedBox(height: 48.h),
+            AppGap.h(48),
 
             // 同意按钮
-            SizedBox(
-              width: double.infinity,
-              height: 88.h,
-              child: ElevatedButton(
-                onPressed: _onAgree,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary(context),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                ),
-                child: AppText(
-                  L10nUtils.privacyPolicyAgree,
-                  size: 32.sp,
-                  color: Colors.white,
-                  weight: FontWeight.w500,
-                ),
-              ),
-            ),
-            SizedBox(height: 20.h),
+            AppButton(text: L10nUtils.privacyPolicyAgree, onTap: _onAgree),
+            AppGap.h(20),
 
             // 不同意按钮
-            SizedBox(
-              width: double.infinity,
+            AppOutlinedButton(
+              text: L10nUtils.privacyPolicyDisagree,
+              onTap: _onDisagree,
+              sideColor: AppColors.textGray(context),
+              textColor: AppColors.textGray(context),
               height: 88.h,
-              child: OutlinedButton(
-                onPressed: _onDisagree,
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: AppColors.textGray(context)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                ),
-                child: AppText(
-                  L10nUtils.privacyPolicyDisagree,
-                  size: 32.sp,
-                  color: AppColors.textGray(context),
-                ),
-              ),
             ),
           ],
         ),

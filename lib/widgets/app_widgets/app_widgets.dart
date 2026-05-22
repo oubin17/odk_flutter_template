@@ -341,23 +341,35 @@ class AppIconButton extends StatelessWidget {
 class AppOutlinedButton extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
+  final Color? sideColor;
+  final Color? textColor;
+  final double? height;
 
-  const AppOutlinedButton({super.key, required this.text, required this.onTap});
+  const AppOutlinedButton({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.sideColor,
+    this.textColor,
+    this.height,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final effectiveSideColor = sideColor ?? AppColors.primary(context);
+    final effectiveTextColor = textColor ?? AppColors.primary(context);
     return SizedBox(
       width: double.infinity,
-      height: 72.h,
+      height: height ?? 72.h,
       child: OutlinedButton(
         onPressed: onTap,
         style: OutlinedButton.styleFrom(
-          side: BorderSide(color: AppColors.primary(context), width: 1.w),
+          side: BorderSide(color: effectiveSideColor, width: 1.w),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.w),
           ),
         ),
-        child: AppText(text, color: AppColors.primary(context), size: 28.sp),
+        child: AppText(text, color: effectiveTextColor, size: 28.sp),
       ),
     );
   }
@@ -497,7 +509,7 @@ class AppInput extends StatelessWidget {
         ),
         hintText: hint,
         hintStyle: TextStyle(
-          fontSize: 20.sp,
+          fontSize: 26.sp,
           color: AppColors.textGray(context),
         ),
         // ====================== 安全版前缀（无遮挡+可输入） ======================
@@ -1050,6 +1062,118 @@ class AppDot extends StatelessWidget {
       decoration: BoxDecoration(
         color: color ?? AppColors.error,
         shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
+/// 多行文本域组件（适配主题 + 暗黑模式）
+///
+/// 适用于意见反馈、备注填写等多行文本输入场景。
+/// 默认无边框，配合 [AppCard] 使用效果更佳。
+///
+/// 示例：
+/// ```dart
+/// AppCard(
+///   showShadow: false,
+///   padding: EdgeInsets.zero,
+///   child: AppTextArea(
+///     controller: _controller,
+///     hint: L10nUtils.feedbackHint,
+///     maxLength: 1000,
+///     onChanged: (_) => setState(() {}),
+///   ),
+/// )
+/// ```
+class AppTextArea extends StatelessWidget {
+  /// 控制器
+  final TextEditingController? controller;
+
+  /// 占位提示文字
+  final String? hint;
+
+  /// 最大行数
+  final int? maxLines;
+
+  /// 最小行数
+  final int? minLines;
+
+  /// 最大字符数（null 则不限制）
+  final int? maxLength;
+
+  /// 内容变化回调
+  final ValueChanged<String>? onChanged;
+
+  /// 内边距
+  final EdgeInsetsGeometry? padding;
+
+  /// 是否显示边框（默认无边框，配合 AppCard 使用）
+  final bool showBorder;
+
+  /// 圆角（showBorder 为 true 时生效）
+  final double? borderRadius;
+
+  /// 是否只读
+  final bool readOnly;
+
+  /// 键盘类型
+  final TextInputType? keyboardType;
+
+  const AppTextArea({
+    super.key,
+    this.controller,
+    this.hint,
+    this.maxLines = 10,
+    this.minLines = 8,
+    this.maxLength,
+    this.onChanged,
+    this.padding,
+    this.showBorder = false,
+    this.borderRadius,
+    this.readOnly = false,
+    this.keyboardType,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      onChanged: onChanged,
+      maxLines: maxLines,
+      minLines: minLines,
+      maxLength: maxLength,
+      readOnly: readOnly,
+      keyboardType: keyboardType ?? TextInputType.multiline,
+      style: TextStyle(fontSize: 28.sp, color: AppColors.textMain(context)),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(
+          fontSize: 28.sp,
+          color: AppColors.textGray(context),
+        ),
+        border: showBorder
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular((borderRadius ?? 12).w),
+                borderSide: BorderSide(color: AppColors.divider(context)),
+              )
+            : InputBorder.none,
+        enabledBorder: showBorder
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular((borderRadius ?? 12).w),
+                borderSide: BorderSide(color: AppColors.divider(context)),
+              )
+            : InputBorder.none,
+        focusedBorder: showBorder
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular((borderRadius ?? 12).w),
+                borderSide: BorderSide(color: AppColors.primary(context)),
+              )
+            : InputBorder.none,
+        contentPadding: padding ?? EdgeInsets.all(24.w),
+        counterStyle: TextStyle(
+          fontSize: 24.sp,
+          color: AppColors.textGray(context),
+        ),
       ),
     );
   }
