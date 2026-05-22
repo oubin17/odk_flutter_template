@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:odk_flutter_template/core/storage/storage_manager.dart';
+import 'package:odk_flutter_template/core/cache/app_cache_manager.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
 import 'package:odk_flutter_template/providers/theme/theme_provider.dart';
@@ -8,8 +8,31 @@ import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:provider/provider.dart';
 
-class CommonSettingPage extends StatelessWidget {
+class CommonSettingPage extends StatefulWidget {
   const CommonSettingPage({super.key});
+
+  @override
+  State<CommonSettingPage> createState() => _CommonSettingPageState();
+}
+
+class _CommonSettingPageState extends State<CommonSettingPage> {
+  String _cacheSize = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCacheSize();
+  }
+
+  /// 加载缓存大小
+  Future<void> _loadCacheSize() async {
+    final size = await AppCacheManager.getCacheSizeFormatted();
+    if (mounted) {
+      setState(() {
+        _cacheSize = size;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +107,9 @@ class CommonSettingPage extends StatelessWidget {
               color: AppColors.textSecond(context),
             ),
             title: L10nUtils.clearCache,
-            desc: _getCacheSize(),
+            desc: _cacheSize.isNotEmpty
+                ? '${L10nUtils.cacheSize}: $_cacheSize'
+                : '${L10nUtils.cacheSize}: --',
             showArrow: false,
             onTap: () => _clearCache(context),
           ),
@@ -94,18 +119,6 @@ class CommonSettingPage extends StatelessWidget {
     );
   }
 
-  /// 获取缓存大小（简化版，实际项目中可计算临时目录大小）
-  String _getCacheSize() {
-    // TODO: 实际项目中可以通过遍历临时目录计算缓存大小
-    // 这里提供一个简化实现
-    try {
-      // 简化：返回一个占位文本，实际应计算
-      return '${L10nUtils.cacheSize}: --';
-    } catch (e) {
-      return '';
-    }
-  }
-
   /// 清理缓存
   void _clearCache(BuildContext context) {
     AppToast.showAppConfirmDialog(
@@ -113,12 +126,10 @@ class CommonSettingPage extends StatelessWidget {
       msg: L10nUtils.clearCacheConfirm,
       onConfirm: () async {
         try {
-          // 清理 SharedPreferences 中的非关键数据
-          // 注意：不清除 token、用户信息等关键数据
-          await StorageManager().remove('cache_data');
-          // TODO: 清理图片缓存（cached_network_image）
-          // TODO: 清理 WebView 缓存
-          // TODO: 清理临时目录文件
+          // 清理图片缓存（CachedNetworkImage）+ 临时目录
+          await AppCacheManager.clearCache();
+          // 刷新缓存大小显示
+          await _loadCacheSize();
           AppToast.showNotify(L10nUtils.clearCacheSuccess, null);
         } catch (e) {
           AppToast.showToast(L10nUtils.operationFailed);

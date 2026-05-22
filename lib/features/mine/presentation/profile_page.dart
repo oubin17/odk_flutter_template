@@ -55,10 +55,10 @@ class ProfilePage extends StatelessWidget {
             child: Selector<UserProvider, String?>(
               selector: (_, provider) =>
                   provider.userEntity?.userProfile.avatarUrl,
-              builder: (_, avatarUrl, __) {
+              builder: (_, avatarUrl, _) {
                 return AppAvatar(
                   imgUrl: avatarUrl,
-                  assetPath: Assets.images.profile.admin.path,
+                  assetPath: Assets.images.launcherIcon.launcher.path,
                   size: 300.w,
                 );
               },
