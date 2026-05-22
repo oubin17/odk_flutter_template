@@ -44,15 +44,15 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
               final currentMode = themeProvider.isDarkMode
-                  ? L10nUtils.of(context).darkMode
-                  : L10nUtils.of(context).lightMode;
+                  ? L10nUtils.darkMode
+                  : L10nUtils.lightMode;
               return AppListItem(
                 left: AppIcon(
                   themeProvider.isDarkMode
                       ? Icons.dark_mode_outlined
                       : Icons.light_mode_outlined,
                 ),
-                title: L10nUtils.of(context).themeMode,
+                title: L10nUtils.themeMode,
                 desc: currentMode,
                 showArrow: false,
                 onTap: () {
@@ -91,10 +91,10 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
           // 缓存清理
           AppListItem(
             left: const AppIcon(Icons.cleaning_services_outlined),
-            title: L10nUtils.of(context).clearCache,
+            title: L10nUtils.clearCache,
             desc: _cacheSize.isNotEmpty
-                ? '${L10nUtils.of(context).cacheSize}: $_cacheSize'
-                : '${L10nUtils.of(context).cacheSize}: --',
+                ? '${L10nUtils.cacheSize}: $_cacheSize'
+                : '${L10nUtils.cacheSize}: --',
             showArrow: false,
             onTap: () => _clearCache(context),
           ),

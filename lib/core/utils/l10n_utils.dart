@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:odk_flutter_template/l10n/app_localizations.dart';
-import 'package:odk_flutter_template/routes/app_router.dart';
 
 /// 国际化静态工具类（🔥 全局静态调用，无需context）
 class L10nUtils {

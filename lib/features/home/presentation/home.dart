@@ -3,7 +3,6 @@ import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/content/presentation/content_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/first_index.dart';
 import 'package:odk_flutter_template/features/mine/presentation/profile_page.dart';
-import 'package:odk_flutter_template/widgets/app_page/app_bottom_nav_bar.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_floating_nav_bar.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 
