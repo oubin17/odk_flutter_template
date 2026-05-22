@@ -50,66 +50,121 @@ class AppToast {
   }
 
   /// 通用确认弹窗（确认按钮使用 AppDebounceWrapper 防抖）
+  ///
+  /// [title] 标题文字
+  /// [msg] 描述文字（可选）
+  /// [confirmText] 确认按钮文字，默认"确认"
+  /// [cancelText] 取消按钮文字，默认"取消"
+  /// [onConfirm] 确认回调
+  /// [isDanger] 是否为危险操作（如退出登录），确认按钮变红
+  /// [icon] 标题上方图标（可选，如 Icons.logout）
   static void showAppConfirmDialog({
     required String title,
     String? msg,
     String? confirmText,
     String? cancelText,
     VoidCallback? onConfirm,
+    bool isDanger = false,
+    IconData? icon,
   }) {
     SmartDialog.show(
       clickMaskDismiss: false,
-      // 原生圆角弹窗容器
       builder: (context) => Dialog(
-        // 主题适配：弹窗背景色
-        backgroundColor: AppColors.bgPage(context),
-        // 圆角
+        backgroundColor: AppColors.card(context),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(24.r),
         ),
-        // 阴影
-        elevation: 4,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // 标题
-              AppText.title(title, color: AppColors.textMain(context)),
-              AppGap.hNormal,
-              if (msg != null && msg.isNotEmpty) ...[
-                AppText.second(msg, color: AppColors.textSecond(context)),
-                AppGap.hSmall,
-              ],
-
-              // 按钮行
-              Row(
+        elevation: 8,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // ── 内容区域 ──
+            Padding(
+              padding: EdgeInsets.fromLTRB(40.w, 40.h, 40.w, 32.h),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  // 取消按钮
-                  Expanded(
-                    child: AppTextButton(
-                      text: cancelText ?? L10nUtils.cancel,
-                      onTap: () => SmartDialog.dismiss(),
-                    ),
-                  ),
-                  AppGap.wXL,
-                  // 确认按钮：使用 AppDebounceWrapper 防抖
-                  Expanded(
-                    child: AppDebounceWrapper(
-                      onTap: () async {
-                        SmartDialog.dismiss();
-                        onConfirm?.call();
-                      },
-                      child: AppTextButton(
-                        text: confirmText ?? L10nUtils.confirm,
-                        onTap: null, // 点击由 AppDebounceWrapper 接管
+                  // 图标（可选）
+                  if (icon != null) ...[
+                    Container(
+                      width: 80.w,
+                      height: 80.w,
+                      decoration: BoxDecoration(
+                        color: isDanger
+                            ? AppColors.errorLight
+                            : AppColors.primary50(context),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        icon,
+                        size: 40.w,
+                        color: isDanger
+                            ? AppColors.error
+                            : AppColors.primary(context),
                       ),
                     ),
-                  ),
+                    AppGap.hNormal,
+                  ],
+                  // 标题
+                  AppText.title(title, color: AppColors.textMain(context)),
+                  // 描述文字
+                  if (msg != null && msg.isNotEmpty) ...[
+                    AppGap.hSmall,
+                    AppText(
+                      msg,
+                      color: AppColors.textSecond(context),
+                      size: 26.sp,
+                      align: TextAlign.center,
+                    ),
+                  ],
                 ],
               ),
-            ],
-          ),
+            ),
+
+            // ── 分割线 ──
+            Divider(
+              height: 1.h,
+              thickness: 1.h,
+              color: AppColors.divider(context),
+            ),
+
+            // ── 按钮区域 ──
+            Row(
+              children: [
+                // 取消按钮
+                Expanded(
+                  child: AppDialogButton(
+                    text: cancelText ?? L10nUtils.cancel,
+                    textColor: AppColors.textSecond(context),
+                    onTap: () => SmartDialog.dismiss(),
+                  ),
+                ),
+                // 竖向分割线
+                SizedBox(
+                  width: 1.w,
+                  height: 80.h,
+                  child: ColoredBox(color: AppColors.divider(context)),
+                ),
+                // 确认按钮（防抖）
+                Expanded(
+                  child: AppDebounceWrapper(
+                    onTap: () async {
+                      SmartDialog.dismiss();
+                      onConfirm?.call();
+                    },
+                    child: AppDialogButton(
+                      text: confirmText ?? L10nUtils.confirm,
+                      textColor: isDanger
+                          ? AppColors.error
+                          : AppColors.primary(context),
+                      isBold: true,
+                      onTap: null, // 由 AppDebounceWrapper 接管
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

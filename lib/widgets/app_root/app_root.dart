@@ -78,12 +78,8 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
             // 🔥 5.x 保留这个初始化即可
             builder: (context, child) {
               // 初始化弹窗
-              final smartDialogWidget = FlutterSmartDialog.init()(
-                context,
-                child,
-              );
               L10nUtils.init(context);
-              return smartDialogWidget;
+              return FlutterSmartDialog.init()(context, child);
             },
             // 绑定主题
             theme: AppTheme.lightTheme,

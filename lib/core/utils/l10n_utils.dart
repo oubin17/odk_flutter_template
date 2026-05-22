@@ -10,6 +10,18 @@ class L10nUtils {
     _localizations = AppLocalizations.of(context);
   }
 
+  /// 内部统一获取根上下文本地化实例
+  // static AppLocalizations get _loc {
+  //   final rootContext = AppRouter.routerKey.currentContext;
+  //   assert(rootContext != null, "应用根上下文未就绪");
+  //   return AppLocalizations.of(rootContext!)!;
+  // }
+
+  // // 统一入口，实时获取当前上下文语种
+  // static AppLocalizations of(BuildContext context) {
+  //   return AppLocalizations.of(context)!;
+  // }
+
   // ======================== 通用 ========================
   static String get confirm => _localizations!.confirm;
   static String get cancel => _localizations!.cancel;
@@ -46,6 +58,7 @@ class L10nUtils {
   static String get deviceInfo => _localizations!.deviceInfo;
   static String get versionInfo => _localizations!.versionInfo;
   static String get logout => _localizations!.logout;
+  static String get logoutConfirmMsg => _localizations!.logoutConfirmMsg;
 
   // ======================== 个人页 ========================
   static String get profile => _localizations!.profile;

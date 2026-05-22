@@ -10,7 +10,6 @@ import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
-import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 /// 首次启动隐私政策弹窗
 ///
@@ -65,7 +64,7 @@ class PrivacyPolicyDialog {
       barrierDismissible: false,
       // 禁止返回键关闭弹窗
       builder: (context) =>
-          PopScope(canPop: false, child: const _PrivacyPolicyDialogContent()),
+          const PopScope(canPop: false, child: _PrivacyPolicyDialogContent()),
     );
   }
 }
@@ -81,59 +80,73 @@ class _PrivacyPolicyDialogContent extends StatefulWidget {
 
 class _PrivacyPolicyDialogContentState
     extends State<_PrivacyPolicyDialogContent> {
+  /// 是否进入二次确认状态（点击"不同意"后切换）
+  bool _showExitConfirm = false;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: AppColors.card(context),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 48.h),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // 标题
-            AppText(
-              L10nUtils.privacyPolicyDialogTitle,
-              size: 36.sp,
-              weight: FontWeight.w600,
-              align: TextAlign.center,
+      elevation: 8,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // ── 内容区域 ──
+          Padding(
+            padding: EdgeInsets.fromLTRB(40.w, 40.h, 40.w, 32.h),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // 标题
+                AppText(
+                  _showExitConfirm
+                      ? L10nUtils.privacyPolicyExitConfirm
+                      : L10nUtils.privacyPolicyDialogTitle,
+                  size: 32.sp,
+                  weight: FontWeight.w600,
+                  align: TextAlign.center,
+                ),
+                AppGap.h(20),
+
+                // 内容
+                if (_showExitConfirm)
+                  _buildExitConfirmContent(context)
+                else
+                  _buildContentWithLinks(context),
+              ],
             ),
-            AppGap.h(32),
+          ),
 
-            // 内容（含可点击的协议链接）
-            _buildContentWithLinks(context),
-            AppGap.h(48),
+          // ── 分割线 ──
+          Divider(
+            height: 1.h,
+            thickness: 1.h,
+            color: AppColors.divider(context),
+          ),
 
-            // 同意按钮
-            AppButton(text: L10nUtils.privacyPolicyAgree, onTap: _onAgree),
-            AppGap.h(20),
-
-            // 不同意按钮
-            AppOutlinedButton(
-              text: L10nUtils.privacyPolicyDisagree,
-              onTap: _onDisagree,
-              sideColor: AppColors.textGray(context),
-              textColor: AppColors.textGray(context),
-              height: 88.h,
-            ),
-          ],
-        ),
+          // ── 按钮区域 ──
+          if (_showExitConfirm)
+            _buildExitConfirmButtons(context)
+          else
+            _buildAgreeButtons(context),
+        ],
       ),
     );
   }
 
-  /// 构建带可点击链接的内容文本
+  /// 构建隐私政策内容（含可点击的协议链接）
   Widget _buildContentWithLinks(BuildContext context) {
     final userAgreementText = L10nUtils.userAgreement;
     final privacyPolicyText = L10nUtils.privacyPolicy;
 
-    // 使用 RichText + TextSpan 实现可点击的协议链接
     return RichText(
       textAlign: TextAlign.start,
       text: TextSpan(
         style: TextStyle(
-          fontSize: 28.sp,
+          fontSize: 26.sp,
           color: AppColors.textSecond(context),
-          height: 1.8,
+          height: 1.6,
         ),
         children: _buildTextSpans(
           context,
@@ -141,6 +154,78 @@ class _PrivacyPolicyDialogContentState
           privacyPolicyText,
         ),
       ),
+    );
+  }
+
+  /// 构建退出确认提示内容
+  Widget _buildExitConfirmContent(BuildContext context) {
+    return AppText(
+      L10nUtils.privacyPolicyExitMessage,
+      size: 26.sp,
+      color: AppColors.textSecond(context),
+      align: TextAlign.center,
+    );
+  }
+
+  /// 构建同意/不同意按钮（一行展示，iOS 风格）
+  Widget _buildAgreeButtons(BuildContext context) {
+    return Row(
+      children: [
+        // 不同意按钮
+        Expanded(
+          child: AppDialogButton(
+            text: L10nUtils.privacyPolicyDisagree,
+            textColor: AppColors.textGray(context),
+            onTap: _onDisagree,
+          ),
+        ),
+        // 竖向分割线
+        SizedBox(
+          width: 1.w,
+          height: 80.h,
+          child: ColoredBox(color: AppColors.divider(context)),
+        ),
+        // 同意按钮
+        Expanded(
+          child: AppDialogButton(
+            text: L10nUtils.privacyPolicyAgree,
+            textColor: AppColors.primary(context),
+            isBold: true,
+            onTap: _onAgree,
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// 构建退出确认按钮（确认退出 + 再想想，iOS 风格）
+  Widget _buildExitConfirmButtons(BuildContext context) {
+    return Row(
+      children: [
+        // 再想想（取消）
+        Expanded(
+          child: AppDialogButton(
+            text: L10nUtils.cancel,
+            textColor: AppColors.textSecond(context),
+            onTap: _onCancelExit,
+          ),
+        ),
+        // 竖向分割线
+        SizedBox(
+          width: 1.w,
+          height: 80.h,
+          child: ColoredBox(color: AppColors.divider(context)),
+        ),
+        // 确认退出（危险操作，红色）
+        Expanded(
+          child: AppDialogButton(
+            text: L10nUtils.privacyPolicyExitConfirm,
+            textColor: AppColors.error,
+            isBold: true,
+            onTap: _onConfirmExit,
+          ),
+        ),
+      ],
     );
   }
 
@@ -220,18 +305,22 @@ class _PrivacyPolicyDialogContentState
     }
   }
 
-  /// 不同意隐私政策
+  /// 不同意隐私政策 → 切换到二次确认状态
   void _onDisagree() {
-    // 先提示用户
-    AppToast.showAppConfirmDialog(
-      title: L10nUtils.privacyPolicyExitConfirm,
-      msg: L10nUtils.privacyPolicyExitMessage,
-      confirmText: L10nUtils.privacyPolicyExitConfirm,
-      cancelText: L10nUtils.cancel,
-      onConfirm: () {
-        // 用户确认退出应用
-        exit(0);
-      },
-    );
+    setState(() {
+      _showExitConfirm = true;
+    });
+  }
+
+  /// 取消退出 → 切换回隐私政策内容
+  void _onCancelExit() {
+    setState(() {
+      _showExitConfirm = false;
+    });
+  }
+
+  /// 确认退出应用
+  void _onConfirmExit() {
+    exit(0);
   }
 }

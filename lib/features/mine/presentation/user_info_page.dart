@@ -22,7 +22,7 @@ class UserInfoPage extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20.0),
         child: AppAvatar(
           imgUrl: user?.userProfile.avatarUrl,
-          assetPath: Assets.images.profile.admin.path,
+          assetPath: Assets.images.launcherIcon.launcher.path,
           size: 80.w,
         ),
       ),

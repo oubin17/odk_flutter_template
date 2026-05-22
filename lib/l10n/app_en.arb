@@ -129,6 +129,10 @@
   "@logout": {
     "description": "登出"
   },
+  "logoutConfirmMsg": "You will need to log in again after signing out. Are you sure?",
+  "@logoutConfirmMsg": {
+    "description": "退出登录确认提示"
+  },
 
   "profile": "Profile",
   "@profile": {

@@ -82,6 +82,8 @@ class SystemSettingPage extends StatelessWidget {
       onTap: () {
         AppToast.showAppConfirmDialog(
           title: L10nUtils.logout,
+          msg: L10nUtils.logoutConfirmMsg,
+          isDanger: true,
           onConfirm: () async {
             await AuthService().logout();
             NavigatorUtils.goNamed(RouteNames.signin);

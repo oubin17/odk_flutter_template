@@ -102,6 +102,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get logout => '登出';
 
   @override
+  String get logoutConfirmMsg => '退出后需要重新登录，确认退出吗？';
+
+  @override
   String get profile => '用户画像';
 
   @override

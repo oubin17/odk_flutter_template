@@ -284,6 +284,12 @@ abstract class AppLocalizations {
   /// **'Log Out'**
   String get logout;
 
+  /// 退出登录确认提示
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to log in again after signing out. Are you sure?'**
+  String get logoutConfirmMsg;
+
   /// 用户画像
   ///
   /// In en, this message translates to:

@@ -191,9 +191,9 @@ class AppRouter {
         name: RouteNames.agreement,
         builder: (context, state) {
           // 接收路由传递的标题和链接
-          final title = state.uri.queryParameters['title'] ?? '协议';
+          // final title = state.uri.queryParameters['title'] ?? '协议';
           final url = state.uri.queryParameters['url'] ?? '';
-          return AgreementPage(title: title, url: url);
+          return AgreementPage(title: "", url: url);
         },
       ),
       GoRoute(

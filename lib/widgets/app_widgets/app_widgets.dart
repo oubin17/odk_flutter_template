@@ -1202,6 +1202,57 @@ class AppTextArea extends StatelessWidget {
   }
 }
 
+/// 弹窗专用文字按钮（iOS Alert 风格）
+///
+/// 用于确认弹窗、隐私政策弹窗等场景的底部操作按钮。
+/// 左右排列 + 竖向分割线分隔，确认按钮加粗，取消按钮次要色。
+///
+/// 示例：
+/// ```dart
+/// Row(
+///   children: [
+///     Expanded(child: AppDialogButton(text: '取消', textColor: Colors.grey, onTap: () {})),
+///     SizedBox(width: 1.w, height: 80.h, child: ColoredBox(color: Colors.grey)),
+///     Expanded(child: AppDialogButton(text: '确认', textColor: Colors.blue, isBold: true, onTap: () {})),
+///   ],
+/// )
+/// ```
+class AppDialogButton extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final bool isBold;
+  final VoidCallback? onTap;
+
+  const AppDialogButton({
+    super.key,
+    required this.text,
+    required this.textColor,
+    this.isBold = false,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        height: 80.h,
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 30.sp,
+            color: textColor,
+            fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
+            height: 1.2,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// 通用分割线组件（支持自定义颜色和左右边距）
 ///
 /// 示例：

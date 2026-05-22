@@ -102,6 +102,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Log Out';
 
   @override
+  String get logoutConfirmMsg =>
+      'You will need to log in again after signing out. Are you sure?';
+
+  @override
   String get profile => 'Profile';
 
   @override

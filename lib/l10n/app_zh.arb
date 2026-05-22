@@ -35,6 +35,7 @@
   "deviceInfo": "设备信息",
   "versionInfo": "版本信息",
   "logout": "登出",
+  "logoutConfirmMsg": "退出后需要重新登录，确认退出吗？",
 
   "profile": "用户画像",
   "avatar": "头像",

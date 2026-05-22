@@ -61,7 +61,7 @@ class AgreementPage extends StatefulWidget {
     this.jsChannelName = 'AppBridge',
     this.onJsMessage,
     this.syncCookie = true,
-    this.dynamicTitle = true,
+    this.dynamicTitle = false,
   });
 
   @override
@@ -130,7 +130,7 @@ class _AgreementPageState extends State<AgreementPage> {
               _loadingProgress = 1.0;
             });
 
-            // 动态更新标题：获取网页标题
+            //动态更新标题：获取网页标题
             if (widget.dynamicTitle) {
               _updateWebTitle();
             }
