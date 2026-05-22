@@ -127,20 +127,24 @@ class _DeleteAccountPageState extends State<DeleteAccountPage>
       width: double.infinity,
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
+        color: AppColors.errorLight,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: Colors.red.shade200),
+        border: Border.all(color: AppColors.errorBorder),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.warning_amber_rounded, color: Colors.red, size: 40.w),
+          AppIcon(
+            Icons.warning_amber_rounded,
+            color: AppColors.error,
+            size: 40.w,
+          ),
           SizedBox(width: 16.w),
           Expanded(
             child: AppText(
               L10nUtils.deleteAccountWarning,
               size: 26.sp,
-              color: Colors.red.shade700,
+              color: AppColors.errorDark,
             ),
           ),
         ],

@@ -230,7 +230,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 36.w, color: AppColors.primary(context)),
+            AppIcon(icon, size: 36.w, color: AppColors.primary(context)),
             AppGap.wNormal,
             AppText.body(text),
           ],
@@ -376,7 +376,11 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
           children: [
             AppText(title, size: 28.sp, color: AppColors.textMain(context)),
             if (isSelected)
-              Icon(Icons.check, color: AppColors.primary(context), size: 32.sp),
+              AppIcon(
+                Icons.check,
+                color: AppColors.primary(context),
+                size: 32.sp,
+              ),
           ],
         ),
       ),
@@ -393,7 +397,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         readOnly: true,
         onTap: _showBottomDatePicker,
         hint: L10nUtils.birthday,
-        suffixIcon: const Icon(Icons.calendar_today),
+        suffixIcon: const AppIcon(Icons.calendar_today),
         hideUnderline: true,
       ),
     );
@@ -427,7 +431,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
                         width: 3.w,
                       ),
                     ),
-                    child: Icon(
+                    child: AppIcon(
                       Icons.camera_alt,
                       size: 28.w,
                       color: Colors.white,
@@ -521,11 +525,11 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 36.w, color: AppColors.primary(context)),
+            AppIcon(icon, size: 36.w, color: AppColors.primary(context)),
             AppGap.wNormal,
             AppText.body(text),
             const Spacer(),
-            Icon(
+            AppIcon(
               Icons.arrow_forward_ios,
               size: 24.w,
               color: AppColors.textGray(context),

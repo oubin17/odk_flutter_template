@@ -261,7 +261,7 @@ class _VersionInfoPageState extends State<VersionInfoPage>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.check_circle, size: 28.w, color: AppColors.success),
+          AppIcon(Icons.check_circle, size: 28.w, color: AppColors.success),
           AppGap.wSmall,
           AppText.tip(L10nUtils.alreadyLatestVersion, color: AppColors.success),
         ],

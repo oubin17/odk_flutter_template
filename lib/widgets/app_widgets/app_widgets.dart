@@ -61,6 +61,9 @@ class AppColors {
   // 状态色
   static const Color success = Color(0xFF00B42A);
   static const Color error = Color(0xFFF53F3F);
+  static const Color errorLight = Color(0xFFFDE8E8); // 错误色-浅背景（类似 red.shade50）
+  static const Color errorBorder = Color(0xFFFBC2C2); // 错误色-边框（类似 red.shade200）
+  static const Color errorDark = Color(0xFFCB2634); // 错误色-深文字（类似 red.shade700）
   static const Color warning = Color(0xFFFF7D00);
 
   //其他特殊颜色，不跟随系统
@@ -286,6 +289,26 @@ class AppButton extends StatelessWidget {
           weight: FontWeight.w500,
         ),
       ),
+    );
+  }
+}
+
+/// 统一图标组件（纯展示，适配主题+暗黑模式）
+/// 用于列表项左侧图标、状态图标等纯展示场景
+/// 如需可点击的图标按钮，请使用 [AppIconButton]
+class AppIcon extends StatelessWidget {
+  final IconData icon;
+  final Color? color;
+  final double? size;
+
+  const AppIcon(this.icon, {super.key, this.color, this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      icon,
+      size: size ?? 28.w,
+      color: color ?? AppColors.textSecond(context),
     );
   }
 }

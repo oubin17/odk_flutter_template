@@ -47,15 +47,11 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
                   ? L10nUtils.darkMode
                   : L10nUtils.lightMode;
               return AppListItem(
-                left: themeProvider.isDarkMode
-                    ? Icon(
-                        Icons.dark_mode_outlined,
-                        color: AppColors.textSecond(context),
-                      )
-                    : Icon(
-                        Icons.light_mode_outlined,
-                        color: AppColors.textSecond(context),
-                      ),
+                left: AppIcon(
+                  themeProvider.isDarkMode
+                      ? Icons.dark_mode_outlined
+                      : Icons.light_mode_outlined,
+                ),
                 title: L10nUtils.themeMode,
                 desc: currentMode,
                 showArrow: false,
@@ -74,15 +70,7 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
           Consumer<LocaleProvider>(
             builder: (context, localProvider, child) {
               return AppListItem(
-                left: localProvider.isEnglish
-                    ? Icon(
-                        Icons.language_outlined,
-                        color: AppColors.textSecond(context),
-                      )
-                    : Icon(
-                        Icons.language_outlined,
-                        color: AppColors.textSecond(context),
-                      ),
+                left: const AppIcon(Icons.language_outlined),
                 title: L10nUtils.switchLanguage,
                 desc: L10nUtils.language,
                 showArrow: false,
@@ -102,10 +90,7 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
 
           // 缓存清理
           AppListItem(
-            left: Icon(
-              Icons.cleaning_services_outlined,
-              color: AppColors.textSecond(context),
-            ),
+            left: const AppIcon(Icons.cleaning_services_outlined),
             title: L10nUtils.clearCache,
             desc: _cacheSize.isNotEmpty
                 ? '${L10nUtils.cacheSize}: $_cacheSize'
