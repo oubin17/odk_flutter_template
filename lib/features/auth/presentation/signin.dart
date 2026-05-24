@@ -54,8 +54,7 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
       vm.verifyCode = verifyCodeController.text;
     }
 
-    // Loading 由 ViewModel 内部管理（AppToast.showLoading/dismiss）
-    // 防重复点击由 AppDebounceButton 自动处理，无需手动判断 isLoading
+    // 按钮自带 loading 效果（AppDebounceButton），无需额外 Loading Toast
     final response = await vm.login();
 
     if (!mounted) return;
@@ -76,6 +75,7 @@ class _SignInPageState extends State<SignInPage> with AuthMixin {
     return AppInput(
       controller: _passwordController,
       label: L10nUtils.password,
+      obscure: true,
       prefixIcon: Icon(
         Icons.password,
         size: 32.w,

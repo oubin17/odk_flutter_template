@@ -219,6 +219,87 @@ class AppLocalizationsZh extends AppLocalizations {
   String get registerFailed => '注册失败';
 
   @override
+  String get errorCode000 => '成功';
+
+  @override
+  String get errorCode001 => '请求参数非法';
+
+  @override
+  String get errorCode002 => '请求过于频繁，请稍后重试';
+
+  @override
+  String get errorCode003 => '租户非法';
+
+  @override
+  String get errorCode004 => '租户为空';
+
+  @override
+  String get errorCode005 => '租户不匹配';
+
+  @override
+  String get errorCode010 => '用户已经存在';
+
+  @override
+  String get errorCode011 => '登录ID重复';
+
+  @override
+  String get errorCode012 => '用户不存在';
+
+  @override
+  String get errorCode013 => '密码不匹配';
+
+  @override
+  String get errorCode014 => '用户状态异常';
+
+  @override
+  String get errorCode015 => '用户未登录';
+
+  @override
+  String get errorCode016 => '新旧密码一致';
+
+  @override
+  String get errorCode017 => '密码已经存在';
+
+  @override
+  String get errorCode020 => 'Token过期，请重新登录';
+
+  @override
+  String get errorCode021 => 'Token缺失，请重新登录';
+
+  @override
+  String get errorCode022 => 'Token不匹配，请重新登录';
+
+  @override
+  String get errorCode030 => '暂无权限';
+
+  @override
+  String get errorCode040 => '验证码不匹配';
+
+  @override
+  String get errorCode041 => '验证码已过期';
+
+  @override
+  String get errorCode042 => '验证码已存在';
+
+  @override
+  String get errorCode043 => '验证码已超过最大验证次数';
+
+  @override
+  String get errorCode044 => '验证码已超过最大发送次数';
+
+  @override
+  String get errorCode045 => '验证码唯一键错误';
+
+  @override
+  String get errorCode046 => '验证码不存在';
+
+  @override
+  String get errorCodeN100 => '未知系统异常';
+
+  @override
+  String get errorCodeN110 => '签名错误';
+
+  @override
   String get paramValidationError => '参数校验失败，请检查输入';
 
   @override

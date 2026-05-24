@@ -1,6 +1,7 @@
 import 'package:odk_flutter_template/core/crash/bugly_service.dart';
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/utils/encrypt_utils.dart';
+import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/auth/api/auth_api.dart';
 import 'package:odk_flutter_template/features/auth/models/auth/user_regist_request.dart';
 import 'package:odk_flutter_template/features/auth/models/auth/user_login_request.dart';
@@ -34,20 +35,40 @@ class AuthService {
   }
 
   /// 登录
-  Future<UserLoginResponse?> login(UserLoginRequest request) async {
-    //
+  ///
+  /// 返回 `({UserLoginResponse? user, String? errorMessage})`：
+  /// - 登录成功：user 不为 null，errorMessage 为 null
+  /// - 失败（业务/网络）：user 为 null，errorMessage 为错误信息
+  ///   - 业务失败：errorMessage 为服务端返回的 errorContext
+  ///   - 网络异常：errorMessage 为通用网络错误提示（拦截器已弹 Toast）
+  Future<({UserLoginResponse? user, String? errorMessage})> login(
+    UserLoginRequest request,
+  ) async {
     if (request.identifyValue != null) {
       request.identifyValue = await EncryptUtils.encrypt(
         request.identifyValue!,
       );
     }
-    // 拦截器已经统一处理了所有异常
-    UserLoginResponse? response = await AuthApi().login(request);
 
-    if (response != null) {
-      await _doAfterLogin(response);
+    final response = await AuthApi().login(request);
+
+    if (!response.success) {
+      return (
+        user: null,
+        // ✅ 优先根据 errorCode 映射国际化文本，降级到 errorContext，最终降级到 loginFailed
+        errorMessage: response.localizedErrorMessage(L10nUtils.loginFailed),
+      );
     }
-    return response;
+
+    if (response.data == null) {
+      return (user: null, errorMessage: L10nUtils.loginFailed);
+    }
+
+    final userLoginResponse = UserLoginResponse.fromJson(
+      response.data as Map<String, dynamic>,
+    );
+    await _doAfterLogin(userLoginResponse);
+    return (user: userLoginResponse, errorMessage: null);
   }
 
   Future<void> _doAfterLogin(UserLoginResponse response) async {

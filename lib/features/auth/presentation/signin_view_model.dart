@@ -4,7 +4,6 @@ import 'package:odk_flutter_template/features/auth/models/auth/user_login_reques
 import 'package:odk_flutter_template/features/auth/models/auth/userlogin_response.dart';
 import 'package:odk_flutter_template/features/auth/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
-import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 /// 登录页 ViewModel — 业务逻辑与 UI 分离
 ///
@@ -48,10 +47,6 @@ class SignInViewModel extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  /// 登录结果
-  UserLoginResponse? _loginResult;
-  UserLoginResponse? get loginResult => _loginResult;
-
   SignInViewModel({AuthService? authService})
     : _authService = authService ?? AuthService();
 
@@ -75,52 +70,36 @@ class SignInViewModel extends ChangeNotifier {
 
   /// 执行登录
   ///
-  /// 返回 [UserLoginResponse?]，UI 层根据结果决定后续操作（Toast、导航等）
+  /// 返回 [UserLoginResponse?]，UI 层负责错误提示
+  /// 网络异常由拦截器统一处理（Toast + resolve），不会抛出异常
   Future<UserLoginResponse?> login() async {
     _errorMessage = null;
-    _loginResult = null;
 
-    AppToast.showLoading();
+    ({UserLoginResponse? user, String? errorMessage}) result;
 
-    try {
-      UserLoginResponse? response;
-
-      if (isPasswordLogin) {
-        // 密码登录
-        response = await _authService.login(
-          UserLoginRequest(
-            loginId: account,
-            identifyType: "1",
-            identifyValue: password,
-          ),
-        );
-      } else {
-        // 验证码登录：提交时构建 VerificationCode
-        final verificationCode = VerificationCode(
-          verifyCode,
-          verifyCodeUniqueId,
-        );
-        response = await _authService.login(
-          UserLoginRequest(
-            loginId: account,
-            identifyType: "2",
-            verificationCode: verificationCode,
-          ),
-        );
-      }
-
-      _loginResult = response;
-      if (response == null) {
-        _errorMessage = L10nUtils.loginFailed;
-      }
-
-      return response;
-    } catch (e) {
-      _errorMessage = L10nUtils.loginFailed;
-      _loginResult = null;
-      return null;
-    } finally {
-      AppToast.dismiss();
+    if (isPasswordLogin) {
+      // 密码登录
+      result = await _authService.login(
+        UserLoginRequest(
+          loginId: account,
+          identifyType: "1",
+          identifyValue: password,
+        ),
+      );
+    } else {
+      // 验证码登录：提交时构建 VerificationCode
+      final verificationCode = VerificationCode(verifyCode, verifyCodeUniqueId);
+      result = await _authService.login(
+        UserLoginRequest(
+          loginId: account,
+          identifyType: "2",
+          verificationCode: verificationCode,
+        ),
+      );
     }
+
+    _errorMessage = result.errorMessage;
+
+    return result.user;
   }
 }

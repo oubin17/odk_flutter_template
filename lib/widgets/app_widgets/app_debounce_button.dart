@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
+import 'package:odk_flutter_template/widgets/mixins/mounted_safe_mixin.dart';
 
 /// 防重复点击按钮
 ///
@@ -52,60 +52,35 @@ class AppDebounceButton extends StatefulWidget {
   State<AppDebounceButton> createState() => _AppDebounceButtonState();
 }
 
-class _AppDebounceButtonState extends State<AppDebounceButton> {
+class _AppDebounceButtonState extends State<AppDebounceButton>
+    with MountedSafeMixin {
   bool _isProcessing = false;
 
   Future<void> _handleTap() async {
     if (_isProcessing || widget.disabled) return;
 
-    setState(() => _isProcessing = true);
+    setState(() => _isProcessing = true); // 同步操作，无需安全检查
 
     try {
       await widget.onTap?.call();
     } finally {
       // 异步操作完成后恢复（确保最短防抖时长）
-      final remaining = widget.debounceDuration;
-      await Future.delayed(remaining);
-      if (mounted) {
-        setState(() => _isProcessing = false);
-      }
+      await Future.delayed(widget.debounceDuration);
+      mountedSafeSetState(
+        () => _isProcessing = false,
+      ); // await 之后，使用安全 setState
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDisabled = widget.disabled || _isProcessing;
-
-    return SizedBox(
-      width: double.infinity,
-      height: widget.height ?? 88.h,
-      child: ElevatedButton(
-        onPressed: isDisabled ? null : _handleTap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isDisabled
-              ? AppColors.textGray(context)
-              : (widget.bgColor ?? AppColors.primary(context)),
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.w),
-          ),
-        ),
-        child: _isProcessing
-            ? SizedBox(
-                width: 36.w,
-                height: 36.w,
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 3.w,
-                ),
-              )
-            : AppText(
-                widget.text,
-                color: AppColors.textWhite,
-                size: 32.sp,
-                weight: FontWeight.w500,
-              ),
-      ),
+    return AppButton(
+      text: widget.text,
+      onTap: _isProcessing || widget.disabled ? null : _handleTap,
+      disabled: widget.disabled,
+      isLoading: _isProcessing,
+      height: widget.height,
+      bgColor: widget.bgColor,
     );
   }
 }
@@ -138,21 +113,22 @@ class AppDebounceWrapper extends StatefulWidget {
   State<AppDebounceWrapper> createState() => _AppDebounceWrapperState();
 }
 
-class _AppDebounceWrapperState extends State<AppDebounceWrapper> {
+class _AppDebounceWrapperState extends State<AppDebounceWrapper>
+    with MountedSafeMixin {
   bool _isProcessing = false;
 
   Future<void> _handleTap() async {
     if (_isProcessing) return;
 
-    setState(() => _isProcessing = true);
+    setState(() => _isProcessing = true); // 同步操作，无需安全检查
 
     try {
       await widget.onTap?.call();
     } finally {
       await Future.delayed(widget.debounceDuration);
-      if (mounted) {
-        setState(() => _isProcessing = false);
-      }
+      mountedSafeSetState(
+        () => _isProcessing = false,
+      ); // await 之后，使用安全 setState
     }
   }
 

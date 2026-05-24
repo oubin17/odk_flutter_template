@@ -506,6 +506,168 @@ abstract class AppLocalizations {
   /// **'Registration failed'**
   String get registerFailed;
 
+  /// 成功
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get errorCode000;
+
+  /// 请求参数非法
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid request parameters'**
+  String get errorCode001;
+
+  /// 请求过于频繁
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests, please try again later'**
+  String get errorCode002;
+
+  /// 租户非法
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid tenant'**
+  String get errorCode003;
+
+  /// 租户为空
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant is empty'**
+  String get errorCode004;
+
+  /// 租户不匹配
+  ///
+  /// In en, this message translates to:
+  /// **'Tenant mismatch'**
+  String get errorCode005;
+
+  /// 用户已经存在
+  ///
+  /// In en, this message translates to:
+  /// **'User already exists'**
+  String get errorCode010;
+
+  /// 登录ID重复
+  ///
+  /// In en, this message translates to:
+  /// **'Login ID already exists'**
+  String get errorCode011;
+
+  /// 用户不存在
+  ///
+  /// In en, this message translates to:
+  /// **'User does not exist'**
+  String get errorCode012;
+
+  /// 密码不匹配
+  ///
+  /// In en, this message translates to:
+  /// **'Password mismatch'**
+  String get errorCode013;
+
+  /// 用户状态异常
+  ///
+  /// In en, this message translates to:
+  /// **'Abnormal user status'**
+  String get errorCode014;
+
+  /// 用户未登录
+  ///
+  /// In en, this message translates to:
+  /// **'User not logged in'**
+  String get errorCode015;
+
+  /// 新旧密码一致
+  ///
+  /// In en, this message translates to:
+  /// **'New password cannot be the same as old password'**
+  String get errorCode016;
+
+  /// 密码已经存在
+  ///
+  /// In en, this message translates to:
+  /// **'Password already exists'**
+  String get errorCode017;
+
+  /// Token过期
+  ///
+  /// In en, this message translates to:
+  /// **'Token expired, please log in again'**
+  String get errorCode020;
+
+  /// Token缺失
+  ///
+  /// In en, this message translates to:
+  /// **'Token missing, please log in again'**
+  String get errorCode021;
+
+  /// Token不匹配
+  ///
+  /// In en, this message translates to:
+  /// **'Token mismatch, please log in again'**
+  String get errorCode022;
+
+  /// 暂无权限
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied'**
+  String get errorCode030;
+
+  /// 验证码不匹配
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code mismatch'**
+  String get errorCode040;
+
+  /// 验证码已过期
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code expired'**
+  String get errorCode041;
+
+  /// 验证码已存在
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code already exists'**
+  String get errorCode042;
+
+  /// 验证码已超过最大验证次数
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum verification attempts exceeded'**
+  String get errorCode043;
+
+  /// 验证码已超过最大发送次数
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum verification code sends exceeded'**
+  String get errorCode044;
+
+  /// 验证码唯一键错误
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid verification code unique key'**
+  String get errorCode045;
+
+  /// 验证码不存在
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code does not exist'**
+  String get errorCode046;
+
+  /// 未知系统异常
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown system error'**
+  String get errorCodeN100;
+
+  /// 签名错误
+  ///
+  /// In en, this message translates to:
+  /// **'Signing error'**
+  String get errorCodeN110;
+
   /// 参数校验失败提示
   ///
   /// In en, this message translates to:

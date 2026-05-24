@@ -1,13 +1,21 @@
 import 'package:flutter/widgets.dart';
+import 'package:odk_flutter_template/core/utils/error_code_mapper.dart';
 import 'package:odk_flutter_template/l10n/app_localizations.dart';
 
 /// 国际化静态工具类（🔥 全局静态调用，无需context）
 class L10nUtils {
   static AppLocalizations? _localizations;
 
+  /// 获取 AppLocalizations 实例（供 ErrorCodeMapper 等工具类动态查找用）
+  static AppLocalizations? get localizations => _localizations;
+
   /// 初始化（在 MaterialApp builder 中调用一次）
   static void init(BuildContext context) {
     _localizations = AppLocalizations.of(context);
+    // 同步初始化 ErrorCodeMapper 的国际化缓存
+    if (_localizations != null) {
+      ErrorCodeMapper.init(_localizations!);
+    }
   }
 
   /// 强制更新缓存（在语言切换时调用）

@@ -254,6 +254,7 @@ class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback? onTap;
   final bool disabled;
+  final bool isLoading;
   final double? height;
   final Color? bgColor;
 
@@ -262,19 +263,22 @@ class AppButton extends StatelessWidget {
     required this.text,
     required this.onTap,
     this.disabled = false,
+    this.isLoading = false,
     this.height,
     this.bgColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isDisabled = disabled || isLoading;
+
     return SizedBox(
       width: double.infinity,
       height: height ?? 88.h,
       child: ElevatedButton(
-        onPressed: disabled ? null : onTap,
+        onPressed: isDisabled ? null : onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: disabled
+          backgroundColor: isDisabled
               ? AppColors.textGray(context)
               : (bgColor ?? AppColors.primary(context)),
           elevation: 0,
@@ -282,12 +286,21 @@ class AppButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.w),
           ),
         ),
-        child: AppText(
-          text,
-          color: AppColors.textWhite,
-          size: 32.sp,
-          weight: FontWeight.w500,
-        ),
+        child: isLoading
+            ? SizedBox(
+                width: 36.w,
+                height: 36.w,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 3.w,
+                ),
+              )
+            : AppText(
+                text,
+                color: AppColors.textWhite,
+                size: 32.sp,
+                weight: FontWeight.w500,
+              ),
       ),
     );
   }
@@ -424,50 +437,6 @@ class AppTextButton extends StatelessWidget {
         text,
         color: color ?? AppColors.primary(context),
         size: size ?? 26.sp,
-      ),
-    );
-  }
-}
-
-/// 加载状态按钮
-class AppLoadingButton extends StatelessWidget {
-  final String text;
-  final bool isLoading;
-  final VoidCallback? onTap;
-  final bool disabled;
-
-  const AppLoadingButton({
-    super.key,
-    required this.text,
-    required this.isLoading,
-    required this.onTap,
-    this.disabled = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 88.h,
-      child: ElevatedButton(
-        onPressed: isLoading || disabled ? null : onTap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isLoading || disabled
-              ? AppColors.textGray(context)
-              : AppColors.primary(context),
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.w),
-          ),
-        ),
-        child: isLoading
-            ? CircularProgressIndicator(color: Colors.white, strokeWidth: 2.w)
-            : AppText(
-                text,
-                color: AppColors.textWhite,
-                size: 32.sp,
-                weight: FontWeight.w500,
-              ),
       ),
     );
   }

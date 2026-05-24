@@ -41,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
       ..account = accountController.text
       ..verifyCode = verifyCodeController.text;
 
-    // Loading 由 ViewModel 内部管理（AppToast.showLoading/dismiss）
+    // 按钮自带 loading 效果（AppDebounceButton），无需额外 Loading Toast
     final response = await vm.register();
 
     if (!mounted) return;
@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
     if (response.success) {
       NavigatorUtils.goNamed(RouteNames.home);
     } else {
-      AppToast.showToast(response.errorContext ?? L10nUtils.registerFailed);
+      AppToast.showToast(vm.errorMessage ?? L10nUtils.registerFailed);
     }
   }
 

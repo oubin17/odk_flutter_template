@@ -106,20 +106,12 @@ class RequestResponseInterceptor extends InterceptorsWrapper {
     }
 
     // ====================== 关键：不执行 handler.next(err)！异常到此为止 ======================
-    // 直接把异常标记为处理完成，Dio 不会再把异常抛给 post 方法
-    final safeData = responseData is Map<String, dynamic>
-        ? responseData
-        : <String, dynamic>{};
-
+    // 网络异常：拦截器已弹 Toast，resolve 一个失败响应避免异常外抛
     handler.resolve(
       Response(
         requestOptions: err.requestOptions,
         statusCode: 999, // 自定义异常码
-        data: ServiceResponse.bizError(
-          safeData['errorType'],
-          safeData['errorCode'],
-          safeData['errorContext'],
-        ).toJson(),
+        data: ServiceResponse.commonError().toJson(),
       ),
     );
   }

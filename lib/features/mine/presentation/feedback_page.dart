@@ -96,7 +96,7 @@ class _FeedbackPageState extends State<FeedbackPage> with MountedSafeMixin {
 
   /// 提交按钮
   Widget _buildSubmitButton(BuildContext context) {
-    return AppLoadingButton(
+    return AppButton(
       text: L10nUtils.feedbackSubmit,
       isLoading: _isSubmitting,
       disabled: _isEmpty,

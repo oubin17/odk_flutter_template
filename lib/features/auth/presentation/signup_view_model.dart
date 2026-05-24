@@ -5,7 +5,6 @@ import 'package:odk_flutter_template/features/auth/models/auth/user_regist_reque
 import 'package:odk_flutter_template/features/auth/models/verify_code/verification_code.dart';
 import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
-import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 
 /// 注册页 ViewModel — 业务逻辑与 UI 分离
 ///
@@ -65,38 +64,27 @@ class SignUpViewModel extends ChangeNotifier {
 
   /// 执行注册
   ///
-  /// 返回 [ServiceResponse]，UI 层根据结果决定后续操作（Toast、导航等）
+  /// 返回 [ServiceResponse]，UI 层根据 success 和 errorMessage 处理
   Future<ServiceResponse> register() async {
     _errorMessage = null;
     _isSuccess = false;
 
-    AppToast.showLoading();
+    final verificationCode = VerificationCode(verifyCode, verifyCodeUniqueId);
 
-    try {
-      // 提交时构建 VerificationCode
-      final verificationCode = VerificationCode(verifyCode, verifyCodeUniqueId);
+    final response = await _authService.register(
+      UserRegistRequest(
+        loginId: account,
+        verificationCode: verificationCode,
+        extendInfoDTO: ExtendInfoDto(privacyVersion: _privacyVersion),
+      ),
+    );
 
-      final response = await _authService.register(
-        UserRegistRequest(
-          loginId: account,
-          verificationCode: verificationCode,
-          extendInfoDTO: ExtendInfoDto(privacyVersion: _privacyVersion),
-        ),
-      );
-
-      _isSuccess = response.success;
-      if (!response.success) {
-        _errorMessage = response.errorContext ?? L10nUtils.registerFailed;
-      }
-
-      return response;
-    } catch (e) {
-      _errorMessage = L10nUtils.registerFailed;
-      _isSuccess = false;
-      // 返回一个失败响应，保持返回类型一致
-      return ServiceResponse(success: false, errorContext: _errorMessage);
-    } finally {
-      AppToast.dismiss();
+    _isSuccess = response.success;
+    if (!response.success) {
+      // ✅ 优先根据 errorCode 映射国际化文本，降级到 errorContext，最终降级到 registerFailed
+      _errorMessage = response.localizedErrorMessage(L10nUtils.registerFailed);
     }
+
+    return response;
   }
 }

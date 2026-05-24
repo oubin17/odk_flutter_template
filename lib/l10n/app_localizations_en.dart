@@ -223,6 +223,87 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerFailed => 'Registration failed';
 
   @override
+  String get errorCode000 => 'Success';
+
+  @override
+  String get errorCode001 => 'Invalid request parameters';
+
+  @override
+  String get errorCode002 => 'Too many requests, please try again later';
+
+  @override
+  String get errorCode003 => 'Invalid tenant';
+
+  @override
+  String get errorCode004 => 'Tenant is empty';
+
+  @override
+  String get errorCode005 => 'Tenant mismatch';
+
+  @override
+  String get errorCode010 => 'User already exists';
+
+  @override
+  String get errorCode011 => 'Login ID already exists';
+
+  @override
+  String get errorCode012 => 'User does not exist';
+
+  @override
+  String get errorCode013 => 'Password mismatch';
+
+  @override
+  String get errorCode014 => 'Abnormal user status';
+
+  @override
+  String get errorCode015 => 'User not logged in';
+
+  @override
+  String get errorCode016 => 'New password cannot be the same as old password';
+
+  @override
+  String get errorCode017 => 'Password already exists';
+
+  @override
+  String get errorCode020 => 'Token expired, please log in again';
+
+  @override
+  String get errorCode021 => 'Token missing, please log in again';
+
+  @override
+  String get errorCode022 => 'Token mismatch, please log in again';
+
+  @override
+  String get errorCode030 => 'Permission denied';
+
+  @override
+  String get errorCode040 => 'Verification code mismatch';
+
+  @override
+  String get errorCode041 => 'Verification code expired';
+
+  @override
+  String get errorCode042 => 'Verification code already exists';
+
+  @override
+  String get errorCode043 => 'Maximum verification attempts exceeded';
+
+  @override
+  String get errorCode044 => 'Maximum verification code sends exceeded';
+
+  @override
+  String get errorCode045 => 'Invalid verification code unique key';
+
+  @override
+  String get errorCode046 => 'Verification code does not exist';
+
+  @override
+  String get errorCodeN100 => 'Unknown system error';
+
+  @override
+  String get errorCodeN110 => 'Signing error';
+
+  @override
   String get paramValidationError =>
       'Parameter validation failed, please check your input';
 

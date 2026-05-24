@@ -16,12 +16,12 @@ class ConfigKey {
   static const String signSecret = 'signSecret';
 
   static const String userAgreementUrl =
-      'http://8.133.253.216/mixed-service/webview/user_agreement.html';
+      'http://8.133.253.216/mixed-service/webview/policy_and_agreement/user_agreement.html';
   static const String privacyPolicyUrl =
-      'http://8.133.253.216/mixed-service/webview/privacy_policy.html';
+      'http://8.133.253.216/mixed-service/webview/policy_and_agreement/privacy_policy.html';
 
   static const String aboutUsUrl =
-      'http://8.133.253.216/mixed-service/webview/about_us.html';
+      'http://8.133.253.216/mixed-service/webview/about_us/about_us.html';
 
   // 👇 Bugly 崩溃监控配置 Key
   static const String buglyAndroidAppId = 'buglyAndroidAppId';
@@ -41,18 +41,18 @@ const Map<String, String> commonVariables = {
 const Map<String, String> devVariables = {
   ...commonVariables,
   // ConfigKey.serverUri: 'http://172.27.53.115:8080/odk-base-template/api',
-  ConfigKey.serverUri: 'http://192.168.31.228:8080/odk-base-template/api',
-  // ConfigKey.serverUri: 'http://172.20.10.5:8080/odk-base-template/api',
+  // ConfigKey.serverUri: 'http://192.168.31.228:8080/odk-base-template/api',
+  ConfigKey.serverUri: 'http://172.20.10.5:8080/odk-base-template/api',
 
   // 开发环境专属密钥
   ConfigKey.signSecret: 'flutter_app_dev_sign_secret_2025',
   ConfigKey.userAgreementUrl:
-      'http://8.133.253.216/mixed-service/webview/user_agreement.html',
+      'http://8.133.253.216/mixed-service/webview/policy_and_agreement/user_agreement.html',
   ConfigKey.privacyPolicyUrl:
-      'http://8.133.253.216/mixed-service/webview/privacy_policy.html',
+      'http://8.133.253.216/mixed-service/webview/policy_and_agreement/privacy_policy.html',
 
   ConfigKey.aboutUsUrl:
-      'http://8.133.253.216/mixed-service/webview/about_us.html',
+      'http://8.133.253.216/mixed-service/webview/about_us/about_us.html',
 
   // Bugly 崩溃监控（开发环境）
   ConfigKey.buglyAndroidAppId: '614d64d438', // ⚠️ 替换为你在 Bugly 注册的 Android AppId
