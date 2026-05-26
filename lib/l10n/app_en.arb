@@ -1,302 +1,382 @@
 {
   "@@locale": "en",
-
+  "@@x-comment-section-common": "===================== 通用基础 =====================",
   "confirm": "Confirm",
-  "@confirm": {
-    "description": "确认"
-  },
+  "@confirm": { "description": "确认" },
   "cancel": "Cancel",
-  "@cancel": {
-    "description": "取消"
-  },
+  "@cancel": { "description": "取消" },
   "save": "Save",
-  "@save": {
-    "description": "保存"
-  },
+  "@save": { "description": "保存" },
   "success": "Success",
-  "@success": {
-    "description": "成功"
-  },
+  "@success": { "description": "成功" },
   "fail": "Failed",
-  "@fail": {
-    "description": "失败"
-  },
+  "@fail": { "description": "失败" },
   "error": "Error",
-  "@error": {
-    "description": "错误"
-  },
+  "@error": { "description": "错误" },
   "todo": "To do...",
-  "@todo": {
-    "description": "待实现占位文本"
-  },
+  "@todo": { "description": "待实现占位文本" },
   "common": "Common",
-  "@common": {
-    "description": "通用"
-  },
-  "login": "Login",
-  "@login": {
-    "description": "登录"
-  },
-  "register": "Register",
-  "@register": {
-    "description": "注册"
-  },
+  "@common": { "description": "通用" },
   "operationFailed": "Operation Failed",
-  "@operationFailed": {
-    "description": "操作失败"
-  },
+  "@operationFailed": { "description": "操作失败" },
+  "loading": "Loading...",
+  "@loading": { "description": "加载中" },
+  "emptyData": "No data",
+  "@emptyData": { "description": "暂无数据" },
+  "retry": "Retry",
+  "@retry": { "description": "重试" },
+  "saving": "Saving...",
+  "@saving": { "description": "保存中" },
 
+  "@@x-comment-section-app": "===================== 应用 & 导航 =====================",
   "appTitle": "ODK Flutter Template",
-  "@appTitle": {
-    "description": "应用标题"
-  },
+  "@appTitle": { "description": "应用标题" },
+  "appName": "App Name",
+  "@appName": { "description": "应用名称" },
   "home": "Home",
-  "@home": {
-    "description": "首页"
-  },
+  "@home": { "description": "首页" },
   "discover": "Discover",
-  "@discover": {
-    "description": "发现"
-  },
+  "@discover": { "description": "发现" },
   "mine": "Mine",
-  "@mine": {
-    "description": "我的"
-  },
+  "@mine": { "description": "我的" },
+  "detail": "Detail",
+  "@detail": { "description": "详情" },
 
-  "systemSetting": "Setting",
-  "@systemSetting": {
-    "description": "系统设置"
-  },
-  "commonSetting": "General Settings",
-  "@commonSetting": {
-    "description": "通用设置"
-  },
-  "account": "Account",
-  "@account": {
-    "description": "账户"
-  },
-  "general": "General",
-  "@general": {
-    "description": "通用"
-  },
-  "themeMode": "ThemeMode",
-  "@themeMode": {
-    "description": "主题模式"
-  },
-  "lightMode": "Light Mode",
-  "@lightMode": {
-    "description": "日间模式"
-  },
-  "darkMode": "Dark Mode",
-  "@darkMode": {
-    "description": "夜间模式"
-  },
-  "switchLanguage": "Language",
-  "@switchLanguage": {
-    "description": "切换语言"
-  },
-  "language": "English",
-  "@language": {
-    "description": "当前语言名称"
-  },
-  "aboutUs": "About Us",
-  "@aboutUs": {
-    "description": "关于我们"
-  },
-  "helpAbout": "Help & About",
-  "@helpAbout": {
-    "description": "帮助&关于"
-  },
-
+  "@@x-comment-section-auth": "===================== 认证（登录/注册） =====================",
+  "login": "Login",
+  "@login": { "description": "登录" },
+  "register": "Register",
+  "@register": { "description": "注册" },
+  "password": "Password",
+  "@password": { "description": "密码" },
+  "switchLoginType": "Switch login method",
+  "@switchLoginType": { "description": "切换登录方式" },
+  "noAccount": "No account?",
+  "@noAccount": { "description": "没有账号？" },
+  "hasAccount": "Already have an account?",
+  "@hasAccount": { "description": "已经有账号？" },
+  "welcomeBack": "Welcome Back",
+  "@welcomeBack": { "description": "欢迎回来" },
+  "loginFailed": "Login failed, please check your account and password",
+  "@loginFailed": { "description": "登录失败，请检查账号密码" },
+  "registerFailed": "Registration failed",
+  "@registerFailed": { "description": "注册失败" },
   "iHaveReadAndAgree": "I have read and agree to the",
-  "@iHaveReadAndAgree": {
-    "description": "我已阅读并同意"
-  },
+  "@iHaveReadAndAgree": { "description": "我已阅读并同意" },
   "andText": "and",
-  "@andText": {
-    "description": "和"
-  },
+  "@andText": { "description": "和" },
+  "agreeTermsFirst": "Please agree to the User Agreement and Privacy Policy",
+  "@agreeTermsFirst": { "description": "请勾选用户协议和隐私政策" },
+  "userAgreement": "User Agreement",
+  "@userAgreement": { "description": "用户协议" },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": { "description": "隐私政策" },
 
-  "deviceInfo": "Device Info",
-  "@deviceInfo": {
-    "description": "设备信息"
-  },
-  "versionInfo": "Version Info",
-  "@versionInfo": {
-    "description": "版本信息"
-  },
-  "logout": "Log Out",
-  "@logout": {
-    "description": "登出"
-  },
-  "logoutConfirmMsg": "You will need to log in again after signing out. Are you sure?",
-  "@logoutConfirmMsg": {
-    "description": "退出登录确认提示"
-  },
-
-  "profile": "Profile",
-  "@profile": {
-    "description": "用户画像"
-  },
-  "avatar": "Avatar",
-  "@avatar": {
-    "description": "头像"
-  },
-  "nickname": "Nickname",
-  "@nickname": {
-    "description": "昵称"
-  },
-  "gender": "Gender",
-  "@gender": {
-    "description": "性别"
-  },
-  "male": "Male",
-  "@male": {
-    "description": "男"
-  },
-  "female": "Female",
-  "@female": {
-    "description": "女"
-  },
-  "birthday": "Birthday",
-  "@birthday": {
-    "description": "生日"
-  },
-  "phoneNumber": "Phone Number",
-  "@phoneNumber": {
-    "description": "手机号"
-  },
-
+  "@@x-comment-section-account-security": "===================== 账号安全 & 密码 =====================",
   "accountSecurity": "Account Security",
-  "@accountSecurity": {
-    "description": "账号安全"
-  },
+  "@accountSecurity": { "description": "账号安全" },
   "setPassword": "Set Password",
-  "@setPassword": {
-    "description": "设置密码"
-  },
+  "@setPassword": { "description": "设置密码" },
   "resetPassword": "Reset Password",
-  "@resetPassword": {
-    "description": "重置密码"
-  },
+  "@resetPassword": { "description": "重置密码" },
   "resetPasswordShort": "Reset Password",
-  "@resetPasswordShort": {
-    "description": "重置密码（场景名称）"
-  },
+  "@resetPasswordShort": { "description": "重置密码（场景名称）" },
   "pleaseEnterPassword": "Please enter password",
-  "@pleaseEnterPassword": {
-    "description": "请输入密码"
-  },
+  "@pleaseEnterPassword": { "description": "请输入密码" },
   "newPassword": "New Password",
-  "@newPassword": {
-    "description": "新密码"
-  },
+  "@newPassword": { "description": "新密码" },
   "pleaseEnterNewPassword": "Please enter new password",
-  "@pleaseEnterNewPassword": {
-    "description": "请输入新密码"
-  },
+  "@pleaseEnterNewPassword": { "description": "请输入新密码" },
   "oldPassword": "Old Password",
-  "@oldPassword": {
-    "description": "旧密码"
-  },
+  "@oldPassword": { "description": "旧密码" },
   "pleaseEnterOldPassword": "Please enter old password",
-  "@pleaseEnterOldPassword": {
-    "description": "请输入旧密码"
-  },
+  "@pleaseEnterOldPassword": { "description": "请输入旧密码" },
   "newPasswordCannotBeSameAsOld": "New password cannot be the same as old password",
-  "@newPasswordCannotBeSameAsOld": {
-    "description": "新密码不能与旧密码相同"
-  },
+  "@newPasswordCannotBeSameAsOld": { "description": "新密码不能与旧密码相同" },
   "confirmPassword": "Confirm Password",
-  "@confirmPassword": {
-    "description": "确认密码"
-  },
+  "@confirmPassword": { "description": "确认密码" },
   "pleaseEnterConfirmPassword": "Please enter confirm password",
-  "@pleaseEnterConfirmPassword": {
-    "description": "请输入确认密码"
-  },
+  "@pleaseEnterConfirmPassword": { "description": "请输入确认密码" },
   "passwordsNotMatch": "Passwords do not match",
-  "@passwordsNotMatch": {
-    "description": "两次输入密码不一致"
-  },
+  "@passwordsNotMatch": { "description": "两次输入密码不一致" },
 
+  "@@x-comment-section-verify-code": "===================== 验证码 =====================",
   "pleaseEnterVerifyCode": "Please enter verification code",
-  "@pleaseEnterVerifyCode": {
-    "description": "请输入验证码"
-  },
+  "@pleaseEnterVerifyCode": { "description": "请输入验证码" },
   "resendAfterSeconds": "{seconds}s to resend",
   "@resendAfterSeconds": {
     "description": "xx秒后重发",
     "placeholders": {
-      "seconds": {
-        "type": "int"
-      }
+      "seconds": { "type": "int" }
     }
   },
   "getVerifyCode": "Get Code",
-  "@getVerifyCode": {
-    "description": "获取验证码"
-  },
+  "@getVerifyCode": { "description": "获取验证码" },
 
+  "@@x-comment-section-form-validation": "===================== 表单校验 =====================",
   "fieldNotEmptyTip": "{field} cannot be empty",
   "@fieldNotEmptyTip": {
     "description": "字段不能为空，表单校验提示",
     "placeholders": {
-      "field": {
-        "type": "String"
-      }
+      "field": { "type": "String" }
     }
   },
   "fieldFormatErrorTip": "{field} format is incorrect",
   "@fieldFormatErrorTip": {
     "description": "字段格式不正确，表单校验提示",
     "placeholders": {
-      "field": {
-        "type": "String"
-      }
+      "field": { "type": "String" }
     }
   },
+  "paramValidationError": "Parameter validation failed, please check your input",
+  "@paramValidationError": { "description": "参数校验失败提示" },
 
-  "password": "Password",
-  "@password": {
-    "description": "密码"
+  "@@x-comment-section-profile": "===================== 用户画像 & 个人信息 =====================",
+  "profile": "Profile",
+  "@profile": { "description": "用户画像" },
+  "avatar": "Avatar",
+  "@avatar": { "description": "头像" },
+  "nickname": "Nickname",
+  "@nickname": { "description": "昵称" },
+  "gender": "Gender",
+  "@gender": { "description": "性别" },
+  "male": "Male",
+  "@male": { "description": "男" },
+  "female": "Female",
+  "@female": { "description": "女" },
+  "birthday": "Birthday",
+  "@birthday": { "description": "生日" },
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": { "description": "手机号" },
+  "account": "Account",
+  "@account": { "description": "账户" },
+
+  "@@x-comment-section-settings": "===================== 系统设置 =====================",
+  "systemSetting": "Setting",
+  "@systemSetting": { "description": "系统设置" },
+  "commonSetting": "General Settings",
+  "@commonSetting": { "description": "通用设置" },
+  "helpAbout": "Help & About",
+  "@helpAbout": { "description": "帮助&关于" },
+  "general": "General",
+  "@general": { "description": "通用" },
+  "themeMode": "ThemeMode",
+  "@themeMode": { "description": "主题模式" },
+  "lightMode": "Light Mode",
+  "@lightMode": { "description": "日间模式" },
+  "darkMode": "Dark Mode",
+  "@darkMode": { "description": "夜间模式" },
+  "switchLanguage": "Language",
+  "@switchLanguage": { "description": "切换语言" },
+  "language": "English",
+  "@language": { "description": "当前语言名称" },
+  "aboutUs": "About Us",
+  "@aboutUs": { "description": "关于我们" },
+  "about": "About",
+  "@about": { "description": "关于" },
+  "deviceInfo": "Device Info",
+  "@deviceInfo": { "description": "设备信息" },
+  "versionInfo": "Version Info",
+  "@versionInfo": { "description": "版本信息" },
+  "logout": "Log Out",
+  "@logout": { "description": "登出" },
+  "logoutConfirmMsg": "You will need to log in again after signing out. Are you sure?",
+  "@logoutConfirmMsg": { "description": "退出登录确认提示" },
+
+  "@@x-comment-section-privacy-dialog": "===================== 隐私政策弹窗 =====================",
+  "privacyPolicyDialogTitle": "Privacy Policy Notice",
+  "@privacyPolicyDialogTitle": { "description": "隐私政策弹窗标题" },
+  "privacyPolicyDialogContent": "Thank you for using this app! Before using it, please carefully read and agree to the {userAgreement} and {privacyPolicy}. We will strictly protect your personal information in accordance with the policy.",
+  "@privacyPolicyDialogContent": {
+    "description": "隐私政策弹窗内容",
+    "placeholders": {
+      "userAgreement": { "type": "String" },
+      "privacyPolicy": { "type": "String" }
+    }
   },
-  "userAgreement": "User Agreement",
-  "@userAgreement": {
-    "description": "用户协议"
+  "privacyPolicyAgree": "Agree & Continue",
+  "@privacyPolicyAgree": { "description": "同意隐私政策" },
+  "privacyPolicyDisagree": "Disagree",
+  "@privacyPolicyDisagree": { "description": "不同意隐私政策" },
+  "privacyPolicyDisagreeMessage": "You need to agree to the Privacy Policy to use this app",
+  "@privacyPolicyDisagreeMessage": { "description": "不同意隐私政策提示" },
+  "privacyPolicyExitConfirm": "Exit App",
+  "@privacyPolicyExitConfirm": { "description": "退出应用确认" },
+  "privacyPolicyExitMessage": "You cannot use this app without agreeing to the Privacy Policy. Are you sure you want to exit?",
+  "@privacyPolicyExitMessage": { "description": "退出应用确认信息" },
+
+  "@@x-comment-section-delete-account": "===================== 注销账号 =====================",
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": { "description": "注销账号" },
+  "deleteAccountWarning": "After deleting your account, all your data will be permanently deleted and cannot be recovered. Please proceed with caution.",
+  "@deleteAccountWarning": { "description": "注销账号警告" },
+  "deleteAccountConfirmTitle": "Confirm Account Deletion",
+  "@deleteAccountConfirmTitle": { "description": "注销账号确认标题" },
+  "deleteAccountConfirmMessage": "This action is irreversible! After deletion, your account and all associated data will be permanently deleted and cannot be recovered. Are you sure you want to delete your account?",
+  "@deleteAccountConfirmMessage": { "description": "注销账号确认信息" },
+  "deleteAccountInputHint": "Type \"CONFIRM DELETE\" to continue",
+  "@deleteAccountInputHint": { "description": "注销账号输入提示" },
+  "deleteAccountInputMatch": "CONFIRM DELETE",
+  "@deleteAccountInputMatch": { "description": "注销账号输入匹配文本" },
+  "deleteAccountButton": "Confirm Deletion",
+  "@deleteAccountButton": { "description": "注销账号按钮" },
+  "deleteAccountSuccess": "Account deleted successfully",
+  "@deleteAccountSuccess": { "description": "注销账号成功" },
+  "deleteAccountFailed": "Failed to delete account, please try again later",
+  "@deleteAccountFailed": { "description": "注销账号失败" },
+
+  "@@x-comment-section-cache": "===================== 缓存管理 =====================",
+  "clearCache": "Clear Cache",
+  "@clearCache": { "description": "清理缓存" },
+  "cacheSize": "Cache Size",
+  "@cacheSize": { "description": "缓存大小" },
+  "clearCacheSuccess": "Cache cleared successfully",
+  "@clearCacheSuccess": { "description": "缓存清理完成" },
+  "clearCacheConfirm": "Are you sure you want to clear all cache data?",
+  "@clearCacheConfirm": { "description": "确认清理缓存" },
+
+  "@@x-comment-section-feedback": "===================== 意见反馈 =====================",
+  "feedback": "Feedback",
+  "@feedback": { "description": "意见反馈" },
+  "feedbackEmail": "Feedback Email",
+  "@feedbackEmail": { "description": "反馈邮箱" },
+  "feedbackHint": "Please enter your suggestions",
+  "@feedbackHint": { "description": "意见反馈输入提示" },
+  "feedbackSubmit": "Submit Feedback",
+  "@feedbackSubmit": { "description": "提交反馈按钮" },
+  "feedbackSuccess": "Feedback submitted successfully, thank you!",
+  "@feedbackSuccess": { "description": "反馈提交成功" },
+  "feedbackFailed": "Failed to submit feedback, please try again later",
+  "@feedbackFailed": { "description": "反馈提交失败" },
+  "feedbackContentRequired": "Feedback content cannot be empty",
+  "@feedbackContentRequired": { "description": "反馈内容不能为空" },
+
+  "@@x-comment-section-update": "===================== 版本更新 =====================",
+  "packageName": "Package Name",
+  "@packageName": { "description": "包名" },
+  "versionNumber": "Version",
+  "@versionNumber": { "description": "版本号" },
+  "buildNumber": "Build Number",
+  "@buildNumber": { "description": "构建号" },
+  "checkingUpdate": "Checking for updates...",
+  "@checkingUpdate": { "description": "正在检查更新" },
+  "newVersionFound": "New version available v{version}",
+  "@newVersionFound": {
+    "description": "发现新版本",
+    "placeholders": {
+      "version": { "type": "String" }
+    }
   },
-  "privacyPolicy": "Privacy Policy",
-  "@privacyPolicy": {
-    "description": "隐私政策"
-  },
-  "agreeTermsFirst": "Please agree to the User Agreement and Privacy Policy",
-  "@agreeTermsFirst": {
-    "description": "请勾选用户协议和隐私政策"
-  },
-  "loginFailed": "Login failed, please check your account and password",
-  "@loginFailed": {
-    "description": "登录失败，请检查账号密码"
-  },
-  "switchLoginType": "Switch login method",
-  "@switchLoginType": {
-    "description": "切换登录方式"
-  },
-  "noAccount": "No account?",
-  "@noAccount": {
-    "description": "没有账号？"
-  },
-  "hasAccount": "Already have an account?",
-  "@hasAccount": {
-    "description": "已经有账号？"
-  },
-  "welcomeBack": "Welcome Back",
-  "@welcomeBack": {
-    "description": "欢迎回来"
-  },
-  "registerFailed": "Registration failed",
-  "@registerFailed": {
-    "description": "注册失败"
-  },
+  "updateNow": "Update Now",
+  "@updateNow": { "description": "立即更新" },
+  "alreadyLatestVersion": "Already up to date",
+  "@alreadyLatestVersion": { "description": "已是最新版本" },
+  "cannotOpenAppStore": "Unable to open app store, please search for updates manually",
+  "@cannotOpenAppStore": { "description": "无法打开应用市场" },
+
+  "@@x-comment-section-media-permission": "===================== 拍照 & 相册 & 权限 =====================",
+  "takePhoto": "Take Photo",
+  "@takePhoto": { "description": "拍照" },
+  "chooseFromAlbum": "Choose from Album",
+  "@chooseFromAlbum": { "description": "从相册选择" },
+  "cameraPermissionDenied": "Camera permission is required to take photos",
+  "@cameraPermissionDenied": { "description": "需要相机权限才能拍照" },
+  "photoPermissionDenied": "Photo library permission is required to select photos",
+  "@photoPermissionDenied": { "description": "需要相册权限才能选择照片" },
+  "permissionDeniedTip": "Permission denied, please find this app in Settings and enable Camera access",
+  "@permissionDeniedTip": { "description": "权限被拒绝，请在设置中开启" },
+  "avatarUpdateSuccess": "Avatar updated successfully",
+  "@avatarUpdateSuccess": { "description": "头像更新成功" },
+  "selectAvatar": "Select Avatar",
+  "@selectAvatar": { "description": "选择头像" },
+  "cameraNotAvailableOnSimulator": "Camera is not available on simulator, please test on a real device",
+  "@cameraNotAvailableOnSimulator": { "description": "模拟器不支持相机，请使用真机测试" },
+
+  "@@x-comment-section-network": "===================== 网络异常 =====================",
+  "networkError": "Network error, please check your network connection",
+  "@networkError": { "description": "网络异常提示" },
+  "networkTimeout": "Network request timed out, please try again",
+  "@networkTimeout": { "description": "网络请求超时提示" },
+  "networkConnectionFailed": "Unable to connect to server, please try again later",
+  "@networkConnectionFailed": { "description": "网络连接失败提示" },
+  "sslError": "Secure connection failed, please check your network settings",
+  "@sslError": { "description": "SSL证书错误提示" },
+  "networkRestored": "Network connection restored",
+  "@networkRestored": { "description": "网络连接恢复提示" },
+  "noNetworkConnection": "No network connection, please check network settings",
+  "@noNetworkConnection": { "description": "无网络连接提示" },
+
+  "@@x-comment-section-request": "===================== 请求 & 响应异常 =====================",
+  "requestError": "Request error, please try again",
+  "@requestError": { "description": "请求异常提示" },
+  "requestCancelled": "Request has been cancelled",
+  "@requestCancelled": { "description": "请求被取消提示" },
+  "responseError": "Response error, please try again later",
+  "@responseError": { "description": "响应异常提示" },
+  "tooManyRequests": "Too many requests, please try again later",
+  "@tooManyRequests": { "description": "请求过于频繁提示" },
+
+  "@@x-comment-section-server": "===================== 服务器异常 =====================",
+  "serverError": "Server error, please try again later",
+  "@serverError": { "description": "服务器错误提示" },
+  "serverMaintenance": "Server is under maintenance, please try again later",
+  "@serverMaintenance": { "description": "服务器维护提示" },
+
+  "@@x-comment-section-auth-permission": "===================== 授权 & 权限 =====================",
+  "unauthorized": "Authentication expired, please log in again",
+  "@unauthorized": { "description": "未授权/登录过期提示" },
+  "forbidden": "Access denied, insufficient permissions",
+  "@forbidden": { "description": "无权限访问提示" },
+
+  "@@x-comment-section-resource": "===================== 资源 & 数据异常 =====================",
+  "notFound": "Requested resource not found",
+  "@notFound": { "description": "资源未找到提示" },
+  "dataParseError": "Data parsing error",
+  "@dataParseError": { "description": "数据解析异常提示" },
+  "downloadFailed": "Download failed, please try again",
+  "@downloadFailed": { "description": "下载失败提示" },
+  "uploadFailed": "Upload failed, please try again",
+  "@uploadFailed": { "description": "上传失败提示" },
+  "unknownError": "Unknown error, please try again",
+  "@unknownError": { "description": "未知错误提示" },
+
+  "@@x-comment-section-page-status": "===================== 页面状态 =====================",
+  "pageNotFound": "Page Not Found",
+  "@pageNotFound": { "description": "页面未找到" },
+  "pageNotFoundDesc": "The page you are looking for does not exist",
+  "@pageNotFoundDesc": { "description": "页面未找到描述" },
+  "networkErrorDesc": "Network connection error, please check your network and retry",
+  "@networkErrorDesc": { "description": "网络错误描述" },
+  "serverErrorDesc": "Server is temporarily unavailable, please try again later",
+  "@serverErrorDesc": { "description": "服务器错误描述" },
+  "unknownErrorDesc": "Something went wrong, please try again later",
+  "@unknownErrorDesc": { "description": "未知错误描述" },
+
+  "@@x-comment-section-refresh": "===================== 刷新 & 加载 =====================",
+  "pullToRefresh": "Pull to refresh",
+  "@pullToRefresh": { "description": "下拉刷新" },
+  "releaseToRefresh": "Release to refresh",
+  "@releaseToRefresh": { "description": "释放刷新" },
+  "refreshComplete": "Refresh complete",
+  "@refreshComplete": { "description": "刷新完成" },
+  "pullToLoadMore": "Pull up to load more",
+  "@pullToLoadMore": { "description": "上拉加载更多" },
+  "releaseToLoadMore": "Release to load more",
+  "@releaseToLoadMore": { "description": "释放加载更多" },
+  "loadingMore": "Loading...",
+  "@loadingMore": { "description": "正在加载" },
+  "noMoreData": "No more data",
+  "@noMoreData": { "description": "没有更多数据" },
+  "loadFailed": "Load failed, tap to retry",
+  "@loadFailed": { "description": "加载失败，点击重试" },
+
+  "@@x-comment-section-social": "===================== 社交互动 =====================",
+  "follow": "Follow",
+  "@follow": { "description": "关注" },
+  "unfollow": "Unfollow",
+  "@unfollow": { "description": "取消关注" },
+
+  "@@x-comment-section-error-code": "===================== 业务错误码 =====================",
   "errorCode000": "Success",
   "@errorCode000": { "description": "成功" },
   "errorCode001": "Invalid request parameters",
@@ -350,377 +430,5 @@
   "errorCodeN100": "Unknown system error",
   "@errorCodeN100": { "description": "未知系统异常" },
   "errorCodeN110": "Signing error",
-  "@errorCodeN110": { "description": "签名错误" },
-
-  "paramValidationError": "Parameter validation failed, please check your input",
-  "@paramValidationError": {
-    "description": "参数校验失败提示"
-  },
-
-  "networkError": "Network error, please check your network connection",
-  "@networkError": {
-    "description": "网络异常提示"
-  },
-  "networkTimeout": "Network request timed out, please try again",
-  "@networkTimeout": {
-    "description": "网络请求超时提示"
-  },
-  "networkConnectionFailed": "Unable to connect to server, please try again later",
-  "@networkConnectionFailed": {
-    "description": "网络连接失败提示"
-  },
-  "sslError": "Secure connection failed, please check your network settings",
-  "@sslError": {
-    "description": "SSL证书错误提示"
-  },
-
-  "requestError": "Request error, please try again",
-  "@requestError": {
-    "description": "请求异常提示"
-  },
-  "requestCancelled": "Request has been cancelled",
-  "@requestCancelled": {
-    "description": "请求被取消提示"
-  },
-  "responseError": "Response error, please try again later",
-  "@responseError": {
-    "description": "响应异常提示"
-  },
-  "tooManyRequests": "Too many requests, please try again later",
-  "@tooManyRequests": {
-    "description": "请求过于频繁提示"
-  },
-
-  "serverError": "Server error, please try again later",
-  "@serverError": {
-    "description": "服务器错误提示"
-  },
-  "serverMaintenance": "Server is under maintenance, please try again later",
-  "@serverMaintenance": {
-    "description": "服务器维护提示"
-  },
-
-  "unauthorized": "Authentication expired, please log in again",
-  "@unauthorized": {
-    "description": "未授权/登录过期提示"
-  },
-  "forbidden": "Access denied, insufficient permissions",
-  "@forbidden": {
-    "description": "无权限访问提示"
-  },
-
-  "notFound": "Requested resource not found",
-  "@notFound": {
-    "description": "资源未找到提示"
-  },
-  "dataParseError": "Data parsing error",
-  "@dataParseError": {
-    "description": "数据解析异常提示"
-  },
-
-  "downloadFailed": "Download failed, please try again",
-  "@downloadFailed": {
-    "description": "下载失败提示"
-  },
-  "uploadFailed": "Upload failed, please try again",
-  "@uploadFailed": {
-    "description": "上传失败提示"
-  },
-
-  "unknownError": "Unknown error, please try again",
-  "@unknownError": {
-    "description": "未知错误提示"
-  },
-
-  "networkRestored": "Network connection restored",
-  "@networkRestored": {
-    "description": "网络连接恢复提示"
-  },
-  "noNetworkConnection": "No network connection, please check network settings",
-  "@noNetworkConnection": {
-    "description": "无网络连接提示"
-  },
-
-  "appName": "App Name",
-  "@appName": {
-    "description": "应用名称"
-  },
-  "packageName": "Package Name",
-  "@packageName": {
-    "description": "包名"
-  },
-  "versionNumber": "Version",
-  "@versionNumber": {
-    "description": "版本号"
-  },
-  "buildNumber": "Build Number",
-  "@buildNumber": {
-    "description": "构建号"
-  },
-  "checkingUpdate": "Checking for updates...",
-  "@checkingUpdate": {
-    "description": "正在检查更新"
-  },
-  "newVersionFound": "New version available v{version}",
-  "@newVersionFound": {
-    "description": "发现新版本",
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
-  },
-  "updateNow": "Update Now",
-  "@updateNow": {
-    "description": "立即更新"
-  },
-  "alreadyLatestVersion": "Already up to date",
-  "@alreadyLatestVersion": {
-    "description": "已是最新版本"
-  },
-  "cannotOpenAppStore": "Unable to open app store, please search for updates manually",
-  "@cannotOpenAppStore": {
-    "description": "无法打开应用市场"
-  },
-
-  "takePhoto": "Take Photo",
-  "@takePhoto": {
-    "description": "拍照"
-  },
-  "chooseFromAlbum": "Choose from Album",
-  "@chooseFromAlbum": {
-    "description": "从相册选择"
-  },
-  "cameraPermissionDenied": "Camera permission is required to take photos",
-  "@cameraPermissionDenied": {
-    "description": "需要相机权限才能拍照"
-  },
-  "photoPermissionDenied": "Photo library permission is required to select photos",
-  "@photoPermissionDenied": {
-    "description": "需要相册权限才能选择照片"
-  },
-  "permissionDeniedTip": "Permission denied, please find this app in Settings and enable Camera access",
-  "@permissionDeniedTip": {
-    "description": "权限被拒绝，请在设置中开启"
-  },
-  "avatarUpdateSuccess": "Avatar updated successfully",
-  "@avatarUpdateSuccess": {
-    "description": "头像更新成功"
-  },
-  "selectAvatar": "Select Avatar",
-  "@selectAvatar": {
-    "description": "选择头像"
-  },
-  "saving": "Saving...",
-  "@saving": {
-    "description": "保存中"
-  },
-  "cameraNotAvailableOnSimulator": "Camera is not available on simulator, please test on a real device",
-  "@cameraNotAvailableOnSimulator": {
-    "description": "模拟器不支持相机，请使用真机测试"
-  },
-
-  "loading": "Loading...",
-  "@loading": {
-    "description": "加载中"
-  },
-  "emptyData": "No data",
-  "@emptyData": {
-    "description": "暂无数据"
-  },
-  "retry": "Retry",
-  "@retry": {
-    "description": "重试"
-  },
-  "pageNotFound": "Page Not Found",
-  "@pageNotFound": {
-    "description": "页面未找到"
-  },
-  "pageNotFoundDesc": "The page you are looking for does not exist",
-  "@pageNotFoundDesc": {
-    "description": "页面未找到描述"
-  },
-  "networkErrorDesc": "Network connection error, please check your network and retry",
-  "@networkErrorDesc": {
-    "description": "网络错误描述"
-  },
-  "serverErrorDesc": "Server is temporarily unavailable, please try again later",
-  "@serverErrorDesc": {
-    "description": "服务器错误描述"
-  },
-  "unknownErrorDesc": "Something went wrong, please try again later",
-  "@unknownErrorDesc": {
-    "description": "未知错误描述"
-  },
-
-  "pullToRefresh": "Pull to refresh",
-  "@pullToRefresh": {
-    "description": "下拉刷新"
-  },
-  "releaseToRefresh": "Release to refresh",
-  "@releaseToRefresh": {
-    "description": "释放刷新"
-  },
-  "refreshComplete": "Refresh complete",
-  "@refreshComplete": {
-    "description": "刷新完成"
-  },
-  "pullToLoadMore": "Pull up to load more",
-  "@pullToLoadMore": {
-    "description": "上拉加载更多"
-  },
-  "releaseToLoadMore": "Release to load more",
-  "@releaseToLoadMore": {
-    "description": "释放加载更多"
-  },
-  "loadingMore": "Loading...",
-  "@loadingMore": {
-    "description": "正在加载"
-  },
-  "noMoreData": "No more data",
-  "@noMoreData": {
-    "description": "没有更多数据"
-  },
-  "loadFailed": "Load failed, tap to retry",
-  "@loadFailed": {
-    "description": "加载失败，点击重试"
-  },
-  "follow": "Follow",
-  "@follow": {
-    "description": "关注" 
-  },
-  "unfollow": "Unfollow",
-  "@unfollow": {
-    "description": "取消关注"
-  },
-  "detail": "Detail",
-  "@detail": {
-    "description": "详情"
-  },
-
-  "privacyPolicyDialogTitle": "Privacy Policy Notice",
-  "@privacyPolicyDialogTitle": {
-    "description": "隐私政策弹窗标题"
-  },
-  "privacyPolicyDialogContent": "Thank you for using this app! Before using it, please carefully read and agree to the {userAgreement} and {privacyPolicy}. We will strictly protect your personal information in accordance with the policy.",
-  "@privacyPolicyDialogContent": {
-    "description": "隐私政策弹窗内容",
-    "placeholders": {
-      "userAgreement": {
-        "type": "String"
-      },
-      "privacyPolicy": {
-        "type": "String"
-      }
-    }
-  },
-  "privacyPolicyAgree": "Agree & Continue",
-  "@privacyPolicyAgree": {
-    "description": "同意隐私政策"
-  },
-  "privacyPolicyDisagree": "Disagree",
-  "@privacyPolicyDisagree": {
-    "description": "不同意隐私政策"
-  },
-  "privacyPolicyDisagreeMessage": "You need to agree to the Privacy Policy to use this app",
-  "@privacyPolicyDisagreeMessage": {
-    "description": "不同意隐私政策提示"
-  },
-  "privacyPolicyExitConfirm": "Exit App",
-  "@privacyPolicyExitConfirm": {
-    "description": "退出应用确认"
-  },
-  "privacyPolicyExitMessage": "You cannot use this app without agreeing to the Privacy Policy. Are you sure you want to exit?",
-  "@privacyPolicyExitMessage": {
-    "description": "退出应用确认信息"
-  },
-
-  "deleteAccount": "Delete Account",
-  "@deleteAccount": {
-    "description": "注销账号"
-  },
-  "deleteAccountWarning": "After deleting your account, all your data will be permanently deleted and cannot be recovered. Please proceed with caution.",
-  "@deleteAccountWarning": {
-    "description": "注销账号警告"
-  },
-  "deleteAccountConfirmTitle": "Confirm Account Deletion",
-  "@deleteAccountConfirmTitle": {
-    "description": "注销账号确认标题"
-  },
-  "deleteAccountConfirmMessage": "This action is irreversible! After deletion, your account and all associated data will be permanently deleted and cannot be recovered. Are you sure you want to delete your account?",
-  "@deleteAccountConfirmMessage": {
-    "description": "注销账号确认信息"
-  },
-  "deleteAccountInputHint": "Type \"CONFIRM DELETE\" to continue",
-  "@deleteAccountInputHint": {
-    "description": "注销账号输入提示"
-  },
-  "deleteAccountInputMatch": "CONFIRM DELETE",
-  "@deleteAccountInputMatch": {
-    "description": "注销账号输入匹配文本"
-  },
-  "deleteAccountButton": "Confirm Deletion",
-  "@deleteAccountButton": {
-    "description": "注销账号按钮"
-  },
-  "deleteAccountSuccess": "Account deleted successfully",
-  "@deleteAccountSuccess": {
-    "description": "注销账号成功"
-  },
-  "deleteAccountFailed": "Failed to delete account, please try again later",
-  "@deleteAccountFailed": {
-    "description": "注销账号失败"
-  },
-  "clearCache": "Clear Cache",
-  "@clearCache": {
-    "description": "清理缓存"
-  },
-  "cacheSize": "Cache Size",
-  "@cacheSize": {
-    "description": "缓存大小"
-  },
-  "clearCacheSuccess": "Cache cleared successfully",
-  "@clearCacheSuccess": {
-    "description": "缓存清理完成"
-  },
-  "clearCacheConfirm": "Are you sure you want to clear all cache data?",
-  "@clearCacheConfirm": {
-    "description": "确认清理缓存"
-  },
-  "about": "About",
-  "@about": {
-    "description": "关于"
-  },
-  "aboutUs": "About Us",
-  "@aboutUs": {
-    "description": "关于我们"
-  },
-  "feedback": "Feedback",
-  "@feedback": {
-    "description": "意见反馈"
-  },
-  "feedbackEmail": "Feedback Email",
-  "@feedbackEmail": {
-    "description": "反馈邮箱"
-  },
-  "feedbackHint": "Please enter your suggestions",
-  "@feedbackHint": {
-    "description": "意见反馈输入提示"
-  },
-  "feedbackSubmit": "Submit Feedback",
-  "@feedbackSubmit": {
-    "description": "提交反馈按钮"
-  },
-  "feedbackSuccess": "Feedback submitted successfully, thank you!",
-  "@feedbackSuccess": {
-    "description": "反馈提交成功"
-  },
-  "feedbackFailed": "Failed to submit feedback, please try again later",
-  "@feedbackFailed": {
-    "description": "反馈提交失败"
-  },
-  "feedbackContentRequired": "Feedback content cannot be empty",
-  "@feedbackContentRequired": {
-    "description": "反馈内容不能为空"
-  }
+  "@errorCodeN110": { "description": "签名错误" }
 }

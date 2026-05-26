@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-
+  "@@x-comment-section-common": "===================== 通用基础 =====================",
   "confirm": "确认",
   "cancel": "取消",
   "save": "保存",
@@ -9,43 +9,37 @@
   "error": "错误",
   "todo": "待实现...",
   "common": "通用",
-  "login": "登录",
-  "register": "注册",
-  "iHaveReadAndAgree": "我已阅读并同意",
-  "andText": "和",
-  
   "operationFailed": "操作失败",
+  "loading": "加载中...",
+  "emptyData": "暂无数据",
+  "retry": "重试",
+  "saving": "保存中...",
 
+  "@@x-comment-section-app": "===================== 应用 & 导航 =====================",
   "appTitle": "ODK Flutter 模板",
+  "appName": "应用名称",
   "home": "首页",
   "discover": "发现",
   "mine": "我的",
+  "detail": "详情",
 
-  "systemSetting": "设置",
-  "commonSetting": "通用设置",
-  "helpAbout": "帮助&关于",
-  "account": "账户",
-  "general": "通用",
-  "themeMode": "主题模式",
-  "lightMode": "日间模式",
-  "darkMode": "夜间模式",
-  "switchLanguage": "语言",
-  "language": "中文",
-  "aboutUs": "关于我们",
-  "deviceInfo": "设备信息",
-  "versionInfo": "版本信息",
-  "logout": "登出",
-  "logoutConfirmMsg": "退出后需要重新登录，确认退出吗？",
+  "@@x-comment-section-auth": "===================== 认证（登录/注册） =====================",
+  "login": "登录",
+  "register": "注册",
+  "password": "密码",
+  "switchLoginType": "切换登录方式",
+  "noAccount": "没有账号？",
+  "hasAccount": "已经有账号？",
+  "welcomeBack": "欢迎回来",
+  "loginFailed": "登录失败，请检查账号密码",
+  "registerFailed": "注册失败",
+  "iHaveReadAndAgree": "我已阅读并同意",
+  "andText": "和",
+  "agreeTermsFirst": "请勾选用户协议和隐私政策",
+  "userAgreement": "用户协议",
+  "privacyPolicy": "隐私政策",
 
-  "profile": "用户画像",
-  "avatar": "头像",
-  "nickname": "昵称",
-  "gender": "性别",
-  "male": "男",
-  "female": "女",
-  "birthday": "生日",
-  "phoneNumber": "手机号",
-
+  "@@x-comment-section-account-security": "===================== 账号安全 & 密码 =====================",
   "accountSecurity": "账号安全",
   "setPassword": "设置密码",
   "resetPassword": "重置密码",
@@ -60,23 +54,167 @@
   "pleaseEnterConfirmPassword": "请输入确认密码",
   "passwordsNotMatch": "两次输入密码不一致",
 
+  "@@x-comment-section-verify-code": "===================== 验证码 =====================",
   "pleaseEnterVerifyCode": "请输入验证码",
   "resendAfterSeconds": "{seconds}s后重发",
   "getVerifyCode": "获取验证码",
 
+  "@@x-comment-section-form-validation": "===================== 表单校验 =====================",
   "fieldNotEmptyTip": "{field}不能为空",
   "fieldFormatErrorTip": "{field}格式不正确",
+  "paramValidationError": "参数校验失败，请检查输入",
 
-  "password": "密码",
-  "userAgreement": "用户协议",
-  "privacyPolicy": "隐私政策",
-  "agreeTermsFirst": "请勾选用户协议和隐私政策",
-  "loginFailed": "登录失败，请检查账号密码",
-  "switchLoginType": "切换登录方式",
-  "noAccount": "没有账号？",
-  "hasAccount": "已经有账号？",
-  "welcomeBack": "欢迎回来",
-  "registerFailed": "注册失败",
+  "@@x-comment-section-profile": "===================== 用户画像 & 个人信息 =====================",
+  "profile": "用户画像",
+  "avatar": "头像",
+  "nickname": "昵称",
+  "gender": "性别",
+  "male": "男",
+  "female": "女",
+  "birthday": "生日",
+  "phoneNumber": "手机号",
+  "account": "账户",
+
+  "@@x-comment-section-settings": "===================== 系统设置 =====================",
+  "systemSetting": "设置",
+  "commonSetting": "通用设置",
+  "helpAbout": "帮助&关于",
+  "general": "通用",
+  "themeMode": "主题模式",
+  "lightMode": "日间模式",
+  "darkMode": "夜间模式",
+  "switchLanguage": "语言",
+  "language": "中文",
+  "aboutUs": "关于我们",
+  "about": "关于",
+  "deviceInfo": "设备信息",
+  "versionInfo": "版本信息",
+  "logout": "登出",
+  "logoutConfirmMsg": "退出后需要重新登录，确认退出吗？",
+
+  "@@x-comment-section-privacy-dialog": "===================== 隐私政策弹窗 =====================",
+  "privacyPolicyDialogTitle": "隐私政策提示",
+  "privacyPolicyDialogContent": "感谢您使用本应用！在使用前，请您仔细阅读并同意{userAgreement}和{privacyPolicy}。我们将严格按照政策内容保护您的个人信息安全。",
+  "@privacyPolicyDialogContent": {
+    "placeholders": {
+      "userAgreement": {
+        "type": "String"
+      },
+      "privacyPolicy": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyPolicyAgree": "同意并继续",
+  "privacyPolicyDisagree": "不同意",
+  "privacyPolicyDisagreeMessage": "您需要同意隐私政策才能使用本应用",
+  "privacyPolicyExitConfirm": "退出应用",
+  "privacyPolicyExitMessage": "不同意隐私政策将无法使用本应用，确认退出吗？",
+
+  "@@x-comment-section-delete-account": "===================== 注销账号 =====================",
+  "deleteAccount": "注销账号",
+  "deleteAccountWarning": "注销账号后，您的所有数据将被永久删除且无法恢复，请谨慎操作。",
+  "deleteAccountConfirmTitle": "确认注销账号",
+  "deleteAccountConfirmMessage": "此操作不可逆！注销后您的账号及所有关联数据将被永久删除，无法恢复。确认注销吗？",
+  "deleteAccountInputHint": "请输入\"确认注销\"以继续",
+  "deleteAccountInputMatch": "确认注销",
+  "deleteAccountButton": "确认注销",
+  "deleteAccountSuccess": "账号已注销",
+  "deleteAccountFailed": "注销失败，请稍后重试",
+
+  "@@x-comment-section-cache": "===================== 缓存管理 =====================",
+  "clearCache": "清理缓存",
+  "cacheSize": "缓存大小",
+  "clearCacheSuccess": "缓存清理完成",
+  "clearCacheConfirm": "确认清理所有缓存数据吗？",
+
+  "@@x-comment-section-feedback": "===================== 意见反馈 =====================",
+  "feedback": "意见反馈",
+  "feedbackEmail": "反馈邮箱",
+  "feedbackHint": "请输入您的意见或建议",
+  "feedbackSubmit": "提交反馈",
+  "feedbackSuccess": "反馈提交成功，感谢您的建议！",
+  "feedbackFailed": "反馈提交失败，请稍后重试",
+  "feedbackContentRequired": "反馈内容不能为空",
+
+  "@@x-comment-section-update": "===================== 版本更新 =====================",
+  "packageName": "包名",
+  "versionNumber": "版本号",
+  "buildNumber": "构建号",
+  "checkingUpdate": "正在检查更新...",
+  "newVersionFound": "发现新版本 v{version}",
+  "@newVersionFound": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateNow": "立即更新",
+  "alreadyLatestVersion": "已是最新版本",
+  "cannotOpenAppStore": "无法打开应用市场，请手动搜索更新",
+
+  "@@x-comment-section-media-permission": "===================== 拍照 & 相册 & 权限 =====================",
+  "takePhoto": "拍照",
+  "chooseFromAlbum": "从相册选择",
+  "cameraPermissionDenied": "需要相机权限才能拍照",
+  "photoPermissionDenied": "需要相册权限才能选择照片",
+  "permissionDeniedTip": "权限被拒绝，请在设置中找到本应用，开启相机权限",
+  "avatarUpdateSuccess": "头像更新成功",
+  "selectAvatar": "选择头像",
+  "cameraNotAvailableOnSimulator": "模拟器不支持相机，请使用真机测试",
+
+  "@@x-comment-section-network": "===================== 网络异常 =====================",
+  "networkError": "网络异常，请检查网络连接",
+  "networkTimeout": "网络请求超时，请重试",
+  "networkConnectionFailed": "无法连接服务器，请稍后重试",
+  "sslError": "安全连接失败，请检查网络设置",
+  "networkRestored": "网络连接恢复",
+  "noNetworkConnection": "当前无网络连接，请检查网络设置",
+
+  "@@x-comment-section-request": "===================== 请求 & 响应异常 =====================",
+  "requestError": "请求异常，请重试",
+  "requestCancelled": "请求已取消",
+  "responseError": "响应异常，请稍后重试",
+  "tooManyRequests": "请求过于频繁，请稍后重试",
+
+  "@@x-comment-section-server": "===================== 服务器异常 =====================",
+  "serverError": "服务器错误，请稍后重试",
+  "serverMaintenance": "服务器维护中，请稍后重试",
+
+  "@@x-comment-section-auth-permission": "===================== 授权 & 权限 =====================",
+  "unauthorized": "认证已过期，请重新登录",
+  "forbidden": "访问被拒绝，权限不足",
+
+  "@@x-comment-section-resource": "===================== 资源 & 数据异常 =====================",
+  "notFound": "请求的资源不存在",
+  "dataParseError": "数据解析异常",
+  "downloadFailed": "下载失败，请重试",
+  "uploadFailed": "上传失败，请重试",
+  "unknownError": "未知错误，请重试",
+
+  "@@x-comment-section-page-status": "===================== 页面状态 =====================",
+  "pageNotFound": "页面未找到",
+  "pageNotFoundDesc": "您访问的页面不存在",
+  "networkErrorDesc": "网络连接异常，请检查网络后重试",
+  "serverErrorDesc": "服务器开小差了，请稍后重试",
+  "unknownErrorDesc": "出了点问题，请稍后重试",
+
+  "@@x-comment-section-refresh": "===================== 刷新 & 加载 =====================",
+  "pullToRefresh": "下拉刷新",
+  "releaseToRefresh": "释放刷新",
+  "refreshComplete": "刷新完成",
+  "pullToLoadMore": "上拉加载更多",
+  "releaseToLoadMore": "释放加载更多",
+  "loadingMore": "正在加载...",
+  "noMoreData": "没有更多数据",
+  "loadFailed": "加载失败，点击重试",
+
+  "@@x-comment-section-social": "===================== 社交互动 =====================",
+  "follow": "关注",
+  "unfollow": "取消关注",
+
+  "@@x-comment-section-error-code": "===================== 业务错误码 =====================",
   "errorCode000": "成功",
   "errorCode001": "请求参数非法",
   "errorCode002": "请求过于频繁，请稍后重试",
@@ -103,123 +241,5 @@
   "errorCode045": "验证码唯一键错误",
   "errorCode046": "验证码不存在",
   "errorCodeN100": "未知系统异常",
-  "errorCodeN110": "签名错误",
-  "paramValidationError": "参数校验失败，请检查输入",
-
-  "networkError": "网络异常，请检查网络连接",
-  "networkTimeout": "网络请求超时，请重试",
-  "networkConnectionFailed": "无法连接服务器，请稍后重试",
-  "sslError": "安全连接失败，请检查网络设置",
-
-  "requestError": "请求异常，请重试",
-  "requestCancelled": "请求已取消",
-  "responseError": "响应异常，请稍后重试",
-  "tooManyRequests": "请求过于频繁，请稍后重试",
-
-  "serverError": "服务器错误，请稍后重试",
-  "serverMaintenance": "服务器维护中，请稍后重试",
-
-  "unauthorized": "认证已过期，请重新登录",
-  "forbidden": "访问被拒绝，权限不足",
-
-  "notFound": "请求的资源不存在",
-  "dataParseError": "数据解析异常",
-
-  "downloadFailed": "下载失败，请重试",
-  "uploadFailed": "上传失败，请重试",
-
-  "unknownError": "未知错误，请重试",
-
-  "networkRestored": "网络连接恢复",
-  "noNetworkConnection": "当前无网络连接，请检查网络设置",
-
-  "appName": "应用名称",
-  "packageName": "包名",
-  "versionNumber": "版本号",
-  "buildNumber": "构建号",
-  "checkingUpdate": "正在检查更新...",
-  "newVersionFound": "发现新版本 v{version}",
-  "@newVersionFound": {
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
-  },
-  "updateNow": "立即更新",
-  "alreadyLatestVersion": "已是最新版本",
-  "cannotOpenAppStore": "无法打开应用市场，请手动搜索更新",
-
-  "takePhoto": "拍照",
-  "chooseFromAlbum": "从相册选择",
-  "cameraPermissionDenied": "需要相机权限才能拍照",
-  "photoPermissionDenied": "需要相册权限才能选择照片",
-  "permissionDeniedTip": "权限被拒绝，请在设置中找到本应用，开启相机权限",
-  "avatarUpdateSuccess": "头像更新成功",
-  "selectAvatar": "选择头像",
-  "saving": "保存中...",
-  "cameraNotAvailableOnSimulator": "模拟器不支持相机，请使用真机测试",
-
-  "loading": "加载中...",
-  "emptyData": "暂无数据",
-  "retry": "重试",
-  "pageNotFound": "页面未找到",
-  "pageNotFoundDesc": "您访问的页面不存在",
-  "networkErrorDesc": "网络连接异常，请检查网络后重试",
-  "serverErrorDesc": "服务器开小差了，请稍后重试",
-  "unknownErrorDesc": "出了点问题，请稍后重试",
-
-  "pullToRefresh": "下拉刷新",
-  "releaseToRefresh": "释放刷新",
-  "refreshComplete": "刷新完成",
-  "pullToLoadMore": "上拉加载更多",
-  "releaseToLoadMore": "释放加载更多",
-  "loadingMore": "正在加载...",
-  "noMoreData": "没有更多数据",
-  "loadFailed": "加载失败，点击重试",
-  "follow": "关注",
-  "unfollow": "取消关注",
-  "detail": "详情",
-
-  "privacyPolicyDialogTitle": "隐私政策提示",
-  "privacyPolicyDialogContent": "感谢您使用本应用！在使用前，请您仔细阅读并同意{userAgreement}和{privacyPolicy}。我们将严格按照政策内容保护您的个人信息安全。",
-  "@privacyPolicyDialogContent": {
-    "placeholders": {
-      "userAgreement": {
-        "type": "String"
-      },
-      "privacyPolicy": {
-        "type": "String"
-      }
-    }
-  },
-  "privacyPolicyAgree": "同意并继续",
-  "privacyPolicyDisagree": "不同意",
-  "privacyPolicyDisagreeMessage": "您需要同意隐私政策才能使用本应用",
-  "privacyPolicyExitConfirm": "退出应用",
-  "privacyPolicyExitMessage": "不同意隐私政策将无法使用本应用，确认退出吗？",
-
-  "deleteAccount": "注销账号",
-  "deleteAccountWarning": "注销账号后，您的所有数据将被永久删除且无法恢复，请谨慎操作。",
-  "deleteAccountConfirmTitle": "确认注销账号",
-  "deleteAccountConfirmMessage": "此操作不可逆！注销后您的账号及所有关联数据将被永久删除，无法恢复。确认注销吗？",
-  "deleteAccountInputHint": "请输入\"确认注销\"以继续",
-  "deleteAccountInputMatch": "确认注销",
-  "deleteAccountButton": "确认注销",
-  "deleteAccountSuccess": "账号已注销",
-  "deleteAccountFailed": "注销失败，请稍后重试",
-  "clearCache": "清理缓存",
-  "cacheSize": "缓存大小",
-  "clearCacheSuccess": "缓存清理完成",
-  "clearCacheConfirm": "确认清理所有缓存数据吗？",
-  "about": "关于",
-  "aboutUs": "关于我们",
-  "feedback": "意见反馈",
-  "feedbackEmail": "反馈邮箱",
-  "feedbackHint": "请输入您的意见或建议",
-  "feedbackSubmit": "提交反馈",
-  "feedbackSuccess": "反馈提交成功，感谢您的建议！",
-  "feedbackFailed": "反馈提交失败，请稍后重试",
-  "feedbackContentRequired": "反馈内容不能为空"
-
+  "errorCodeN110": "签名错误"
 }
