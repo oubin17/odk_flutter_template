@@ -146,29 +146,47 @@ abstract class AppLocalizations {
   /// **'Common'**
   String get common;
 
-  /// 登录
-  ///
-  /// In en, this message translates to:
-  /// **'Login'**
-  String get login;
-
-  /// 注册
-  ///
-  /// In en, this message translates to:
-  /// **'Register'**
-  String get register;
-
   /// 操作失败
   ///
   /// In en, this message translates to:
   /// **'Operation Failed'**
   String get operationFailed;
 
+  /// 加载中
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// 暂无数据
+  ///
+  /// In en, this message translates to:
+  /// **'No data'**
+  String get emptyData;
+
+  /// 重试
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// 保存中
+  ///
+  /// In en, this message translates to:
+  /// **'Saving...'**
+  String get saving;
+
   /// 应用标题
   ///
   /// In en, this message translates to:
   /// **'ODK Flutter Template'**
   String get appTitle;
+
+  /// 应用名称
+  ///
+  /// In en, this message translates to:
+  /// **'App Name'**
+  String get appName;
 
   /// 首页
   ///
@@ -188,71 +206,65 @@ abstract class AppLocalizations {
   /// **'Mine'**
   String get mine;
 
-  /// 系统设置
+  /// 详情
   ///
   /// In en, this message translates to:
-  /// **'Setting'**
-  String get systemSetting;
+  /// **'Detail'**
+  String get detail;
 
-  /// 通用设置
+  /// 登录
   ///
   /// In en, this message translates to:
-  /// **'General Settings'**
-  String get commonSetting;
+  /// **'Login'**
+  String get login;
 
-  /// 账户
+  /// 注册
   ///
   /// In en, this message translates to:
-  /// **'Account'**
-  String get account;
+  /// **'Register'**
+  String get register;
 
-  /// 通用
+  /// 密码
   ///
   /// In en, this message translates to:
-  /// **'General'**
-  String get general;
+  /// **'Password'**
+  String get password;
 
-  /// 主题模式
+  /// 切换登录方式
   ///
   /// In en, this message translates to:
-  /// **'ThemeMode'**
-  String get themeMode;
+  /// **'Switch login method'**
+  String get switchLoginType;
 
-  /// 日间模式
+  /// 没有账号？
   ///
   /// In en, this message translates to:
-  /// **'Light Mode'**
-  String get lightMode;
+  /// **'No account?'**
+  String get noAccount;
 
-  /// 夜间模式
+  /// 已经有账号？
   ///
   /// In en, this message translates to:
-  /// **'Dark Mode'**
-  String get darkMode;
+  /// **'Already have an account?'**
+  String get hasAccount;
 
-  /// 切换语言
+  /// 欢迎回来
   ///
   /// In en, this message translates to:
-  /// **'Language'**
-  String get switchLanguage;
+  /// **'Welcome Back'**
+  String get welcomeBack;
 
-  /// 当前语言名称
+  /// 登录失败，请检查账号密码
   ///
   /// In en, this message translates to:
-  /// **'English'**
-  String get language;
+  /// **'Login failed, please check your account and password'**
+  String get loginFailed;
 
-  /// 关于我们
+  /// 注册失败
   ///
   /// In en, this message translates to:
-  /// **'About Us'**
-  String get aboutUs;
-
-  /// 帮助&关于
-  ///
-  /// In en, this message translates to:
-  /// **'Help & About'**
-  String get helpAbout;
+  /// **'Registration failed'**
+  String get registerFailed;
 
   /// 我已阅读并同意
   ///
@@ -266,77 +278,23 @@ abstract class AppLocalizations {
   /// **'and'**
   String get andText;
 
-  /// 设备信息
+  /// 请勾选用户协议和隐私政策
   ///
   /// In en, this message translates to:
-  /// **'Device Info'**
-  String get deviceInfo;
+  /// **'Please agree to the User Agreement and Privacy Policy'**
+  String get agreeTermsFirst;
 
-  /// 版本信息
+  /// 用户协议
   ///
   /// In en, this message translates to:
-  /// **'Version Info'**
-  String get versionInfo;
+  /// **'User Agreement'**
+  String get userAgreement;
 
-  /// 登出
+  /// 隐私政策
   ///
   /// In en, this message translates to:
-  /// **'Log Out'**
-  String get logout;
-
-  /// 退出登录确认提示
-  ///
-  /// In en, this message translates to:
-  /// **'You will need to log in again after signing out. Are you sure?'**
-  String get logoutConfirmMsg;
-
-  /// 用户画像
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get profile;
-
-  /// 头像
-  ///
-  /// In en, this message translates to:
-  /// **'Avatar'**
-  String get avatar;
-
-  /// 昵称
-  ///
-  /// In en, this message translates to:
-  /// **'Nickname'**
-  String get nickname;
-
-  /// 性别
-  ///
-  /// In en, this message translates to:
-  /// **'Gender'**
-  String get gender;
-
-  /// 男
-  ///
-  /// In en, this message translates to:
-  /// **'Male'**
-  String get male;
-
-  /// 女
-  ///
-  /// In en, this message translates to:
-  /// **'Female'**
-  String get female;
-
-  /// 生日
-  ///
-  /// In en, this message translates to:
-  /// **'Birthday'**
-  String get birthday;
-
-  /// 手机号
-  ///
-  /// In en, this message translates to:
-  /// **'Phone Number'**
-  String get phoneNumber;
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
 
   /// 账号安全
   ///
@@ -446,65 +404,617 @@ abstract class AppLocalizations {
   /// **'{field} format is incorrect'**
   String fieldFormatErrorTip(String field);
 
-  /// 密码
+  /// 参数校验失败提示
   ///
   /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
+  /// **'Parameter validation failed, please check your input'**
+  String get paramValidationError;
 
-  /// 用户协议
+  /// 用户画像
   ///
   /// In en, this message translates to:
-  /// **'User Agreement'**
-  String get userAgreement;
+  /// **'Profile'**
+  String get profile;
 
-  /// 隐私政策
+  /// 头像
   ///
   /// In en, this message translates to:
-  /// **'Privacy Policy'**
-  String get privacyPolicy;
+  /// **'Avatar'**
+  String get avatar;
 
-  /// 请勾选用户协议和隐私政策
+  /// 昵称
   ///
   /// In en, this message translates to:
-  /// **'Please agree to the User Agreement and Privacy Policy'**
-  String get agreeTermsFirst;
+  /// **'Nickname'**
+  String get nickname;
 
-  /// 登录失败，请检查账号密码
+  /// 性别
   ///
   /// In en, this message translates to:
-  /// **'Login failed, please check your account and password'**
-  String get loginFailed;
+  /// **'Gender'**
+  String get gender;
 
-  /// 切换登录方式
+  /// 男
   ///
   /// In en, this message translates to:
-  /// **'Switch login method'**
-  String get switchLoginType;
+  /// **'Male'**
+  String get male;
 
-  /// 没有账号？
+  /// 女
   ///
   /// In en, this message translates to:
-  /// **'No account?'**
-  String get noAccount;
+  /// **'Female'**
+  String get female;
 
-  /// 已经有账号？
+  /// 生日
   ///
   /// In en, this message translates to:
-  /// **'Already have an account?'**
-  String get hasAccount;
+  /// **'Birthday'**
+  String get birthday;
 
-  /// 欢迎回来
+  /// 手机号
   ///
   /// In en, this message translates to:
-  /// **'Welcome Back'**
-  String get welcomeBack;
+  /// **'Phone Number'**
+  String get phoneNumber;
 
-  /// 注册失败
+  /// 账户
   ///
   /// In en, this message translates to:
-  /// **'Registration failed'**
-  String get registerFailed;
+  /// **'Account'**
+  String get account;
+
+  /// 系统设置
+  ///
+  /// In en, this message translates to:
+  /// **'Setting'**
+  String get systemSetting;
+
+  /// 通用设置
+  ///
+  /// In en, this message translates to:
+  /// **'General Settings'**
+  String get commonSetting;
+
+  /// 帮助&关于
+  ///
+  /// In en, this message translates to:
+  /// **'Help & About'**
+  String get helpAbout;
+
+  /// 通用
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get general;
+
+  /// 主题模式
+  ///
+  /// In en, this message translates to:
+  /// **'ThemeMode'**
+  String get themeMode;
+
+  /// 日间模式
+  ///
+  /// In en, this message translates to:
+  /// **'Light Mode'**
+  String get lightMode;
+
+  /// 夜间模式
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// 切换语言
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get switchLanguage;
+
+  /// 当前语言名称
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get language;
+
+  /// 关于我们
+  ///
+  /// In en, this message translates to:
+  /// **'About Us'**
+  String get aboutUs;
+
+  /// 关于
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// 设备信息
+  ///
+  /// In en, this message translates to:
+  /// **'Device Info'**
+  String get deviceInfo;
+
+  /// 版本信息
+  ///
+  /// In en, this message translates to:
+  /// **'Version Info'**
+  String get versionInfo;
+
+  /// 登出
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get logout;
+
+  /// 退出登录确认提示
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to log in again after signing out. Are you sure?'**
+  String get logoutConfirmMsg;
+
+  /// 隐私政策弹窗标题
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy Notice'**
+  String get privacyPolicyDialogTitle;
+
+  /// 隐私政策弹窗内容
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for using this app! Before using it, please carefully read and agree to the {userAgreement} and {privacyPolicy}. We will strictly protect your personal information in accordance with the policy.'**
+  String privacyPolicyDialogContent(String userAgreement, String privacyPolicy);
+
+  /// 同意隐私政策
+  ///
+  /// In en, this message translates to:
+  /// **'Agree & Continue'**
+  String get privacyPolicyAgree;
+
+  /// 不同意隐私政策
+  ///
+  /// In en, this message translates to:
+  /// **'Disagree'**
+  String get privacyPolicyDisagree;
+
+  /// 不同意隐私政策提示
+  ///
+  /// In en, this message translates to:
+  /// **'You need to agree to the Privacy Policy to use this app'**
+  String get privacyPolicyDisagreeMessage;
+
+  /// 退出应用确认
+  ///
+  /// In en, this message translates to:
+  /// **'Exit App'**
+  String get privacyPolicyExitConfirm;
+
+  /// 退出应用确认信息
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot use this app without agreeing to the Privacy Policy. Are you sure you want to exit?'**
+  String get privacyPolicyExitMessage;
+
+  /// 注销账号
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// 注销账号警告
+  ///
+  /// In en, this message translates to:
+  /// **'After deleting your account, all your data will be permanently deleted and cannot be recovered. Please proceed with caution.'**
+  String get deleteAccountWarning;
+
+  /// 注销账号确认标题
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Account Deletion'**
+  String get deleteAccountConfirmTitle;
+
+  /// 注销账号确认信息
+  ///
+  /// In en, this message translates to:
+  /// **'This action is irreversible! After deletion, your account and all associated data will be permanently deleted and cannot be recovered. Are you sure you want to delete your account?'**
+  String get deleteAccountConfirmMessage;
+
+  /// 注销账号输入提示
+  ///
+  /// In en, this message translates to:
+  /// **'Type \"CONFIRM DELETE\" to continue'**
+  String get deleteAccountInputHint;
+
+  /// 注销账号输入匹配文本
+  ///
+  /// In en, this message translates to:
+  /// **'CONFIRM DELETE'**
+  String get deleteAccountInputMatch;
+
+  /// 注销账号按钮
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Deletion'**
+  String get deleteAccountButton;
+
+  /// 注销账号成功
+  ///
+  /// In en, this message translates to:
+  /// **'Account deleted successfully'**
+  String get deleteAccountSuccess;
+
+  /// 注销账号失败
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete account, please try again later'**
+  String get deleteAccountFailed;
+
+  /// 清理缓存
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Cache'**
+  String get clearCache;
+
+  /// 缓存大小
+  ///
+  /// In en, this message translates to:
+  /// **'Cache Size'**
+  String get cacheSize;
+
+  /// 缓存清理完成
+  ///
+  /// In en, this message translates to:
+  /// **'Cache cleared successfully'**
+  String get clearCacheSuccess;
+
+  /// 确认清理缓存
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear all cache data?'**
+  String get clearCacheConfirm;
+
+  /// 意见反馈
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedback;
+
+  /// 反馈邮箱
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback Email'**
+  String get feedbackEmail;
+
+  /// 意见反馈输入提示
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your suggestions'**
+  String get feedbackHint;
+
+  /// 提交反馈按钮
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Feedback'**
+  String get feedbackSubmit;
+
+  /// 反馈提交成功
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback submitted successfully, thank you!'**
+  String get feedbackSuccess;
+
+  /// 反馈提交失败
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to submit feedback, please try again later'**
+  String get feedbackFailed;
+
+  /// 反馈内容不能为空
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback content cannot be empty'**
+  String get feedbackContentRequired;
+
+  /// 包名
+  ///
+  /// In en, this message translates to:
+  /// **'Package Name'**
+  String get packageName;
+
+  /// 版本号
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get versionNumber;
+
+  /// 构建号
+  ///
+  /// In en, this message translates to:
+  /// **'Build Number'**
+  String get buildNumber;
+
+  /// 正在检查更新
+  ///
+  /// In en, this message translates to:
+  /// **'Checking for updates...'**
+  String get checkingUpdate;
+
+  /// 发现新版本
+  ///
+  /// In en, this message translates to:
+  /// **'New version available v{version}'**
+  String newVersionFound(String version);
+
+  /// 立即更新
+  ///
+  /// In en, this message translates to:
+  /// **'Update Now'**
+  String get updateNow;
+
+  /// 已是最新版本
+  ///
+  /// In en, this message translates to:
+  /// **'Already up to date'**
+  String get alreadyLatestVersion;
+
+  /// 无法打开应用市场
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to open app store, please search for updates manually'**
+  String get cannotOpenAppStore;
+
+  /// 拍照
+  ///
+  /// In en, this message translates to:
+  /// **'Take Photo'**
+  String get takePhoto;
+
+  /// 从相册选择
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from Album'**
+  String get chooseFromAlbum;
+
+  /// 需要相机权限才能拍照
+  ///
+  /// In en, this message translates to:
+  /// **'Camera permission is required to take photos'**
+  String get cameraPermissionDenied;
+
+  /// 需要相册权限才能选择照片
+  ///
+  /// In en, this message translates to:
+  /// **'Photo library permission is required to select photos'**
+  String get photoPermissionDenied;
+
+  /// 权限被拒绝，请在设置中开启
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied, please find this app in Settings and enable Camera access'**
+  String get permissionDeniedTip;
+
+  /// 头像更新成功
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar updated successfully'**
+  String get avatarUpdateSuccess;
+
+  /// 选择头像
+  ///
+  /// In en, this message translates to:
+  /// **'Select Avatar'**
+  String get selectAvatar;
+
+  /// 模拟器不支持相机，请使用真机测试
+  ///
+  /// In en, this message translates to:
+  /// **'Camera is not available on simulator, please test on a real device'**
+  String get cameraNotAvailableOnSimulator;
+
+  /// 网络异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Network error, please check your network connection'**
+  String get networkError;
+
+  /// 网络请求超时提示
+  ///
+  /// In en, this message translates to:
+  /// **'Network request timed out, please try again'**
+  String get networkTimeout;
+
+  /// 网络连接失败提示
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to connect to server, please try again later'**
+  String get networkConnectionFailed;
+
+  /// SSL证书错误提示
+  ///
+  /// In en, this message translates to:
+  /// **'Secure connection failed, please check your network settings'**
+  String get sslError;
+
+  /// 网络连接恢复提示
+  ///
+  /// In en, this message translates to:
+  /// **'Network connection restored'**
+  String get networkRestored;
+
+  /// 无网络连接提示
+  ///
+  /// In en, this message translates to:
+  /// **'No network connection, please check network settings'**
+  String get noNetworkConnection;
+
+  /// 请求异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Request error, please try again'**
+  String get requestError;
+
+  /// 请求被取消提示
+  ///
+  /// In en, this message translates to:
+  /// **'Request has been cancelled'**
+  String get requestCancelled;
+
+  /// 响应异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Response error, please try again later'**
+  String get responseError;
+
+  /// 请求过于频繁提示
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests, please try again later'**
+  String get tooManyRequests;
+
+  /// 服务器错误提示
+  ///
+  /// In en, this message translates to:
+  /// **'Server error, please try again later'**
+  String get serverError;
+
+  /// 服务器维护提示
+  ///
+  /// In en, this message translates to:
+  /// **'Server is under maintenance, please try again later'**
+  String get serverMaintenance;
+
+  /// 未授权/登录过期提示
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication expired, please log in again'**
+  String get unauthorized;
+
+  /// 无权限访问提示
+  ///
+  /// In en, this message translates to:
+  /// **'Access denied, insufficient permissions'**
+  String get forbidden;
+
+  /// 资源未找到提示
+  ///
+  /// In en, this message translates to:
+  /// **'Requested resource not found'**
+  String get notFound;
+
+  /// 数据解析异常提示
+  ///
+  /// In en, this message translates to:
+  /// **'Data parsing error'**
+  String get dataParseError;
+
+  /// 下载失败提示
+  ///
+  /// In en, this message translates to:
+  /// **'Download failed, please try again'**
+  String get downloadFailed;
+
+  /// 上传失败提示
+  ///
+  /// In en, this message translates to:
+  /// **'Upload failed, please try again'**
+  String get uploadFailed;
+
+  /// 未知错误提示
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error, please try again'**
+  String get unknownError;
+
+  /// 页面未找到
+  ///
+  /// In en, this message translates to:
+  /// **'Page Not Found'**
+  String get pageNotFound;
+
+  /// 页面未找到描述
+  ///
+  /// In en, this message translates to:
+  /// **'The page you are looking for does not exist'**
+  String get pageNotFoundDesc;
+
+  /// 网络错误描述
+  ///
+  /// In en, this message translates to:
+  /// **'Network connection error, please check your network and retry'**
+  String get networkErrorDesc;
+
+  /// 服务器错误描述
+  ///
+  /// In en, this message translates to:
+  /// **'Server is temporarily unavailable, please try again later'**
+  String get serverErrorDesc;
+
+  /// 未知错误描述
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong, please try again later'**
+  String get unknownErrorDesc;
+
+  /// 下拉刷新
+  ///
+  /// In en, this message translates to:
+  /// **'Pull to refresh'**
+  String get pullToRefresh;
+
+  /// 释放刷新
+  ///
+  /// In en, this message translates to:
+  /// **'Release to refresh'**
+  String get releaseToRefresh;
+
+  /// 刷新完成
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh complete'**
+  String get refreshComplete;
+
+  /// 上拉加载更多
+  ///
+  /// In en, this message translates to:
+  /// **'Pull up to load more'**
+  String get pullToLoadMore;
+
+  /// 释放加载更多
+  ///
+  /// In en, this message translates to:
+  /// **'Release to load more'**
+  String get releaseToLoadMore;
+
+  /// 正在加载
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingMore;
+
+  /// 没有更多数据
+  ///
+  /// In en, this message translates to:
+  /// **'No more data'**
+  String get noMoreData;
+
+  /// 加载失败，点击重试
+  ///
+  /// In en, this message translates to:
+  /// **'Load failed, tap to retry'**
+  String get loadFailed;
+
+  /// 关注
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get follow;
+
+  /// 取消关注
+  ///
+  /// In en, this message translates to:
+  /// **'Unfollow'**
+  String get unfollow;
 
   /// 成功
   ///
@@ -667,516 +1177,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Signing error'**
   String get errorCodeN110;
-
-  /// 参数校验失败提示
-  ///
-  /// In en, this message translates to:
-  /// **'Parameter validation failed, please check your input'**
-  String get paramValidationError;
-
-  /// 网络异常提示
-  ///
-  /// In en, this message translates to:
-  /// **'Network error, please check your network connection'**
-  String get networkError;
-
-  /// 网络请求超时提示
-  ///
-  /// In en, this message translates to:
-  /// **'Network request timed out, please try again'**
-  String get networkTimeout;
-
-  /// 网络连接失败提示
-  ///
-  /// In en, this message translates to:
-  /// **'Unable to connect to server, please try again later'**
-  String get networkConnectionFailed;
-
-  /// SSL证书错误提示
-  ///
-  /// In en, this message translates to:
-  /// **'Secure connection failed, please check your network settings'**
-  String get sslError;
-
-  /// 请求异常提示
-  ///
-  /// In en, this message translates to:
-  /// **'Request error, please try again'**
-  String get requestError;
-
-  /// 请求被取消提示
-  ///
-  /// In en, this message translates to:
-  /// **'Request has been cancelled'**
-  String get requestCancelled;
-
-  /// 响应异常提示
-  ///
-  /// In en, this message translates to:
-  /// **'Response error, please try again later'**
-  String get responseError;
-
-  /// 请求过于频繁提示
-  ///
-  /// In en, this message translates to:
-  /// **'Too many requests, please try again later'**
-  String get tooManyRequests;
-
-  /// 服务器错误提示
-  ///
-  /// In en, this message translates to:
-  /// **'Server error, please try again later'**
-  String get serverError;
-
-  /// 服务器维护提示
-  ///
-  /// In en, this message translates to:
-  /// **'Server is under maintenance, please try again later'**
-  String get serverMaintenance;
-
-  /// 未授权/登录过期提示
-  ///
-  /// In en, this message translates to:
-  /// **'Authentication expired, please log in again'**
-  String get unauthorized;
-
-  /// 无权限访问提示
-  ///
-  /// In en, this message translates to:
-  /// **'Access denied, insufficient permissions'**
-  String get forbidden;
-
-  /// 资源未找到提示
-  ///
-  /// In en, this message translates to:
-  /// **'Requested resource not found'**
-  String get notFound;
-
-  /// 数据解析异常提示
-  ///
-  /// In en, this message translates to:
-  /// **'Data parsing error'**
-  String get dataParseError;
-
-  /// 下载失败提示
-  ///
-  /// In en, this message translates to:
-  /// **'Download failed, please try again'**
-  String get downloadFailed;
-
-  /// 上传失败提示
-  ///
-  /// In en, this message translates to:
-  /// **'Upload failed, please try again'**
-  String get uploadFailed;
-
-  /// 未知错误提示
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown error, please try again'**
-  String get unknownError;
-
-  /// 网络连接恢复提示
-  ///
-  /// In en, this message translates to:
-  /// **'Network connection restored'**
-  String get networkRestored;
-
-  /// 无网络连接提示
-  ///
-  /// In en, this message translates to:
-  /// **'No network connection, please check network settings'**
-  String get noNetworkConnection;
-
-  /// 应用名称
-  ///
-  /// In en, this message translates to:
-  /// **'App Name'**
-  String get appName;
-
-  /// 包名
-  ///
-  /// In en, this message translates to:
-  /// **'Package Name'**
-  String get packageName;
-
-  /// 版本号
-  ///
-  /// In en, this message translates to:
-  /// **'Version'**
-  String get versionNumber;
-
-  /// 构建号
-  ///
-  /// In en, this message translates to:
-  /// **'Build Number'**
-  String get buildNumber;
-
-  /// 正在检查更新
-  ///
-  /// In en, this message translates to:
-  /// **'Checking for updates...'**
-  String get checkingUpdate;
-
-  /// 发现新版本
-  ///
-  /// In en, this message translates to:
-  /// **'New version available v{version}'**
-  String newVersionFound(String version);
-
-  /// 立即更新
-  ///
-  /// In en, this message translates to:
-  /// **'Update Now'**
-  String get updateNow;
-
-  /// 已是最新版本
-  ///
-  /// In en, this message translates to:
-  /// **'Already up to date'**
-  String get alreadyLatestVersion;
-
-  /// 无法打开应用市场
-  ///
-  /// In en, this message translates to:
-  /// **'Unable to open app store, please search for updates manually'**
-  String get cannotOpenAppStore;
-
-  /// 拍照
-  ///
-  /// In en, this message translates to:
-  /// **'Take Photo'**
-  String get takePhoto;
-
-  /// 从相册选择
-  ///
-  /// In en, this message translates to:
-  /// **'Choose from Album'**
-  String get chooseFromAlbum;
-
-  /// 需要相机权限才能拍照
-  ///
-  /// In en, this message translates to:
-  /// **'Camera permission is required to take photos'**
-  String get cameraPermissionDenied;
-
-  /// 需要相册权限才能选择照片
-  ///
-  /// In en, this message translates to:
-  /// **'Photo library permission is required to select photos'**
-  String get photoPermissionDenied;
-
-  /// 权限被拒绝，请在设置中开启
-  ///
-  /// In en, this message translates to:
-  /// **'Permission denied, please find this app in Settings and enable Camera access'**
-  String get permissionDeniedTip;
-
-  /// 头像更新成功
-  ///
-  /// In en, this message translates to:
-  /// **'Avatar updated successfully'**
-  String get avatarUpdateSuccess;
-
-  /// 选择头像
-  ///
-  /// In en, this message translates to:
-  /// **'Select Avatar'**
-  String get selectAvatar;
-
-  /// 保存中
-  ///
-  /// In en, this message translates to:
-  /// **'Saving...'**
-  String get saving;
-
-  /// 模拟器不支持相机，请使用真机测试
-  ///
-  /// In en, this message translates to:
-  /// **'Camera is not available on simulator, please test on a real device'**
-  String get cameraNotAvailableOnSimulator;
-
-  /// 加载中
-  ///
-  /// In en, this message translates to:
-  /// **'Loading...'**
-  String get loading;
-
-  /// 暂无数据
-  ///
-  /// In en, this message translates to:
-  /// **'No data'**
-  String get emptyData;
-
-  /// 重试
-  ///
-  /// In en, this message translates to:
-  /// **'Retry'**
-  String get retry;
-
-  /// 页面未找到
-  ///
-  /// In en, this message translates to:
-  /// **'Page Not Found'**
-  String get pageNotFound;
-
-  /// 页面未找到描述
-  ///
-  /// In en, this message translates to:
-  /// **'The page you are looking for does not exist'**
-  String get pageNotFoundDesc;
-
-  /// 网络错误描述
-  ///
-  /// In en, this message translates to:
-  /// **'Network connection error, please check your network and retry'**
-  String get networkErrorDesc;
-
-  /// 服务器错误描述
-  ///
-  /// In en, this message translates to:
-  /// **'Server is temporarily unavailable, please try again later'**
-  String get serverErrorDesc;
-
-  /// 未知错误描述
-  ///
-  /// In en, this message translates to:
-  /// **'Something went wrong, please try again later'**
-  String get unknownErrorDesc;
-
-  /// 下拉刷新
-  ///
-  /// In en, this message translates to:
-  /// **'Pull to refresh'**
-  String get pullToRefresh;
-
-  /// 释放刷新
-  ///
-  /// In en, this message translates to:
-  /// **'Release to refresh'**
-  String get releaseToRefresh;
-
-  /// 刷新完成
-  ///
-  /// In en, this message translates to:
-  /// **'Refresh complete'**
-  String get refreshComplete;
-
-  /// 上拉加载更多
-  ///
-  /// In en, this message translates to:
-  /// **'Pull up to load more'**
-  String get pullToLoadMore;
-
-  /// 释放加载更多
-  ///
-  /// In en, this message translates to:
-  /// **'Release to load more'**
-  String get releaseToLoadMore;
-
-  /// 正在加载
-  ///
-  /// In en, this message translates to:
-  /// **'Loading...'**
-  String get loadingMore;
-
-  /// 没有更多数据
-  ///
-  /// In en, this message translates to:
-  /// **'No more data'**
-  String get noMoreData;
-
-  /// 加载失败，点击重试
-  ///
-  /// In en, this message translates to:
-  /// **'Load failed, tap to retry'**
-  String get loadFailed;
-
-  /// 关注
-  ///
-  /// In en, this message translates to:
-  /// **'Follow'**
-  String get follow;
-
-  /// 取消关注
-  ///
-  /// In en, this message translates to:
-  /// **'Unfollow'**
-  String get unfollow;
-
-  /// 详情
-  ///
-  /// In en, this message translates to:
-  /// **'Detail'**
-  String get detail;
-
-  /// 隐私政策弹窗标题
-  ///
-  /// In en, this message translates to:
-  /// **'Privacy Policy Notice'**
-  String get privacyPolicyDialogTitle;
-
-  /// 隐私政策弹窗内容
-  ///
-  /// In en, this message translates to:
-  /// **'Thank you for using this app! Before using it, please carefully read and agree to the {userAgreement} and {privacyPolicy}. We will strictly protect your personal information in accordance with the policy.'**
-  String privacyPolicyDialogContent(String userAgreement, String privacyPolicy);
-
-  /// 同意隐私政策
-  ///
-  /// In en, this message translates to:
-  /// **'Agree & Continue'**
-  String get privacyPolicyAgree;
-
-  /// 不同意隐私政策
-  ///
-  /// In en, this message translates to:
-  /// **'Disagree'**
-  String get privacyPolicyDisagree;
-
-  /// 不同意隐私政策提示
-  ///
-  /// In en, this message translates to:
-  /// **'You need to agree to the Privacy Policy to use this app'**
-  String get privacyPolicyDisagreeMessage;
-
-  /// 退出应用确认
-  ///
-  /// In en, this message translates to:
-  /// **'Exit App'**
-  String get privacyPolicyExitConfirm;
-
-  /// 退出应用确认信息
-  ///
-  /// In en, this message translates to:
-  /// **'You cannot use this app without agreeing to the Privacy Policy. Are you sure you want to exit?'**
-  String get privacyPolicyExitMessage;
-
-  /// 注销账号
-  ///
-  /// In en, this message translates to:
-  /// **'Delete Account'**
-  String get deleteAccount;
-
-  /// 注销账号警告
-  ///
-  /// In en, this message translates to:
-  /// **'After deleting your account, all your data will be permanently deleted and cannot be recovered. Please proceed with caution.'**
-  String get deleteAccountWarning;
-
-  /// 注销账号确认标题
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm Account Deletion'**
-  String get deleteAccountConfirmTitle;
-
-  /// 注销账号确认信息
-  ///
-  /// In en, this message translates to:
-  /// **'This action is irreversible! After deletion, your account and all associated data will be permanently deleted and cannot be recovered. Are you sure you want to delete your account?'**
-  String get deleteAccountConfirmMessage;
-
-  /// 注销账号输入提示
-  ///
-  /// In en, this message translates to:
-  /// **'Type \"CONFIRM DELETE\" to continue'**
-  String get deleteAccountInputHint;
-
-  /// 注销账号输入匹配文本
-  ///
-  /// In en, this message translates to:
-  /// **'CONFIRM DELETE'**
-  String get deleteAccountInputMatch;
-
-  /// 注销账号按钮
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm Deletion'**
-  String get deleteAccountButton;
-
-  /// 注销账号成功
-  ///
-  /// In en, this message translates to:
-  /// **'Account deleted successfully'**
-  String get deleteAccountSuccess;
-
-  /// 注销账号失败
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to delete account, please try again later'**
-  String get deleteAccountFailed;
-
-  /// 清理缓存
-  ///
-  /// In en, this message translates to:
-  /// **'Clear Cache'**
-  String get clearCache;
-
-  /// 缓存大小
-  ///
-  /// In en, this message translates to:
-  /// **'Cache Size'**
-  String get cacheSize;
-
-  /// 缓存清理完成
-  ///
-  /// In en, this message translates to:
-  /// **'Cache cleared successfully'**
-  String get clearCacheSuccess;
-
-  /// 确认清理缓存
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to clear all cache data?'**
-  String get clearCacheConfirm;
-
-  /// 关于
-  ///
-  /// In en, this message translates to:
-  /// **'About'**
-  String get about;
-
-  /// 意见反馈
-  ///
-  /// In en, this message translates to:
-  /// **'Feedback'**
-  String get feedback;
-
-  /// 反馈邮箱
-  ///
-  /// In en, this message translates to:
-  /// **'Feedback Email'**
-  String get feedbackEmail;
-
-  /// 意见反馈输入提示
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your suggestions'**
-  String get feedbackHint;
-
-  /// 提交反馈按钮
-  ///
-  /// In en, this message translates to:
-  /// **'Submit Feedback'**
-  String get feedbackSubmit;
-
-  /// 反馈提交成功
-  ///
-  /// In en, this message translates to:
-  /// **'Feedback submitted successfully, thank you!'**
-  String get feedbackSuccess;
-
-  /// 反馈提交失败
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to submit feedback, please try again later'**
-  String get feedbackFailed;
-
-  /// 反馈内容不能为空
-  ///
-  /// In en, this message translates to:
-  /// **'Feedback content cannot be empty'**
-  String get feedbackContentRequired;
 }
 
 class _AppLocalizationsDelegate

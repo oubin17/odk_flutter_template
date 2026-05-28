@@ -33,16 +33,25 @@ class AppLocalizationsZh extends AppLocalizations {
   String get common => '通用';
 
   @override
-  String get login => '登录';
-
-  @override
-  String get register => '注册';
-
-  @override
   String get operationFailed => '操作失败';
 
   @override
+  String get loading => '加载中...';
+
+  @override
+  String get emptyData => '暂无数据';
+
+  @override
+  String get retry => '重试';
+
+  @override
+  String get saving => '保存中...';
+
+  @override
   String get appTitle => 'ODK Flutter 模板';
+
+  @override
+  String get appName => '应用名称';
 
   @override
   String get home => '首页';
@@ -54,37 +63,34 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mine => '我的';
 
   @override
-  String get systemSetting => '设置';
+  String get detail => '详情';
 
   @override
-  String get commonSetting => '通用设置';
+  String get login => '登录';
 
   @override
-  String get account => '账户';
+  String get register => '注册';
 
   @override
-  String get general => '通用';
+  String get password => '密码';
 
   @override
-  String get themeMode => '主题模式';
+  String get switchLoginType => '切换登录方式';
 
   @override
-  String get lightMode => '日间模式';
+  String get noAccount => '没有账号？';
 
   @override
-  String get darkMode => '夜间模式';
+  String get hasAccount => '已经有账号？';
 
   @override
-  String get switchLanguage => '语言';
+  String get welcomeBack => '欢迎回来';
 
   @override
-  String get language => '中文';
+  String get loginFailed => '登录失败，请检查账号密码';
 
   @override
-  String get aboutUs => '关于我们';
-
-  @override
-  String get helpAbout => '帮助&关于';
+  String get registerFailed => '注册失败';
 
   @override
   String get iHaveReadAndAgree => '我已阅读并同意';
@@ -93,40 +99,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get andText => '和';
 
   @override
-  String get deviceInfo => '设备信息';
+  String get agreeTermsFirst => '请勾选用户协议和隐私政策';
 
   @override
-  String get versionInfo => '版本信息';
+  String get userAgreement => '用户协议';
 
   @override
-  String get logout => '登出';
-
-  @override
-  String get logoutConfirmMsg => '退出后需要重新登录，确认退出吗？';
-
-  @override
-  String get profile => '用户画像';
-
-  @override
-  String get avatar => '头像';
-
-  @override
-  String get nickname => '昵称';
-
-  @override
-  String get gender => '性别';
-
-  @override
-  String get male => '男';
-
-  @override
-  String get female => '女';
-
-  @override
-  String get birthday => '生日';
-
-  @override
-  String get phoneNumber => '手机号';
+  String get privacyPolicy => '隐私政策';
 
   @override
   String get accountSecurity => '账号安全';
@@ -189,34 +168,318 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get password => '密码';
+  String get paramValidationError => '参数校验失败，请检查输入';
 
   @override
-  String get userAgreement => '用户协议';
+  String get profile => '用户画像';
 
   @override
-  String get privacyPolicy => '隐私政策';
+  String get avatar => '头像';
 
   @override
-  String get agreeTermsFirst => '请勾选用户协议和隐私政策';
+  String get nickname => '昵称';
 
   @override
-  String get loginFailed => '登录失败，请检查账号密码';
+  String get gender => '性别';
 
   @override
-  String get switchLoginType => '切换登录方式';
+  String get male => '男';
 
   @override
-  String get noAccount => '没有账号？';
+  String get female => '女';
 
   @override
-  String get hasAccount => '已经有账号？';
+  String get birthday => '生日';
 
   @override
-  String get welcomeBack => '欢迎回来';
+  String get phoneNumber => '手机号';
 
   @override
-  String get registerFailed => '注册失败';
+  String get account => '账户';
+
+  @override
+  String get systemSetting => '设置';
+
+  @override
+  String get commonSetting => '通用设置';
+
+  @override
+  String get helpAbout => '帮助&关于';
+
+  @override
+  String get general => '通用';
+
+  @override
+  String get themeMode => '主题模式';
+
+  @override
+  String get lightMode => '日间模式';
+
+  @override
+  String get darkMode => '夜间模式';
+
+  @override
+  String get switchLanguage => '语言';
+
+  @override
+  String get language => '中文';
+
+  @override
+  String get aboutUs => '关于我们';
+
+  @override
+  String get about => '关于';
+
+  @override
+  String get deviceInfo => '设备信息';
+
+  @override
+  String get versionInfo => '版本信息';
+
+  @override
+  String get logout => '登出';
+
+  @override
+  String get logoutConfirmMsg => '退出后需要重新登录，确认退出吗？';
+
+  @override
+  String get privacyPolicyDialogTitle => '隐私政策提示';
+
+  @override
+  String privacyPolicyDialogContent(
+    String userAgreement,
+    String privacyPolicy,
+  ) {
+    return '感谢您使用本应用！在使用前，请您仔细阅读并同意$userAgreement和$privacyPolicy。我们将严格按照政策内容保护您的个人信息安全。';
+  }
+
+  @override
+  String get privacyPolicyAgree => '同意并继续';
+
+  @override
+  String get privacyPolicyDisagree => '不同意';
+
+  @override
+  String get privacyPolicyDisagreeMessage => '您需要同意隐私政策才能使用本应用';
+
+  @override
+  String get privacyPolicyExitConfirm => '退出应用';
+
+  @override
+  String get privacyPolicyExitMessage => '不同意隐私政策将无法使用本应用，确认退出吗？';
+
+  @override
+  String get deleteAccount => '注销账号';
+
+  @override
+  String get deleteAccountWarning => '注销账号后，您的所有数据将被永久删除且无法恢复，请谨慎操作。';
+
+  @override
+  String get deleteAccountConfirmTitle => '确认注销账号';
+
+  @override
+  String get deleteAccountConfirmMessage =>
+      '此操作不可逆！注销后您的账号及所有关联数据将被永久删除，无法恢复。确认注销吗？';
+
+  @override
+  String get deleteAccountInputHint => '请输入\"确认注销\"以继续';
+
+  @override
+  String get deleteAccountInputMatch => '确认注销';
+
+  @override
+  String get deleteAccountButton => '确认注销';
+
+  @override
+  String get deleteAccountSuccess => '账号已注销';
+
+  @override
+  String get deleteAccountFailed => '注销失败，请稍后重试';
+
+  @override
+  String get clearCache => '清理缓存';
+
+  @override
+  String get cacheSize => '缓存大小';
+
+  @override
+  String get clearCacheSuccess => '缓存清理完成';
+
+  @override
+  String get clearCacheConfirm => '确认清理所有缓存数据吗？';
+
+  @override
+  String get feedback => '意见反馈';
+
+  @override
+  String get feedbackEmail => '反馈邮箱';
+
+  @override
+  String get feedbackHint => '请输入您的意见或建议';
+
+  @override
+  String get feedbackSubmit => '提交反馈';
+
+  @override
+  String get feedbackSuccess => '反馈提交成功，感谢您的建议！';
+
+  @override
+  String get feedbackFailed => '反馈提交失败，请稍后重试';
+
+  @override
+  String get feedbackContentRequired => '反馈内容不能为空';
+
+  @override
+  String get packageName => '包名';
+
+  @override
+  String get versionNumber => '版本号';
+
+  @override
+  String get buildNumber => '构建号';
+
+  @override
+  String get checkingUpdate => '正在检查更新...';
+
+  @override
+  String newVersionFound(String version) {
+    return '发现新版本 v$version';
+  }
+
+  @override
+  String get updateNow => '立即更新';
+
+  @override
+  String get alreadyLatestVersion => '已是最新版本';
+
+  @override
+  String get cannotOpenAppStore => '无法打开应用市场，请手动搜索更新';
+
+  @override
+  String get takePhoto => '拍照';
+
+  @override
+  String get chooseFromAlbum => '从相册选择';
+
+  @override
+  String get cameraPermissionDenied => '需要相机权限才能拍照';
+
+  @override
+  String get photoPermissionDenied => '需要相册权限才能选择照片';
+
+  @override
+  String get permissionDeniedTip => '权限被拒绝，请在设置中找到本应用，开启相机权限';
+
+  @override
+  String get avatarUpdateSuccess => '头像更新成功';
+
+  @override
+  String get selectAvatar => '选择头像';
+
+  @override
+  String get cameraNotAvailableOnSimulator => '模拟器不支持相机，请使用真机测试';
+
+  @override
+  String get networkError => '网络异常，请检查网络连接';
+
+  @override
+  String get networkTimeout => '网络请求超时，请重试';
+
+  @override
+  String get networkConnectionFailed => '无法连接服务器，请稍后重试';
+
+  @override
+  String get sslError => '安全连接失败，请检查网络设置';
+
+  @override
+  String get networkRestored => '网络连接恢复';
+
+  @override
+  String get noNetworkConnection => '当前无网络连接，请检查网络设置';
+
+  @override
+  String get requestError => '请求异常，请重试';
+
+  @override
+  String get requestCancelled => '请求已取消';
+
+  @override
+  String get responseError => '响应异常，请稍后重试';
+
+  @override
+  String get tooManyRequests => '请求过于频繁，请稍后重试';
+
+  @override
+  String get serverError => '服务器错误，请稍后重试';
+
+  @override
+  String get serverMaintenance => '服务器维护中，请稍后重试';
+
+  @override
+  String get unauthorized => '认证已过期，请重新登录';
+
+  @override
+  String get forbidden => '访问被拒绝，权限不足';
+
+  @override
+  String get notFound => '请求的资源不存在';
+
+  @override
+  String get dataParseError => '数据解析异常';
+
+  @override
+  String get downloadFailed => '下载失败，请重试';
+
+  @override
+  String get uploadFailed => '上传失败，请重试';
+
+  @override
+  String get unknownError => '未知错误，请重试';
+
+  @override
+  String get pageNotFound => '页面未找到';
+
+  @override
+  String get pageNotFoundDesc => '您访问的页面不存在';
+
+  @override
+  String get networkErrorDesc => '网络连接异常，请检查网络后重试';
+
+  @override
+  String get serverErrorDesc => '服务器开小差了，请稍后重试';
+
+  @override
+  String get unknownErrorDesc => '出了点问题，请稍后重试';
+
+  @override
+  String get pullToRefresh => '下拉刷新';
+
+  @override
+  String get releaseToRefresh => '释放刷新';
+
+  @override
+  String get refreshComplete => '刷新完成';
+
+  @override
+  String get pullToLoadMore => '上拉加载更多';
+
+  @override
+  String get releaseToLoadMore => '释放加载更多';
+
+  @override
+  String get loadingMore => '正在加载...';
+
+  @override
+  String get noMoreData => '没有更多数据';
+
+  @override
+  String get loadFailed => '加载失败，点击重试';
+
+  @override
+  String get follow => '关注';
+
+  @override
+  String get unfollow => '取消关注';
 
   @override
   String get errorCode000 => '成功';
@@ -298,267 +561,4 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get errorCodeN110 => '签名错误';
-
-  @override
-  String get paramValidationError => '参数校验失败，请检查输入';
-
-  @override
-  String get networkError => '网络异常，请检查网络连接';
-
-  @override
-  String get networkTimeout => '网络请求超时，请重试';
-
-  @override
-  String get networkConnectionFailed => '无法连接服务器，请稍后重试';
-
-  @override
-  String get sslError => '安全连接失败，请检查网络设置';
-
-  @override
-  String get requestError => '请求异常，请重试';
-
-  @override
-  String get requestCancelled => '请求已取消';
-
-  @override
-  String get responseError => '响应异常，请稍后重试';
-
-  @override
-  String get tooManyRequests => '请求过于频繁，请稍后重试';
-
-  @override
-  String get serverError => '服务器错误，请稍后重试';
-
-  @override
-  String get serverMaintenance => '服务器维护中，请稍后重试';
-
-  @override
-  String get unauthorized => '认证已过期，请重新登录';
-
-  @override
-  String get forbidden => '访问被拒绝，权限不足';
-
-  @override
-  String get notFound => '请求的资源不存在';
-
-  @override
-  String get dataParseError => '数据解析异常';
-
-  @override
-  String get downloadFailed => '下载失败，请重试';
-
-  @override
-  String get uploadFailed => '上传失败，请重试';
-
-  @override
-  String get unknownError => '未知错误，请重试';
-
-  @override
-  String get networkRestored => '网络连接恢复';
-
-  @override
-  String get noNetworkConnection => '当前无网络连接，请检查网络设置';
-
-  @override
-  String get appName => '应用名称';
-
-  @override
-  String get packageName => '包名';
-
-  @override
-  String get versionNumber => '版本号';
-
-  @override
-  String get buildNumber => '构建号';
-
-  @override
-  String get checkingUpdate => '正在检查更新...';
-
-  @override
-  String newVersionFound(String version) {
-    return '发现新版本 v$version';
-  }
-
-  @override
-  String get updateNow => '立即更新';
-
-  @override
-  String get alreadyLatestVersion => '已是最新版本';
-
-  @override
-  String get cannotOpenAppStore => '无法打开应用市场，请手动搜索更新';
-
-  @override
-  String get takePhoto => '拍照';
-
-  @override
-  String get chooseFromAlbum => '从相册选择';
-
-  @override
-  String get cameraPermissionDenied => '需要相机权限才能拍照';
-
-  @override
-  String get photoPermissionDenied => '需要相册权限才能选择照片';
-
-  @override
-  String get permissionDeniedTip => '权限被拒绝，请在设置中找到本应用，开启相机权限';
-
-  @override
-  String get avatarUpdateSuccess => '头像更新成功';
-
-  @override
-  String get selectAvatar => '选择头像';
-
-  @override
-  String get saving => '保存中...';
-
-  @override
-  String get cameraNotAvailableOnSimulator => '模拟器不支持相机，请使用真机测试';
-
-  @override
-  String get loading => '加载中...';
-
-  @override
-  String get emptyData => '暂无数据';
-
-  @override
-  String get retry => '重试';
-
-  @override
-  String get pageNotFound => '页面未找到';
-
-  @override
-  String get pageNotFoundDesc => '您访问的页面不存在';
-
-  @override
-  String get networkErrorDesc => '网络连接异常，请检查网络后重试';
-
-  @override
-  String get serverErrorDesc => '服务器开小差了，请稍后重试';
-
-  @override
-  String get unknownErrorDesc => '出了点问题，请稍后重试';
-
-  @override
-  String get pullToRefresh => '下拉刷新';
-
-  @override
-  String get releaseToRefresh => '释放刷新';
-
-  @override
-  String get refreshComplete => '刷新完成';
-
-  @override
-  String get pullToLoadMore => '上拉加载更多';
-
-  @override
-  String get releaseToLoadMore => '释放加载更多';
-
-  @override
-  String get loadingMore => '正在加载...';
-
-  @override
-  String get noMoreData => '没有更多数据';
-
-  @override
-  String get loadFailed => '加载失败，点击重试';
-
-  @override
-  String get follow => '关注';
-
-  @override
-  String get unfollow => '取消关注';
-
-  @override
-  String get detail => '详情';
-
-  @override
-  String get privacyPolicyDialogTitle => '隐私政策提示';
-
-  @override
-  String privacyPolicyDialogContent(
-    String userAgreement,
-    String privacyPolicy,
-  ) {
-    return '感谢您使用本应用！在使用前，请您仔细阅读并同意$userAgreement和$privacyPolicy。我们将严格按照政策内容保护您的个人信息安全。';
-  }
-
-  @override
-  String get privacyPolicyAgree => '同意并继续';
-
-  @override
-  String get privacyPolicyDisagree => '不同意';
-
-  @override
-  String get privacyPolicyDisagreeMessage => '您需要同意隐私政策才能使用本应用';
-
-  @override
-  String get privacyPolicyExitConfirm => '退出应用';
-
-  @override
-  String get privacyPolicyExitMessage => '不同意隐私政策将无法使用本应用，确认退出吗？';
-
-  @override
-  String get deleteAccount => '注销账号';
-
-  @override
-  String get deleteAccountWarning => '注销账号后，您的所有数据将被永久删除且无法恢复，请谨慎操作。';
-
-  @override
-  String get deleteAccountConfirmTitle => '确认注销账号';
-
-  @override
-  String get deleteAccountConfirmMessage =>
-      '此操作不可逆！注销后您的账号及所有关联数据将被永久删除，无法恢复。确认注销吗？';
-
-  @override
-  String get deleteAccountInputHint => '请输入\"确认注销\"以继续';
-
-  @override
-  String get deleteAccountInputMatch => '确认注销';
-
-  @override
-  String get deleteAccountButton => '确认注销';
-
-  @override
-  String get deleteAccountSuccess => '账号已注销';
-
-  @override
-  String get deleteAccountFailed => '注销失败，请稍后重试';
-
-  @override
-  String get clearCache => '清理缓存';
-
-  @override
-  String get cacheSize => '缓存大小';
-
-  @override
-  String get clearCacheSuccess => '缓存清理完成';
-
-  @override
-  String get clearCacheConfirm => '确认清理所有缓存数据吗？';
-
-  @override
-  String get about => '关于';
-
-  @override
-  String get feedback => '意见反馈';
-
-  @override
-  String get feedbackEmail => '反馈邮箱';
-
-  @override
-  String get feedbackHint => '请输入您的意见或建议';
-
-  @override
-  String get feedbackSubmit => '提交反馈';
-
-  @override
-  String get feedbackSuccess => '反馈提交成功，感谢您的建议！';
-
-  @override
-  String get feedbackFailed => '反馈提交失败，请稍后重试';
-
-  @override
-  String get feedbackContentRequired => '反馈内容不能为空';
 }
