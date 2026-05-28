@@ -95,6 +95,7 @@ class AppPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor ?? AppColors.bgPage(context),
+      extendBody: true,
       appBar: _buildAppBar(context),
       body: _buildBody(context),
       bottomNavigationBar: bottomNavigationBar,
