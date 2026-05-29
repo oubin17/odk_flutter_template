@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:go_router/go_router.dart';
+import 'package:odk_flutter_template/features/aichat/presentation/ai_chat_page.dart'
+    show AiChatPage, AiChatPageTransition;
 import 'package:odk_flutter_template/features/auth/presentation/signin.dart';
 import 'package:odk_flutter_template/features/auth/presentation/signup.dart';
 import 'package:odk_flutter_template/features/content/presentation/content_detail_page.dart';
@@ -34,6 +36,7 @@ class RouteNames {
   static const String passwordManager = 'PasswordManager';
   static const String versionInfo = 'VersionInfo';
   static const String home = 'Home';
+  static const String aiChat = 'AiChat';
   static const String contentDetail = 'contentDetail';
   static const String notFound = 'NotFound';
   static const String agreement = 'Agreement';
@@ -54,6 +57,7 @@ class RoutePaths {
   static const String passwordManager = '/passwordManager';
   static const String versionInfo = '/version';
   static const String home = '/home';
+  static const String aiChat = '/aiChat';
   static const String contentDetail = '/contentDetail';
   static const String notFound = '/notFound';
   static const String agreement = '/agreement';
@@ -114,6 +118,18 @@ class AppRouter {
         path: RoutePaths.home,
         name: RouteNames.home,
         builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        path: RoutePaths.aiChat,
+        name: RouteNames.aiChat,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const AiChatPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return AiChatPageTransition(animation: animation, child: child);
+          },
+          transitionDuration: const Duration(milliseconds: 500),
+        ),
       ),
       GoRoute(
         path: RoutePaths.contentDetail,

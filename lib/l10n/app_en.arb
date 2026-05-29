@@ -430,5 +430,23 @@
   "errorCodeN100": "Unknown system error",
   "@errorCodeN100": { "description": "未知系统异常" },
   "errorCodeN110": "Signing error",
-  "@errorCodeN110": { "description": "签名错误" }
+  "@errorCodeN110": { "description": "签名错误" },
+
+  "@@x-comment-section-ai-chat": "===================== AI Chat =====================",
+  "aiChatSelectModel": "Select Model",
+  "@aiChatSelectModel": { "description": "选择模型" },
+  "aiChatHistory": "Chat History",
+  "@aiChatHistory": { "description": "历史会话" },
+  "aiChatNoHistory": "No chat history",
+  "@aiChatNoHistory": { "description": "暂无会话记录" },
+  "aiChatNewConversation": "New Chat",
+  "@aiChatNewConversation": { "description": "新对话" },
+  "aiChatDeleteConfirmTitle": "Delete Chat",
+  "@aiChatDeleteConfirmTitle": { "description": "删除会话确认标题" },
+  "aiChatDeleteConfirmMsg": "Are you sure you want to delete this chat and all its messages?",
+  "@aiChatDeleteConfirmMsg": { "description": "删除会话确认消息" },
+  "aiChatWelcome": "Start a new conversation",
+  "@aiChatWelcome": { "description": "AI对话欢迎语" },
+  "aiChatInputHint": "Type a message...",
+  "@aiChatInputHint": { "description": "AI对话输入提示" }
 }

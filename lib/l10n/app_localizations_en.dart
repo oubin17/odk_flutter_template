@@ -584,4 +584,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorCodeN110 => 'Signing error';
+
+  @override
+  String get aiChatSelectModel => 'Select Model';
+
+  @override
+  String get aiChatHistory => 'Chat History';
+
+  @override
+  String get aiChatNoHistory => 'No chat history';
+
+  @override
+  String get aiChatNewConversation => 'New Chat';
+
+  @override
+  String get aiChatDeleteConfirmTitle => 'Delete Chat';
+
+  @override
+  String get aiChatDeleteConfirmMsg =>
+      'Are you sure you want to delete this chat and all its messages?';
+
+  @override
+  String get aiChatWelcome => 'Start a new conversation';
+
+  @override
+  String get aiChatInputHint => 'Type a message...';
 }

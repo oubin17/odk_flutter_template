@@ -1177,6 +1177,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Signing error'**
   String get errorCodeN110;
+
+  /// 选择模型
+  ///
+  /// In en, this message translates to:
+  /// **'Select Model'**
+  String get aiChatSelectModel;
+
+  /// 历史会话
+  ///
+  /// In en, this message translates to:
+  /// **'Chat History'**
+  String get aiChatHistory;
+
+  /// 暂无会话记录
+  ///
+  /// In en, this message translates to:
+  /// **'No chat history'**
+  String get aiChatNoHistory;
+
+  /// 新对话
+  ///
+  /// In en, this message translates to:
+  /// **'New Chat'**
+  String get aiChatNewConversation;
+
+  /// 删除会话确认标题
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Chat'**
+  String get aiChatDeleteConfirmTitle;
+
+  /// 删除会话确认消息
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this chat and all its messages?'**
+  String get aiChatDeleteConfirmMsg;
+
+  /// AI对话欢迎语
+  ///
+  /// In en, this message translates to:
+  /// **'Start a new conversation'**
+  String get aiChatWelcome;
+
+  /// AI对话输入提示
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message...'**
+  String get aiChatInputHint;
 }
 
 class _AppLocalizationsDelegate

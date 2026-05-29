@@ -561,4 +561,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get errorCodeN110 => '签名错误';
+
+  @override
+  String get aiChatSelectModel => '选择模型';
+
+  @override
+  String get aiChatHistory => '历史会话';
+
+  @override
+  String get aiChatNoHistory => '暂无会话记录';
+
+  @override
+  String get aiChatNewConversation => '新对话';
+
+  @override
+  String get aiChatDeleteConfirmTitle => '删除会话';
+
+  @override
+  String get aiChatDeleteConfirmMsg => '确认删除该会话及其所有消息吗？';
+
+  @override
+  String get aiChatWelcome => '开始一段新的对话吧';
+
+  @override
+  String get aiChatInputHint => '输入消息...';
 }

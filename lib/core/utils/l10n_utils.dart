@@ -286,4 +286,17 @@ class L10nUtils {
   static String get feedbackFailed => _localizations!.feedbackFailed;
   static String get feedbackContentRequired =>
       _localizations!.feedbackContentRequired;
+
+  // ======================== AI对话 ========================
+  static String get aiChatSelectModel => _localizations!.aiChatSelectModel;
+  static String get aiChatHistory => _localizations!.aiChatHistory;
+  static String get aiChatNoHistory => _localizations!.aiChatNoHistory;
+  static String get aiChatNewConversation =>
+      _localizations!.aiChatNewConversation;
+  static String get aiChatDeleteConfirmTitle =>
+      _localizations!.aiChatDeleteConfirmTitle;
+  static String get aiChatDeleteConfirmMsg =>
+      _localizations!.aiChatDeleteConfirmMsg;
+  static String get aiChatWelcome => _localizations!.aiChatWelcome;
+  static String get aiChatInputHint => _localizations!.aiChatInputHint;
 }

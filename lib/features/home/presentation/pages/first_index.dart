@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/basic_user/service/user_query_service.dart';
+import 'package:odk_flutter_template/routes/app_router.dart';
+import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 import 'package:odk_flutter_template/widgets/app_widgets/app_widgets.dart';
 
@@ -33,7 +35,7 @@ class FirstIndexPage extends StatelessWidget {
             AppIconButton(
               icon: Icons.search,
               onTap: () {
-                UserQueryService().getUserInfo();
+                NavigatorUtils.pushNamed(RouteNames.aiChat);
               },
             ),
           ],

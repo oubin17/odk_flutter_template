@@ -74,8 +74,8 @@ class AppGlassBottomBar extends StatelessWidget {
 
     // 背景色
     final barBgColor = isDark
-        ? const Color(0xFF2C2C2E).withAlpha(220)
-        : Colors.white.withAlpha(240);
+        ? const Color(0xFF2C2C2E).withAlpha(200)
+        : Colors.white.withAlpha(10);
 
     // 药丸背景色
     final pillBgColor = isDark
@@ -112,16 +112,18 @@ class AppGlassBottomBar extends StatelessWidget {
                   ),
                 ),
 
-                // 阴影
+                // 阴影（仅外部，不影响内部颜色）
                 Positioned.fill(
                   child: IgnorePointer(
                     child: DecoratedBox(
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(barH / 2),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withAlpha(isDark ? 60 : 30),
-                            blurRadius: 16,
+                            color: Colors.black.withAlpha(isDark ? 80 : 20),
+                            blurRadius: 12,
                             offset: const Offset(0, 4),
+                            spreadRadius: -4,
                           ),
                         ],
                       ),
