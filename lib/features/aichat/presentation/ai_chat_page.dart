@@ -160,33 +160,57 @@ class _AiChatPageState extends State<AiChatPage> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       builder: (ctx) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 24.h),
-                child: AppText.title(
-                  L10nUtils.aiChatSelectModel,
-                  color: AppColors.textMain(context),
-                ),
+        return ListenableBuilder(
+          listenable: vm,
+          builder: (_, _) {
+            return SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24.h),
+                    child: AppText.title(
+                      L10nUtils.aiChatSelectModel,
+                      color: AppColors.textMain(context),
+                    ),
+                  ),
+                  AppDivider(padding: 0),
+                  if (vm.isLoadingModels)
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 40.h),
+                      child: Center(
+                        child: SizedBox(
+                          width: 40.w,
+                          height: 40.w,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3.w,
+                            color: AppColors.primary(context),
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    ...vm.availableModels.map(
+                      (model) => _buildModelItem(
+                        context: context,
+                        name: model.modelName ?? model.modelCode ?? '',
+                        provider: model.providerType ?? '',
+                        description: model.description ?? '',
+                        isSelected: vm.modelName == model.modelCode,
+                        onTap: () {
+                          vm.selectModel(
+                            model.modelCode ?? '',
+                            model.providerType ?? '',
+                          );
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                  AppGap.hNormal,
+                ],
               ),
-              AppDivider(padding: 0),
-              ...AiChatViewModel.availableModels.map(
-                (model) => _buildModelItem(
-                  context: context,
-                  name: model['name']!,
-                  provider: model['provider']!,
-                  isSelected: vm.modelName == model['name'],
-                  onTap: () {
-                    vm.selectModel(model['name']!, model['provider']!);
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ),
-              AppGap.hNormal,
-            ],
-          ),
+            );
+          },
         );
       },
     );
@@ -196,6 +220,7 @@ class _AiChatPageState extends State<AiChatPage> {
     required BuildContext context,
     required String name,
     required String provider,
+    required String description,
     required bool isSelected,
     required VoidCallback onTap,
   }) {
@@ -210,6 +235,13 @@ class _AiChatPageState extends State<AiChatPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppText.body(name, color: AppColors.textMain(context)),
+                  if (description.isNotEmpty) ...[
+                    AppGap.hSuperSmall,
+                    AppText.tip(
+                      description,
+                      color: AppColors.textGray(context),
+                    ),
+                  ],
                   AppGap.hSuperSmall,
                   AppText.tip(provider, color: AppColors.textGray(context)),
                 ],
@@ -241,8 +273,8 @@ class _AiChatPageState extends State<AiChatPage> {
         size: 40.w,
       ),
       title: Selector<AiChatViewModel, String>(
-        selector: (_, vm) => vm.modelName,
-        builder: (_, modelName, _) {
+        selector: (_, vm) => vm.modelDisplayName,
+        builder: (_, modelDisplayName, _) {
           return GestureDetector(
             onTap: () => _showModelPicker(context),
             child: Container(
@@ -254,7 +286,10 @@ class _AiChatPageState extends State<AiChatPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AppText.second(modelName, color: AppColors.primary(context)),
+                  AppText.second(
+                    modelDisplayName,
+                    color: AppColors.primary(context),
+                  ),
                   SizedBox(width: 4.w),
                   Icon(
                     Icons.arrow_drop_down_rounded,

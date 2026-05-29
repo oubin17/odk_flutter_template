@@ -4,6 +4,7 @@ import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_chat_request.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_conversation.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_message.dart';
+import 'package:odk_flutter_template/features/aichat/models/ai_model_dto.dart';
 import 'package:odk_flutter_template/features/aichat/service/ai_chat_service.dart';
 import 'package:odk_flutter_template/widgets/smart_dialog/app_toast.dart';
 import 'package:uuid/uuid.dart';
@@ -17,22 +18,33 @@ class AiChatViewModel extends ChangeNotifier {
   final AiChatService _aiChatService;
 
   // ====================== 可选模型列表 ======================
-  static const List<Map<String, String>> availableModels = [
-    {'name': 'qwen3.6-flash-2026-04-16', 'provider': 'OPENAI'},
-    {'name': 'qwen-max', 'provider': 'ALIBABA'},
-    {'name': 'deepseek-chat', 'provider': 'OPENAI'},
-    {'name': 'gpt-4o', 'provider': 'OPENAI'},
-  ];
+
+  /// 从服务端获取的模型列表
+  final List<AiModelDTO> _availableModels = [];
+  List<AiModelDTO> get availableModels => List.unmodifiable(_availableModels);
+
+  /// 是否正在加载模型列表
+  bool _isLoadingModels = false;
+  bool get isLoadingModels => _isLoadingModels;
 
   // ====================== 表单状态 ======================
 
-  /// 当前选中的模型名称
-  String _modelName = 'qwen-plus';
+  /// 当前选中的模型代码
+  String _modelName = '';
   String get modelName => _modelName;
 
   /// 当前选中的协议/提供商类型
-  String _providerType = 'ALIBABA';
+  String _providerType = '';
   String get providerType => _providerType;
+
+  /// 当前模型的显示名称（优先 modelName，降级 modelCode）
+  String get modelDisplayName {
+    final model = _availableModels.where((m) => m.modelCode == _modelName);
+    if (model.isNotEmpty) {
+      return model.first.modelName ?? model.first.modelCode ?? _modelName;
+    }
+    return _modelName;
+  }
 
   // ====================== UI 状态 ======================
 
@@ -81,7 +93,10 @@ class AiChatViewModel extends ChangeNotifier {
   StreamSubscription<String>? _streamSubscription;
 
   AiChatViewModel({AiChatService? aiChatService})
-    : _aiChatService = aiChatService ?? AiChatService();
+    : _aiChatService = aiChatService ?? AiChatService() {
+    // 初始化时加载模型列表
+    loadModels();
+  }
 
   // ====================== 状态更新 ======================
 
@@ -89,6 +104,32 @@ class AiChatViewModel extends ChangeNotifier {
   void selectModel(String modelName, String providerType) {
     _modelName = modelName;
     _providerType = providerType;
+    notifyListeners();
+  }
+
+  /// 加载可用模型列表
+  Future<void> loadModels() async {
+    _isLoadingModels = true;
+    notifyListeners();
+
+    try {
+      final models = await _aiChatService.getModels();
+      _availableModels.clear();
+      _availableModels.addAll(models);
+
+      // 按 sortOrder 排序
+      _availableModels.sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
+
+      // 如果当前没有选中模型，且列表不为空，则默认选中第一个
+      if (_modelName.isEmpty && _availableModels.isNotEmpty) {
+        _modelName = _availableModels.first.modelCode ?? '';
+        _providerType = _availableModels.first.providerType ?? '';
+      }
+    } catch (e) {
+      _errorMessage = e.toString();
+    }
+
+    _isLoadingModels = false;
     notifyListeners();
   }
 

@@ -3,6 +3,7 @@ import 'package:odk_flutter_template/features/aichat/api/ai_chat_api.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_chat_request.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_conversation.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_message.dart';
+import 'package:odk_flutter_template/features/aichat/models/ai_model_dto.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class AiChatService {
@@ -31,5 +32,10 @@ class AiChatService {
   /// 删除会话及其消息
   Future<ServiceResponse> deleteConversation(String conversationId) async {
     return await AiChatApi().deleteConversation(conversationId);
+  }
+
+  /// 获取可用的模型列表
+  Future<List<AiModelDTO>> getModels() async {
+    return await AiChatApi().getModels();
   }
 }

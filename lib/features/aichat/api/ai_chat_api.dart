@@ -8,6 +8,7 @@ import 'package:odk_flutter_template/core/network/interceptors/sign_interceptor.
 import 'package:odk_flutter_template/features/aichat/models/ai_chat_request.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_conversation.dart';
 import 'package:odk_flutter_template/features/aichat/models/ai_message.dart';
+import 'package:odk_flutter_template/features/aichat/models/ai_model_dto.dart';
 import 'package:odk_flutter_template/models/response/service_response.dart';
 
 class AiChatApi {
@@ -186,5 +187,16 @@ class AiChatApi {
     return await ApiService.instance.delete(
       '/ai/conversation?conversationId=$conversationId',
     );
+  }
+
+  /// 获取可用的模型列表
+  Future<List<AiModelDTO>> getModels() async {
+    ServiceResponse response = await ApiService.instance.get('/ai/models');
+    if (!response.success || response.data == null) return [];
+
+    final list = response.data as List<dynamic>;
+    return list
+        .map((e) => AiModelDTO.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 }
