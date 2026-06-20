@@ -20,6 +20,7 @@
   "appName": "应用名称",
   "home": "首页",
   "discover": "发现",
+  "message": "消息",
   "mine": "我的",
   "detail": "详情",
 
@@ -251,5 +252,11 @@
   "aiChatDeleteConfirmTitle": "删除会话",
   "aiChatDeleteConfirmMsg": "确认删除该会话及其所有消息吗？",
   "aiChatWelcome": "开始一段新的对话吧",
-  "aiChatInputHint": "输入消息..."
+  "aiChatInputHint": "输入消息...",
+
+  "@@x-comment-section-notification": "===================== 推送通知 =====================",
+  "notificationTitle": "消息通知",
+  "notificationEmpty": "暂无消息",
+  "notificationYesterday": "昨天",
+  "notificationDaysAgo": "天前"
 }

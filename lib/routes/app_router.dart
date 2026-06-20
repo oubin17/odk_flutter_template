@@ -17,6 +17,7 @@ import 'package:odk_flutter_template/features/mine/presentation/system_setting_p
 import 'package:odk_flutter_template/features/mine/presentation/user_info_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/user_info_update_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/version_info_page.dart';
+import 'package:odk_flutter_template/features/notification/presentation/notification_page.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 import 'package:odk_flutter_template/widgets/app_webview/agreement_page.dart';
 import 'package:odk_flutter_template/widgets/app_status/not_found.dart';
@@ -43,6 +44,7 @@ class RouteNames {
   static const String deleteAccount = 'DeleteAccount';
   static const String about = 'About';
   static const String feedback = 'Feedback';
+  static const String notification = 'Notification';
 }
 
 // ====================== 路由路径常量（已删除Splash） ======================
@@ -64,6 +66,7 @@ class RoutePaths {
   static const String deleteAccount = '/deleteAccount';
   static const String about = '/about';
   static const String feedback = '/feedback';
+  static const String notification = '/notification';
 }
 
 class AppRouter {
@@ -226,6 +229,11 @@ class AppRouter {
         path: RoutePaths.feedback,
         name: RouteNames.feedback,
         builder: (context, state) => const FeedbackPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.notification,
+        name: RouteNames.notification,
+        builder: (context, state) => const NotificationPage(),
       ),
       GoRoute(
         path: RoutePaths.notFound,

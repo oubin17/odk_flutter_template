@@ -60,6 +60,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get discover => 'Discover';
 
   @override
+  String get message => 'Messages';
+
+  @override
   String get mine => 'Mine';
 
   @override
@@ -609,4 +612,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aiChatInputHint => 'Type a message...';
+
+  @override
+  String get notificationTitle => 'Notifications';
+
+  @override
+  String get notificationEmpty => 'No notifications';
+
+  @override
+  String get notificationYesterday => 'Yesterday';
+
+  @override
+  String get notificationDaysAgo => ' days ago';
 }

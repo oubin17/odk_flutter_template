@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'Discover'**
   String get discover;
 
+  /// 消息
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get message;
+
   /// 我的
   ///
   /// In en, this message translates to:
@@ -1225,6 +1231,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type a message...'**
   String get aiChatInputHint;
+
+  /// 消息通知标题
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationTitle;
+
+  /// 暂无消息
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications'**
+  String get notificationEmpty;
+
+  /// 昨天
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get notificationYesterday;
+
+  /// 天前
+  ///
+  /// In en, this message translates to:
+  /// **' days ago'**
+  String get notificationDaysAgo;
 }
 
 class _AppLocalizationsDelegate

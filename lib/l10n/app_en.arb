@@ -37,6 +37,8 @@
   "@home": { "description": "首页" },
   "discover": "Discover",
   "@discover": { "description": "发现" },
+  "message": "Messages",
+  "@message": { "description": "消息" },
   "mine": "Mine",
   "@mine": { "description": "我的" },
   "detail": "Detail",
@@ -448,5 +450,15 @@
   "aiChatWelcome": "Start a new conversation",
   "@aiChatWelcome": { "description": "AI对话欢迎语" },
   "aiChatInputHint": "Type a message...",
-  "@aiChatInputHint": { "description": "AI对话输入提示" }
+  "@aiChatInputHint": { "description": "AI对话输入提示" },
+
+  "@@x-comment-section-notification": "===================== 推送通知 =====================",
+  "notificationTitle": "Notifications",
+  "@notificationTitle": { "description": "消息通知标题" },
+  "notificationEmpty": "No notifications",
+  "@notificationEmpty": { "description": "暂无消息" },
+  "notificationYesterday": "Yesterday",
+  "@notificationYesterday": { "description": "昨天" },
+  "notificationDaysAgo": " days ago",
+  "@notificationDaysAgo": { "description": "天前" }
 }

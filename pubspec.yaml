@@ -70,6 +70,14 @@ dependencies:
   liquid_glass_bottom_bar: ^0.0.6
   flutter_markdown: ^0.7.7+1
   
+  # 推送通知（可选）
+  # firebase_core: ^3.12.1        # Firebase 核心（需要真实推送时取消注释）
+  # firebase_messaging: ^15.2.4   # Firebase 推送（需要真实推送时取消注释）
+  # jpush_flutter: ^2.3.4         # 极光推送（国内推荐，需要时取消注释）
+  
+  # 本地通知（模拟系统推送通知栏）
+  flutter_local_notifications: ^17.2.0
+  
 
 dev_dependencies:
   flutter_test:

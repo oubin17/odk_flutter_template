@@ -73,6 +73,7 @@ class L10nUtils {
   static String get appTitle => _localizations!.appTitle;
   static String get home => _localizations!.home;
   static String get discover => _localizations!.discover;
+  static String get message => _localizations!.message;
   static String get mine => _localizations!.mine;
   static String get helpAbout => _localizations!.helpAbout;
   static String get iHaveReadAndAgree => _localizations!.iHaveReadAndAgree;
@@ -299,4 +300,11 @@ class L10nUtils {
       _localizations!.aiChatDeleteConfirmMsg;
   static String get aiChatWelcome => _localizations!.aiChatWelcome;
   static String get aiChatInputHint => _localizations!.aiChatInputHint;
+
+  // ======================== 推送通知 ========================
+  static String get notificationTitle => _localizations!.notificationTitle;
+  static String get notificationEmpty => _localizations!.notificationEmpty;
+  static String get notificationYesterday =>
+      _localizations!.notificationYesterday;
+  static String get notificationDaysAgo => _localizations!.notificationDaysAgo;
 }

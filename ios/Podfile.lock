@@ -4,6 +4,8 @@ PODS:
   - flutter_bugly (0.0.1):
     - Bugly (= 2.6.1)
     - Flutter
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
   - permission_handler_apple (9.3.0):
@@ -12,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_bugly (from `.symlinks/plugins/flutter_bugly/ios`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
@@ -24,6 +27,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_bugly:
     :path: ".symlinks/plugins/flutter_bugly/ios"
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   permission_handler_apple:
@@ -33,6 +38,7 @@ SPEC CHECKSUMS:
   Bugly: 217ac2ce5f0f2626d43dbaa4f70764c953a26a31
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_bugly: a77131ff7b385a481c594830dc89aa53e8e7fbee
+  flutter_local_notifications: ad39620c743ea4c15127860f4b5641649a988100
   fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
 

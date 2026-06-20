@@ -5,6 +5,7 @@ import 'package:odk_flutter_template/core/crash/bugly_service.dart';
 import 'package:odk_flutter_template/core/network/check/network_utils.dart';
 import 'package:odk_flutter_template/core/session/user_session_service.dart';
 import 'package:odk_flutter_template/core/storage/storage_manager.dart';
+import 'package:odk_flutter_template/features/notification/service/notification_service.dart';
 import 'package:odk_flutter_template/providers/user/user_provider.dart';
 
 class AppInitializer {
@@ -37,5 +38,8 @@ class AppInitializer {
 
     // 8. 初始化 Bugly 崩溃监控（需要在 FlavorConfig 配置之后调用，以读取 appId）
     await BuglyService.instance.init();
+
+    // 9. 初始化通知服务
+    await NotificationService().initialize();
   }
 }

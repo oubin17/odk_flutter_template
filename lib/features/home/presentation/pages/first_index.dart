@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
+import 'package:odk_flutter_template/features/notification/models/push_message.dart';
+import 'package:odk_flutter_template/features/notification/service/notification_service.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
@@ -35,6 +37,18 @@ class FirstIndexPage extends StatelessWidget {
               icon: Icons.search,
               onTap: () {
                 NavigatorUtils.pushNamed(RouteNames.aiChat);
+              },
+            ),
+            AppGap.hNormal,
+            AppButton(
+              text: '测试推送通知',
+              onTap: () {
+                NotificationService().simulatePush(
+                  title: '系统通知',
+                  body: '您的账号已成功登录，欢迎使用！',
+                  type: PushMessageType.system,
+                  data: {'routePath': '/notification'},
+                );
               },
             ),
           ],

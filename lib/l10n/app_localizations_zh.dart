@@ -60,6 +60,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get discover => '发现';
 
   @override
+  String get message => '消息';
+
+  @override
   String get mine => '我的';
 
   @override
@@ -585,4 +588,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiChatInputHint => '输入消息...';
+
+  @override
+  String get notificationTitle => '消息通知';
+
+  @override
+  String get notificationEmpty => '暂无消息';
+
+  @override
+  String get notificationYesterday => '昨天';
+
+  @override
+  String get notificationDaysAgo => '天前';
 }
