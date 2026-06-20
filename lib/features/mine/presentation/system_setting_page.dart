@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/auth/service/auth_service.dart';
+import 'package:odk_flutter_template/features/notification/service/notification_service.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
 import 'package:odk_flutter_template/routes/navigator_utils.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
@@ -46,6 +47,31 @@ class SystemSettingPage extends StatelessWidget {
           title: L10nUtils.commonSetting,
           onTap: () {
             NavigatorUtils.pushNamed(RouteNames.commonSetting);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMessageContext(BuildContext context) {
+    final unreadCount = NotificationService().unreadCount;
+
+    return Column(
+      children: [
+        AppListItem(
+          title: L10nUtils.message,
+          right: unreadCount > 0
+              ? Container(
+                  width: 12.w,
+                  height: 12.w,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary(context),
+                    shape: BoxShape.circle,
+                  ),
+                )
+              : null,
+          onTap: () {
+            NavigatorUtils.pushNamed(RouteNames.notification);
           },
         ),
       ],
@@ -115,6 +141,16 @@ class SystemSettingPage extends StatelessWidget {
             showShadow: false,
             padding: EdgeInsets.zero,
             child: _buildSystemContext(context),
+          ),
+
+          AppGap.hLarge,
+
+          // 消息分组
+          _buildSectionTitle(L10nUtils.message),
+          AppCard(
+            showShadow: false,
+            padding: EdgeInsets.zero,
+            child: _buildMessageContext(context),
           ),
 
           AppGap.hLarge,

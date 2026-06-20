@@ -51,8 +51,10 @@ class _ContentPageState extends State<ContentPage> {
   Widget build(BuildContext context) {
     return AppPage(
       title: AppText(L10nUtils.of(context).discover),
+      padding: EdgeInsets.zero,
       body: AppRefreshList<ContentItem>(
         controller: _refreshController,
+        padding: EdgeInsets.symmetric(horizontal: 8.w).copyWith(top: 8.h),
         // 🔧 切换布局模式：修改此处即可
         // - AppRefreshListMode.list：单列列表
         // - AppRefreshListMode.masonryGrid：双列瀑布流

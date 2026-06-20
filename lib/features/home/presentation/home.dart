@@ -3,7 +3,6 @@ import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/content/presentation/content_page.dart';
 import 'package:odk_flutter_template/features/home/presentation/pages/first_index.dart';
 import 'package:odk_flutter_template/features/mine/presentation/profile_page.dart';
-import 'package:odk_flutter_template/features/notification/presentation/notification_page.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_bottom_nav_bar.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
 
@@ -20,7 +19,6 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const FirstIndexPage(),
     const ContentPage(),
-    const NotificationPage(),
     const ProfilePage(),
   ];
 
@@ -69,7 +67,6 @@ class _HomePageState extends State<HomePage> {
         items: [
           AppBottomNavItem(icon: Icons.home, label: L10nUtils.home),
           AppBottomNavItem(icon: Icons.explore, label: L10nUtils.discover),
-          AppBottomNavItem(icon: Icons.message, label: L10nUtils.message),
           AppBottomNavItem(icon: Icons.person, label: L10nUtils.mine),
         ],
         onTap: (index) => setState(() => _currentIndex = index),
