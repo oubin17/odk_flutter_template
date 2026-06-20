@@ -30,58 +30,34 @@ class AppBottomNavBar extends StatelessWidget {
   /// 点击回调
   final ValueChanged<int> onTap;
 
-  /// 选中时颜色（默认主色）
-  final Color? selectedItemColor;
-
-  /// 未选中时颜色（默认灰色）
-  final Color? unselectedItemColor;
-
-  /// 背景色（默认卡片色）
-  final Color? backgroundColor;
-
-  /// 图标大小
-  final double iconSize;
-
-  /// 标签字体大小
-  final double labelFontSize;
-
-  /// 导航栏高度
-  final double barHeight;
-
   const AppBottomNavBar({
     super.key,
     required this.currentIndex,
     required this.items,
     required this.onTap,
-    this.selectedItemColor,
-    this.unselectedItemColor,
-    this.backgroundColor,
-    this.iconSize = 50,
-    this.labelFontSize = 20,
-    this.barHeight = 56,
   });
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = selectedItemColor ?? AppColors.primary(context);
-    final unselectedColor = unselectedItemColor ?? AppColors.textGray(context);
-    final bgColor = backgroundColor ?? AppColors.card(context);
+    final primaryColor = AppColors.primary(context);
+    final unselectedColor = AppColors.textGray(context);
+    final bgColor = AppColors.card(context).withValues(alpha: 0.85);
 
     return Container(
       decoration: BoxDecoration(
         color: bgColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(15),
-            blurRadius: 8.w,
-            offset: Offset(0, -2.w),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.black.withAlpha(20),
+        //     blurRadius: 12.w,
+        //     offset: Offset(0, -2.w),
+        //   ),
+        // ],
       ),
       child: Padding(
         padding: EdgeInsets.only(
-          top: 6.h,
-          bottom: MediaQuery.of(context).padding.bottom + 6.h,
+          top: 10.h,
+          bottom: MediaQuery.of(context).padding.bottom + 5.h,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -100,14 +76,14 @@ class AppBottomNavBar extends StatelessWidget {
                   children: [
                     Icon(
                       isSelected ? (item.activeIcon ?? item.icon) : item.icon,
-                      size: iconSize.w,
+                      size: 48.w,
                       color: color,
                     ),
                     if (item.label != null) ...[
                       AppGap.h(4),
                       AppText(
                         item.label!,
-                        size: labelFontSize.sp,
+                        size: 20.sp,
                         color: color,
                         weight: FontWeight.w500,
                       ),

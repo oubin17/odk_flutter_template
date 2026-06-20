@@ -290,7 +290,7 @@ class _AiChatPageState extends State<AiChatPage> {
                     modelDisplayName,
                     color: AppColors.primary(context),
                   ),
-                  SizedBox(width: 4.w),
+                  AppGap.wSuperSmall,
                   Icon(
                     Icons.arrow_drop_down_rounded,
                     size: 32.w,
@@ -497,7 +497,7 @@ class _AiChatPageState extends State<AiChatPage> {
                       size: 24.w,
                     ),
                   ),
-                  SizedBox(width: 14.w),
+                  AppGap.w(14),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -510,7 +510,7 @@ class _AiChatPageState extends State<AiChatPage> {
                           size: 28.sp,
                           maxLines: 1,
                         ),
-                        SizedBox(height: 6.h),
+                        AppGap.h(6),
                         AppText.tip(
                           conversation.createTime ?? '',
                           color: AppColors.textGray(context),
@@ -653,7 +653,7 @@ class _AiChatPageState extends State<AiChatPage> {
                   color: AppColors.primary(context),
                 ),
               ),
-              SizedBox(width: 12.w),
+              AppGap.w(12),
             ],
             Flexible(
               child: Container(
@@ -726,7 +726,7 @@ class _AiChatPageState extends State<AiChatPage> {
               ),
             ),
             if (isUser) ...[
-              SizedBox(width: 12.w),
+              AppGap.w(12),
               Container(
                 width: 56.w,
                 height: 56.w,

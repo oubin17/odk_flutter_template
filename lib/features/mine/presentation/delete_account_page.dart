@@ -26,7 +26,6 @@ class DeleteAccountPage extends StatefulWidget {
 class _DeleteAccountPageState extends State<DeleteAccountPage>
     with MountedSafeMixin {
   final TextEditingController _confirmController = TextEditingController();
-  bool _isDeleting = false;
 
   @override
   void dispose() {
@@ -49,8 +48,6 @@ class _DeleteAccountPageState extends State<DeleteAccountPage>
     final confirmed = await _showConfirmDialog();
     if (!confirmed) return;
 
-    setState(() => _isDeleting = true);
-
     try {
       // 调用后端注销接口（如果有的话）
       await AuthService().deletion();
@@ -64,8 +61,6 @@ class _DeleteAccountPageState extends State<DeleteAccountPage>
       mountedSafeCallback(() {
         AppToast.showToast(L10nUtils.deleteAccountFailed);
       });
-    } finally {
-      mountedSafeSetState(() => _isDeleting = false);
     }
   }
 
@@ -74,17 +69,17 @@ class _DeleteAccountPageState extends State<DeleteAccountPage>
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(L10nUtils.deleteAccountConfirmTitle),
-        content: Text(L10nUtils.deleteAccountConfirmMessage),
+        title: AppText(L10nUtils.deleteAccountConfirmTitle),
+        content: AppText.second(L10nUtils.deleteAccountConfirmMessage),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(L10nUtils.cancel),
+          AppTextButton(
+            text: L10nUtils.cancel,
+            onTap: () => Navigator.of(context).pop(false),
           ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text(L10nUtils.confirm),
+          AppTextButton(
+            text: L10nUtils.confirm,
+            color: AppColors.error,
+            onTap: () => Navigator.of(context).pop(true),
           ),
         ],
       ),
@@ -178,19 +173,10 @@ class _DeleteAccountPageState extends State<DeleteAccountPage>
       children: [
         AppText.second(L10nUtils.deleteAccountInputHint),
         AppGap.hSmall,
-        TextField(
+        AppInput(
           controller: _confirmController,
+          hint: L10nUtils.deleteAccountInputMatch,
           onChanged: (_) => setState(() {}),
-          decoration: InputDecoration(
-            hintText: L10nUtils.deleteAccountInputMatch,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 16.h,
-            ),
-          ),
         ),
       ],
     );
@@ -198,36 +184,11 @@ class _DeleteAccountPageState extends State<DeleteAccountPage>
 
   /// 注销按钮
   Widget _buildDeleteButton(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 88.h,
-      child: ElevatedButton(
-        onPressed: _isDeleting || !_isConfirmMatch ? null : _deleteAccount,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
-          disabledBackgroundColor: Colors.grey.shade300,
-          disabledForegroundColor: Colors.grey.shade500,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
-          ),
-        ),
-        child: _isDeleting
-            ? SizedBox(
-                width: 36.w,
-                height: 36.w,
-                child: const CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 2,
-                ),
-              )
-            : AppText(
-                L10nUtils.deleteAccountButton,
-                size: 32.sp,
-                color: _isConfirmMatch ? Colors.white : Colors.grey.shade500,
-                weight: FontWeight.w500,
-              ),
-      ),
+    return AppDebounceButton(
+      text: L10nUtils.deleteAccountButton,
+      disabled: !_isConfirmMatch,
+      bgColor: AppColors.error,
+      onTap: _deleteAccount,
     );
   }
 }

@@ -20,7 +20,6 @@ class FeedbackPage extends StatefulWidget {
 
 class _FeedbackPageState extends State<FeedbackPage> with MountedSafeMixin {
   final TextEditingController _feedbackController = TextEditingController();
-  bool _isSubmitting = false;
 
   @override
   void dispose() {
@@ -39,8 +38,6 @@ class _FeedbackPageState extends State<FeedbackPage> with MountedSafeMixin {
       return;
     }
 
-    setState(() => _isSubmitting = true);
-
     try {
       // 调用反馈提交 API
       await SystemService().submitFeedback(_feedbackController.text.trim());
@@ -54,8 +51,6 @@ class _FeedbackPageState extends State<FeedbackPage> with MountedSafeMixin {
       mountedSafeCallback(() {
         AppToast.showToast(L10nUtils.feedbackFailed);
       });
-    } finally {
-      mountedSafeSetState(() => _isSubmitting = false);
     }
   }
 
@@ -96,9 +91,8 @@ class _FeedbackPageState extends State<FeedbackPage> with MountedSafeMixin {
 
   /// 提交按钮
   Widget _buildSubmitButton(BuildContext context) {
-    return AppButton(
+    return AppDebounceButton(
       text: L10nUtils.feedbackSubmit,
-      isLoading: _isSubmitting,
       disabled: _isEmpty,
       onTap: _submitFeedback,
     );

@@ -19,7 +19,7 @@ class UserInfoPage extends StatelessWidget {
     return AppListItem(
       title: L10nUtils.avatar,
       right: Padding(
-        padding: const EdgeInsets.only(right: 20.0),
+        padding: EdgeInsets.only(right: 20.w),
         child: AppAvatar(
           imgUrl: user?.userProfile.avatarUrl,
           assetPath: Assets.images.launcherIcon.launcher.path,
@@ -44,7 +44,7 @@ class UserInfoPage extends StatelessWidget {
         AppListItem(
           title: L10nUtils.nickname,
           right: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: 8.w),
             child: AppText(user?.userProfile?.userName ?? "", size: 26.sp),
           ),
           onTap: () {
@@ -62,7 +62,7 @@ class UserInfoPage extends StatelessWidget {
         AppListItem(
           title: L10nUtils.gender,
           right: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: 8.w),
             child: AppText(
               GenderEnum.fromCode(user?.userProfile?.gender ?? ""),
               size: 26.sp,
@@ -83,7 +83,7 @@ class UserInfoPage extends StatelessWidget {
         AppListItem(
           title: L10nUtils.birthday,
           right: Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: 8.w),
             child: AppText(user?.userProfile?.birthDay ?? "", size: 26.sp),
           ),
           onTap: () {
@@ -106,7 +106,7 @@ class UserInfoPage extends StatelessWidget {
     return AppListItem(
       title: L10nUtils.phoneNumber,
       right: Padding(
-        padding: const EdgeInsets.only(right: 8.0),
+        padding: EdgeInsets.only(right: 8.w),
         child: AppText(user?.accessToken.tokenValue ?? "", size: 26.sp),
       ),
       showArrow: false,
