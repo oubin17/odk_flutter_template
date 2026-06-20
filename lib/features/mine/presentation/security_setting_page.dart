@@ -66,7 +66,7 @@ class SecuritySettingPage extends StatelessWidget {
             padding: EdgeInsets.zero,
             child: _buildPasswordContext(context),
           ),
-          AppGap.h(24),
+          AppGap.hLarge,
           // 危险操作区域
           AppCard(
             showShadow: false,

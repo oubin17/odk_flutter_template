@@ -107,7 +107,7 @@ class SystemSettingPage extends StatelessWidget {
             child: _buildAccountContext(context),
           ),
 
-          AppGap.h(24),
+          AppGap.hLarge,
 
           // 通用分组
           _buildSectionTitle(L10nUtils.general),
@@ -117,7 +117,7 @@ class SystemSettingPage extends StatelessWidget {
             child: _buildSystemContext(context),
           ),
 
-          AppGap.h(24),
+          AppGap.hLarge,
           // 帮助关于分组
           _buildSectionTitle(L10nUtils.helpAbout),
           AppCard(

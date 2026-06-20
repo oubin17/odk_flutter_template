@@ -41,8 +41,8 @@ const Map<String, String> commonVariables = {
 const Map<String, String> devVariables = {
   ...commonVariables,
   // ConfigKey.serverUri: 'http://172.27.53.115:8080/odk-base-template/api',
-  // ConfigKey.serverUri: 'http://192.168.31.228:8080/odk-base-template/api',
-  ConfigKey.serverUri: 'http://172.20.10.5:8080/odk-base-template/api',
+  ConfigKey.serverUri: 'http://192.168.31.228:8080/odk-base-template/api',
+  // ConfigKey.serverUri: 'http://172.20.10.5:8080/odk-base-template/api',
 
   // 开发环境专属密钥
   ConfigKey.signSecret: 'flutter_app_dev_sign_secret_2025',

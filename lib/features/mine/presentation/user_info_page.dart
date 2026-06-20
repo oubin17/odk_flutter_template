@@ -131,7 +131,7 @@ class UserInfoPage extends StatelessWidget {
                 child: _buildAvatarContext(context, user),
               ),
 
-              AppGap.h(24),
+              AppGap.hLarge,
 
               // 基本信息
               AppCard(
@@ -140,7 +140,7 @@ class UserInfoPage extends StatelessWidget {
                 child: _buildBasicInfoContext(context, user),
               ),
 
-              AppGap.h(24),
+              AppGap.hLarge,
 
               // 账号信息
               AppCard(

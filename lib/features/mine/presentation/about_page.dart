@@ -24,7 +24,7 @@ class AboutPage extends StatelessWidget {
           // 顶部应用信息区域
           _buildAppHeader(context),
 
-          AppGap.h(24),
+          AppGap.hLarge,
 
           // 信息列表分组
           AppCard(
@@ -95,9 +95,9 @@ class AboutPage extends StatelessWidget {
           // 应用图标
           AppAvatar(
             assetPath: Assets.images.launcherIcon.launcher.path,
-            size: 120,
+            size: 120.w,
             shape: AppAvatarShape.rounded,
-            borderRadius: 24,
+            borderRadius: 24.w,
           ),
           AppGap.hNormal,
           // 应用名称
