@@ -624,4 +624,294 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationDaysAgo => ' days ago';
+
+  @override
+  String get complianceInfo => 'Compliance';
+
+  @override
+  String get sdkList => 'Third-party SDK List';
+
+  @override
+  String get privacyCollection => 'Personal Information Collection';
+
+  @override
+  String get permissionInfo => 'Permission Usage';
+
+  @override
+  String get complianceRequired => 'Required';
+
+  @override
+  String get compliancePurpose => 'Purpose';
+
+  @override
+  String get complianceScenario => 'Scenario';
+
+  @override
+  String get complianceProvider => 'Provider';
+
+  @override
+  String get complianceDataCollected => 'Data Collected';
+
+  @override
+  String get complianceCollectionPurpose => 'Collection Purpose';
+
+  @override
+  String get complianceProcessingMethod => 'Processing Method';
+
+  @override
+  String get permissionInfoDesc =>
+      'This app may request the following permissions during operation, solely for providing corresponding features. Non-essential permissions are only requested when using the relevant features. You can manage permissions anytime in system settings.';
+
+  @override
+  String get permCameraName => 'Camera (CAMERA)';
+
+  @override
+  String get permCameraPurpose => 'Take profile photos';
+
+  @override
+  String get permCameraScenario =>
+      'When user selects \"Take Photo\" on profile page';
+
+  @override
+  String get permAlbumName => 'Photo Library (READ_MEDIA_IMAGES)';
+
+  @override
+  String get permAlbumPurpose => 'Select profile image from album';
+
+  @override
+  String get permAlbumScenario =>
+      'When user selects \"Choose from Album\" on profile page';
+
+  @override
+  String get permNotificationName => 'Notifications (POST_NOTIFICATIONS)';
+
+  @override
+  String get permNotificationPurpose => 'Receive push notifications';
+
+  @override
+  String get permNotificationScenario => 'During app runtime (user can toggle)';
+
+  @override
+  String get permNetworkName => 'Network (INTERNET)';
+
+  @override
+  String get permNetworkPurpose => 'Server communication, web content loading';
+
+  @override
+  String get permNetworkScenario => 'During app runtime (required)';
+
+  @override
+  String get permPhoneStateName => 'Device State (READ_PHONE_STATE)';
+
+  @override
+  String get permPhoneStatePurpose =>
+      'Crash monitoring auxiliary info (device model, etc.)';
+
+  @override
+  String get permPhoneStateScenario => 'Auto-collected by Bugly SDK on crash';
+
+  @override
+  String get sdkListDesc =>
+      'This app integrates the following third-party SDKs to provide various features. All SDKs\' data collection and processing comply with relevant laws and privacy policies.';
+
+  @override
+  String get sdkProviderDartCommunity => 'Dart Open Source Community';
+
+  @override
+  String get sdkProviderFlutterOfficial => 'Flutter Official';
+
+  @override
+  String get sdkProviderTencent => 'Tencent Computer System Co., Ltd.';
+
+  @override
+  String get sdkDataNone => 'None';
+
+  @override
+  String get sdkDioPurpose => 'Network requests';
+
+  @override
+  String get sdkDioData => 'Network request parameters (including device ID)';
+
+  @override
+  String get sdkProviderLibPurpose => 'State management';
+
+  @override
+  String get sdkGoRouterPurpose => 'Route navigation';
+
+  @override
+  String get sdkSecureStoragePurpose =>
+      'Secure storage (tokens and sensitive data)';
+
+  @override
+  String get sdkSecureStorageData => 'Locally stored tokens';
+
+  @override
+  String get sdkSharedPrefsPurpose => 'Preference storage';
+
+  @override
+  String get sdkSharedPrefsData => 'Theme mode, language preference';
+
+  @override
+  String get sdkCachedImagePurpose => 'Image cache loading';
+
+  @override
+  String get sdkCachedImageData => 'Image cache files';
+
+  @override
+  String get sdkWebviewPurpose => 'Embedded web pages (agreement pages, etc.)';
+
+  @override
+  String get sdkWebviewData => 'Cookies';
+
+  @override
+  String get sdkImagePickerPurpose => 'Avatar photo/album selection';
+
+  @override
+  String get sdkImagePickerData => 'Selected images';
+
+  @override
+  String get sdkPermissionHandlerPurpose => 'Permission request management';
+
+  @override
+  String get sdkDeviceInfoPurpose => 'Device info retrieval';
+
+  @override
+  String get sdkDeviceInfoData => 'Device model, OS version';
+
+  @override
+  String get sdkPackageInfoPurpose => 'App package info retrieval';
+
+  @override
+  String get sdkPackageInfoData => 'App version, package name';
+
+  @override
+  String get sdkConnectivityPurpose => 'Network status monitoring';
+
+  @override
+  String get sdkConnectivityData => 'Network connection type';
+
+  @override
+  String get sdkLocalNotificationsPurpose => 'Local push notifications';
+
+  @override
+  String get sdkLocalNotificationsData => 'Notification content';
+
+  @override
+  String get sdkBuglyPurpose => 'Crash exception monitoring';
+
+  @override
+  String get sdkBuglyData => 'Device model, OS version, crash logs';
+
+  @override
+  String get privacyCollectionDesc =>
+      'This app collects the following personal information during operation, solely for providing and improving our services. We strictly protect your personal information in accordance with our Privacy Policy.';
+
+  @override
+  String get privacyPhoneInfoType => 'Phone Number';
+
+  @override
+  String get privacyPhonePurpose =>
+      'User login, registration, identity verification';
+
+  @override
+  String get privacyPhoneMethod =>
+      'Encrypted and stored on server, not shared with third parties';
+
+  @override
+  String get privacyPasswordInfoType => 'Password';
+
+  @override
+  String get privacyPasswordPurpose => 'User login authentication';
+
+  @override
+  String get privacyPasswordMethod =>
+      'Encrypted transmission to server, no plaintext stored locally';
+
+  @override
+  String get privacyNicknameInfoType => 'Nickname';
+
+  @override
+  String get privacyNicknamePurpose => 'User profile display';
+
+  @override
+  String get privacyNicknameMethod => 'Transmitted to server for storage';
+
+  @override
+  String get privacyAvatarInfoType => 'Avatar';
+
+  @override
+  String get privacyAvatarPurpose => 'User profile display';
+
+  @override
+  String get privacyAvatarMethod => 'Uploaded to server, local image cache';
+
+  @override
+  String get privacyGenderInfoType => 'Gender';
+
+  @override
+  String get privacyGenderPurpose => 'Profile completion';
+
+  @override
+  String get privacyGenderMethod => 'Transmitted to server for storage';
+
+  @override
+  String get privacyBirthdayInfoType => 'Birthday';
+
+  @override
+  String get privacyBirthdayPurpose => 'Profile completion';
+
+  @override
+  String get privacyBirthdayMethod => 'Transmitted to server for storage';
+
+  @override
+  String get privacyDeviceIdInfoType => 'Device ID (IDFA/Android ID)';
+
+  @override
+  String get privacyDeviceIdPurpose =>
+      'Device identification, crash monitoring';
+
+  @override
+  String get privacyDeviceIdMethod =>
+      'Locally generated and stored, not uploaded (except Bugly SDK)';
+
+  @override
+  String get privacyDeviceInfoInfoType => 'Device model, OS version';
+
+  @override
+  String get privacyDeviceInfoPurpose => 'Crash diagnosis, version adaptation';
+
+  @override
+  String get privacyDeviceInfoMethod =>
+      'Uploaded to Tencent server via Bugly SDK';
+
+  @override
+  String get privacyAppVersionInfoType => 'App version number';
+
+  @override
+  String get privacyAppVersionPurpose => 'Version update detection';
+
+  @override
+  String get privacyAppVersionMethod =>
+      'Read locally, compared with server version';
+
+  @override
+  String get privacyNetworkStatusInfoType => 'Network connection status';
+
+  @override
+  String get privacyNetworkStatusPurpose =>
+      'Network status monitoring and alerts';
+
+  @override
+  String get privacyNetworkStatusMethod =>
+      'Local monitoring only, not stored or uploaded';
+
+  @override
+  String get privacyCrashLogInfoType => 'Crash logs';
+
+  @override
+  String get privacyCrashLogPurpose => 'App crash monitoring and repair';
+
+  @override
+  String get privacyCrashLogMethod =>
+      'Uploaded to Tencent server via Bugly SDK';
 }

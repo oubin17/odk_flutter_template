@@ -20,6 +20,7 @@ class AboutPage extends StatelessWidget {
     return AppPage(
       title: AppText(L10nUtils.about),
       body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         children: [
           // 顶部应用信息区域
           _buildAppHeader(context),
@@ -76,6 +77,41 @@ class AboutPage extends StatelessWidget {
                         'url': Env.privacyPolicyUrl,
                       },
                     );
+                  },
+                ),
+              ],
+            ),
+          ),
+
+          // 合规信息分组
+          AppGap.hLarge,
+          Padding(
+            padding: EdgeInsets.only(left: 30.w, bottom: 8.h),
+            child: AppText.tip(L10nUtils.complianceInfo),
+          ),
+          AppCard(
+            showShadow: false,
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                AppListItem(
+                  title: L10nUtils.sdkList,
+                  onTap: () {
+                    NavigatorUtils.pushNamed(RouteNames.sdkList);
+                  },
+                ),
+                const AppDivider(),
+                AppListItem(
+                  title: L10nUtils.privacyCollection,
+                  onTap: () {
+                    NavigatorUtils.pushNamed(RouteNames.privacyCollection);
+                  },
+                ),
+                const AppDivider(),
+                AppListItem(
+                  title: L10nUtils.permissionInfo,
+                  onTap: () {
+                    NavigatorUtils.pushNamed(RouteNames.permissionInfo);
                   },
                 ),
               ],

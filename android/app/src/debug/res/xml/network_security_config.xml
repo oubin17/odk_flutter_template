@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ========================================================================== -->
+<!-- 网络安全配置（Debug / 开发环境）                                            -->
+<!-- ========================================================================== -->
+<!-- 允许所有明文 HTTP 请求，支持通过 IP 直接访问开发服务器                       -->
+<!-- 此文件仅在 Debug 构建时生效，会覆盖 main 中的同名资源                       -->
+<!-- ========================================================================== -->
+<network-security-config>
+    <!-- 开发环境：允许所有明文 HTTP -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

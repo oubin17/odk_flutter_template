@@ -223,6 +223,7 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
       title: AppText(widget.title),
       onSave: _handleSave,
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: Form(
           key: _formKey,
           child: switch (widget.type) {

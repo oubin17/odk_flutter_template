@@ -11,6 +11,9 @@ import 'package:odk_flutter_template/features/mine/presentation/about_page.dart'
 import 'package:odk_flutter_template/features/mine/presentation/common_setting_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/delete_account_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/feedback_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/permission_info_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/privacy_collection_page.dart';
+import 'package:odk_flutter_template/features/mine/presentation/sdk_list_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/password_manager_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/security_setting_page.dart';
 import 'package:odk_flutter_template/features/mine/presentation/system_setting_page.dart';
@@ -45,6 +48,9 @@ class RouteNames {
   static const String about = 'About';
   static const String feedback = 'Feedback';
   static const String notification = 'Notification';
+  static const String sdkList = 'SdkList';
+  static const String privacyCollection = 'PrivacyCollection';
+  static const String permissionInfo = 'PermissionInfo';
 }
 
 // ====================== 路由路径常量（已删除Splash） ======================
@@ -67,6 +73,9 @@ class RoutePaths {
   static const String about = '/about';
   static const String feedback = '/feedback';
   static const String notification = '/notification';
+  static const String sdkList = '/sdkList';
+  static const String privacyCollection = '/privacyCollection';
+  static const String permissionInfo = '/permissionInfo';
 }
 
 class AppRouter {
@@ -234,6 +243,21 @@ class AppRouter {
         path: RoutePaths.notification,
         name: RouteNames.notification,
         builder: (context, state) => const NotificationPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.sdkList,
+        name: RouteNames.sdkList,
+        builder: (context, state) => const SdkListPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.privacyCollection,
+        name: RouteNames.privacyCollection,
+        builder: (context, state) => const PrivacyCollectionPage(),
+      ),
+      GoRoute(
+        path: RoutePaths.permissionInfo,
+        name: RouteNames.permissionInfo,
+        builder: (context, state) => const PermissionInfoPage(),
       ),
       GoRoute(
         path: RoutePaths.notFound,

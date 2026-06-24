@@ -105,7 +105,6 @@ class _VersionInfoPageState extends State<VersionInfoPage>
   Widget build(BuildContext context) {
     return AppPage(
       title: AppText(L10nUtils.versionInfo),
-      padding: EdgeInsets.zero,
       body: SingleChildScrollView(
         child: SizedBox(
           width: double.infinity,

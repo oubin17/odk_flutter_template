@@ -600,4 +600,280 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notificationDaysAgo => '天前';
+
+  @override
+  String get complianceInfo => '合规信息';
+
+  @override
+  String get sdkList => '第三方SDK列表';
+
+  @override
+  String get privacyCollection => '个人信息收集清单';
+
+  @override
+  String get permissionInfo => '权限使用说明';
+
+  @override
+  String get complianceRequired => '必要';
+
+  @override
+  String get compliancePurpose => '用途';
+
+  @override
+  String get complianceScenario => '使用场景';
+
+  @override
+  String get complianceProvider => '提供方';
+
+  @override
+  String get complianceDataCollected => '收集数据';
+
+  @override
+  String get complianceCollectionPurpose => '收集目的';
+
+  @override
+  String get complianceProcessingMethod => '处理方式';
+
+  @override
+  String get permissionInfoDesc =>
+      '本应用在运行过程中会申请以下权限，仅用于提供相应功能。非必要权限将在使用对应功能时才会请求，您可以随时在系统设置中管理权限。';
+
+  @override
+  String get permCameraName => '相机（CAMERA）';
+
+  @override
+  String get permCameraPurpose => '拍摄头像照片';
+
+  @override
+  String get permCameraScenario => '用户在个人资料页选择「拍照」时';
+
+  @override
+  String get permAlbumName => '相册（READ_MEDIA_IMAGES）';
+
+  @override
+  String get permAlbumPurpose => '从相册选择头像图片';
+
+  @override
+  String get permAlbumScenario => '用户在个人资料页选择「从相册选择」时';
+
+  @override
+  String get permNotificationName => '通知（POST_NOTIFICATIONS）';
+
+  @override
+  String get permNotificationPurpose => '接收推送消息通知';
+
+  @override
+  String get permNotificationScenario => '应用运行时（用户可手动开关）';
+
+  @override
+  String get permNetworkName => '网络（INTERNET）';
+
+  @override
+  String get permNetworkPurpose => '与服务端通信、加载网页内容';
+
+  @override
+  String get permNetworkScenario => '应用运行时（必须）';
+
+  @override
+  String get permPhoneStateName => '设备状态（READ_PHONE_STATE）';
+
+  @override
+  String get permPhoneStatePurpose => '崩溃监控辅助信息（设备型号等）';
+
+  @override
+  String get permPhoneStateScenario => '应用崩溃时由Bugly SDK自动收集';
+
+  @override
+  String get sdkListDesc =>
+      '本应用集成了以下第三方SDK，用于提供各项功能服务。各SDK的数据收集和处理均符合相关法律法规及隐私政策要求。';
+
+  @override
+  String get sdkProviderDartCommunity => 'Dart开源社区';
+
+  @override
+  String get sdkProviderFlutterOfficial => 'Flutter官方';
+
+  @override
+  String get sdkProviderTencent => '深圳市腾讯计算机系统有限公司';
+
+  @override
+  String get sdkDataNone => '无';
+
+  @override
+  String get sdkDioPurpose => '网络请求';
+
+  @override
+  String get sdkDioData => '网络请求参数（含设备标识）';
+
+  @override
+  String get sdkProviderLibPurpose => '状态管理';
+
+  @override
+  String get sdkGoRouterPurpose => '路由导航';
+
+  @override
+  String get sdkSecureStoragePurpose => '安全存储（Token等敏感信息）';
+
+  @override
+  String get sdkSecureStorageData => '本地存储的Token';
+
+  @override
+  String get sdkSharedPrefsPurpose => '偏好设置存储';
+
+  @override
+  String get sdkSharedPrefsData => '主题模式、语言偏好';
+
+  @override
+  String get sdkCachedImagePurpose => '图片缓存加载';
+
+  @override
+  String get sdkCachedImageData => '图片缓存文件';
+
+  @override
+  String get sdkWebviewPurpose => '内嵌网页（协议页面等）';
+
+  @override
+  String get sdkWebviewData => 'Cookie';
+
+  @override
+  String get sdkImagePickerPurpose => '头像拍照/相册选择';
+
+  @override
+  String get sdkImagePickerData => '所选图片';
+
+  @override
+  String get sdkPermissionHandlerPurpose => '权限请求管理';
+
+  @override
+  String get sdkDeviceInfoPurpose => '获取设备信息';
+
+  @override
+  String get sdkDeviceInfoData => '设备型号、系统版本';
+
+  @override
+  String get sdkPackageInfoPurpose => '获取应用包信息';
+
+  @override
+  String get sdkPackageInfoData => '应用版本号、包名';
+
+  @override
+  String get sdkConnectivityPurpose => '网络状态监听';
+
+  @override
+  String get sdkConnectivityData => '网络连接类型';
+
+  @override
+  String get sdkLocalNotificationsPurpose => '本地推送通知';
+
+  @override
+  String get sdkLocalNotificationsData => '通知内容';
+
+  @override
+  String get sdkBuglyPurpose => '崩溃异常监控';
+
+  @override
+  String get sdkBuglyData => '设备型号、系统版本、崩溃日志';
+
+  @override
+  String get privacyCollectionDesc =>
+      '本应用在运行过程中会收集以下个人信息，仅用于提供和改善产品服务。我们将严格按照《隐私政策》保护您的个人信息安全。';
+
+  @override
+  String get privacyPhoneInfoType => '手机号';
+
+  @override
+  String get privacyPhonePurpose => '用户登录、注册、身份验证';
+
+  @override
+  String get privacyPhoneMethod => '传输至服务端加密存储，不分享给第三方';
+
+  @override
+  String get privacyPasswordInfoType => '密码';
+
+  @override
+  String get privacyPasswordPurpose => '用户登录认证';
+
+  @override
+  String get privacyPasswordMethod => '加密传输至服务端，本地不存储明文';
+
+  @override
+  String get privacyNicknameInfoType => '昵称';
+
+  @override
+  String get privacyNicknamePurpose => '用户资料展示';
+
+  @override
+  String get privacyNicknameMethod => '传输至服务端存储';
+
+  @override
+  String get privacyAvatarInfoType => '头像';
+
+  @override
+  String get privacyAvatarPurpose => '用户资料展示';
+
+  @override
+  String get privacyAvatarMethod => '上传至服务端，本地图片缓存';
+
+  @override
+  String get privacyGenderInfoType => '性别';
+
+  @override
+  String get privacyGenderPurpose => '用户资料完善';
+
+  @override
+  String get privacyGenderMethod => '传输至服务端存储';
+
+  @override
+  String get privacyBirthdayInfoType => '生日';
+
+  @override
+  String get privacyBirthdayPurpose => '用户资料完善';
+
+  @override
+  String get privacyBirthdayMethod => '传输至服务端存储';
+
+  @override
+  String get privacyDeviceIdInfoType => '设备标识（IDFA/Android ID）';
+
+  @override
+  String get privacyDeviceIdPurpose => '设备识别、崩溃监控';
+
+  @override
+  String get privacyDeviceIdMethod => '本地生成存储，不上传服务端（Bugly SDK除外）';
+
+  @override
+  String get privacyDeviceInfoInfoType => '设备型号、系统版本';
+
+  @override
+  String get privacyDeviceInfoPurpose => '崩溃异常诊断、版本适配';
+
+  @override
+  String get privacyDeviceInfoMethod => '通过Bugly SDK上传至腾讯服务端';
+
+  @override
+  String get privacyAppVersionInfoType => '应用版本号';
+
+  @override
+  String get privacyAppVersionPurpose => '版本更新检测';
+
+  @override
+  String get privacyAppVersionMethod => '本地读取，与服务端版本号比对';
+
+  @override
+  String get privacyNetworkStatusInfoType => '网络连接状态';
+
+  @override
+  String get privacyNetworkStatusPurpose => '网络状态监听与提示';
+
+  @override
+  String get privacyNetworkStatusMethod => '仅本地监听，不存储不上传';
+
+  @override
+  String get privacyCrashLogInfoType => '崩溃日志';
+
+  @override
+  String get privacyCrashLogPurpose => '应用崩溃异常监控与修复';
+
+  @override
+  String get privacyCrashLogMethod => '通过Bugly SDK上传至腾讯服务端';
 }

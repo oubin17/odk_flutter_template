@@ -1,2 +1,5 @@
 #include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
 #include "Generated.xcconfig"
+
+// ATS: 开发环境允许通过 IP 的 HTTP 明文访问（支持本地/公网 IP 调试）
+NS_ALLOWS_ARBITRARY_LOADS = YES

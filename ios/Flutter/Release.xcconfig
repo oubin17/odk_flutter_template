@@ -1,2 +1,6 @@
 #include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
 #include "Generated.xcconfig"
+
+// ATS: 生产环境收紧为 HTTPS，明文 HTTP 请求将被拒绝
+// 获取域名后请在 Info.plist 的 NSExceptionDomains 中添加域名例外
+NS_ALLOWS_ARBITRARY_LOADS = NO

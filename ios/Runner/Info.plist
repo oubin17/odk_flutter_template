@@ -26,14 +26,30 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<!-- ====================== ATS 网络安全配置 ====================== -->
+	<!-- Debug 构建：NS_ALLOWS_ARBITRARY_LOADS=YES（允许通过 IP 的 HTTP 开发访问） -->
+	<!-- Release 构建：NS_ALLOWS_ARBITRARY_LOADS=NO（收紧为 HTTPS，需配置域名例外） -->
+	<!-- 变量值由 ios/Flutter/Debug.xcconfig 和 Release.xcconfig 注入 -->
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
+		<string>$(NS_ALLOWS_ARBITRARY_LOADS)</string>
+		<!-- 允许本地网络访问（局域网 IP 如 192.168.x.x、10.x.x.x） -->
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
+		<!-- ==================================================== -->
+		<!-- 生产环境域名例外（获取域名后取消注释并替换为你的域名） -->
+		<!-- ==================================================== -->
+		<!-- <key>NSExceptionDomains</key> -->
+		<!-- <dict> -->
+		<!--     <key>your-production-domain.com</key> -->
+		<!--     <dict> -->
+		<!--         <key>NSIncludesSubdomains</key> -->
+		<!--         <true/> -->
+		<!--         <key>NSExceptionAllowsInsecureHTTPLoads</key> -->
+		<!--         <false/> -->
+		<!--     </dict> -->
+		<!-- </dict> -->
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>需要访问您的相机以拍摄头像</string>

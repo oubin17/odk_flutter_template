@@ -9,23 +9,28 @@ import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 /// body 的滚动方式由调用方自行决定，AppPage 不做限制。
 ///
 /// **padding 规则：**
-/// - 不传 [padding] 时默认使用 `EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h)`
+/// - 不传 [padding] 时：
+///   - body 为 ScrollView / SingleChildScrollView → 不加外层 Padding（由 ScrollView 自管理，避免滚动时与 AppBar 产生固定间隙）
+///   - body 为其他 Widget → 使用默认 `EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h)`
 /// - 传 `EdgeInsets.zero` 可显式取消 padding
-/// - body 为 ScrollView 时，调用方无需设置 ScrollView 的 padding，由 AppPage 统一管理
+/// - 传自定义 [padding] 则始终生效
 ///
 /// **使用示例：**
 ///
 /// ```dart
-/// // 最简用法：标题 + 滚动 body（自动添加默认 padding）
+/// // ScrollView 页面（自动跳过外层 padding，由 ScrollView 自管理）
 /// AppPage(
 ///   title: AppText('设置'),
-///   body: SingleChildScrollView(child: _buildForm()),
+///   body: ListView(
+///     padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+///     children: [...],
+///   ),
 /// )
 ///
-/// // 列表页（无需给 ListView 设置 padding）
+/// // 非 ScrollView body（自动添加默认 padding）
 /// AppPage(
-///   title: AppText('账号安全'),
-///   body: ListView(children: [...]),
+///   title: AppText('设置'),
+///   body: _buildForm(),
 /// )
 ///
 /// // 带保存按钮
@@ -33,13 +38,6 @@ import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 ///   title: AppText('修改密码'),
 ///   onSave: _handleSave,
 ///   body: SingleChildScrollView(child: _buildForm()),
-/// )
-///
-/// // 自定义 padding
-/// AppPage(
-///   title: AppText('版本信息'),
-///   padding: EdgeInsets.zero,
-///   body: SingleChildScrollView(child: _buildContent()),
 /// )
 ///
 /// // 无 appBar 页面
@@ -65,8 +63,9 @@ class AppPage extends StatelessWidget {
   final Widget body;
 
   /// body 内边距
-  /// - 默认值：`EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h)`
+  /// - 不传时：ScrollView body 不加外层 padding，非 ScrollView body 使用默认 padding
   /// - 传 `EdgeInsets.zero` 可显式取消 padding
+  /// - 传自定义值则始终作为外层 Padding 生效
   final EdgeInsetsGeometry? padding;
 
   /// 页面背景色（默认 AppColors.bgPage(context)）
@@ -122,11 +121,25 @@ class AppPage extends StatelessWidget {
     return null;
   }
 
-  /// 构建 body（统一添加 padding）
+  /// 构建 body
+  ///
+  /// ScrollView body 不加外层 Padding（避免滚动时与 AppBar 产生固定间隙），
+  /// 由 ScrollView 自身的 padding 属性管理边距。
   Widget _buildBody(BuildContext context) {
-    final effectivePadding =
-        padding ?? EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h);
+    // 显式传了 padding，始终生效
+    if (padding != null) {
+      return Padding(padding: padding!, child: body);
+    }
 
-    return Padding(padding: effectivePadding, child: body);
+    // ScrollView 自管理 padding，不加外层 Padding
+    if (body is ScrollView || body is SingleChildScrollView) {
+      return body;
+    }
+
+    // 非 ScrollView body：使用默认 padding
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+      child: body,
+    );
   }
 }

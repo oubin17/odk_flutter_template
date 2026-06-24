@@ -1255,6 +1255,552 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **' days ago'**
   String get notificationDaysAgo;
+
+  /// 合规信息分区标题
+  ///
+  /// In en, this message translates to:
+  /// **'Compliance'**
+  String get complianceInfo;
+
+  /// 第三方SDK列表
+  ///
+  /// In en, this message translates to:
+  /// **'Third-party SDK List'**
+  String get sdkList;
+
+  /// 个人信息收集清单
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information Collection'**
+  String get privacyCollection;
+
+  /// 权限使用说明
+  ///
+  /// In en, this message translates to:
+  /// **'Permission Usage'**
+  String get permissionInfo;
+
+  /// 必要标签
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get complianceRequired;
+
+  /// 用途标签
+  ///
+  /// In en, this message translates to:
+  /// **'Purpose'**
+  String get compliancePurpose;
+
+  /// 使用场景标签
+  ///
+  /// In en, this message translates to:
+  /// **'Scenario'**
+  String get complianceScenario;
+
+  /// 提供方标签
+  ///
+  /// In en, this message translates to:
+  /// **'Provider'**
+  String get complianceProvider;
+
+  /// 收集数据标签
+  ///
+  /// In en, this message translates to:
+  /// **'Data Collected'**
+  String get complianceDataCollected;
+
+  /// 收集目的标签
+  ///
+  /// In en, this message translates to:
+  /// **'Collection Purpose'**
+  String get complianceCollectionPurpose;
+
+  /// 处理方式标签
+  ///
+  /// In en, this message translates to:
+  /// **'Processing Method'**
+  String get complianceProcessingMethod;
+
+  /// 权限使用说明页面描述
+  ///
+  /// In en, this message translates to:
+  /// **'This app may request the following permissions during operation, solely for providing corresponding features. Non-essential permissions are only requested when using the relevant features. You can manage permissions anytime in system settings.'**
+  String get permissionInfoDesc;
+
+  /// 相机权限名称
+  ///
+  /// In en, this message translates to:
+  /// **'Camera (CAMERA)'**
+  String get permCameraName;
+
+  /// 相机权限用途
+  ///
+  /// In en, this message translates to:
+  /// **'Take profile photos'**
+  String get permCameraPurpose;
+
+  /// 相机权限使用场景
+  ///
+  /// In en, this message translates to:
+  /// **'When user selects \"Take Photo\" on profile page'**
+  String get permCameraScenario;
+
+  /// 相册权限名称
+  ///
+  /// In en, this message translates to:
+  /// **'Photo Library (READ_MEDIA_IMAGES)'**
+  String get permAlbumName;
+
+  /// 相册权限用途
+  ///
+  /// In en, this message translates to:
+  /// **'Select profile image from album'**
+  String get permAlbumPurpose;
+
+  /// 相册权限使用场景
+  ///
+  /// In en, this message translates to:
+  /// **'When user selects \"Choose from Album\" on profile page'**
+  String get permAlbumScenario;
+
+  /// 通知权限名称
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications (POST_NOTIFICATIONS)'**
+  String get permNotificationName;
+
+  /// 通知权限用途
+  ///
+  /// In en, this message translates to:
+  /// **'Receive push notifications'**
+  String get permNotificationPurpose;
+
+  /// 通知权限使用场景
+  ///
+  /// In en, this message translates to:
+  /// **'During app runtime (user can toggle)'**
+  String get permNotificationScenario;
+
+  /// 网络权限名称
+  ///
+  /// In en, this message translates to:
+  /// **'Network (INTERNET)'**
+  String get permNetworkName;
+
+  /// 网络权限用途
+  ///
+  /// In en, this message translates to:
+  /// **'Server communication, web content loading'**
+  String get permNetworkPurpose;
+
+  /// 网络权限使用场景
+  ///
+  /// In en, this message translates to:
+  /// **'During app runtime (required)'**
+  String get permNetworkScenario;
+
+  /// 设备状态权限名称
+  ///
+  /// In en, this message translates to:
+  /// **'Device State (READ_PHONE_STATE)'**
+  String get permPhoneStateName;
+
+  /// 设备状态权限用途
+  ///
+  /// In en, this message translates to:
+  /// **'Crash monitoring auxiliary info (device model, etc.)'**
+  String get permPhoneStatePurpose;
+
+  /// 设备状态权限使用场景
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-collected by Bugly SDK on crash'**
+  String get permPhoneStateScenario;
+
+  /// SDK列表页面描述
+  ///
+  /// In en, this message translates to:
+  /// **'This app integrates the following third-party SDKs to provide various features. All SDKs\' data collection and processing comply with relevant laws and privacy policies.'**
+  String get sdkListDesc;
+
+  /// Dart开源社区
+  ///
+  /// In en, this message translates to:
+  /// **'Dart Open Source Community'**
+  String get sdkProviderDartCommunity;
+
+  /// Flutter官方
+  ///
+  /// In en, this message translates to:
+  /// **'Flutter Official'**
+  String get sdkProviderFlutterOfficial;
+
+  /// 腾讯公司
+  ///
+  /// In en, this message translates to:
+  /// **'Tencent Computer System Co., Ltd.'**
+  String get sdkProviderTencent;
+
+  /// 无数据收集
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get sdkDataNone;
+
+  /// Dio用途
+  ///
+  /// In en, this message translates to:
+  /// **'Network requests'**
+  String get sdkDioPurpose;
+
+  /// Dio收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Network request parameters (including device ID)'**
+  String get sdkDioData;
+
+  /// Provider用途
+  ///
+  /// In en, this message translates to:
+  /// **'State management'**
+  String get sdkProviderLibPurpose;
+
+  /// GoRouter用途
+  ///
+  /// In en, this message translates to:
+  /// **'Route navigation'**
+  String get sdkGoRouterPurpose;
+
+  /// 安全存储用途
+  ///
+  /// In en, this message translates to:
+  /// **'Secure storage (tokens and sensitive data)'**
+  String get sdkSecureStoragePurpose;
+
+  /// 安全存储收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Locally stored tokens'**
+  String get sdkSecureStorageData;
+
+  /// 偏好设置用途
+  ///
+  /// In en, this message translates to:
+  /// **'Preference storage'**
+  String get sdkSharedPrefsPurpose;
+
+  /// 偏好设置收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Theme mode, language preference'**
+  String get sdkSharedPrefsData;
+
+  /// 图片缓存用途
+  ///
+  /// In en, this message translates to:
+  /// **'Image cache loading'**
+  String get sdkCachedImagePurpose;
+
+  /// 图片缓存收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Image cache files'**
+  String get sdkCachedImageData;
+
+  /// Webview用途
+  ///
+  /// In en, this message translates to:
+  /// **'Embedded web pages (agreement pages, etc.)'**
+  String get sdkWebviewPurpose;
+
+  /// Webview收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Cookies'**
+  String get sdkWebviewData;
+
+  /// 图片选择器用途
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar photo/album selection'**
+  String get sdkImagePickerPurpose;
+
+  /// 图片选择器收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Selected images'**
+  String get sdkImagePickerData;
+
+  /// 权限管理用途
+  ///
+  /// In en, this message translates to:
+  /// **'Permission request management'**
+  String get sdkPermissionHandlerPurpose;
+
+  /// 设备信息用途
+  ///
+  /// In en, this message translates to:
+  /// **'Device info retrieval'**
+  String get sdkDeviceInfoPurpose;
+
+  /// 设备信息收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Device model, OS version'**
+  String get sdkDeviceInfoData;
+
+  /// 包信息用途
+  ///
+  /// In en, this message translates to:
+  /// **'App package info retrieval'**
+  String get sdkPackageInfoPurpose;
+
+  /// 包信息收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'App version, package name'**
+  String get sdkPackageInfoData;
+
+  /// 网络连接用途
+  ///
+  /// In en, this message translates to:
+  /// **'Network status monitoring'**
+  String get sdkConnectivityPurpose;
+
+  /// 网络连接收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Network connection type'**
+  String get sdkConnectivityData;
+
+  /// 本地通知用途
+  ///
+  /// In en, this message translates to:
+  /// **'Local push notifications'**
+  String get sdkLocalNotificationsPurpose;
+
+  /// 本地通知收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Notification content'**
+  String get sdkLocalNotificationsData;
+
+  /// Bugly用途
+  ///
+  /// In en, this message translates to:
+  /// **'Crash exception monitoring'**
+  String get sdkBuglyPurpose;
+
+  /// Bugly收集数据
+  ///
+  /// In en, this message translates to:
+  /// **'Device model, OS version, crash logs'**
+  String get sdkBuglyData;
+
+  /// 个人信息收集清单页面描述
+  ///
+  /// In en, this message translates to:
+  /// **'This app collects the following personal information during operation, solely for providing and improving our services. We strictly protect your personal information in accordance with our Privacy Policy.'**
+  String get privacyCollectionDesc;
+
+  /// 手机号信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get privacyPhoneInfoType;
+
+  /// 手机号收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'User login, registration, identity verification'**
+  String get privacyPhonePurpose;
+
+  /// 手机号处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Encrypted and stored on server, not shared with third parties'**
+  String get privacyPhoneMethod;
+
+  /// 密码信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get privacyPasswordInfoType;
+
+  /// 密码收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'User login authentication'**
+  String get privacyPasswordPurpose;
+
+  /// 密码处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Encrypted transmission to server, no plaintext stored locally'**
+  String get privacyPasswordMethod;
+
+  /// 昵称信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Nickname'**
+  String get privacyNicknameInfoType;
+
+  /// 昵称收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'User profile display'**
+  String get privacyNicknamePurpose;
+
+  /// 昵称处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Transmitted to server for storage'**
+  String get privacyNicknameMethod;
+
+  /// 头像信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar'**
+  String get privacyAvatarInfoType;
+
+  /// 头像收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'User profile display'**
+  String get privacyAvatarPurpose;
+
+  /// 头像处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded to server, local image cache'**
+  String get privacyAvatarMethod;
+
+  /// 性别信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get privacyGenderInfoType;
+
+  /// 性别收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'Profile completion'**
+  String get privacyGenderPurpose;
+
+  /// 性别处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Transmitted to server for storage'**
+  String get privacyGenderMethod;
+
+  /// 生日信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get privacyBirthdayInfoType;
+
+  /// 生日收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'Profile completion'**
+  String get privacyBirthdayPurpose;
+
+  /// 生日处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Transmitted to server for storage'**
+  String get privacyBirthdayMethod;
+
+  /// 设备标识信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Device ID (IDFA/Android ID)'**
+  String get privacyDeviceIdInfoType;
+
+  /// 设备标识收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'Device identification, crash monitoring'**
+  String get privacyDeviceIdPurpose;
+
+  /// 设备标识处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Locally generated and stored, not uploaded (except Bugly SDK)'**
+  String get privacyDeviceIdMethod;
+
+  /// 设备信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Device model, OS version'**
+  String get privacyDeviceInfoInfoType;
+
+  /// 设备信息收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'Crash diagnosis, version adaptation'**
+  String get privacyDeviceInfoPurpose;
+
+  /// 设备信息处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded to Tencent server via Bugly SDK'**
+  String get privacyDeviceInfoMethod;
+
+  /// 应用版本号信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'App version number'**
+  String get privacyAppVersionInfoType;
+
+  /// 应用版本号收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'Version update detection'**
+  String get privacyAppVersionPurpose;
+
+  /// 应用版本号处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Read locally, compared with server version'**
+  String get privacyAppVersionMethod;
+
+  /// 网络状态信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Network connection status'**
+  String get privacyNetworkStatusInfoType;
+
+  /// 网络状态收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'Network status monitoring and alerts'**
+  String get privacyNetworkStatusPurpose;
+
+  /// 网络状态处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Local monitoring only, not stored or uploaded'**
+  String get privacyNetworkStatusMethod;
+
+  /// 崩溃日志信息类型
+  ///
+  /// In en, this message translates to:
+  /// **'Crash logs'**
+  String get privacyCrashLogInfoType;
+
+  /// 崩溃日志收集目的
+  ///
+  /// In en, this message translates to:
+  /// **'App crash monitoring and repair'**
+  String get privacyCrashLogPurpose;
+
+  /// 崩溃日志处理方式
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded to Tencent server via Bugly SDK'**
+  String get privacyCrashLogMethod;
 }
 
 class _AppLocalizationsDelegate

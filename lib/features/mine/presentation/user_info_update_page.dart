@@ -555,6 +555,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       title: AppText(widget.title),
       onSave: _handleSave,
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [_buildInputWidget()],

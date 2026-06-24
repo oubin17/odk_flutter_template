@@ -124,6 +124,7 @@ class SystemSettingPage extends StatelessWidget {
     return AppPage(
       title: AppText(L10nUtils.of(context).systemSetting),
       body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         children: [
           // 账号分组
           _buildSectionTitle(L10nUtils.account),

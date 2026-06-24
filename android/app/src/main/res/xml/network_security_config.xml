@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ========================================================================== -->
+<!-- 网络安全配置（Release / 生产环境）                                          -->
+<!-- ========================================================================== -->
+<!-- 默认禁止明文 HTTP，仅允许 HTTPS 请求                                        -->
+<!-- 开发环境的明文放行由 src/debug/res/xml/network_security_config.xml 覆盖     -->
+<!-- ========================================================================== -->
+<network-security-config>
+    <!-- 默认：禁止明文 HTTP，仅允许 HTTPS -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- ================================================================ -->
+    <!-- 开发/测试服务器 IP 例外（发布到应用市场前可移除）                  -->
+    <!-- ================================================================ -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">8.133.253.216</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+
+    <!-- ================================================================ -->
+    <!-- 生产环境域名（获取域名后取消注释并替换）                           -->
+    <!-- 如果生产环境使用 HTTPS（推荐），则无需添加明文例外                -->
+    <!-- ================================================================ -->
+    <!-- <domain-config cleartextTrafficPermitted="true"> -->
+    <!--     <domain includeSubdomains="true">your-production-domain.com</domain> -->
+    <!-- </domain-config> -->
+</network-security-config>

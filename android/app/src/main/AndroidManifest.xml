@@ -14,10 +14,17 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
-    <!-- 存储权限（选择相册头像） -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 相册/存储权限（Android 13+ 细粒度媒体权限） -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <!-- Android 12 及以下兼容（READ_EXTERNAL_STORAGE 在 13+ 已废弃） -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
+
+    <!-- 推送通知权限（Android 13+ 必须声明，否则无法发送通知） -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <!-- Bugly 崩溃监控：读取设备信息（非必须，不添加则无法获取设备型号等辅助信息） -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -27,7 +34,7 @@
         android:label="odk_flutter_template"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:usesCleartextTraffic="true">
+        android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".MainActivity"
             android:exported="true"

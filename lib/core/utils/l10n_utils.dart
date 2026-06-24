@@ -307,4 +307,157 @@ class L10nUtils {
   static String get notificationYesterday =>
       _localizations!.notificationYesterday;
   static String get notificationDaysAgo => _localizations!.notificationDaysAgo;
+
+  // ======================== 合规信息 ========================
+  static String get complianceInfo => _localizations!.complianceInfo;
+  static String get sdkList => _localizations!.sdkList;
+  static String get privacyCollection => _localizations!.privacyCollection;
+  static String get permissionInfo => _localizations!.permissionInfo;
+
+  // ======================== 合规信息详情 - 公共标签 ========================
+  static String get complianceRequired => _localizations!.complianceRequired;
+  static String get compliancePurpose => _localizations!.compliancePurpose;
+  static String get complianceScenario => _localizations!.complianceScenario;
+  static String get complianceProvider => _localizations!.complianceProvider;
+  static String get complianceDataCollected =>
+      _localizations!.complianceDataCollected;
+  static String get complianceCollectionPurpose =>
+      _localizations!.complianceCollectionPurpose;
+  static String get complianceProcessingMethod =>
+      _localizations!.complianceProcessingMethod;
+
+  // ======================== 权限使用说明 ========================
+  static String get permissionInfoDesc => _localizations!.permissionInfoDesc;
+  static String get permCameraName => _localizations!.permCameraName;
+  static String get permCameraPurpose => _localizations!.permCameraPurpose;
+  static String get permCameraScenario => _localizations!.permCameraScenario;
+  static String get permAlbumName => _localizations!.permAlbumName;
+  static String get permAlbumPurpose => _localizations!.permAlbumPurpose;
+  static String get permAlbumScenario => _localizations!.permAlbumScenario;
+  static String get permNotificationName =>
+      _localizations!.permNotificationName;
+  static String get permNotificationPurpose =>
+      _localizations!.permNotificationPurpose;
+  static String get permNotificationScenario =>
+      _localizations!.permNotificationScenario;
+  static String get permNetworkName => _localizations!.permNetworkName;
+  static String get permNetworkPurpose => _localizations!.permNetworkPurpose;
+  static String get permNetworkScenario => _localizations!.permNetworkScenario;
+  static String get permPhoneStateName => _localizations!.permPhoneStateName;
+  static String get permPhoneStatePurpose =>
+      _localizations!.permPhoneStatePurpose;
+  static String get permPhoneStateScenario =>
+      _localizations!.permPhoneStateScenario;
+
+  // ======================== SDK列表 ========================
+  static String get sdkListDesc => _localizations!.sdkListDesc;
+  static String get sdkProviderDartCommunity =>
+      _localizations!.sdkProviderDartCommunity;
+  static String get sdkProviderFlutterOfficial =>
+      _localizations!.sdkProviderFlutterOfficial;
+  static String get sdkProviderTencent => _localizations!.sdkProviderTencent;
+  static String get sdkDataNone => _localizations!.sdkDataNone;
+  static String get sdkDioPurpose => _localizations!.sdkDioPurpose;
+  static String get sdkDioData => _localizations!.sdkDioData;
+  static String get sdkProviderLibPurpose =>
+      _localizations!.sdkProviderLibPurpose;
+  static String get sdkGoRouterPurpose => _localizations!.sdkGoRouterPurpose;
+  static String get sdkSecureStoragePurpose =>
+      _localizations!.sdkSecureStoragePurpose;
+  static String get sdkSecureStorageData =>
+      _localizations!.sdkSecureStorageData;
+  static String get sdkSharedPrefsPurpose =>
+      _localizations!.sdkSharedPrefsPurpose;
+  static String get sdkSharedPrefsData => _localizations!.sdkSharedPrefsData;
+  static String get sdkCachedImagePurpose =>
+      _localizations!.sdkCachedImagePurpose;
+  static String get sdkCachedImageData => _localizations!.sdkCachedImageData;
+  static String get sdkWebviewPurpose => _localizations!.sdkWebviewPurpose;
+  static String get sdkWebviewData => _localizations!.sdkWebviewData;
+  static String get sdkImagePickerPurpose =>
+      _localizations!.sdkImagePickerPurpose;
+  static String get sdkImagePickerData => _localizations!.sdkImagePickerData;
+  static String get sdkPermissionHandlerPurpose =>
+      _localizations!.sdkPermissionHandlerPurpose;
+  static String get sdkDeviceInfoPurpose =>
+      _localizations!.sdkDeviceInfoPurpose;
+  static String get sdkDeviceInfoData => _localizations!.sdkDeviceInfoData;
+  static String get sdkPackageInfoPurpose =>
+      _localizations!.sdkPackageInfoPurpose;
+  static String get sdkPackageInfoData => _localizations!.sdkPackageInfoData;
+  static String get sdkConnectivityPurpose =>
+      _localizations!.sdkConnectivityPurpose;
+  static String get sdkConnectivityData => _localizations!.sdkConnectivityData;
+  static String get sdkLocalNotificationsPurpose =>
+      _localizations!.sdkLocalNotificationsPurpose;
+  static String get sdkLocalNotificationsData =>
+      _localizations!.sdkLocalNotificationsData;
+  static String get sdkBuglyPurpose => _localizations!.sdkBuglyPurpose;
+  static String get sdkBuglyData => _localizations!.sdkBuglyData;
+
+  // ======================== 个人信息收集清单 ========================
+  static String get privacyCollectionDesc =>
+      _localizations!.privacyCollectionDesc;
+  static String get privacyPhoneInfoType =>
+      _localizations!.privacyPhoneInfoType;
+  static String get privacyPhonePurpose => _localizations!.privacyPhonePurpose;
+  static String get privacyPhoneMethod => _localizations!.privacyPhoneMethod;
+  static String get privacyPasswordInfoType =>
+      _localizations!.privacyPasswordInfoType;
+  static String get privacyPasswordPurpose =>
+      _localizations!.privacyPasswordPurpose;
+  static String get privacyPasswordMethod =>
+      _localizations!.privacyPasswordMethod;
+  static String get privacyNicknameInfoType =>
+      _localizations!.privacyNicknameInfoType;
+  static String get privacyNicknamePurpose =>
+      _localizations!.privacyNicknamePurpose;
+  static String get privacyNicknameMethod =>
+      _localizations!.privacyNicknameMethod;
+  static String get privacyAvatarInfoType =>
+      _localizations!.privacyAvatarInfoType;
+  static String get privacyAvatarPurpose =>
+      _localizations!.privacyAvatarPurpose;
+  static String get privacyAvatarMethod => _localizations!.privacyAvatarMethod;
+  static String get privacyGenderInfoType =>
+      _localizations!.privacyGenderInfoType;
+  static String get privacyGenderPurpose =>
+      _localizations!.privacyGenderPurpose;
+  static String get privacyGenderMethod => _localizations!.privacyGenderMethod;
+  static String get privacyBirthdayInfoType =>
+      _localizations!.privacyBirthdayInfoType;
+  static String get privacyBirthdayPurpose =>
+      _localizations!.privacyBirthdayPurpose;
+  static String get privacyBirthdayMethod =>
+      _localizations!.privacyBirthdayMethod;
+  static String get privacyDeviceIdInfoType =>
+      _localizations!.privacyDeviceIdInfoType;
+  static String get privacyDeviceIdPurpose =>
+      _localizations!.privacyDeviceIdPurpose;
+  static String get privacyDeviceIdMethod =>
+      _localizations!.privacyDeviceIdMethod;
+  static String get privacyDeviceInfoInfoType =>
+      _localizations!.privacyDeviceInfoInfoType;
+  static String get privacyDeviceInfoPurpose =>
+      _localizations!.privacyDeviceInfoPurpose;
+  static String get privacyDeviceInfoMethod =>
+      _localizations!.privacyDeviceInfoMethod;
+  static String get privacyAppVersionInfoType =>
+      _localizations!.privacyAppVersionInfoType;
+  static String get privacyAppVersionPurpose =>
+      _localizations!.privacyAppVersionPurpose;
+  static String get privacyAppVersionMethod =>
+      _localizations!.privacyAppVersionMethod;
+  static String get privacyNetworkStatusInfoType =>
+      _localizations!.privacyNetworkStatusInfoType;
+  static String get privacyNetworkStatusPurpose =>
+      _localizations!.privacyNetworkStatusPurpose;
+  static String get privacyNetworkStatusMethod =>
+      _localizations!.privacyNetworkStatusMethod;
+  static String get privacyCrashLogInfoType =>
+      _localizations!.privacyCrashLogInfoType;
+  static String get privacyCrashLogPurpose =>
+      _localizations!.privacyCrashLogPurpose;
+  static String get privacyCrashLogMethod =>
+      _localizations!.privacyCrashLogMethod;
 }
