@@ -112,9 +112,7 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
                           _registerTitle(),
                           AppGap.hLarge,
                           accountInput(
-                            suffixIcon: ClearButton(
-                              controller: accountController,
-                            ),
+                            showClearButton: true,
                           ),
                           AppGap.hSmall,
                           VerifyCodeInput(

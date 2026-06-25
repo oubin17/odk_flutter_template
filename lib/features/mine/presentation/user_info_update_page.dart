@@ -335,10 +335,10 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       padding: AppGap.cardPadding,
       child: AppInput(
         controller: _nicknameController,
+        showClearButton: true,
         validator: (value) => value?.trim().isEmpty ?? true
             ? L10nUtils.fieldNotEmptyTip(L10nUtils.nickname)
             : null,
-        suffixIcon: ClearButton(controller: _nicknameController),
         hideUnderline: true,
       ),
     );

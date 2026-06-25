@@ -72,7 +72,7 @@ mixin AuthMixin<T extends StatefulWidget> on State<T> {
   // ====================== 输入组件 ======================
 
   /// 账号输入框
-  Widget accountInput({Widget? suffixIcon}) {
+  Widget accountInput({bool showClearButton = false}) {
     return AppInput(
       controller: accountController,
       label: L10nUtils.account,
@@ -81,7 +81,7 @@ mixin AuthMixin<T extends StatefulWidget> on State<T> {
         size: 32.w,
         color: AppColors.textGray(context),
       ),
-      suffixIcon: suffixIcon,
+      showClearButton: showClearButton,
       validator: ToolUtils.checkPhoneValidator,
     );
   }

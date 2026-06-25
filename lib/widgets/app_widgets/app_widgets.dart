@@ -489,6 +489,7 @@ class AppInput extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool readOnly;
   final bool hideUnderline;
+  final bool showClearButton; // 是否显示清除按钮
 
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
@@ -507,6 +508,7 @@ class AppInput extends StatelessWidget {
     this.keyboardType,
     this.readOnly = false,
     this.hideUnderline = false,
+    this.showClearButton = false,
     this.validator,
     this.onSaved,
     this.onChanged,
@@ -553,12 +555,7 @@ class AppInput extends StatelessWidget {
             : null,
         prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
         // ====================================================================
-        suffixIcon: suffixIcon != null
-            ? Padding(
-                padding: EdgeInsets.only(left: 20.w),
-                child: suffixIcon,
-              )
-            : null,
+        suffixIcon: _buildSuffixIcon(context),
         border: hideUnderline
             ? InputBorder.none
             : UnderlineInputBorder(
@@ -586,6 +583,52 @@ class AppInput extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 1.h),
         errorStyle: TextStyle(fontSize: 24.sp, color: AppColors.error),
       ),
+    );
+  }
+
+  /// 构建后缀图标（清除按钮 + 自定义后缀图标）
+  Widget? _buildSuffixIcon(BuildContext context) {
+    // 如果没有 controller，不显示清除按钮
+    if (controller == null) {
+      return suffixIcon != null
+          ? Padding(
+              padding: EdgeInsets.only(left: 20.w),
+              child: suffixIcon,
+            )
+          : null;
+    }
+
+    // 监听输入框内容变化，动态显示/隐藏清除按钮
+    return AnimatedBuilder(
+      animation: controller!,
+      builder: (context, child) {
+        // 输入框为空且没有自定义后缀图标时，不显示任何图标
+        if (controller!.text.isEmpty && suffixIcon == null) {
+          return const SizedBox();
+        }
+
+        // 有内容时，显示清除按钮 + 自定义后缀图标（如果有）
+        return Padding(
+          padding: EdgeInsets.only(left: 20.w),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 自定义后缀图标（如果有）
+              if (suffixIcon != null) ...[suffixIcon!, SizedBox(width: 8.w)],
+              // 清除按钮（有内容时显示）
+              if (controller!.text.isNotEmpty)
+                GestureDetector(
+                  onTap: () => controller!.clear(),
+                  child: Icon(
+                    Icons.cancel,
+                    size: 32.w,
+                    color: AppColors.textGray(context).withAlpha(80),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

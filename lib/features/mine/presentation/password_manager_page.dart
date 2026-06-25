@@ -124,12 +124,12 @@ class _PasswordManagerPageState extends State<PasswordManagerPage> {
       prefixIcon: AppInputPrefix(title, width: 240.w),
       obscure: true,
       hideUnderline: true,
+      showClearButton: true,
       validator:
           validator ??
           (value) => value?.trim().isEmpty ?? true
               ? L10nUtils.pleaseEnterPassword
               : null,
-      suffixIcon: ClearButton(controller: controller),
     );
   }
 
