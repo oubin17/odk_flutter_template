@@ -114,7 +114,7 @@ class SdkListPage extends StatelessWidget {
     return AppPage(
       title: AppText(L10nUtils.sdkList),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
+        padding: AppGap.formPadding,
         children: [
           // 页面说明
           AppText.second(L10nUtils.sdkListDesc),

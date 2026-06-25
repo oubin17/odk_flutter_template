@@ -15,7 +15,7 @@ class SystemSettingPage extends StatelessWidget {
   /// 分组标题
   Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: EdgeInsets.only(left: 30.w, bottom: 8.h, top: 4.h),
+      padding: AppGap.sectionTitlePadding,
       child: AppText.tip(title),
     );
   }
@@ -124,7 +124,7 @@ class SystemSettingPage extends StatelessWidget {
     return AppPage(
       title: AppText(L10nUtils.of(context).systemSetting),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: AppGap.pagePadding,
         children: [
           // 账号分组
           _buildSectionTitle(L10nUtils.account),

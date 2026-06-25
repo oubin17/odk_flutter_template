@@ -11,7 +11,7 @@ import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 /// **padding 规则：**
 /// - 不传 [padding] 时：
 ///   - body 为 ScrollView / SingleChildScrollView → 不加外层 Padding（由 ScrollView 自管理，避免滚动时与 AppBar 产生固定间隙）
-///   - body 为其他 Widget → 使用默认 `EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h)`
+///   - body 为其他 Widget → 使用默认 [AppGap.pagePadding]
 /// - 传 `EdgeInsets.zero` 可显式取消 padding
 /// - 传自定义 [padding] 则始终生效
 ///
@@ -22,7 +22,7 @@ import 'package:odk_flutter_template/widgets/app_page/app_bar.dart';
 /// AppPage(
 ///   title: AppText('设置'),
 ///   body: ListView(
-///     padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+///     padding: AppGap.pagePadding,
 ///     children: [...],
 ///   ),
 /// )
@@ -137,9 +137,6 @@ class AppPage extends StatelessWidget {
     }
 
     // 非 ScrollView body：使用默认 padding
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-      child: body,
-    );
+    return Padding(padding: AppGap.pagePadding, child: body);
   }
 }

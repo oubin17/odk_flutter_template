@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/system/service/system_service.dart';
 import 'package:odk_flutter_template/widgets/app_page/app_page.dart';
@@ -59,7 +58,7 @@ class _FeedbackPageState extends State<FeedbackPage> with MountedSafeMixin {
     return AppPage(
       title: AppText(L10nUtils.feedback),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
+        padding: AppGap.formPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

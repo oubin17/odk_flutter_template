@@ -194,6 +194,44 @@ class AppGap {
   static Widget wLarge = SizedBox(width: 40.w);
   static Widget wXL = SizedBox(width: 60.w);
 
+  // ===================== 预设内边距常量 =====================
+
+  /// 页面内容默认内边距
+  /// 用于 ScrollView/ListView 的 padding
+  static EdgeInsets pagePadding = EdgeInsets.symmetric(
+    horizontal: 24.w,
+    vertical: 16.h,
+  );
+
+  /// 卡片默认内边距
+  static EdgeInsets cardPadding = EdgeInsets.all(30.w);
+
+  /// 列表项默认内边距
+  static EdgeInsets listItemPadding = EdgeInsets.symmetric(
+    horizontal: 30.w,
+    vertical: 20.h,
+  );
+
+  /// 分组标题内边距
+  /// 用于设置页面分组标题（如"账号"、"通用"等）
+  static EdgeInsets sectionTitlePadding = EdgeInsets.only(
+    left: 30.w,
+    bottom: 8.h,
+    top: 4.h,
+  );
+
+  /// 表单输入区域内边距
+  static EdgeInsets formPadding = EdgeInsets.symmetric(
+    horizontal: 30.w,
+    vertical: 20.h,
+  );
+
+  /// 按钮默认内边距
+  static EdgeInsets buttonPadding = EdgeInsets.symmetric(
+    horizontal: 20.w,
+    vertical: 10.h,
+  );
+
   // ===================== 自定义间距 =====================
 
   /// 自定义垂直间距
@@ -230,7 +268,7 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: padding ?? EdgeInsets.all(30.w),
+      padding: padding ?? AppGap.cardPadding,
       decoration: BoxDecoration(
         color: bg ?? AppColors.card(context),
         borderRadius: BorderRadius.circular(radius ?? 16.w),
@@ -430,9 +468,7 @@ class AppTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onTap,
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-      ),
+      style: TextButton.styleFrom(padding: AppGap.buttonPadding),
       child: AppText(
         text,
         color: color ?? AppColors.primary(context),

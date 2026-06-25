@@ -148,7 +148,7 @@ class _SignUpPageState extends State<SignUpPage> with AuthMixin {
   Widget _bottomFixedArea(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
+        padding: AppGap.formPadding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

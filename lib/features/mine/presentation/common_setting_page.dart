@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/cache/app_cache_manager.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/providers/locale/locale_provider.dart';
@@ -40,7 +39,7 @@ class _CommonSettingPageState extends State<CommonSettingPage> {
     return AppPage(
       title: AppText(L10nUtils.of(context).commonSetting),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: AppGap.pagePadding,
         children: [
           // 主题切换 + 图标
           Consumer<ThemeProvider>(

@@ -55,7 +55,7 @@ class PermissionInfoPage extends StatelessWidget {
     return AppPage(
       title: AppText(L10nUtils.permissionInfo),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
+        padding: AppGap.formPadding,
         children: [
           // 页面说明
           AppText.second(L10nUtils.permissionInfoDesc),

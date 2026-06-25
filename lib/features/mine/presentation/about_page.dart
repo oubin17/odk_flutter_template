@@ -20,7 +20,7 @@ class AboutPage extends StatelessWidget {
     return AppPage(
       title: AppText(L10nUtils.about),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: AppGap.pagePadding,
         children: [
           // 顶部应用信息区域
           _buildAppHeader(context),
@@ -86,7 +86,7 @@ class AboutPage extends StatelessWidget {
           // 合规信息分组
           AppGap.hLarge,
           Padding(
-            padding: EdgeInsets.only(left: 30.w, bottom: 8.h),
+            padding: AppGap.sectionTitlePadding,
             child: AppText.tip(L10nUtils.complianceInfo),
           ),
           AppCard(

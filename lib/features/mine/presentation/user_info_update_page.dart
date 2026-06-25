@@ -332,7 +332,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
   Widget _buildNicknameInputWidget() {
     return AppCard(
       showShadow: false,
-      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 30.w),
+      padding: AppGap.cardPadding,
       child: AppInput(
         controller: _nicknameController,
         validator: (value) => value?.trim().isEmpty ?? true
@@ -447,7 +447,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
 
         // 底部选择区域
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          padding: AppGap.pagePadding.copyWith(top: 0, bottom: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -555,7 +555,7 @@ class _UserInfoUpdatePageState extends State<UserInfoUpdatePage> {
       title: AppText(widget.title),
       onSave: _handleSave,
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: AppGap.pagePadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [_buildInputWidget()],

@@ -70,7 +70,7 @@ class ProfilePage extends StatelessWidget {
           Selector<UserProvider, String>(
             selector: (_, provider) =>
                 provider.userEntity?.userProfile.userName ?? "",
-            builder: (_, userName, __) {
+            builder: (_, userName, _) {
               return AppText(
                 userName,
                 size: 36.sp,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:odk_flutter_template/core/utils/l10n_utils.dart';
 import 'package:odk_flutter_template/features/mine/presentation/password_manager_page.dart';
 import 'package:odk_flutter_template/routes/app_router.dart';
@@ -61,7 +60,7 @@ class SecuritySettingPage extends StatelessWidget {
     return AppPage(
       title: AppText(L10nUtils.accountSecurity),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+        padding: AppGap.pagePadding,
         children: [
           AppCard(
             showShadow: false,
